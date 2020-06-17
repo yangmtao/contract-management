@@ -1,0 +1,27 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.bj.config.MybatisPlusKeyGenerator",
+      "name": "user.key",
+      "type": "com.bj.config.MybatisPlusKeyGenerator"
+    },
+    {
+      "sourceType": "com.bj.config.IDKeyGeneratorConfig",
+      "name": "user.key",
+      "type": "com.bj.config.IDKeyGeneratorConfig"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.bj.config.IDKeyGeneratorConfig",
+      "name": "user.key.data-center-id",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.bj.config.IDKeyGeneratorConfig",
+      "name": "user.key.worker-id",
+      "type": "java.lang.Integer"
+    }
+  ]
+}

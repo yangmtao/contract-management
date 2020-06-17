@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>欢迎页</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/elementUI.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <style type="text/css">
+        html {
+            height: 100%;
+            overflow: auto;
+        }
+
+        body {
+            height: 100%;
+            /*background-image: url('${request.contextPath}/statics/images/home.png');*/
+            /*backgound-repeat:none;*/
+            /*background-size:auto 100% ;*/
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        .jqgrow .jqgrid-rownum {
+            text-align: center;
+        }
+
+        .ui-jqgrid-labels .ui-th-column {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="appMain" v-cloak>
+
+
+</div>
+<script src="${request.contextPath}/statics/libs/jquery.min.js"></script>
+<script src="${request.contextPath}/statics/libs/vue.min.js"></script>
+<script src="${request.contextPath}/statics/js/elementUI.js"></script>
+<script src="${request.contextPath}/statics/plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="${request.contextPath}/statics/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="${request.contextPath}/statics/js/common.js?_${.now?long}"></script>
+<script type="text/javascript">
+    var baseURL = "${request.contextPath}/";
+</script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

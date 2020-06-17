@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bj.sys.dao.UserOperationDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.bj.sys.entity.UserOperationEntity" id="bjUserOperationMap">
+        <result property="opId" column="op_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="opModule" column="op_module"/>
+        <result property="opContent" column="op_content"/>
+        <result property="opDesc" column="op_desc"/>
+        <result property="opDate" column="op_date"/>
+        <result property="opSource" column="op_source"/>
+        <result property="usePlatform" column="use_platform"/>
+    </resultMap>
+    <select id="queryUserOperationPage" resultType="com.bj.sys.entity.UserOperationEntity">
+        select * from (select t1.op_id,t1.op_content,t1.op_date,t1.op_desc,t1.op_module,t1.use_platform,t2.user_name
+        from user_operation t1,sys_user t2 where t1.user_id=t2.user_id  and t1.op_source=2
+            <if test='userName!=null and userName!=""'>
+                and instr(t2.user_name,#{userName})>0
+            </if>
+            <if test='createDateStart!=null and createDateStart!=""'>
+                and t1.op_date &gt;=#{createDateStart}
+            </if>
+            <if test='createDateEnd!=null and createDateEnd!=""'>
+                and t1.op_date &lt;=#{createDateEnd}
+            </if>
+        ) a
+        <if test="sidx !=null and sidx!='' ">
+            order by  ${sidx}
+        </if>
+        <if test="startNum != null  and limit != null">
+            limit ${startNum},${limit}
+        </if>
+    </select>
+    <select id="queryUserOperationTotal" resultType="java.lang.Integer">
+      select count(*) as count from (select t1.op_id,t1.op_content,t1.op_date,t1.op_desc,t1.op_module,t1.use_platform,t2.user_name
+        from user_operation t1,sys_user t2 where t1.user_id=t2.user_id and t1.op_source=2
+        <if test='userName!=null and userName!=""'>
+            and instr(t2.user_name,#{userName})>0
+        </if>
+        <if test='createDateStart!=null and createDateStart!=""'>
+            and t1.op_date &gt;=#{createDateStart}
+        </if>
+        <if test='createDateEnd!=null and createDateEnd!=""'>
+            and t1.op_date &lt;=#{createDateEnd}
+        </if>
+       ) a
+    </select>
+    <select id="queryUserOperationPageFront" resultType="com.bj.sys.entity.UserOperationEntity">
+        select * from (select t1.op_id,t1.op_content,t1.op_date,t1.op_desc,t1.op_module,t1.use_platform,t2.user_name user_name
+        from user_operation t1,user t2 where t1.user_id=t2.user_id and t1.op_source=1
+        <if test='userName!=null and userName!=""'>
+            and instr(t2.user_name,#{userName})>0
+        </if>
+        <if test='createDateStart!=null and createDateStart!=""'>
+            and t1.op_date &gt;=#{createDateStart}
+        </if>
+        <if test='createDateEnd!=null and createDateEnd!=""'>
+            and t1.op_date &lt;=#{createDateEnd}
+        </if>
+        ) a
+        <if test="sidx !=null and sidx!='' ">
+            order by  ${sidx}
+        </if>
+        <if test="startNum != null  and limit != null">
+            limit ${startNum},${limit}
+        </if>
+    </select>
+    <select id="queryUserOperationTotalFront" resultType="java.lang.Integer">
+       select count(*) count from (select t1.op_id,t1.op_content,t1.op_date,t1.op_desc,t1.op_module,t1.use_platform,t2.user_name user_name
+        from user_operation t1,user t2 where t1.user_id=t2.user_id  and t1.op_source=1
+        <if test='userName!=null and userName!=""'>
+            and instr(t2.user_name,#{userName})>0
+        </if>
+        <if test='createDateStart!=null and createDateStart!=""'>
+            and t1.op_date &gt;=#{createDateStart}
+        </if>
+        <if test='createDateEnd!=null and createDateEnd!=""'>
+            and t1.op_date &lt;=#{createDateEnd}
+        </if>
+        ) a
+    </select>
+</mapper>
