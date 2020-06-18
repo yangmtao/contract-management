@@ -34,11 +34,11 @@ $.ajaxSetup({
         // console.log("sessionStatus====",sessionStatus,"success"!=textStatus);
         // return;
         if (textStatus != "success") {
-            top.location.href = baseURL + "login.html";
+            //top.location.href = baseURL + "login.html";
         }
         if (sessionStatus == "timeout") {
             //如果超时就处理 ，指定要跳转的页面(比如登陆页)
-            top.location.href = baseURL + "login.html";
+            //top.location.href = baseURL + "login.html";
         }
     }
 });

@@ -13,8 +13,7 @@ import java.util.Map;
 
 @Controller
 public class PageController {
-    @Autowired
-    private SupplierDao supplierDao;
+
 
     //contract
     @GetMapping("/contract/add.html")
@@ -27,11 +26,16 @@ public class PageController {
         return "contract/contract_query";
     }
 
-    //supplier
-    @GetMapping("/supplier/simpleInfo")
-    @ResponseBody
-    public R supplierSimpleInfo(@RequestParam("keyword") String keyword) throws Exception {
-        List<Map<String, String>> maps = supplierDao.selectSupplierSimple(keyword);
-        return R.ok().put("partyBs", maps);
+    @GetMapping("/contract/examine.html")
+    public String contractExamine(){
+        return "contract/contract_examine";
     }
+
+    @GetMapping("/contract/change.html")
+    public String contractChange(){
+        return "contract/contract_change";
+    }
+
+
+
 }

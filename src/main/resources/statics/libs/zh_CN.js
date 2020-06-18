@@ -6,7 +6,7 @@
         name: "zh_CN",
         messages: {
             _default: function(n) {
-                return n + "的值无效"
+                return  "的值无效"
             },
             after: function(n, e) {
                 var t = e[0];
@@ -22,7 +22,7 @@
                 return n + "只能包含字母数字字符"
             },
             alpha_spaces: function(n) {
-                return n + "只能包含字母字符和空格"
+                return "只能包含字母字符和空格"
             },
             before: function(n, e) {
                 var t = e[0];
@@ -46,7 +46,7 @@
             decimal: function(n, e) {
                 void 0 === e && (e = []);
                 var t = e[0];
-                return void 0 === t && (t = "*"), n + "必须是数字，且能够保留" + ("*" === t ? "" : t) + "位小数"
+                return void 0 === t && (t = "*"),  "必须是数字，且能够保留" + ("*" === t ? "" : t) + "位小数"
             },
             digits: function(n, e) {
                 return n + "必须是数字，且精确到" + e[0] + "位数"
@@ -78,10 +78,10 @@
             length: function(n, e) {
                 var t = e[0],
                     r = e[1];
-                return r ? n + "长度必须在" + t + "到" + r + "之间" : n + "长度必须为" + t
+                return r ?  "长度必须在" + t + "到" + r + "之间" : "长度至少为" + t
             },
             max: function(n, e) {
-                return n + "不能超过" + e[0] + "个字符"
+                return  "不能超过" + e[0] + "个字符"
             },
             max_value: function(n, e) {
                 return n + "必须小于或等于" + e[0]
@@ -90,7 +90,7 @@
                 return n + "不是一个有效的文件类型"
             },
             min: function(n, e) {
-                return n + "必须至少有" + e[0] + "个字符"
+                return  "必须至少有"+ e[0] + "个字符"
             },
             min_value: function(n, e) {
                 return n + "必须大于或等于" + e[0]
@@ -102,7 +102,7 @@
                 return n + "格式无效"
             },
             required: function(n) {
-                return n + "是必须的"
+                return  "是必须的"
             },
             size: function(n, e) {
                 return n + "必须小于" + function(n) {

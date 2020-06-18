@@ -33,4 +33,5 @@ SysUserDao extends BaseMapper<SysUserEntity> {
 	 */
 	List<Map<String,Object>> queryAllUser(RowBounds var1, @Param("ew") Wrapper var2);
 
+    List<Map<String, String>> selectUserDept(@Param("keyword") String keyword);
 }

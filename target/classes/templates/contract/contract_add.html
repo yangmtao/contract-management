@@ -3,7 +3,7 @@
 <head>
     <title>文章列表</title>
     <#include "/header.html">
-    <!-- include summernote css/js summernote的font应放在css文件夹内-->
+    <!-- vee-validate-->
     <script src="${request.contextPath}/statics/libs/vee-validate.js"></script>
     <script src="${request.contextPath}/statics/libs/zh_CN.js"></script>
 </head>
@@ -44,13 +44,13 @@
                 <div class="col-sm-2 col-md-2 control-label not-blank">合同名称</div>
                 <div class="col-sm-10">
 
-                    <input type="text" v-validate="'required|min:4|normalText'" name="合同名称" auto-complete="off"  class="form-control input-sm-10" v-model="contract.contractName" placeholder="请输入合同名称,4~100字"/>
+                    <input type="text" v-validate="'required|min:4|normalText'" name="contractName" auto-complete="off"  class="form-control input-sm-10" v-model="contract.contractName" placeholder="请输入合同名称,4~100字"/>
                     <el-alert
-                            :title="errors.first('合同名称')"
+                            :title="'合同名称'+errors.first('contractName')"
                             :closable="false"
                             type="warning"
                             show-icon
-                            v-show="errors.has('合同名称')">
+                            v-show="errors.has('contractName')">
                     </el-alert>
                 </div>
             </div>
@@ -58,11 +58,11 @@
             <div class="form-group">
                 <div class="col-sm-2 control-label not-blank">采购部门</div>
                 <div class="col-sm-2">
-                    <input type="text" auto-complete="off" class="form-control" style="cursor:pointer;" v-model="dept.purchasingDeptName" @click="deptTree('purchase')" readonly="readonly" placeholder="请选择"/>
+                    <input type="text" auto-complete="off" class="form-control" style="cursor:pointer;" v-validate="'required'" name="purchasingDeptId" v-model="dept.purchasingDeptName" @click="deptTree('purchase')" readonly="readonly" placeholder="请选择"/>
                 </div>
                 <div class="col-sm-2   control-label not-blank">需求部门</div>
                 <div class="col-sm-2">
-                    <input type="text" auto-complete="off" class="form-control" style="cursor:pointer;" v-model="dept.demandDeptName" @click="deptTree('demand')" readonly="readonly" placeholder="请选择"/>
+                    <input type="text" auto-complete="off" class="form-control" style="cursor:pointer;" v-validate="'required'" name="demandDeptId" v-model="dept.demandDeptName" @click="deptTree('demand')" readonly="readonly" placeholder="请选择"/>
                 </div>
                 <div class="col-sm-2   control-label not-blank">经办人</div>
                 <div class="col-sm-2">
@@ -73,6 +73,8 @@
                             reserve-keyword
                             placeholder="请输入经办人"
                             :remote-method="remoteManager"
+                            v-validate="'required'"
+                            name="contractManager"
                             :loading="remoteManagerLoading">
                         <el-option
                                 v-for="item in remoteManagers"
@@ -87,13 +89,14 @@
             <div class="form-group">
                 <div class="col-sm-2   control-label not-blank">合同类型</div>
                 <div class="col-sm-2">
-                    <el-select v-model="contract.contractType" size="small">
+                    <el-select v-model="contract.contractType" size="small" v-validate="'required'"
+                               name="contractType">
                         <el-option v-for="(v,k) in DICT.CONTRACT_TYPE" :key="k" :value="k" :label="v"></el-option>
                     </el-select>
                 </div>
                 <div class="col-sm-2   control-label not-blank">甲方单位</div>
                 <div class="col-sm-2">
-                    <el-select v-model="contract.partyAId" size="small">
+                    <el-select v-model="contract.partyAId" size="small" >
                         <el-option v-for="(v,k) in DICT.CONTRACT_TYPE" :key="k" :value="k" :label="v"></el-option>
                     </el-select>
                 </div>
@@ -106,7 +109,8 @@
                             reserve-keyword
                             placeholder="请输入单位名称"
                             :remote-method="getRemotePartyB"
-                            :loading="remotePartyBLoading">
+                            :loading="remotePartyBLoading"
+                    >
                         <el-option
                                 v-for="item in remotePartyBs"
                                 :key="item.supplier_id"
@@ -121,13 +125,13 @@
             <div class="form-group">
                 <div class="col-sm-2 col-md-2 control-label not-blank">采购内容</div>
                 <div class="col-sm-10">
-                    <textarea  auto-complete="off"  name="采购内容" v-validate="'required|length:10,500'" class="form-control input-sm-10" v-model="contract.purchaseContent" placeholder="请输入采购内容，10~500字"></textarea>
+                    <textarea  auto-complete="off" v-validate="'required'" name="purchaseContent"  v-validate="'required|length:10,500'" class="form-control input-sm-10" v-model="contract.purchaseContent" placeholder="请输入采购内容，10~500字"></textarea>
                     <el-alert
-                            :title="errors.first('采购内容')"
+                            :title="'采购内容'+errors.first('purchaseContent')"
                             :closable="false"
                             type="warning"
                             show-icon
-                            v-show="errors.has('采购内容')">
+                            v-show="errors.has('purchaseContent')">
                     </el-alert>
                 </div>
             </div>
@@ -135,16 +139,16 @@
             <div class="form-group">
                 <div class="col-sm-2 control-label not-blank">付款方式</div>
                 <div class="col-sm-2">
-                    <el-select v-model="contract.paymentType" size="small">
+                    <el-select v-model="contract.paymentType" size="small" >
                         <el-option v-for="(v,k) in DICT.PAYMENT_TYPE" :key="k" :value="k" :label="v"></el-option>
                     </el-select>
                 </div>
                 <div class="col-sm-2   control-label not-blank">合同金额</div>
                 <div class="col-sm-2">
-                    <input type="number" v-validate="'required|min_value:0|decimal:2'" name="合同金额" auto-complete="off" class="form-control"  v-model="contract.contractAmount"  placeholder="合同总金额"/>
+                    <input type="number" v-validate="'required|min_value:0|decimal:2'" name="contractAmount" auto-complete="off" class="form-control"  v-model="contract.contractAmount"  placeholder="合同总金额"/>
                     <el-alert
-                            v-show="errors.has('合同金额')"
-                            :title="errors.first('合同金额')"
+                            v-show="errors.has('contractAmount')"
+                            :title="'合同金额'+errors.first('contractAmount')"
                             :closable="false"
                             type="warning"
                             show-icon>

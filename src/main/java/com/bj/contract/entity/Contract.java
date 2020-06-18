@@ -120,7 +120,7 @@ public class Contract extends Model<Contract> {
     /**
      * 付款阶段
      */
-    @TableField("payment_stage")
+    @TableField(exist = false)
     private String paymentStage;
     /**
      * 合同相关附件

@@ -3,7 +3,7 @@
 <mapper namespace="com.bj.contract.dao.ContractMapper">
 
     <select id="queryAllContract" resultType="com.bj.contract.entity.Contract">
-        select * from contract_file <where> ${ew.sqlSegment}</where>
+        select * from contract <where> ${ew.sqlSegment}</where>
     </select>
 
 

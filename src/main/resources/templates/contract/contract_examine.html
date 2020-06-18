@@ -2,9 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>合同审查记录</title>
+    <#include "/header.html">
 </head>
+<style>
+    .form-control{
+        width: 220px;
+    }
+</style>
 <body>
+<div id="rrapp" v-cloak>
+    <div class="panel panel-default">
+        <form class="form-horizontal">
 
+            <div class="form-group">
+                <div class="col-sm-2 control-label  ">合同名称</div>
+                <div class="col-sm-2">
+                    <input type="text" auto-complete="off" class="form-control"  v-model="queryOption.contractName" placeholder="请输入合同名称"/>
+                </div>
+                <div class="col-sm-2   control-label  ">合同编号</div>
+                <div class="col-sm-2">
+                    <input type="text" auto-complete="off" class="form-control" v-model="queryOption.contractCode" placeholder="请输入合同编号"/>
+                </div>
+                <div class="col-sm-2   control-label  ">严重等级</div>
+                <div class="col-sm-2">
+                    <select auto-complete="off" class="form-control" style="cursor:pointer;"  v-model="queryOption.riskLevel" readonly="readonly" placeholder="请选择">
+                        <option>高</option>
+                        <option>中</option>
+                        <option>低</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <div class="col-sm-2 control-label  ">开始时间</div>
+                <div class="col-sm-2">
+                    <el-date-picker v-model="queryOption.startDate"
+                                    type="date"
+                                    :time-arrow-control="true"
+                                    placeholder="请选择开始时间" id="finOrgInfoDate001" size="small"
+                                    value-format="yyyy-MM-dd"
+                    >
+                    </el-date-picker>
+                </div>
+                <div class="col-sm-2 control-label  ">结束时间</div>
+                <div class="col-sm-2">
+                    <el-date-picker v-model="queryOption.endDate"
+                                    type="date"
+                                    size="small"
+                                    :time-arrow-control="true"
+                                    placeholder="请选择结束时间" id="finOrgInfoDate002" size="small"
+                                    value-format="yyyy-MM-dd"
+                    >
+                    </el-date-picker>
+                </div>
+                <div class="col-sm-1 control-label  "></div>
+                <div class="col-sm-3 ">
+                    <input type="button" class="btn btn-primary" @click="queryExamine" value="查 询"/>
+                    <input type="reset" class="btn btn-warning"  value="重 置"/>
+                </div>
+            </div>
+
+
+        </form>
+        <!--jqgrid数据表格-->
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+
+</div>
 </body>
+<script src="${request.contextPath}/statics/js/contract/contract_examine.js?_${.now?long}"></script>
 </html>

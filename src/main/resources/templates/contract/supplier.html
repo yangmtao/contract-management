@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>金融机构-供应商列表</title>
+    <#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList==1">
+        <div class="grid-btn">
+            <div style="float:left;height:40px;width:100%;margin-top:10px;">
+                <label style="font-weight: normal;margin-left: 10px;">公司名称：</label>
+                <el-input
+                        placeholder="请输入公司名称"
+                        v-model="supplierSearch.supplierName"
+                        style="width:250px;"
+                        size="small"
+                        clearable>
+                </el-input>
+                <label style="font-weight: normal;margin-left: 10px;">统一社会信用代码：</label>
+                <el-input
+                        placeholder="请输入信用代码"
+                        v-model="supplierSearch.creditCode"
+                        style="width:250px;"
+                        size="small"
+                        clearable>
+                </el-input>
+                <a class="btn btn-default" @click="querySupplier">查询</a>
+                <a class="btn btn-default" @click="clearSupplier">重置</a>
+            </div>
+            <div style="float:left;height:40px;width:100%;margin-top:10px;">
+                <#if shiro.hasPermission("contract:supplier:save")>
+                <a class="btn btn-primary" @click="addSupplier"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            </#if>
+            <#if shiro.hasPermission("contract:supplier:update")>
+                <a class="btn btn-primary" @click="updateSupplier"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+                <a class='btn btn-primary' @click='supplierDetails'><i class="fa-info-circle"></i>&nbsp;详情</a>
+                <a class="btn btn-primary" href="blackList.html"><i class="fa fa-check-square-o"></i>&nbsp;查看黑名单</a>
+                <a class="btn btn-warning" @click="del"><i class="fa fa-check-square-o"></i>&nbsp;删除</a>
+            </#if>
+</div>
+<div style="height: 0px;clear:both;"></div>
+</div>
+<table id="jqGrid"></table>
+<div id="jqGridPager"></div>
+</div>
+
+<div v-show="showList==2" class="panel panel-default">
+    <div class="panel-heading">{{title}}</div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-2 control-label">公司名称</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" v-model="supplier.supplierName" placeholder="公司名称"/>
+            </div>
+        </div>
+        <div class="form-group" v-show='opName=="add"'>
+            <div class="col-sm-2 control-label">统一社会信用代码</div>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" v-model="supplier.creditCode" placeholder="统一社会信用代码"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">法定代表人</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" v-model="supplier.legaRepresentative" placeholder="法定代表人"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">资质</div>
+            <div class="col-sm-10">
+                <input type="text" style="cursor: pointer;"  class="form-control" v-model="supplier.qualifications" placeholder="资质"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">所属地</div>
+            <div class="col-sm-10">
+                <input type="text" style="cursor: pointer;"  class="form-control" v-model="supplier.attribution" placeholder="所属地"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">注册资本</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" v-model="supplier.registeredCapital" placeholder="注册资本"/>
+            </div>
+        </div>
+        <div class="form-group">
+        <div class="col-sm-2 control-label">经营状况</div>
+        <div class="col-sm-10">
+            <el-select v-model="supplier.operatingStatus" clearable placeholder="请选择">
+                <el-option
+                        v-for="item in operatingStatusList"
+                        :key="item.code"
+                        size="small"
+                        :label="item.value"
+                        :value="item.code">
+                </el-option>
+            </el-select>
+        </div>
+    </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">公司类型</div>
+            <div class="col-sm-10">
+                <el-select v-model="supplier.supplierType" clearable placeholder="请选择">
+                    <el-option
+                            v-for="item in typeList"
+                            :key="item.code"
+                            size="small"
+                            :label="item.value"
+                            :value="item.code">
+                    </el-option>
+                </el-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">营业范围</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" v-model="supplier.businessScope" placeholder="营业范围"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-2 control-label"></div>
+            <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+            &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+        </div>
+    </form>
+</div>
+
+<div v-show="showList==3" class="panel panel-default">
+    <div class="panel-heading">{{title}}</div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-2 control-label">公司名称</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" :disabled="true" v-model="supplier.supplierName" placeholder="公司名称"/>
+            </div>
+        </div>
+        <div class="form-group" v-show='opName=="add"'>
+            <div class="col-sm-2 control-label">统一社会信用代码</div>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" :disabled="true" v-model="supplier.creditCode" placeholder="统一社会信用代码"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">法定代表人</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" :disabled="true" v-model="supplier.legaRepresentative" placeholder="法定代表人"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">资质</div>
+            <div class="col-sm-10">
+                <input type="text" style="cursor: pointer;"  class="form-control" v-model="supplier.qualifications" placeholder="资质"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">所属地</div>
+            <div class="col-sm-10">
+                <input type="text" style="cursor: pointer;"  class="form-control" :disabled="true" v-model="supplier.attribution" placeholder="所属地"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">注册资本</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" :disabled="true" v-model="supplier.registeredCapital" placeholder="注册资本"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">经营状况</div>
+            <div class="col-sm-10">
+                <el-select v-model="supplier.operatingStatus" :disabled="true" clearable placeholder="请选择">
+                    <el-option
+                            v-for="item in operatingStatusList"
+                            :key="item.code"
+                            size="small"
+                            :label="item.value"
+                            :value="item.code">
+                    </el-option>
+                </el-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">公司类型</div>
+            <div class="col-sm-10">
+                <el-select v-model="supplier.supplierType" :disabled="true" clearable placeholder="请选择">
+                    <el-option
+                            v-for="item in typeList"
+                            :key="item.code"
+                            size="small"
+                            :label="item.value"
+                            :value="item.code">
+                    </el-option>
+                </el-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">营业范围</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" :disabled="true" v-model="supplier.businessScope" placeholder="营业范围"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">备注</div>
+            <div class="col-sm-10">
+                <input type="textarea" style="cursor: pointer;"  class="form-control" v-model="supplier.remarks" placeholder="备注"/>
+            </div>
+
+        </div>
+
+        <table id="contract"></table>
+        <div id="contractPager"></div>
+
+        <div class="form-group">
+            <div class="col-sm-2 control-label"></div>
+            &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+        </div>
+    </form>
+</div>
+</div>
+<!-- 选择窗口 -->
+<div id="finUserOrgInfoTreeLayer" style="display: none;padding:10px;">
+    <ul id="finUserOrgInfoTree" class="ztree"></ul>
+</div>
+<script src="${request.contextPath}/statics/js/contract/supplier.js?_${.now?long}"></script>
+</body>
+</html>

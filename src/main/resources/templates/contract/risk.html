@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>金融机构-我的待办任务</title>
+    <#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList==1">
+        <div class="grid-btn">
+            <div style="float:left;height:40px;width:100%;margin-top:10px;">
+                <label style="font-weight: normal;margin-left: 10px;">申请人：</label>
+                <el-input
+                        placeholder="请输入公司名称"
+                        v-model="supplierSearch.supplierName"
+                        style="width:250px;"
+                        size="small"
+                        clearable>
+                </el-input>
+                <label style="font-weight: normal;margin-left: 10px;">申请时间：</label>
+                <el-input
+                        placeholder="请输入信用代码"
+                        v-model="supplierSearch.creditCode"
+                        style="width:250px;"
+                        size="small"
+                        clearable>
+                </el-input>
+                <a class="btn btn-default" @click="querySupplier">查询</a>
+                <a class="btn btn-default" @click="clearSupplier">重置</a>
+            </div>
+            <div style="float:left;height:40px;width:100%;margin-top:10px;">
+                <a class='btn btn-primary' @click='supplierDetails'><i class="fa-info-circle"></i>&nbsp;详情</a>
+            </div>
+            <div style="height: 0px;clear:both;"></div>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="showList==2" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">申请人</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="supplier.supplierName" placeholder="公司名称"/>
+                </div>
+            </div>
+            <div class="form-group" v-show='opName=="add"'>
+                <div class="col-sm-2 control-label">申请部门</div>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" v-model="supplier.creditCode" placeholder="统一社会信用代码"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">申请时间</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="supplier.legaRepresentative" placeholder="法定代表人"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">开始时间</div>
+                <div class="col-sm-10">
+                    <input type="text" style="cursor: pointer;"  class="form-control" v-model="supplier.qualifications" placeholder="资质"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">结束时间</div>
+                <div class="col-sm-10">
+                    <input type="text" style="cursor: pointer;"  class="form-control" v-model="supplier.attribution" placeholder="所属地"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">当前节点</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="supplier.registeredCapital" placeholder="注册资本"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-2 control-label">合同名称</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="supplier.businessScope" placeholder="营业范围"/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+
+</div>
+<!-- 选择窗口 -->
+<div id="finUserOrgInfoTreeLayer" style="display: none;padding:10px;">
+    <ul id="finUserOrgInfoTree" class="ztree"></ul>
+</div>
+<script src="${request.contextPath}/statics/js/contract/risk.js?_${.now?long}"></script>
+</body>
+</html>

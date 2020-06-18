@@ -28,4 +28,12 @@
 		</where>
 	</select>
 
+	<!--查询用户部门简要信息-->
+	<select id="selectUserDept" resultType="java.util.HashMap">
+		select u.user_id,u.real_name,d.dept_name from sys_user as u left join sys_dept as d on u.dept_id=d.dept_id
+		where
+		<bind name="userName" value="'%'+keyword+'%'"/>
+		u.real_name like #{userName}
+	</select>
+
 </mapper>

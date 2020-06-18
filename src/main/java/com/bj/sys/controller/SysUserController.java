@@ -70,7 +70,15 @@ public class SysUserController extends AbstractController {
     public R info() {
         return R.ok().put("user", getUser());
     }
-
+    /**
+     * 所有用户部门缩略信息
+     */
+    @RequestMapping("/userDept")
+    @RequiresPermissions("sys:user:list")
+    public R userDeptList(@RequestParam("keyword") String keyword) throws Exception {
+        List<Map<String, String>> maps =sysUserService.selectUserDept(keyword);
+        return R.ok().put("managers", maps);
+    }
     /**
      * 修改登录用户密码
      */
