@@ -70,19 +70,25 @@
                             v-model="contract.contractManager"
                             filterable
                             remote
+                            v-validate="'required'" name="contractManager"
                             reserve-keyword
                             placeholder="请输入经办人"
                             :remote-method="remoteManager"
-                            v-validate="'required'"
-                            name="contractManager"
                             :loading="remoteManagerLoading">
                         <el-option
                                 v-for="item in remoteManagers"
                                 :key="item.id"
                                 :label="item.real_name +'  '+ item.dept_name"
-                                :value="item.id">
+                                :value="item.user_id">
                         </el-option>
                     </el-select>
+                    <el-alert
+                            :title="'合同经办人'+errors.first('contractManager')"
+                            :closable="false"
+                            type="warning"
+                            show-icon
+                            v-show="errors.has('contractManager')">
+                    </el-alert>
                 </div>
             </div>
 
@@ -96,7 +102,8 @@
                 </div>
                 <div class="col-sm-2   control-label not-blank">甲方单位</div>
                 <div class="col-sm-2">
-                    <el-select v-model="contract.partyAId" size="small" >
+                    <el-select v-model="contract.partyAId" size="small" v-validate="'required'"
+                               name="partyAId">
                         <el-option v-for="(v,k) in DICT.CONTRACT_TYPE" :key="k" :value="k" :label="v"></el-option>
                     </el-select>
                 </div>
@@ -110,6 +117,8 @@
                             placeholder="请输入单位名称"
                             :remote-method="getRemotePartyB"
                             :loading="remotePartyBLoading"
+                            v-validate="'required'"
+                            name="partyBId"
                     >
                         <el-option
                                 v-for="item in remotePartyBs"
@@ -125,7 +134,7 @@
             <div class="form-group">
                 <div class="col-sm-2 col-md-2 control-label not-blank">采购内容</div>
                 <div class="col-sm-10">
-                    <textarea  auto-complete="off" v-validate="'required'" name="purchaseContent"  v-validate="'required|length:10,500'" class="form-control input-sm-10" v-model="contract.purchaseContent" placeholder="请输入采购内容，10~500字"></textarea>
+                    <textarea  auto-complete="off"  name="purchaseContent"  v-validate="'required|length:4,500'" class="form-control input-sm-10" v-model="contract.purchaseContent" placeholder="请输入采购内容，10~500字"></textarea>
                     <el-alert
                             :title="'采购内容'+errors.first('purchaseContent')"
                             :closable="false"
@@ -139,7 +148,7 @@
             <div class="form-group">
                 <div class="col-sm-2 control-label not-blank">付款方式</div>
                 <div class="col-sm-2">
-                    <el-select v-model="contract.paymentType" size="small" >
+                    <el-select v-model="contract.paymentType" size="small" name="paymentType"  v-validate="'required'">
                         <el-option v-for="(v,k) in DICT.PAYMENT_TYPE" :key="k" :value="k" :label="v"></el-option>
                     </el-select>
                 </div>
@@ -165,6 +174,7 @@
                                     :time-arrow-control="true"
                                     placeholder="选择开始时间" id="finOrgInfoDate001" size="small"
                                     value-format="yyyy-MM-dd"
+                                    name="startDate"  v-validate="'required'"
                     >
                     </el-date-picker>
                 </div>
@@ -175,6 +185,7 @@
                                     :time-arrow-control="true"
                                     placeholder="选择结束时间" id="finOrgInfoDate001" size="small"
                                     value-format="yyyy-MM-dd"
+                                    name="endDate"  v-validate="'required'"
                                     >
                     </el-date-picker>
                 </div>

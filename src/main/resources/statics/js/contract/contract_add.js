@@ -130,11 +130,11 @@ var vmContract = new Vue({
             purchasingDeptId:null,
             demandDeptId:null,
             contractType:null,
-            contractFile:null,
+            //contractFile:null,
             partyAId:null,
             partyBId:null,
             paymentType:null,
-            contractCode:null
+            //contractCode:null
         },
         paymentStage:{
             stageName: null,
@@ -165,8 +165,8 @@ var vmContract = new Vue({
             })
         },
         showAddPaymentStage:function(){
-          if(this.contract.contractAmount==null||this.contract.contractAmount=='') {
-              alert("请先输入合同总金额");
+          if(this.contract.contractAmount==null||this.contract.startDate==null||this.endDate==null) {
+              alert("请先输入合同总金额,合同开始及结束时间");
           }else{
               this.dialogFormVisible=true;
           }
@@ -196,21 +196,29 @@ var vmContract = new Vue({
         },
         saveContract: function(){
             var _this = this;
+            var item,contract=_this.contract;
             if(_this.files.length<1){
                 alert("请上传合同附件");
                 return;
+            }else if(contract.endDate < contract.startDate){
+                alert("合同结束时间不能小于开始时间");
+            }else if(_this.tableData.length<1){
+                alert("请输入付款阶段");
+                return;
             }
-            var contract=_this.contract;
-           contract.contractFile=_this.files[0].url;
+            for (item in contract){
+                if(_this.errors.has(item)||contract[item]==null){
+
+                    alert("请正确完整的录入合同信息！"+item+","+contract[item]);
+                    return;
+                }
+            }
             contract.paymentStage=JSON.stringify(this.tableData);
+
+           contract.contractFile=_this.files[0].url;
+
             contract.contractCode=new Date().getTime();
-           var item;
-           for (item in contract){
-               if(contract[item]==null||contract[item]==''){
-                   alert("请正确完整的录入合同信息！"+item);
-                   return;
-               }
-           }
+
            var dataStr=JSON.stringify(contract);
            alert(dataStr);
             $.ajax({
@@ -266,7 +274,7 @@ var vmContract = new Vue({
                         data:{
                             keyword:keyword
                         },
-                        url:baseURL+"supplier/simpleInfo",
+                        url:baseURL+"contract/supplier/simpleInfo",
                         success:function(r){
                             if(r.code===1){
                                 _this.remotePartyBs=r.partyBs;
