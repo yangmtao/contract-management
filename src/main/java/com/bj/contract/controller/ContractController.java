@@ -4,7 +4,10 @@ package com.bj.contract.controller;
 import com.alibaba.fastjson.JSON;
 import com.bj.common.util.PageUtils;
 import com.bj.common.util.R;
+import com.bj.config.MyBatisPlusAutoFill;
 import com.bj.contract.entity.Contract;
+import com.bj.contract.entity.ContractPaymentStage;
+import com.bj.contract.service.IContractPaymentStageService;
 import com.bj.contract.service.IContractService;
 
 import com.bj.sys.controller.AbstractController;
@@ -17,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -35,11 +40,21 @@ public class ContractController extends AbstractController {
     @Autowired
     private IContractService contractFileService;
 
+    @Autowired
+    private IContractPaymentStageService paymentStageService;
+
+    @GetMapping("/info/{id}")
+    @RequiresPermissions("contract:select")
+    public Contract getContractInfoById(@PathVariable("id") Long id) {
+        Contract contract=contractFileService.getContractInfoById(id);
+        return contract;
+    }
+
+
     /**
      * 分页获取所有合同
      */
     @RequestMapping("/list")
-    @ResponseBody
     @RequiresPermissions("contract:list")
     public R list(@RequestParam Map<String, Object> params) throws Exception {
 
@@ -75,9 +90,18 @@ public class ContractController extends AbstractController {
     public R saveContract(@RequestBody Contract contractFile){
         System.out.println(JSON.toJSONString(contractFile));
         contractFile.setPayStatus(0);
+        contractFile.setCreateDate(new Date());
         boolean insert = contractFileService.insert(contractFile);
+
         if(insert){
+            //保存付款阶段
+            List<ContractPaymentStage> stages=JSON.parseArray(contractFile.getPaymentStage(),ContractPaymentStage.class);
+            for(int i=0;i<stages.size();i++){
+                stages.get(i).setContractId(contractFile.getContractId());
+                paymentStageService.insert(stages.get(i));
+            }
             return R.ok("录入成功");
+
         }else{
             return R.error("服务器故障，请联系管理员");
         }

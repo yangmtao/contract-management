@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.enums.IdType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -49,7 +50,11 @@ public class Contract extends Model<Contract> {
     @TableField("contract_manager")
     @NotNull(message = "必须选择经办人")
     private String contractManager;
-
+    /**
+     * 经办人真实姓名
+     */
+    @TableField(exist = false)
+    private String contractManagerName;
     /**
      * 采购内容
      */
@@ -67,6 +72,7 @@ public class Contract extends Model<Contract> {
      * 合同录入时间
      */
     @TableField(value = "create_date",fill= FieldFill.INSERT)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
     /**
@@ -74,6 +80,7 @@ public class Contract extends Model<Contract> {
      */
     @TableField("start_date")
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "合同开始时间不能为空")
    // @DateTimeFormat
     private Date startDate;
@@ -97,6 +104,11 @@ public class Contract extends Model<Contract> {
     @NotNull(message = "必须选择需求部门")
     private Long demandDeptId;
     /**
+     * 需求部门名称
+     */
+    @TableField(exist = false)
+    private String demandDeptName;
+    /**
      * 合同类型
      */
     @TableField("contract_type")
@@ -112,6 +124,11 @@ public class Contract extends Model<Contract> {
      */
     @TableField("party_b_id")
     private Long partyBId;
+    /**
+     * 乙方公司名称
+     */
+    @TableField(exist = false)
+    private String partyBName;
     /**
      * 支付方式
      */

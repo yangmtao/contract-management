@@ -22,5 +22,6 @@ public interface SupplierMapper extends BaseMapper<SupplierEntity> {
 
     List<Map<String, String>> selectSupplierSimple(@Param("keyword") String keyword);
 
-	
+
+    String selectSupplierNameById(@Param("id") Long id);
 }

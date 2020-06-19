@@ -217,13 +217,15 @@
                         <el-table-column
                                 prop="paymentRate"
                                 label="付款比例"
-                                width="80">
+                                width="80"
+                                :formatter="rateFormatter"
+                        >
                         </el-table-column>
                         <el-table-column
                                 label="付款时间"
                                 width="120">
                             <template slot-scope="scope">
-                                <i class="el-icon-time"></i>
+                               <!-- <i class="el-icon-time"></i>-->
                                 <span style="margin-left: 10px">{{ scope.row.paymentDate }}</span>
                             </template>
                         </el-table-column>

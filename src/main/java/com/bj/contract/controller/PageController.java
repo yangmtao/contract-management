@@ -1,12 +1,17 @@
 package com.bj.contract.controller;
 
+import com.bj.contract.entity.Contract;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class PageController {
 
-
+    @Autowired
+    private ContractController contractController;
     //contract
     @GetMapping("/contract/add.html")
     public String contract_add(){
@@ -26,6 +31,13 @@ public class PageController {
     @GetMapping("/contract/change.html")
     public String contractChange(){
         return "contract/contract_change";
+    }
+
+    @GetMapping("/contract/{id}/detail.html")
+    public String contractChange(@PathVariable("id") Long id, ModelMap modelMap){
+        Contract contract = contractController.getContractInfoById(id);
+        modelMap.put("contract",contract);
+        return "contract/contract_detail";
     }
 
 

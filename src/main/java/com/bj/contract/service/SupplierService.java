@@ -31,5 +31,7 @@ public interface SupplierService extends IService<SupplierEntity> {
     R update(Long supplierId, Integer blackList, String remarks);
 
     List<Map<String, String>> selectSupplierSimple(String keyword);
+
+    String getSupplierNameById(Long id);
 }
 

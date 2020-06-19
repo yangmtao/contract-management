@@ -66,4 +66,9 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         page.setRecords(baseMapper.queryAllContract(page,wrapper));
         return new PageUtils(page);
     }
+
+    @Override
+    public Contract getContractInfoById(Long id) {
+        return baseMapper.selectById(id);
+    }
 }

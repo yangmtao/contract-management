@@ -8,5 +8,8 @@
         supplier_name like #{supplierName}
     </select>
 
+    <select id="selectSupplierNameById" resultType="string">
+        select supplier_name from supplier where supplier_id=#{id}
+    </select>
 
 </mapper>

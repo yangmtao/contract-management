@@ -70,6 +70,15 @@ public class SysUserController extends AbstractController {
     public R info() {
         return R.ok().put("user", getUser());
     }
+
+    /**
+     * 根据用户id获取用户真实姓名
+     */
+    @RequestMapping("/name/{id}")
+    public R getUserNameById(@PathVariable("id") Long id) {
+        String userName=sysUserService.getUserNameById(id);
+        return R.ok().put("userName", userName);
+    }
     /**
      * 所有用户部门缩略信息
      */

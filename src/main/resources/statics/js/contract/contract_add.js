@@ -165,16 +165,19 @@ var vmContract = new Vue({
             })
         },
         showAddPaymentStage:function(){
-          if(this.contract.contractAmount==null||this.contract.startDate==null||this.endDate==null) {
+          if(this.contract.contractAmount==null||this.contract.startDate==null||this.contract.endDate==null) {
               alert("请先输入合同总金额,合同开始及结束时间");
           }else{
               this.dialogFormVisible=true;
           }
         },
+        rateFormatter:function(row,column){
+           return row.paymentRate+'%';
+        },
         addPaymentStage:function(){
             var tempStage={};
             $.extend(tempStage,this.paymentStage);
-            tempStage.paymentRate=((tempStage.paymentAmount/this.contract.contractAmount)*100).toFixed(2)+'%';
+            tempStage.paymentRate=((tempStage.paymentAmount/this.contract.contractAmount)*100).toFixed(2);
             this.tableData.push(tempStage);
           this.dialogFormVisible=false;
         },
@@ -202,6 +205,7 @@ var vmContract = new Vue({
                 return;
             }else if(contract.endDate < contract.startDate){
                 alert("合同结束时间不能小于开始时间");
+                return;
             }else if(_this.tableData.length<1){
                 alert("请输入付款阶段");
                 return;
@@ -229,6 +233,7 @@ var vmContract = new Vue({
                 success: function (r) {
                     if (r.code === 1) {
                         alert('操作成功');
+                        _this.reload();
                     } else {
                         alert(r.msg);
                     }
