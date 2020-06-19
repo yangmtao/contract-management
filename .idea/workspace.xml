@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bd60090f-90ee-457b-96b9-44f98b2830f9" name="Default Changelist" comment="commit mapper">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="mybatis xml" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/apache-maven-3.6.2" />
+        <option name="userSettingsFile" value="D:\apache-maven-3.6.2\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1dQhPgtOPnoVmWMVpVzWY4ugcI5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/statics/js" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="Push.Settings">
+    <option name="SHOW_DETAILS_PANEL" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bj.config" />
+      <recent name="com.bj.common.util" />
+      <recent name="com.bj.sys.shiro" />
+      <recent name="com.bj.interceptor" />
+      <recent name="com.bj.common.enums" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\IdeaProjects\contract-management\src\main\resources\statics\js" />
+      <recent name="F:\IdeaProjects\contract-management\src\main\resources\mapper\contract" />
+      <recent name="F:\IdeaProjects\contract-management\src\main\resources\statics\css" />
+      <recent name="F:\IdeaProjects\contract-management\src\main\java\com\bj" />
+      <recent name="F:\IdeaProjects\contract-management\src\main\resources\statics\libs" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="ContractManagementApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="contract-management" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bj.ContractManagementApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bd60090f-90ee-457b-96b9-44f98b2830f9" name="Default Changelist" comment="" />
+      <created>1592363201425</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592363201425</updated>
+      <workItem from="1592363204522" duration="13240000" />
+      <workItem from="1592473477017" duration="192000" />
+      <workItem from="1592527408417" duration="156000" />
+      <workItem from="1592528159312" duration="160000" />
+      <workItem from="1592528342989" duration="35000" />
+      <workItem from="1592528387478" duration="514000" />
+      <workItem from="1592531126339" duration="517000" />
+      <workItem from="1592532045119" duration="7419000" />
+    </task>
+    <task id="LOCAL-00001" summary="contract_add modify">
+      <created>1592537822162</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1592537822162</updated>
+    </task>
+    <task id="LOCAL-00002" summary="2020/6/19 12:00">
+      <created>1592537901435</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1592537901435</updated>
+    </task>
+    <task id="LOCAL-00003" summary="commit mapper">
+      <created>1592537952871</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1592537952871</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="contract_add modify" />
+    <MESSAGE value="2020/6/19 12:00" />
+    <MESSAGE value="commit mapper" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit mapper" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="837" y="96" key="CommitChangelistDialog2" timestamp="1592540892630">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="837" y="96" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592540892630" />
+    <state width="1068" height="316" key="GridCell.Tab.0.bottom" timestamp="1592533781421">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1068" height="316" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592533781421" />
+    <state width="1068" height="316" key="GridCell.Tab.0.center" timestamp="1592533781421">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1068" height="316" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592533781421" />
+    <state width="1068" height="316" key="GridCell.Tab.0.left" timestamp="1592533781421">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1068" height="316" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592533781421" />
+    <state width="1068" height="316" key="GridCell.Tab.0.right" timestamp="1592533781421">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1068" height="316" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592533781421" />
+    <state width="1068" height="316" key="GridCell.Tab.1.bottom" timestamp="1592533781421">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1068" height="316" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592533781421" />
+    <state width="1068" height="316" key="GridCell.Tab.1.center" timestamp="1592533781421">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1068" height="316" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592533781421" />
+    <state width="1068" height="316" key="GridCell.Tab.1.left" timestamp="1592533781421">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1068" height="316" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592533781421" />
+    <state width="1068" height="316" key="GridCell.Tab.1.right" timestamp="1592533781421">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1068" height="316" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592533781421" />
+    <state x="704" y="74" key="SettingsEditor" timestamp="1592531440131">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="704" y="74" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1592531440131" />
+    <state x="816" y="233" key="Vcs.Push.Dialog.v2" timestamp="1592538224982">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="816" y="233" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592538224982" />
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1592531126611">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592531126611" />
+  </component>
+</project>
