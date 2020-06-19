@@ -50,7 +50,7 @@ public class SupplierController {
         return R.ok().put("page", page);
     }
 
-    @GetMapping("/supplier/simpleInfo")
+    @GetMapping("/simpleInfo")
     @ResponseBody
     public R supplierSimpleInfo(@RequestParam("keyword") String keyword) throws Exception {
         List<Map<String, String>> maps = supplierService.selectSupplierSimple(keyword);

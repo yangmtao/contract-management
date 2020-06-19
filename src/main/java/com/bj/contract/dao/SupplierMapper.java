@@ -18,9 +18,9 @@ import java.util.Map;
  * @date 2020-06-08 10:41:06
  */
 @Mapper
-public interface SupplierDao extends BaseMapper<SupplierEntity> {
+public interface SupplierMapper extends BaseMapper<SupplierEntity> {
 
-    List<Map<String, String>> selectSupplierSimple(String keyword);
+    List<Map<String, String>> selectSupplierSimple(@Param("keyword") String keyword);
 
 	
 }
