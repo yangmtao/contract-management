@@ -5,6 +5,10 @@ import com.bj.common.util.PageUtils;
 import com.bj.contract.entity.Contract;
 
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,9 +19,11 @@ import java.util.Map;
  * @author yangmingtao
  * @since 2020-06-10
  */
-public interface IContractService extends IService<Contract> {
+public interface ContractService extends IService<Contract> {
 
     PageUtils queryPage(Map<String, Object> params) throws Exception;
 
     Contract getContractInfoById(Long id);
+
+    void excelExport(HttpServletResponse response, List<String> ids) throws FileNotFoundException, IOException, IllegalAccessException;
 }

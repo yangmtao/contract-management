@@ -4,26 +4,24 @@ package com.bj.contract.controller;
 import com.alibaba.fastjson.JSON;
 import com.bj.common.util.PageUtils;
 import com.bj.common.util.R;
-import com.bj.config.MyBatisPlusAutoFill;
 import com.bj.contract.entity.Contract;
 import com.bj.contract.entity.ContractPaymentStage;
-import com.bj.contract.service.IContractPaymentStageService;
-import com.bj.contract.service.IContractService;
+import com.bj.contract.service.ContractPaymentStageService;
+import com.bj.contract.service.ContractService;
 
 import com.bj.sys.controller.AbstractController;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * <p>
@@ -33,17 +31,18 @@ import java.util.UUID;
  * @author yangmingtao
  * @since 2020-06-09
  */
-@RestController
+@Controller
 @RequestMapping("/contract")
 @Slf4j
 public class ContractController extends AbstractController {
     @Autowired
-    private IContractService contractFileService;
+    private ContractService contractFileService;
 
     @Autowired
-    private IContractPaymentStageService paymentStageService;
+    private ContractPaymentStageService paymentStageService;
 
     @GetMapping("/info/{id}")
+    @ResponseBody
     @RequiresPermissions("contract:select")
     public Contract getContractInfoById(@PathVariable("id") Long id) {
         Contract contract=contractFileService.getContractInfoById(id);
@@ -55,16 +54,18 @@ public class ContractController extends AbstractController {
      * 分页获取所有合同
      */
     @RequestMapping("/list")
+    @ResponseBody
     @RequiresPermissions("contract:list")
     public R list(@RequestParam Map<String, Object> params) throws Exception {
 
         log.info("contract list");
-        PageUtils page =page = contractFileService.queryPage(params);
+        PageUtils page  = contractFileService.queryPage(params);
         return R.ok().put("page", page);
     }
 
     //图片上传
     @RequestMapping("/uploadImage")
+    @ResponseBody
     public R uploadImage(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
         log.info("image upload===============");
         //设置图片保存名称
@@ -86,7 +87,8 @@ public class ContractController extends AbstractController {
 
     //保存、新增合同
     @PostMapping("/save")
-    //@RequiresPermissions("contract:save")
+    @ResponseBody
+    @RequiresPermissions("contract:save")
     public R saveContract(@RequestBody Contract contractFile){
         System.out.println(JSON.toJSONString(contractFile));
         contractFile.setPayStatus(0);
@@ -105,6 +107,15 @@ public class ContractController extends AbstractController {
         }else{
             return R.error("服务器故障，请联系管理员");
         }
+    }
+
+    @GetMapping("/export/excel")
+    public R excelExport(@RequestParam("ids") String ids,HttpServletResponse response) throws IOException, IllegalAccessException {
+        String[] idStr=ids.split(",");
+
+        List<String> idList= Arrays.asList(idStr);
+        contractFileService.excelExport(response,idList);
+        return R.ok().put("msg","导出成功");
     }
 }
 

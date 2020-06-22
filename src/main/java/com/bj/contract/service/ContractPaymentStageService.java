@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @author yangmingtao
  * @since 2020-06-19
  */
-public interface IContractPaymentStageService extends IService<ContractPaymentStage> {
+public interface ContractPaymentStageService extends IService<ContractPaymentStage> {
 
 }
