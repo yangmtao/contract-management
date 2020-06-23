@@ -21,10 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * <p>
@@ -113,8 +110,10 @@ public class ContractController extends AbstractController {
     }
 
     @GetMapping("/export/excel")
-    public R excelExport(String ids,HttpServletResponse response) throws IOException {
-        List<Long> idList=JSON.parseArray(ids,Long.class);
+    public R excelExport(@RequestParam("ids") String ids,HttpServletResponse response) throws IOException, IllegalAccessException {
+        String[] idStr=ids.split(",");
+
+        List<String> idList= Arrays.asList(idStr);
         contractFileService.excelExport(response,idList);
         return R.ok().put("msg","导出成功");
     }

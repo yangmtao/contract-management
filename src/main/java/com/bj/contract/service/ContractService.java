@@ -25,5 +25,5 @@ public interface ContractService extends IService<Contract> {
 
     Contract getContractInfoById(Long id);
 
-    void excelExport(HttpServletResponse response, List<Long> ids) throws FileNotFoundException, IOException;
+    void excelExport(HttpServletResponse response, List<String> ids) throws FileNotFoundException, IOException, IllegalAccessException;
 }

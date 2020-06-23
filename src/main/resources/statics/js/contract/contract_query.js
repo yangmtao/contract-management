@@ -141,10 +141,6 @@ var vmContract = new Vue({
             partyAId:null,
             partyBId:null,
             paymentType:null,
-            payStatus:null,
-            startNumber:null,
-            endNumber:null,
-            paymentRange:null,
             contractCode:null
         },
         remoteManagers:[],
@@ -168,12 +164,11 @@ var vmContract = new Vue({
                 ztree = $.fn.zTree.init($("#deptTree"), setting, r.deptList);
             })
         },
-        //根据关键字查询相关乙方单位
-        getRemotePartyB:function(keyword){
+        getRemotePartyB:function(){
             var _this=this;
             if(keyword!=''){
                 _this.remotePartyBLoading=true;
-                console.log("正在查找相关单位")
+
                 setTimeout(function(){
                     _this.remotePartyBLoading=false;
                     $.ajax({
@@ -181,10 +176,10 @@ var vmContract = new Vue({
                         data:{
                             keyword:keyword
                         },
-                        url:baseURL+"contract/supplier/simpleInfo",
+                        url:baseURL+"sys/user/userDept",
                         success:function(r){
                             if(r.code===1){
-                                _this.remotePartyBs=r.partyBs;
+                                _this.remotePartyBs=r.managers;
                             }
                         }
                     });
@@ -221,7 +216,6 @@ var vmContract = new Vue({
                 }
             });
         },
-        //根据关键字查询经办人（用户）
         remoteManager:function(keyword){
             var _this=this;
             if(keyword!=''){
@@ -249,32 +243,9 @@ var vmContract = new Vue({
             }
 
         },
-        //合同查询
         queryContract: function(){
             console.log("正在查找");
-            var _this=this;
-            if(_this.contract.startNumber > _this.contract.endNumber){
-                alert("合同金额错误，范围起始值必须小于等于终止值");
-                return;
-            }
-            _this.contract.paymentRange=_this.contract.startNumber+","+_this.contract.endNumber;
-            var page = $("#jqGrid").jqGrid('getGridParam', 'page');
-            $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'contract':JSON.stringify(_this.contract)},
-                page: page
-            }).trigger("reloadGrid");
         },
-        //导出为excel
-        excelExport:function(){
-          console.log("正在导出为excel");
-            var ids = getSelectedRows();
-            if (ids == null) {
-                return;
-            }
-
-           window.location.href="/contract/export/excel?ids="+JSON.stringify(ids);
-        },
-
         reload: function () {
             window.location.reload();
         }
@@ -312,7 +283,7 @@ function getSelectedRows() {
     var grid = $("#jqGrid");
     var rowKey = grid.getGridParam("selrow");
     if (!rowKey) {
-        alert("请选择一条或多条记录");
+        alert("请选择一条记录");
         return;
     }
 
