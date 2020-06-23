@@ -7,11 +7,32 @@
         d.dept_name as demand_dept_name,
         u.real_name as contract_manager_name,
         s.supplier_name as party_b_name,
-        (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes
+        (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes,
+        (select count(*) from contract_examine where contract_id=c.contract_id ) as examineNumbers
         from contract as c left join sys_user as u on c.contract_manager=u.user_id
         left join supplier as s on c.party_b_id=s.supplier_id
         left join sys_dept as d on c.demand_dept_id=d.dept_id
          <where> ${ew.sqlSegment}</where>
+    </select>
+
+    <select id="selectContractByIds" resultType="com.bj.contract.entity.Contract">
+        select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,c.demand_dept_id,c.party_b_id,
+        case c.contract_type when 1 then '赠予合同' when 2 then '租赁合同' else '买卖合同' end as contract_type_name,
+        case c.pay_status when 1 then '在付' when 2 then '已付' else '未付' end as pay_status_name,
+        case c.payment_type when 1 then '银行转账' when 2 then '支票' when 3 then '支付宝' when 4 then '微信' else '现金' end as payment_type_name,
+        c.contract_amount,c.create_date,c.start_date,c.end_date,
+        d.dept_name as demand_dept_name,
+        u.real_name as contract_manager_name,
+        s.supplier_name as party_b_name,
+        (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes
+        from contract as c left join sys_user as u on c.contract_manager=u.user_id
+        left join supplier as s on c.party_b_id=s.supplier_id
+        left join sys_dept as d on c.demand_dept_id=d.dept_id
+        where contract_id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+
     </select>
 
 

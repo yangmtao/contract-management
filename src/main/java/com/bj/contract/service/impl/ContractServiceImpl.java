@@ -16,16 +16,19 @@ import com.bj.contract.service.ContractService;
 
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -96,7 +99,7 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
     public void excelExport(HttpServletResponse response, List<String> ids) throws FileNotFoundException, IOException, IllegalAccessException {
 
         //先根据合同id查出需要转换为excel的合同信息
-        List<Contract> contractList = baseMapper.selectBatchIds(ids);
+        List<Contract> contractList = baseMapper.selectContractByIds(ids);
 
         //创建Excel导出工作对象
         HSSFWorkbook wb=new HSSFWorkbook();
@@ -104,12 +107,31 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         HSSFSheet sheet=wb.createSheet("POI导出测试");
         //创建表头
         HSSFRow header=sheet.createRow(0);
+        //设置表头样式
+        HSSFCellStyle cellStyle=wb.createCellStyle();
+        //背景色
+        cellStyle.setFillBackgroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        //水平对齐方式
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        //垂直对齐方式
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        //设置字体
+        Font font=wb.createFont();
+        font.setFontName("微软雅黑");
+        font.setBold(true);
+        cellStyle.setFont(font);
+        //应用样式
+        header.setRowStyle(cellStyle);
         //获取所有有@ApiModelProperty注解
-        ApiModelProperty[] annos= Contract.class.getDeclaredAnnotationsByType(ApiModelProperty.class);
+        Field[] fields=Contract.class.getDeclaredFields();
         //设置表头单元格名称
-        for(int i=0;i<annos.length;i++){
-           HSSFCell cell=header.createCell(i);
-           cell.setCellValue(annos[i].value());
+        int rowNo=0;
+        for(int i=0;i<fields.length;i++){
+            if(fields[i].getAnnotation(ApiModelProperty.class)!=null){
+                HSSFCell cell=header.createCell(rowNo++);
+                cell.setCellValue(fields[i].getAnnotation(ApiModelProperty.class).value());
+                cell.setCellStyle(cellStyle);
+            }
         }
 
         //--------------------------------------------
@@ -117,12 +139,21 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         for(int i=0;i<contractList.size();i++){
             //创建行
             HSSFRow row = sheet.createRow(i+1);
-            Field[] fields=contractList.get(i).getClass().getDeclaredFields();
+            System.out.println("第"+(i+1)+"条数据："+contractList.get(i).getContractName());
+            Field[] lineFields=contractList.get(i).getClass().getDeclaredFields();
             //写入每一行内容
-            for(int j=0;j<fields.length;j++){
-                if(fields[j].getAnnotation(ApiModelProperty.class)!=null){
-                    fields[j].setAccessible(true);
-                    row.createCell(j).setCellValue(String.valueOf(fields[j].get(contractList.get(i))));
+            int k=0;
+            for(int j=0;j<lineFields.length;j++){
+                if(lineFields[j].getAnnotation(ApiModelProperty.class)!=null){
+                    lineFields[j].setAccessible(true);
+                    SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+                    //如果为时间类型，转换时间格式
+                    if(lineFields[j].getType()== Date.class){
+                        row.createCell(k++).setCellValue(ft.format(lineFields[j].get(contractList.get(i))));
+                    }else{
+                        row.createCell(k++).setCellValue(String.valueOf(lineFields[j].get(contractList.get(i))));
+                    }
+
                 }
             }
         }

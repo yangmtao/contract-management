@@ -224,7 +224,6 @@ var vmContract = new Vue({
             contract.contractCode=new Date().getTime();
 
            var dataStr=JSON.stringify(contract);
-           alert(dataStr);
             $.ajax({
                 type: "POST",
                 url: baseURL + "contract/save",

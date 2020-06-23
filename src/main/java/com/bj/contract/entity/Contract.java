@@ -41,6 +41,12 @@ public class Contract extends Model<Contract> {
     @TableId(value = "contract_id", type = IdType.AUTO)
     private Long contractId;
     /**
+     * 合同编号
+     */
+    @TableField("contract_code")
+    @ApiModelProperty("合同编号")
+    private String contractCode;
+    /**
      * 合同名称
      */
     @ApiModelProperty("合同名称")
@@ -54,12 +60,7 @@ public class Contract extends Model<Contract> {
     @TableField("contract_manager")
     @NotNull(message = "必须选择经办人")
     private String contractManager;
-    /**
-     * 经办人真实姓名
-     */
-    @ApiModelProperty("合同经办人")
-    @TableField(exist = false)
-    private String contractManagerName;
+
     /**
      * 采购内容
      */
@@ -67,6 +68,12 @@ public class Contract extends Model<Contract> {
     @ApiModelProperty("合同内容")
     @NotBlank(message = "采购内容不能为空")
     private String purchaseContent;
+    /**
+     * 经办人真实姓名
+     */
+    @ApiModelProperty("合同经办人")
+    @TableField(exist = false)
+    private String contractManagerName;
     /**
      * 合同金额
      */
@@ -130,8 +137,13 @@ public class Contract extends Model<Contract> {
      */
     @TableField("contract_type")
     @NotNull(message = "必须选择合同类型")
-    @ApiModelProperty("合同类型")
     private Integer contractType;
+    /**
+     * 合同类型名称
+     */
+    @TableField(exist = false)
+    @ApiModelProperty("合同类型")
+    private String contractTypeName;
     /**
      * 甲方公司id
      */
@@ -152,8 +164,14 @@ public class Contract extends Model<Contract> {
      * 支付方式
      */
     @TableField("payment_type")
-    @ApiModelProperty("支付方式")
+    @NotNull(message = "支付方式不能为空")
     private Integer paymentType;
+    /**
+     * 支付方式名称
+     */
+    @TableField(exist = false)
+    @ApiModelProperty("支付方式")
+    private String paymentTypeName;
     /**
      * 付款阶段
      */
@@ -164,18 +182,18 @@ public class Contract extends Model<Contract> {
      */
     @TableField("contract_file")
     private String contractFile;
-    /**
-     * 合同编号
-     */
-    @TableField("contract_code")
-    @ApiModelProperty("合同编号")
-    private String contractCode;
+
     /**
      * 付款状态
      */
     @TableField("pay_status")
-    @ApiModelProperty("付款状态")
     private Integer payStatus;
+    /**
+     * 付款状态名称
+     */
+    @TableField(exist = false)
+    @ApiModelProperty("付款状态")
+    private String payStatusName;
     /**
      *
      * 逻辑删除
@@ -189,6 +207,11 @@ public class Contract extends Model<Contract> {
      */
     @TableField(exist = false)
     private int changeTimes;
+    /*
+    审查记录数，合同审查查询时使用
+     */
+    @TableField(exist = false)
+    private int examineNumbers;
 
     @Override
     protected Serializable pkVal() {

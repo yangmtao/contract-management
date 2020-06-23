@@ -22,4 +22,6 @@ import java.util.List;
 public interface ContractMapper extends BaseMapper<Contract> {
 
     List<Contract> queryAllContract(Page page, @Param("ew") Wrapper wrapper);
+
+    List<Contract> selectContractByIds(List<String> ids);
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bj.contract.dao.ContractExamineMapper">
+
+    <select id="queryAllContractExamine" resultType="com.bj.contract.entity.ContractExamine">
+        select c.contract_id,c.contract_name,c.contract_code,
+        ce.risk_level,ce.problem,ce.create_time,ce.status,ce.handle_way,
+        (select real_name from sys_user where sys_user.user_id=ce.handler) as handlerName,
+        (select real_name from sys_user where sys_user.user_id=c.contract_manager) as contractManager
+        from contract as c join contract_examine as ce on  c.contract_id=ce.contract_id
+        <where> ${ew.sqlSegment}</where>
+    </select>
+
+</mapper>

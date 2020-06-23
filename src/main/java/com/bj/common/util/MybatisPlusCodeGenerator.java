@@ -49,7 +49,7 @@ public class MybatisPlusCodeGenerator {
         // 写于父类中的公共字段
         strategy.setSuperEntityColumns("id");
         //表
-        strategy.setInclude("contract_payment_stage");
+        strategy.setInclude("contract_examine");
         strategy.setControllerMappingHyphenStyle(true);
 
         //strategy.setTablePrefix(pc.getModuleName() + "_");

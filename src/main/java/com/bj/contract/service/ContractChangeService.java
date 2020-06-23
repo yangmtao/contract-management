@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ContractChangeService extends IService<ContractChange> {
 
+    int save(ContractChange change);
 }

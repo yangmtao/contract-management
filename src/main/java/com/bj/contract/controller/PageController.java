@@ -33,6 +33,11 @@ public class PageController {
         return "contract/contract_change";
     }
 
+    @GetMapping("/contract/examine/add.html")
+    public String examineAdd(){
+        return "contract/contract_examine_add";
+    }
+
     @GetMapping("/contract/{id}/detail.html")
     public String contractChange(@PathVariable("id") Long id, ModelMap modelMap){
         Contract contract = contractController.getContractInfoById(id);

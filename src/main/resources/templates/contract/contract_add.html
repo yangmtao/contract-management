@@ -44,7 +44,7 @@
                 <div class="col-sm-2 col-md-2 control-label not-blank">合同名称</div>
                 <div class="col-sm-10">
 
-                    <input type="text" v-validate="'required|min:4|normalText'" name="contractName" auto-complete="off"  class="form-control input-sm-10" v-model="contract.contractName" placeholder="请输入合同名称,4~100字"/>
+                    <input type="text" v-validate="'required|length:4,100|normalText'" name="contractName" auto-complete="off"  class="form-control input-sm-10" v-model="contract.contractName" placeholder="请输入合同名称,4~100字"/>
                     <el-alert
                             :title="'合同名称'+errors.first('contractName')"
                             :closable="false"

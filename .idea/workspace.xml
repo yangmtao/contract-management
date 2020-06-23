@@ -2,21 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd60090f-90ee-457b-96b9-44f98b2830f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/logs/contract-manage.log.2020-06-19.0.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/contract-manage.log.2020-06-22.0.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/controller/ContractExamineController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/dao/ContractExamineMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/entity/ContractExamine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/ContractExamineService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/impl/ContractExamineServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/contract/ContractExamineMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_examine_add.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_examine_add.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/controller/ContractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/controller/ContractController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/common/util/MybatisPlusCodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/common/util/MybatisPlusCodeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/controller/ContractChangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/controller/ContractChangeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/controller/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/controller/PageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/dao/ContractMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/dao/ContractMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/entity/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/entity/Contract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/IContractPaymentStageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/ContractPaymentStageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/IContractService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/ContractService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/impl/ContractPaymentStageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/impl/ContractPaymentStageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/entity/ContractChange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/entity/ContractChange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/ContractChangeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/ContractChangeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/impl/ContractChangeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/impl/ContractChangeServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/impl/ContractServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/impl/ContractServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/contract/ContractMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/contract/ContractMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/statics/js/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/statics/js/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_add.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_change.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_change.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_examine.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_examine.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_query.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_query.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_add.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_change.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_change.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_query.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_query.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,10 +100,10 @@
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\IdeaProjects\contract-management\src\main\resources\mapper\contract" />
+      <recent name="F:\IdeaProjects\contract-management\src\main\resources\statics\js\contract" />
+      <recent name="F:\IdeaProjects\contract-management\src\main\resources\templates\contract" />
       <recent name="F:\IdeaProjects\contract-management\src\main\resources\statics\js" />
       <recent name="F:\IdeaProjects\contract-management\src\main\resources\statics\css" />
-      <recent name="F:\IdeaProjects\contract-management\src\main\java\com\bj" />
-      <recent name="F:\IdeaProjects\contract-management\src\main\resources\statics\libs" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.ContractManagementApplication">
@@ -171,7 +184,8 @@
       <workItem from="1592532045119" duration="7875000" />
       <workItem from="1592541414581" duration="18341000" />
       <workItem from="1592788520549" duration="26868000" />
-      <workItem from="1592873354848" duration="256000" />
+      <workItem from="1592873354848" duration="2303000" />
+      <workItem from="1592877321779" duration="23107000" />
     </task>
     <task id="LOCAL-00001" summary="contract_add modify">
       <created>1592537822162</created>
@@ -208,7 +222,21 @@
       <option name="project" value="LOCAL" />
       <updated>1592561072618</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="2020619">
+      <created>1592873709745</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1592873709745</updated>
+    </task>
+    <task id="LOCAL-00007" summary="2020619">
+      <created>1592873783167</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1592873783167</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,50 +268,58 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="802" y="156" width="1092" height="773" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592541857452" />
-    <state x="1153" y="210" key="#com.intellij.ide.util.MemberChooser" timestamp="1592810437071">
+    <state x="1153" y="210" key="#com.intellij.ide.util.MemberChooser" timestamp="1592902966623">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1153" y="210" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592810437071" />
+    <state x="1153" y="210" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592902966623" />
     <state x="1005" y="427" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1592542829073">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1005" y="427" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592542829073" />
-    <state x="837" y="96" key="CommitChangelistDialog2" timestamp="1592873708917">
+    <state x="837" y="96" key="CommitChangelistDialog2" timestamp="1592873782511">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="837" y="96" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592873708917" />
-    <state width="1082" height="285" key="GridCell.Tab.0.bottom" timestamp="1592820315348">
+    <state x="837" y="96" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592873782511" />
+    <state width="1020" height="484" key="GridCell.Tab.0.bottom" timestamp="1592905074482">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592820315348" />
-    <state width="1082" height="285" key="GridCell.Tab.0.center" timestamp="1592820315348">
+    <state width="1020" height="484" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592905074482" />
+    <state width="1020" height="484" key="GridCell.Tab.0.center" timestamp="1592905074481">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="285" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592820315348" />
-    <state width="1082" height="285" key="GridCell.Tab.0.left" timestamp="1592820315348">
+    <state width="1020" height="484" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592905074481" />
+    <state width="1020" height="484" key="GridCell.Tab.0.left" timestamp="1592905074481">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="285" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592820315348" />
-    <state width="1082" height="285" key="GridCell.Tab.0.right" timestamp="1592820315348">
+    <state width="1020" height="484" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592905074481" />
+    <state width="1020" height="484" key="GridCell.Tab.0.right" timestamp="1592905074481">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="285" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592820315348" />
-    <state width="1082" height="285" key="GridCell.Tab.1.bottom" timestamp="1592820315348">
+    <state width="1020" height="484" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592905074481" />
+    <state width="1020" height="484" key="GridCell.Tab.1.bottom" timestamp="1592905074482">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="285" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592820315348" />
-    <state width="1082" height="285" key="GridCell.Tab.1.center" timestamp="1592820315348">
+    <state width="1020" height="484" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592905074482" />
+    <state width="1020" height="484" key="GridCell.Tab.1.center" timestamp="1592905074482">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="285" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592820315348" />
-    <state width="1082" height="285" key="GridCell.Tab.1.left" timestamp="1592820315348">
+    <state width="1020" height="484" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592905074482" />
+    <state width="1020" height="484" key="GridCell.Tab.1.left" timestamp="1592905074482">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="285" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592820315348" />
-    <state width="1082" height="285" key="GridCell.Tab.1.right" timestamp="1592820315348">
+    <state width="1020" height="484" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592905074482" />
+    <state width="1020" height="484" key="GridCell.Tab.1.right" timestamp="1592905074482">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="285" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592820315348" />
+    <state width="1020" height="484" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592905074482" />
+    <state x="368" y="98" key="MergeDialog" timestamp="1592873853167">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="368" y="98" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592873853167" />
+    <state x="972" y="248" key="MultipleFileMergeDialog" timestamp="1592873865053">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="972" y="248" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592873865053" />
     <state x="704" y="74" key="SettingsEditor" timestamp="1592541575528">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -296,10 +332,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592873356006" />
-    <state x="1069" y="449" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592873713510">
+    <state x="1069" y="449" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592873787994">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1069" y="449" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592873713510" />
+    <state x="1069" y="449" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592873787994" />
     <state x="939" y="380" key="git4idea.ui.GitUnstashDialog" timestamp="1592873647055">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -312,5 +348,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1004" y="233" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592548478086" />
+    <state x="1002" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1592893962172">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1002" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592893962172" />
   </component>
 </project>

@@ -15,17 +15,13 @@ $(function () {
                     return DICT.STATUS[value] || '';
                 }
             },
-            {label: '付款状态', name: 'payStatus', index: "create_date", width: 100, align: 'center',
+            {label: '付款状态', name: 'payStatus',  width: 100, align: 'center',
                 formatter: function (value) {
                     return DICT.PAYMENT_STATUS[value] || '';
                 }
             },
-            {label: '经办人', name: 'contractManagerName', index: "create_date", width: 100, align: 'center',sorttype:'date'},
-            {label: '变更次数', name: 'changeTimes', index: "change_times", width: 100, align: 'center'},
-            {label: '操作',  width: 110, align: 'center',sortable:false,
-                formatter: function (value) {
-                    return '<a class="btn btn-primary" href="/cmsContent/view/'+value+'" target="_blank">查看详情</a>';
-                }}
+            {label: '经办人', name: 'contractManagerName',  width: 100, align: 'center'},
+            {label: '审查记录数', name: 'examineNumbers',  width: 100, align: 'center'},
         ],
         viewrecords: true,
         width: 1200,
@@ -145,12 +141,13 @@ var vmContract = new Vue({
             paymentType:null,
             contractCode:null
         },
-        contractChange:{
-            changeName:null,
-            changeReason:null,
-            contractManager:null,
-            contractAmount:null,
-            paymentDate:null,
+        contractExamine:{
+            riskLevel:null,
+            problem:null,
+            status:null,
+            handler:null,
+            handleWay:null,
+            createTime:null,
             contractId:null,
         },
         remoteManagers:[],
@@ -205,51 +202,36 @@ var vmContract = new Vue({
             if(id==null) {
                 return;
             }else{
-                this.contractChange.contractId=id;
+                this.contractExamine.contractId=id;
                 this.dialogFormVisible=true;
             }
         },
-        cancleContractFile: function(){
-            confirm("确定删除所选文件？",function(){
-                return true;
-            });
-        },
-        addContractChange:function(){
 
-            if(this.files.length<1){
-                alert("请先上传合同更改协议正文！");
-                return;
-            }
+        addcontractExamine:function(){
+
             var _this=this;
-            var contract=_this.contractChange;
+            var contract=_this.contractExamine;
             for (item in contract){
-                if(_this.errors.has(item)||contract[item]==null){
-                    alert("请正确完整的录入合同信息！"+item+","+contract[item]);
+                if(_this.errors.has(item)){
+                    alert("请正确完整的录入合同审查记录信息！"+item+","+contract[item]);
                     return;
                 }
             }
-            contract.changeFile=this.files[0].url;;
             $.ajax({
                 type: "POST",
-                url: baseURL + "contract/change/add",
+                url: baseURL + "contract/examine/add",
                 contentType: "application/json",
-                data: JSON.stringify(_this.contractChange),
+                data: JSON.stringify(_this.contractExamine),
                 success: function (r) {
                     if (r.code === 1) {
                         alert('操作成功');
-                        _this.reload();
                     } else {
                         alert(r.msg);
                     }
                 }
             });
         },
-        contractFileSuccess: function(r){
-            var file={name:r.imageName,url:r.url};
-            this.files[0]=file;
-            //this.files.push(file);
-            alert("上传成功");
-        },
+
         deptTree: function (type) {
             var _this = this;
             layer.open({
@@ -316,7 +298,8 @@ var vmContract = new Vue({
 
 
 DICT = {
-    STATUS: {0: '草稿', 1: '待审核', 2: '审核不通过', 3: '已发布'},
+    STATUS: {0: '待处理', 1: '处理中', 2: '已解决'},
+    RISK_LEVEL: {0: '低', 1: '中', 2: '高'},
     PAYMENT_STATUS: {0: '未付', 1: '在付', 2: '已付'},
     CONTRACT_TYPE: {0: '买卖合同', 1: '供用电、水、气、热力合同', 2: '赠与合同', 3: '租赁合同',4:'承揽合同',5:'建设工程合同',6:'技术合同',7:'仓储合同',8:'委托合同',9:'房间合同'}
 }
@@ -327,7 +310,7 @@ function getSelectedRow() {
     var grid = $("#jqGrid");
     var rowKey = grid.getGridParam("selrow");
     if (!rowKey) {
-        alert("请选择一条记录");
+        alert("请在下方选择一条合同数据");
         return;
     }
 
@@ -340,17 +323,6 @@ function getSelectedRow() {
     return selectedIDs[0];
 }
 
-//选择多条记录
-function getSelectedRows() {
-    var grid = $("#jqGrid");
-    var rowKey = grid.getGridParam("selrow");
-    if (!rowKey) {
-        alert("请选择一条记录");
-        return;
-    }
-
-    return grid.getGridParam("selarrrow");
-}
 //重写alert
 window.alert = function (msg, callback) {
     parent.layer.alert(msg, function (index) {
