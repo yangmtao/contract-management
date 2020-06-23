@@ -2,7 +2,7 @@ package com.bj.contract.service.impl;
 
 import com.bj.contract.entity.ContractPaymentStage;
 import com.bj.contract.dao.ContractPaymentStageMapper;
-import com.bj.contract.service.IContractPaymentStageService;
+import com.bj.contract.service.ContractPaymentStageService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2020-06-19
  */
 @Service
-public class ContractPaymentStageServiceImpl extends ServiceImpl<ContractPaymentStageMapper, ContractPaymentStage> implements IContractPaymentStageService {
+public class ContractPaymentStageServiceImpl extends ServiceImpl<ContractPaymentStageMapper, ContractPaymentStage> implements ContractPaymentStageService {
 
 }

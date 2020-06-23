@@ -3,7 +3,11 @@
 <mapper namespace="com.bj.contract.dao.ContractMapper">
 
     <select id="queryAllContract" resultType="com.bj.contract.entity.Contract">
-        select c.*,d.dept_name as demand_dept_name,u.real_name as contract_manager_name,s.supplier_name as party_b_name
+        select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,c.demand_dept_id,c.party_b_id,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date,
+        d.dept_name as demand_dept_name,
+        u.real_name as contract_manager_name,
+        s.supplier_name as party_b_name,
+        (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes
         from contract as c left join sys_user as u on c.contract_manager=u.user_id
         left join supplier as s on c.party_b_id=s.supplier_id
         left join sys_dept as d on c.demand_dept_id=d.dept_id

@@ -4,18 +4,24 @@ $(function () {
         datatype: "json",
         colModel: [
             {label: '合同ID', name: 'contractId', index: "id", width: 40, key: true, hidden: true},
-            {label: '合同编号', name: 'contractCode', width: 120, align: 'center',sortable:false},
+            {label: '合同编号', name: 'contractCode', width: 150, align: 'center',sortable:false},
             {label: '合同名称', name: 'contractName', width: 200, align: 'center',sortable:false},
-            {label: '需求部门', name: 'demandDeptId',width: 120, align: 'center',sortable:false},
-            {label: '乙方单位', name: 'partyBId', index:"publish_date", width: 160, align: 'center'},
+            {label: '需求部门', name: 'demandDeptName',width: 120, align: 'center',sortable:false},
+            {label: '采购内容', name: 'purchaseContent', width: 200, align: 'center',sortable:false},
+            {label: '乙方单位', name: 'partyBName', index:"publish_date", width: 160, align: 'center'},
             {
                 label: '合同类型', name: 'contractType', width: 120, align: 'center',sortable:false,
                 formatter: function (value) {
                     return DICT.STATUS[value] || '';
                 }
             },
-            {label: '付款状态', name: 'payStatus', index: "create_date", width: 100, align: 'center',sorttype:'date'},
-            {label: '经办人', name: 'contractManager', index: "create_date", width: 100, align: 'center',sorttype:'date'},
+            {label: '付款状态', name: 'payStatus', index: "create_date", width: 100, align: 'center',
+                formatter: function (value) {
+                    return DICT.PAYMENT_STATUS[value] || '';
+                }
+            },
+            {label: '经办人', name: 'contractManagerName', index: "create_date", width: 100, align: 'center',sorttype:'date'},
+            {label: '变更次数', name: 'changeTimes', index: "change_times", width: 100, align: 'center'},
             {label: '操作',  width: 110, align: 'center',sortable:false,
                 formatter: function (value) {
                     return '<a class="btn btn-primary" href="/cmsContent/view/'+value+'" target="_blank">查看详情</a>';
@@ -195,7 +201,16 @@ var vmContract = new Vue({
             }else{
                 this.dialogFormVisible=true;
             }
-        },        deptTree: function (type) {
+        },
+        cancleContractFile: function(){
+            confirm("确定删除所选文件？",function(){
+                return true;
+            });
+        },
+        addContractChange:function(){
+
+        },
+        deptTree: function (type) {
             var _this = this;
             layer.open({
                 type: 1,
@@ -259,8 +274,11 @@ var vmContract = new Vue({
     }
 });
 
+
 DICT = {
-    STATUS: {0: '草稿', 1: '待审核', 2: '审核不通过', 3: '已发布'}
+    STATUS: {0: '草稿', 1: '待审核', 2: '审核不通过', 3: '已发布'},
+    PAYMENT_STATUS: {0: '未付', 1: '在付', 2: '已付'},
+    CONTRACT_TYPE: {0: '买卖合同', 1: '供用电、水、气、热力合同', 2: '赠与合同', 3: '租赁合同',4:'承揽合同',5:'建设工程合同',6:'技术合同',7:'仓储合同',8:'委托合同',9:'房间合同'}
 }
 Vue.prototype.DICT = DICT;
 

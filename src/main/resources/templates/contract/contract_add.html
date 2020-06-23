@@ -134,7 +134,7 @@
             <div class="form-group">
                 <div class="col-sm-2 col-md-2 control-label not-blank">采购内容</div>
                 <div class="col-sm-10">
-                    <textarea  auto-complete="off"  name="purchaseContent"  v-validate="'required|length:4,500'" class="form-control input-sm-10" v-model="contract.purchaseContent" placeholder="请输入采购内容，10~500字"></textarea>
+                    <textarea  auto-complete="off"  name="purchaseContent"  v-validate="'required|length:10,500'" class="form-control input-sm-10" v-model="contract.purchaseContent" placeholder="请输入采购内容，10~500字"></textarea>
                     <el-alert
                             :title="'采购内容'+errors.first('purchaseContent')"
                             :closable="false"

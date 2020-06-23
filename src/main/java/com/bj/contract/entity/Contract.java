@@ -68,6 +68,13 @@ public class Contract extends Model<Contract> {
     @DecimalMax(value = "1000000000",message = "合同金额不能大于10亿")
     @DecimalMin(value = "0",message = "合同金额不能小于0")
     private BigDecimal contractAmount;
+
+    /*
+    合同金额范围
+    合同查询时使用
+     */
+    @TableField(exist = false)
+    private String paymentRange;
     /**
      * 合同录入时间
      */
@@ -161,6 +168,12 @@ public class Contract extends Model<Contract> {
     @TableField("del_tag")
     @TableLogic
     private Integer delTag;
+
+    /*
+    合同变更次数，合同变更查询时使用
+     */
+    @TableField(exist = false)
+    private int changeTimes;
 
     @Override
     protected Serializable pkVal() {
