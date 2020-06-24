@@ -4,93 +4,137 @@
     <title>金融机构-我的待办任务</title>
     <#include "/header.html">
 </head>
+<style>
+    .no-border{
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #333;
+    }
+    .no-border[input]{
+        border: none;!important;
+    }
+</style>
 <body>
 <div id="rrapp" v-cloak>
     <div v-show="showList==1">
-        <div class="grid-btn">
-            <div style="float:left;height:40px;width:100%;margin-top:10px;">
-                <label style="font-weight: normal;margin-left: 10px;">申请人：</label>
-                <el-input
-                        placeholder="请输入公司名称"
-                        v-model="supplierSearch.supplierName"
-                        style="width:250px;"
-                        size="small"
-                        clearable>
-                </el-input>
-                <label style="font-weight: normal;margin-left: 10px;">申请时间：</label>
-                <el-input
-                        placeholder="请输入信用代码"
-                        v-model="supplierSearch.creditCode"
-                        style="width:250px;"
-                        size="small"
-                        clearable>
-                </el-input>
-                <a class="btn btn-default" @click="querySupplier">查询</a>
-                <a class="btn btn-default" @click="clearSupplier">重置</a>
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                <div class="col-sm-2 control-label  ">合同名称</div>
+                <div class="col-sm-2">
+                    <input type="text" auto-complete="off" class="form-control"  v-model="riskSearch.contractName" placeholder="请输入合同名称"/>
+                </div>
+                <div class="col-sm-2   control-label  ">合同编号</div>
+                <div class="col-sm-2">
+                    <input type="text" auto-complete="off" class="form-control" v-model="riskSearch.contractCode" placeholder="请输入合同编号"/>
+                </div>
             </div>
-            <div style="float:left;height:40px;width:100%;margin-top:10px;">
-                <a class='btn btn-primary' @click='supplierDetails'><i class="fa-info-circle"></i>&nbsp;详情</a>
+
+            <div class="form-group">
+                <div class="col-sm-2   control-label  ">付款情况</div>
+                <div class="col-sm-2">
+                    <el-select v-model="riskSearch.payStatus" size="small">
+                        <el-option label="已支付" :value="0"></el-option>
+                        <el-option label="正在支付" :value="1"></el-option>
+                        <el-option label="未支付" :value="2"></el-option>
+                    </el-select>
+                </div>
+                <div class="col-sm-2 control-label  ">乙方单位</div>
+                <div class="col-sm-2">
+                    <input type="text" auto-complete="off" class="form-control"  v-model="riskSearch.supplierName" placeholder="请输入乙方单位"/>
+                </div>
+                <div class="col-sm-1 control-label  "></div>
+                <div class="col-sm-3 ">
+                    <input type="button" class="btn btn-primary" @click="queryRisk" value="查 询"/>
+                    <input type="reset" class="btn btn-warning" @click="clearRisk"  value="重 置"/>
+                </div>
+                <div style="float:left;height:40px;width:100%;margin-top:10px;">
+                    &nbsp;&nbsp;<a class="btn btn-primary" @click="updateRisk"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+                    <a class='btn btn-primary' @click='riskDetails'><i class="fa-info-circle"></i>&nbsp;详情</a>
+                </div>
             </div>
-            <div style="height: 0px;clear:both;"></div>
-        </div>
+
+        </form>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
     </div>
 
     <div v-show="showList==2" class="panel panel-default">
         <div class="panel-heading">{{title}}</div>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <div class="col-sm-2 control-label">申请人</div>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="supplier.supplierName" placeholder="公司名称"/>
-                </div>
-            </div>
-            <div class="form-group" v-show='opName=="add"'>
-                <div class="col-sm-2 control-label">申请部门</div>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" v-model="supplier.creditCode" placeholder="统一社会信用代码"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-2 control-label">申请时间</div>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="supplier.legaRepresentative" placeholder="法定代表人"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-2 control-label">开始时间</div>
-                <div class="col-sm-10">
-                    <input type="text" style="cursor: pointer;"  class="form-control" v-model="supplier.qualifications" placeholder="资质"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-2 control-label">结束时间</div>
-                <div class="col-sm-10">
-                    <input type="text" style="cursor: pointer;"  class="form-control" v-model="supplier.attribution" placeholder="所属地"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-2 control-label">当前节点</div>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="supplier.registeredCapital" placeholder="注册资本"/>
-                </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-sm-2 control-label">合同名称</div>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="supplier.businessScope" placeholder="营业范围"/>
-                </div>
-            </div>
+        <el-form label-width="80px" style="margin: auto">
+            <el-form-item label="合同名称">
+                <el-input :disabled="true" v-model="contractRisk.contractName"></el-input>
+            </el-form-item>
+            <el-form-item label="支付状态">
+                <el-radio-group :disabled="true" v-model="contractRisk.payStatus">
+                    <!--:aria-checked="contractRisk.payStatus==0 ? true : false"-->
+                    <el-radio :label="0" name="type" value="0">已支付</el-radio>
+                    <el-radio :label="1" name="type" value="1">正在支付</el-radio>
+                    <el-radio :label="2" name="type" value="2">未支付</el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="乙方单位">
+                <el-input :disabled="true" type="textarea" v-model="contractRisk.supplierName"></el-input>
+            </el-form-item>
+            <el-form-item label="风险类型">
+                <el-select v-model="contractRisk.riskType" placeholder="请选择等级">
+                    <el-option label="高" value="高"></el-option>
+                    <el-option label="中" value="中"></el-option>
+                    <el-option label="低" value="低"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="风险内容">
+                <el-input style="border: white" v-model="contractRisk.riskName"></el-input>
+            </el-form-item>
+            <el-form-item label="应对措施">
+                <el-input type="textarea" v-model="contractRisk.solution"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button @click="saveOrUpdate">提交</el-button>
+                <el-button @click="reload">返回</el-button>
+            </el-form-item>
+        </el-form>
 
+    </div>
 
-            <div class="form-group">
-                <div class="col-sm-2 control-label"></div>
-                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
-                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
-            </div>
-        </form>
+    <div v-show="showList==3" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+
+        <el-form label-width="80px" style="margin: auto">
+            <el-form-item label="合同名称">
+                <el-input :disabled="true" v-model="contractRisk.contractName"></el-input>
+            </el-form-item>
+            <el-form-item label="支付状态">
+                <el-radio-group :disabled="true" v-model="contractRisk.payStatus">
+                    <el-radio :label="0" name="type" value="0">已支付</el-radio>
+                    <el-radio :label="1" name="type" value="1">正在支付</el-radio>
+                    <el-radio :label="2" name="type" value="2">未支付</el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="乙方单位">
+                <el-input type="textarea" :disabled="true" v-model="contractRisk.supplierName"></el-input>
+            </el-form-item>
+            <el-form-item label="风险类型">
+                <el-radio-group :disabled="true" v-model="contractRisk.riskType">
+                    <el-radio label="高" value="高">高</el-radio>
+                    <el-radio label="中" value="中">中</el-radio>
+                    <el-radio label="低" value="低">低</el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="风险内容">
+                <el-input :disabled="true" style="border: white" v-model="contractRisk.riskName"></el-input>
+            </el-form-item>
+
+            <el-form-item label="应对措施">
+                <el-input type="textarea" :disabled="true" v-model="contractRisk.solution"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button @click="reload">返回</el-button>
+            </el-form-item>
+        </el-form>
+
     </div>
 
 </div>

@@ -8,6 +8,7 @@ import com.bj.contract.entity.Contract;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -21,7 +22,14 @@ import java.util.List;
 @Mapper
 public interface ContractMapper extends BaseMapper<Contract> {
 
+    Contract selectContractById(Long contractId);
+
     List<Contract> queryAllContract(Page page, @Param("ew") Wrapper wrapper);
 
     List<Contract> selectContractByIds(List<String> ids);
+
+
+    void updateAmount(@Param("contractId")Long contractId,@Param("o") Object o, @Param("unAmount") BigDecimal unAmount);
+
+    Contract contractById(Long contractId);
 }

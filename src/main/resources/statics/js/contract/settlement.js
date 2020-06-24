@@ -1,26 +1,50 @@
 function jqGrid(){$("#jqGrid").jqGrid({
-    url: baseURL + 'contract/list' ,
+    url: baseURL + 'contract/settlement/list' ,
     datatype: "json",
     colModel: [
 
-        {label: 'contractApplyRecordId', name: 'contractApplyRecordId', index: 'contract_apply_record_id', width: 10, key: true, hidden: true},
-        {label: '合同编号', name: 'contractId', index: 'contract_id', width: 140, align: 'center'},
+        {label: 'id', name: 'id', index: 'id', width: 10, key: true, hidden: true},
+        {label: '合同id', name: 'contractId', index: 'contract_id', width: 140, align: 'center',hidden:true},
+        {label: '合同编号', name: 'contractCode', index: 'contract_code', width: 140,align: 'center'},
         {label: '合同名称', name: 'contractName', index: 'contract_name', width: 100},
-        {label: '采购部门', name: 'purchasingDeptId', index: 'purchasing_dept_id', width: 140, align: 'center'},
-        {label: '需求部门', name: 'demandDeptId', index: 'demand_dept_id', width: 100},
-        {label: '乙方单位', name: 'partyBId', index: 'party_b_id', width: 100},
+        {label: '采购部门', name: 'purchasingDeptName', index: 'dept1_name', width: 140, align: 'center'},
+        {label: '需求部门', name: 'demandDeptName', index: 'demand_dept_name', width: 100},
+        {label: '乙方单位', name: 'supplierName', index: 'supplier_name', width: 100},
         {label: '合同类型', name: 'contractType', index: 'contract_type', width: 100},
-        {label: '付款情况', name: 'paymentStage', index: 'payment_stage', width: 100},
+        {label: '付款情况', name: 'payStatus', index: 'pay_status', width: 100,
+        formatter:function (cellValue, options, rowData) {
+            var val = "";
+            var payStatus = rowData["payStatus"];
+            if (payStatus == "0") {
+                val = "已支付";
+            } else if (payStatus == "1") {
+                val = "正在支付";
+            }else if(payStatus="2") {
+                val = "未支付"
+            }
+            return val;
+        }
+        },
         {label: '合同金额', name: 'contractAmount', index: 'contract_amount', width: 100},
-        {label: '合同未付款', name: 'receiveTime', index: 'receive_time', width: 100},
+        {label: '合同未付款', name: 'unPayAmount', index: 'un_pay_amount', width: 100,
+            formatter:function (cellValue, options, rowData) {
+                var val = "";
+                var unPayAmount = rowData["unPayAmount"];
+                if (unPayAmount == null) {
+                    val = "已支付完成";
+                    return val;
+                }else {
+                    return unPayAmount;
+                }
+            }},
 
         {label: '备注', name: 'remarks', index: 'remarks', width: 100,align: 'center'},
         {label: '操作',  width: 100, sortable: false, align: 'center',
             formatter:function (cellValue, options, rowData) {
-                var i  = rowData["contractApplyRecordId"];
-                var node = rowData["currentNode"];
-                console.log(node)
-                return "<a class='btn btn-primary' onclick='pass(\""+i+"\",\""+node+"\")' '>通过</a>"
+                var contractId = rowData["contractId"];
+                var contractName = rowData["contractName"];
+                var contractCode = rowData["contractCode"];
+                return "<a class='btn btn-primary' onclick='settlement(\""+contractId+"\",\""+contractName+"\",\""+contractCode+"\")' '>结算</a>"
 
 
             }
@@ -56,39 +80,9 @@ $(function () {
     jqGrid();
 });
 
-function pass(i,node){
+function settlement(contractId,contractName,contractCode){
 
-    layer.confirm('确定仔细核查了吗？', {
-        btn: ['确定','再看一下'] //按钮
-    }, function(){
-        $.ajax({
-            type:"get",
-            url:baseURL + "contract/myMission/pass?contractApplyRecordId="+i+"&currentNode="+node,
-            success:function(re){
-                if(re.code==1){
-                    layer.alert("操作成功",{
-                        icon:1
-                    },function(index){
-                        layer.close(index)
-                        window.location.reload();
-                    })
-                }else {
-                    layer.alert(re.message,{
-                        icon:2
-                    },function (index){
-                        layer.close(index)
-                    })
-                }
-            }
-
-
-        })
-
-    }, function(){
-        layer.close();
-    });
-
-
+vm.passSettlement(contractId,contractName,contractCode)
 
 }
 
@@ -106,19 +100,44 @@ var setting = {
         }
     }
 };
-var vmFinUser = new Vue({
+var vm = new Vue({
     el: '#rrapp',
     data: {
         showList: 1,
         title: null,
         opName: "",
-        supplier:{
-            blackList:1
-        },
+        contractCode:"",
+        contractName:"",
         finUser: {
             orgId: "",
             orgName: "",
             userFlag: 1
+        },
+        contract:{
+            contractName:null,
+            startDate:null,
+            endDate:null,
+            contractManager:null,
+            contractAmount:null,
+            purchaseContent:null,
+            demandDeptId:null,
+            contractType:null,
+            contractFile:null,
+            partyAId:null,
+            partyBId:null,
+            paymentType:null,
+            contractCode:null
+        },
+        settlement:{
+
+        },
+        contractSearch:{
+            contractName:null,
+            contractCode:null,
+            supplierName:"",
+            contractManager:""
+
+
         },
         finUserSearch: {
             userName: "",
@@ -154,24 +173,28 @@ var vmFinUser = new Vue({
     methods: {
 
         //搜索
-        querySupplier: function () {
+        querySett: function () {
             this.reload();
         },
         //重置
-        clearSupplier: function () {
-            this.supplierSearch = {
+        clearSett: function () {
+            this.contractSearch = {
+                contractName:"",
+                contractCode:"",
                 supplierName:"",
-                creditCode:""
+                contractManager:""
             };
             this.reload();
         },
-        //新增
-        addSupplier: function () {
+        //结算
+        passSettlement: function (contractId,contractName,contractCode) {
             this.showList = 2;
-            this.title = "新增";
-            this.opName = "add";
-            this.supplier = {
-                blackList:1
+            this.title = "结算";
+            this.contractName = contractName;
+            this.contractCode = contractCode;
+            this.opName = "settlement";
+            this.settlement = {
+                contractId:contractId,
             };
         },
 
@@ -188,33 +211,16 @@ var vmFinUser = new Vue({
             this.getContract(supplierId);
         },
 
-        //跳转黑名单页面
-        getBlackList:function(){
-            this.$router.push({ path:'/blackList.html'  })
-        },
 
-        //跳转修改页面
-        updateFinUser: function (event) {
-            var supplierId = getSelectedRow();
-            if (supplierId == null) {
-                return;
-            }
-            this.showList = 2;
-            this.title = "修改";
-            this.opName = "update";
-            this.getInfo(supplierId);
-        },
         //新增或修改
         saveOrUpdate: function (event) {
-            var url = this.supplier.supplierId == null ? "contract/supplier/save" : "contract/supplier/update";
+            var url = "contract/settlement/save" ;
             var _this = this;
-
-            console.log("============")
             $.ajax({
                 type: "POST",
                 url: baseURL + url,
                 contentType: "application/json",
-                data: JSON.stringify(this.supplier),
+                data: JSON.stringify(this.settlement),
                 success: function (r) {
                     if (r.code === 1) {
                         alert('操作成功', function (index) {
@@ -302,10 +308,11 @@ var vmFinUser = new Vue({
             this.showList = 1;
             // var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             var postData = {
-                "supplierName":this.supplierSearch.supplierName,
-                "creditCode":this.supplierSearch.creditCode,
+                "contractName":this.contractSearch.contractName,
+                "contractCode":this.contractSearch.contractCode,
+                "supplierName":this.contractSearch.supplierName,
+                "contractManager":this.contractSearch.contractManager
             };
-            console.log(postData.supplierName)
             $("#jqGrid").jqGrid('setGridParam', {
                 page: 1, "postData": postData
             }).trigger("reloadGrid");

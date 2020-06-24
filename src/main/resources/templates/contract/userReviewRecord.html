@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>金融机构-我的待办任务</title>
+    <title>历史记录</title>
     <#include "/header.html">
 </head>
 <body>
@@ -9,33 +9,32 @@
     <div v-show="showList==1">
         <div class="grid-btn">
             <div style="float:left;height:40px;width:100%;margin-top:10px;">
-                <label style="font-weight: normal;margin-left: 10px;">申请人：</label>
+                <label style="font-weight: normal;margin-left: 10px;">合同名称：</label>
                 <el-input
-                        placeholder="请输入公司名称"
-                        v-model="supplierSearch.supplierName"
+                        placeholder="请输入合同名称"
+                        v-model="reviewSearch.contractName"
                         style="width:250px;"
                         size="small"
                         clearable>
                 </el-input>
-                <label style="font-weight: normal;margin-left: 10px;">申请时间：</label>
+                <label style="font-weight: normal;margin-left: 10px;">审核人：</label>
                 <el-input
-                        placeholder="请输入信用代码"
-                        v-model="supplierSearch.creditCode"
+                        placeholder="请输入审核人姓名"
+                        v-model="reviewSearch.reviewer"
                         style="width:250px;"
                         size="small"
                         clearable>
                 </el-input>
-                <a class="btn btn-default" @click="querySupplier">查询</a>
-                <a class="btn btn-default" @click="clearSupplier">重置</a>
+                <a class="btn btn-default" @click="queryReview">查询</a>
+                <a class="btn btn-default" @click="clearReview">重置</a>
             </div>
             <div style="float:left;height:40px;width:100%;margin-top:10px;">
-                <a class='btn btn-primary' @click='supplierDetails'><i class="fa-info-circle"></i>&nbsp;详情</a>
+            </div>
+            <div style="height: 0px;clear:both;"></div>
         </div>
-        <div style="height: 0px;clear:both;"></div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
     </div>
-    <table id="jqGrid"></table>
-    <div id="jqGridPager"></div>
-</div>
 
 <div v-show="showList==2" class="panel panel-default">
     <div class="panel-heading">{{title}}</div>

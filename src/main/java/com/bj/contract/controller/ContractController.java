@@ -63,6 +63,19 @@ public class ContractController extends AbstractController {
         return R.ok().put("page", page);
     }
 
+    /**
+     * 信息
+     */
+    @RequestMapping("/info/{contractId}")
+    @RequiresPermissions("contract:info")
+    public R info(@PathVariable("contractId") Long contractId){
+        System.out.println(contractId);
+        Contract contract = contractFileService.getById(contractId);
+        System.out.println(contract);
+
+        return R.ok().put("contract", contract);
+    }
+
     //图片上传
     @RequestMapping("/uploadImage")
     @ResponseBody

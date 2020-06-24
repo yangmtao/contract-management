@@ -3,24 +3,37 @@ function jqGrid(){$("#jqGrid").jqGrid({
     datatype: "json",
     colModel: [
 
-        {label: 'contractApplyRecordId', name: 'contractApplyRecordId', index: 'contract_apply_record_id', width: 10, key: true, hidden: true},
-        {label: '合同编号', name: 'contractId', index: 'contract_id', width: 140, align: 'center'},
+        {label: 'id', name: 'id', index: 'id', width: 10, key: true, hidden: true},
+        {label: '合同id', name: 'contractId', index: 'contract_id', width: 140, align: 'center',hidden: true},
+        {label: '合同编号', name: 'contractCode', index: 'contract_code', width: 140,align: 'center'},
         {label: '合同名称', name: 'contractName', index: 'contract_name', width: 100},
         {label: '风险类型', name: 'riskType', index: 'risk_type', width: 140, align: 'center'},
         {label: '风险名称', name: 'riskName', index: 'risk_name', width: 100},
         {label: '解决方案', name: 'solution', index: 'solution', width: 100},
         {label: '合同类型', name: 'contractType', index: 'contract_type', width: 100},
-        {label: '付款情况', name: 'paymentStage', index: 'payment_stage', width: 100},
+        {label: '付款情况', name: 'payStatus', index: 'pay_status', width: 100,
+            formatter: function (cellValue, options, rowData) {
+                var val = "";
+                var payStatus = rowData["payStatus"];
+                if (payStatus == "0") {
+                    val = "已支付";
+                } else if (payStatus == "1") {
+                    val = "正在支付";
+                }else if(payStatus="2") {
+                    val = "未支付"
+                }
+                return val;
+            }
+            },
         {label: '合同金额', name: 'contractAmount', index: 'contract_amount', width: 100},
-        {label: '合同未付款', name: 'receiveTime', index: 'receive_time', width: 100},
+        // {label: '合同未付款', name: 'receiveTime', index: 'receive_time', width: 100},
 
-        {label: '备注', name: 'remarks', index: 'remarks', width: 100,align: 'center'},
+        {label: '乙方公司', name: 'supplierName', index: 'supplier_name', width: 100,align: 'center'},
         {label: '操作',  width: 100, sortable: false, align: 'center',
             formatter:function (cellValue, options, rowData) {
-                var i  = rowData["contractApplyRecordId"];
-                var node = rowData["currentNode"];
-                console.log(node)
-                return "<a class='btn btn-primary' onclick='pass(\""+i+"\",\""+node+"\")' '>通过</a>"
+                var id  = rowData["id"];
+
+                return "<a class='btn btn-primary' onclick='over(\""+id+"\")' '>已解决</a>"
 
 
             }
@@ -56,14 +69,13 @@ $(function () {
     jqGrid();
 });
 
-function pass(i,node){
-
-    layer.confirm('确定仔细核查了吗？', {
-        btn: ['确定','再看一下'] //按钮
+function over(id){
+    layer.confirm('确定解决了吗？', {
+        btn: ['确定','还没有'] //按钮
     }, function(){
         $.ajax({
             type:"get",
-            url:baseURL + "contract/myMission/pass?contractApplyRecordId="+i+"&currentNode="+node,
+            url:baseURL + "contract/risk/over?id="+id,
             success:function(re){
                 if(re.code==1){
                     layer.alert("操作成功",{
@@ -112,32 +124,19 @@ var vmFinUser = new Vue({
         showList: 1,
         title: null,
         opName: "",
+        contractRisk:{
+            contractName:""
+        },
+       riskSearch:{
+           contractName:"",
+           contractCode:"",
+           supplierName:"",
+           payStatus:""
+
+       },
         supplier:{
-            blackList:1
+
         },
-        finUser: {
-            orgId: "",
-            orgName: "",
-            userFlag: 1
-        },
-        finUserSearch: {
-            userName: "",
-            realName: "",
-            userStatus: "",
-            orgId: "",
-            orgName: "",
-            createDateStart: "",
-            createDateEnd: ""
-        },
-        supplierSearch:{
-            supplierName:"",
-            creditCode:""
-        },
-        userStatusList: [
-            {code: 1, value: "启用"},
-            {code: 2, value: "停用"},
-            {code: 3, value: "注销"}
-        ],
         operatingStatusList: [
             {code: 1, value: "营业"},
             {code: 2, value: "停业"}
@@ -154,71 +153,58 @@ var vmFinUser = new Vue({
     methods: {
 
         //搜索
-        querySupplier: function () {
+        queryRisk: function () {
             this.reload();
         },
         //重置
-        clearSupplier: function () {
-            this.supplierSearch = {
+        clearRisk: function () {
+            this.riskSearch = {
+                contractName:"",
+                contractCode:"",
                 supplierName:"",
-                creditCode:""
+                payStatus:""
             };
             this.reload();
         },
-        //新增
-        addSupplier: function () {
-            this.showList = 2;
-            this.title = "新增";
-            this.opName = "add";
-            this.supplier = {
-                blackList:1
-            };
-        },
 
         //跳转详情页面
-        supplierDetails:function(){
-            var supplierId = getSelectedRow();
-            if (supplierId == null) {
+        riskDetails:function(){
+            var id = getSelectedRow();
+            if (id == null) {
                 return;
             }
             this.showList = 3;
             this.title = "详情";
             this.opName = "details";
-            this.getInfo(supplierId);
-            this.getContract(supplierId);
+            this.getInfo(id);
         },
 
-        //跳转黑名单页面
-        getBlackList:function(){
-            this.$router.push({ path:'/blackList.html'  })
-        },
 
         //跳转修改页面
-        updateFinUser: function (event) {
-            var supplierId = getSelectedRow();
-            if (supplierId == null) {
+        updateRisk: function (event) {
+            var id = getSelectedRow();
+            if (id == null) {
                 return;
             }
             this.showList = 2;
             this.title = "修改";
             this.opName = "update";
-            this.getInfo(supplierId);
+            this.getInfo(id);
         },
-        //新增或修改
+        //修改
         saveOrUpdate: function (event) {
-            var url = this.supplier.supplierId == null ? "contract/supplier/save" : "contract/supplier/update";
+            var url = "contract/risk/update";
             var _this = this;
-
-            console.log("============")
             $.ajax({
                 type: "POST",
                 url: baseURL + url,
                 contentType: "application/json",
-                data: JSON.stringify(this.supplier),
+                data: JSON.stringify(this.contractRisk),
                 success: function (r) {
                     if (r.code === 1) {
                         alert('操作成功', function (index) {
-                            _this.reload();
+                            // _this.reload();
+                            window.location.reload();
                         });
                     } else {
                         alert(r.msg);
@@ -226,86 +212,25 @@ var vmFinUser = new Vue({
                 }
             });
         },
-        //删除
-        del: function (event) {
-            var supplierIds = getSelectedRows();
-            if (supplierIds == null) {
-                return;
-            }
-            confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
-                    url: baseURL + "contract/supplier/delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(supplierIds),
-                    success: function (r) {
-                        if (r.code == 1) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
-            });
-        },
-
-        handleFinUser: function (num) {
-            var userIds = getSelectedRows();
-            if (userIds == null) {
-                return;
-            }
-            var ids = [];
-            for (var i = 0; i < userIds.length; i++) {
-                ids.push(userIds[i] + "--" + num);
-            }
-            var msg = "";
-            if (num == 1) {
-                msg = "确定启用所选客户的账户信息";
-            } else if (num == 2) {
-                msg = "确定停用所选客户的账户信息";
-            } else if (num == 3) {
-                msg = "确定注销所选客户的账户信息";
-            }
-            var _this = this;
-            confirm(msg, function () {
-                $.ajax({
-                    type: "POST",
-                    url: baseURL + "business/finuser/handleFinUser",
-                    contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 1) {
-                            alert(r.msg, function (index) {
-                                _this.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
-            });
-        },
 
         //得到所选id的信息
-        getInfo: function (supplierId) {
+        getInfo: function (id) {
             var _this = this;
-            $.get(baseURL + "contract/supplier/info/" + supplierId, function (r) {
-                _this.supplier = r.supplier;
-                console.log(_this.supplier+"===================")
+            $.get(baseURL + "contract/risk/info/" + id, function (r) {
+                _this.contractRisk = r.contractRisk;
             });
         },
 
         //搜索函数
         reload: function (event) {
             this.showList = 1;
-            // var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             var postData = {
-                "supplierName":this.supplierSearch.supplierName,
-                "creditCode":this.supplierSearch.creditCode,
+                "contractName":this.riskSearch.contractName,
+                "contractCode":this.riskSearch.contractCode,
+                "supplierName":this.riskSearch.supplierName,
+                "payStatus":this.riskSearch.payStatus
             };
-            console.log(postData.supplierName)
+            console.log(postData.payStatus)
             $("#jqGrid").jqGrid('setGridParam', {
                 page: 1, "postData": postData
             }).trigger("reloadGrid");
