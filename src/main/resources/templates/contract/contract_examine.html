@@ -12,7 +12,7 @@
 </style>
 <body>
 <div id="rrapp" v-cloak>
-    <div class="panel panel-default">
+    <div class="panel panel-default" >
         <form class="form-horizontal">
 
             <div class="form-group">
@@ -59,7 +59,9 @@
                 </div>
                 <div class="col-sm-1 control-label  "></div>
                 <div class="col-sm-3 ">
-                    <input type="button" class="btn btn-primary" @click="queryExamine" value="查 询"/>
+                    <#if shiro.hasPermission("contract:examine:select")>
+                    <a class="btn btn-primary" @click="queryExamine"><i class="fa fa-search"></i>查 询</a>
+                    </#if>
                     <input type="reset" class="btn btn-warning"  value="重 置"/>
                 </div>
             </div>
@@ -70,6 +72,7 @@
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
     </div>
+
 
 
 </div>
