@@ -13,6 +13,10 @@
     .form-control{
         width: 220px;
     }
+    .back{
+        margin: 0 50%;
+        width: 10%;
+    }
    .amountRange{
        width: 70px;
        border: 1px solid #ccc;
@@ -25,10 +29,27 @@
         -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
     }
+    .contractTitle{
+        text-align: center;
+        background-color: transparent;
+    }
+    .contractInfo{
+        width: 950px;
+        margin: 0 auto;
+    }
+    .contract{
+        width: 996px;
+        border:1px solid #b4bccc;
+        margin: 0 auto;
+    }
+    .el-input{
+        width: 320px;
+        border: none;
+    }
 </style>
 <body>
 <div id="rrapp" v-cloak>
-    <div class="panel panel-default">
+    <div class="panel panel-default" v-show="showList">
         <form class="form-horizontal">
 
             <div class="form-group">
@@ -137,14 +158,174 @@
                 <input type="button" class="btn btn-success" @click="excelExport" value="导出Excel"/>
                 </div>
             </div>
-
-
         </form>
         <!--jqgrid数据表格-->
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
     </div>
 
+    <div class="contract" v-show="!showList">
+        <div class="contractTitle"><h2>合同详情</h2></div>
+        <div class="contractInfo">
+            <h4>一、合同基本信息</h4>
+            <el-form ref="form" :model="contract" :inline="true" label-width="120px">
+                <el-form-item label="合同名称">
+                    <el-input v-model="contract.contractName" readonly="true"></el-input>
+                </el-form-item>
+                <el-form-item label="合同编号">
+                    <el-input v-model="contract.contractName"></el-input>
+                </el-form-item>
+            </el-form>
+
+            <el-form ref="form" :model="contract" :inline="true" label-width="120px">
+                <el-form-item label="合同经办人">
+                    <el-input v-model="contract.contractName"></el-input>
+                </el-form-item>
+                <el-form-item label="经办人联系方式">
+                    <el-input v-model="contract.contractName"></el-input>
+                </el-form-item>
+            </el-form>
+            <el-form ref="form" :model="contract" :inline="true" label-width="120px">
+                <el-form-item label="甲方单位">
+                    <el-input v-model="contract.contractName"></el-input>
+                </el-form-item>
+                <el-form-item label="乙方单位">
+                    <el-input v-model="contract.contractName"></el-input>
+                </el-form-item>
+            </el-form>
+            <el-form ref="form" :model="contract" :inline="true" label-width="120px">
+                <el-form-item label="采购部门">
+                    <el-input v-model="contract.contractName"></el-input>
+                </el-form-item>
+                <el-form-item label="需求部门">
+                    <el-input v-model="contract.contractName"></el-input>
+                </el-form-item>
+            </el-form>
+            <el-form ref="form" :model="contract" :inline="true" label-width="120px">
+                <el-form-item label="合同金额">
+                    <el-input v-model="contract.contractName"></el-input>
+                </el-form-item>
+                <el-form-item label="支付方式">
+                    <el-input v-model="contract.contractName"></el-input>
+                </el-form-item>
+            </el-form>
+            <el-form ref="form" :model="contract" :inline="true" label-width="120px">
+                <el-form-item label="开始时间">
+                    <el-input v-model="contract.contractName"></el-input>
+                </el-form-item>
+                <el-form-item label="结束时间">
+                    <el-input v-model="contract.contractName"></el-input>
+                </el-form-item>
+            </el-form>
+            <el-form ref="form" :model="contract"  label-width="120px">
+                <el-form-item label="采购内容">
+                    <el-input type="textarea" :row="3" style="width: 780px;" v-model="contract.contractContent"></el-input>
+                </el-form-item>
+            </el-form>
+            <el-form ref="form" :model="contract"  label-width="120px">
+                <el-form-item label="付款阶段">
+                    <el-table  style="width: 780px;"
+                            :data="tableData"
+                            style="width: 100%"
+                            empty-text="暂未添加付款阶段"
+                            border>
+                        <el-table-column
+                                label="付款阶段"
+                                prop="stageName"
+                                width="178">
+                        </el-table-column>
+                        <el-table-column
+                                prop="uses"
+                                label="用途"
+                                width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="paymentAmount"
+                                label="付款金额"
+                                width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="paymentRate"
+                                label="付款比例"
+                                width="150"
+                                :formatter="rateFormatter"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="付款时间"
+                                width="150">
+                            <template slot-scope="scope">
+                                <!-- <i class="el-icon-time"></i>-->
+                                <span style="margin-left: 10px">{{ scope.row.paymentDate }}</span>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-form-item>
+            </el-form>
+
+            <hr/>
+            <h4>二、合同审核记录</h4>
+            <el-form ref="form" :model="contract"  label-width="120px">
+                <el-form-item label="审核记录表">
+                    <el-table  style="width: 780px;"
+                               :data="tableData"
+                               style="width: 100%"
+                               empty-text="待审核"
+                               border>
+                        <el-table-column
+                                label="审核节点"
+                                prop="stageName"
+                                width="178">
+                        </el-table-column>
+                        <el-table-column
+                                prop="uses"
+                                label="审核人"
+                                width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="paymentAmount"
+                                label="审核意见"
+                                width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="paymentRate"
+                                label="审核结果"
+                                width="150"
+                                :formatter="rateFormatter"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="审核时间"
+                                width="150">
+                            <template slot-scope="scope">
+                                <!-- <i class="el-icon-time"></i>-->
+                                <span style="margin-left: 10px">{{ scope.row.paymentDate }}</span>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-form-item>
+            </el-form>
+            <el-form ref="form" :model="contract"  label-width="100px">
+                <el-form-item label="审核进度">
+                    <el-steps :active="2" align-center>
+                        <el-step title="步骤1" description="这是一段很长很长很长的描述性文字"></el-step>
+                        <el-step title="步骤2" description="这是一段很长很长很长的描述性文字"></el-step>
+                        <el-step title="步骤3" description="这是一段很长很长很长的描述性文字"></el-step>
+                        <el-step title="步骤4" description="这是一段很长很长很长的描述性文字"></el-step>
+                        <el-step title="步骤2" description="这是一段很长很长很长的描述性文字"></el-step>
+                        <el-step title="步骤3" description="这是一段很长很长很长的描述性文字"></el-step>
+                        <el-step title="步骤4" description="这是一段很长很长很长的描述性文字"></el-step>
+                    </el-steps>
+                </el-form-item>
+            </el-form>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-2 control-label"></div>
+            <input type="button" class="btn back btn-primary" @click="showList=true" value="返  回"/>
+        </div>
+    </div>
 
 </div>
 <!-- 选择部门 -->

@@ -48,6 +48,16 @@ public class ContractExamineController extends AbstractController {
         return R.error();
     }
 
+    @GetMapping("/delete/{id}")
+    @RequiresPermissions("contract:examine:delete")
+    public R deleteExamine(@PathVariable("id") String id){
+        boolean b = examineService.deleteById(Long.parseLong(id));
+        if(b){
+            return R.ok();
+        }
+        return R.error();
+    }
+
 
 
 }

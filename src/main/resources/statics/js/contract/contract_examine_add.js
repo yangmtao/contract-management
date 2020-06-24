@@ -229,6 +229,7 @@ var vmContract = new Vue({
                 success: function (r) {
                     if (r.code === 1) {
                         alert('操作成功');
+                        _this.dialogFormVisible=false;
                     } else {
                         alert(r.msg);
                     }

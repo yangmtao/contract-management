@@ -104,7 +104,7 @@
                 <div class="col-sm-2">
                     <el-select v-model="contract.partyAId" size="small" v-validate="'required'"
                                name="partyAId">
-                        <el-option v-for="(v,k) in DICT.CONTRACT_TYPE" :key="k" :value="k" :label="v"></el-option>
+                        <el-option key="k" value="0" label="***医院"></el-option>
                     </el-select>
                 </div>
                 <div class="col-sm-2 control-label not-blank">乙方单位</div>

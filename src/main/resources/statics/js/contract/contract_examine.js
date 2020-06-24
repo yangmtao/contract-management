@@ -3,7 +3,7 @@ $(function () {
         url: baseURL + 'contract/examine/list',
         datatype: "json",
         colModel: [
-            {label: '合同ID', name: 'contractId', index: "id", width: 20, key: true, hidden: true},
+            {label: '合同ID', name: 'id', index: "id", width: 20, key: true, hidden: true},
             {label: '合同编号', name: 'contractCode', width: 120, align: 'center',sortable:false},
             {label: '合同名称', name: 'contractName', width: 200, align: 'center',sortable:false},
            {label: '严重等级', name: 'riskLevel', width: 100, align: 'center',sortable:false},
@@ -16,9 +16,9 @@ $(function () {
             {label: '提出人', name: 'handlerName', width: 120, align: 'center',sortable:false,},
             {label: '提出时间', name: 'createTime', index: "create_time", width: 120, align: 'center',sorttype:'date'},
             {label: '经办人', name: 'handlerName',width: 120, align: 'center',sortable:false},
-            {label: '操作',  width: 110, align: 'center',sortable:false,
+            {label: '操作',  name: 'id',width: 110, align: 'center',sortable:false,
                 formatter: function (value) {
-                    return '<a class="btn btn-primary" href="/cmsContent/view/'+value+'" target="_blank">查看详情</a>';
+                    return '<button class="btn btn-danger" onclick="deleteExamine('+value+')" >删 除</button>';
                 }}
         ],
         viewrecords: true,
@@ -98,8 +98,12 @@ var setting1 = {
             pIdKey: "pid",
             rootPId: 0
         },
+        showList: true,
         key: {
             url: "nourl"
+        },
+        examine:{
+
         }
     },
     callback: {
@@ -126,17 +130,41 @@ var vmContractExamine = new Vue({
     methods: {
 
 
+        modifyExamine:function(){
 
+        },
         queryExamine: function(){
             console.log("正在查找");
         },
         reload: function () {
-            window.location.reload();
+            var page = $("#jqGrid").jqGrid('getGridParam', 'page');
+            $("#jqGrid").jqGrid('setGridParam', {
+                page: page
+            }).trigger("reloadGrid");
         }
 
 
     }
 });
+
+//删除审查记录
+function deleteExamine(id){
+    confirm("确定删除该条记录？",function(){
+        $.ajax({
+            type:"GET",
+            url:baseURL+"contract/examine/delete/"+id,
+            success:function(r){
+                if(r.code===1){
+                    alert("删除成功");
+                    $("#jqGrid").jqGrid('setGridParam', {
+                        page: 1
+                    }).trigger("reloadGrid");
+                }
+            }
+        });
+    })
+
+}
 
 //重写alert
 window.alert = function (msg, callback) {

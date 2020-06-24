@@ -27,7 +27,7 @@ $(function () {
             {label: '经办人', name: 'contractManagerName', index: "create_date", width: 100, align: 'center'},
             {label: '操作',  name: 'contractId', width: 110, align: 'center',sortable:false,
                 formatter: function (value) {
-                    return '<a class="btn btn-primary" href="/contract/'+value+'/detail.html" >查看详情</a>';
+                    return '<button class="btn btn-primary" onclick=showContractInfo('+value+')>查看详情</button>';
                 }}
         ],
         viewrecords: true,
@@ -120,7 +120,7 @@ var setting1 = {
 var vmContract = new Vue({
     el: '#rrapp',
     data: {
-
+        showList: true,
         formLabelWidth: '120px',
         closeOnClickModal:false,
         remoteManagerLoading:false,
@@ -196,6 +196,9 @@ var vmContract = new Vue({
             }else{
                 _this.remotePartyBs=[];
             }
+        },
+        rateFormatter:function(row,column){
+            return row.paymentRate+'%';
         },
         deptTree: function (type) {
             var _this = this;
@@ -302,6 +305,10 @@ DICT = {
     CONTRACT_TYPE: {0: '买卖合同', 1: '赠与合同', 2: '租赁合同'}
 }
 Vue.prototype.DICT = DICT;
+
+function showContractInfo(id) {
+    vmContract.showList=false;
+}
 
 //选择一条记录
 function getSelectedRow() {
