@@ -8283,3 +8283,559 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'dev_contract_db.contract_fil
 ### SQL: select * from contract_file  WHERE  (1 = ?) ORDER BY create_date DESC
 ### Cause: java.sql.SQLSyntaxErrorException: Table 'dev_contract_db.contract_file' doesn't exist
 ; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Table 'dev_contract_db.contract_file' doesn't exist]
+2020-06-24 09:45:10.448  INFO 3556 --- [main] com.bj.ContractManagementApplication     : Starting ContractManagementApplication on DESKTOP-4PH64EH with PID 3556 (C:\Users\admin\Desktop\contract-management\target\classes started by admin in C:\Users\admin\Desktop\contract-management)
+2020-06-24 09:45:10.450 DEBUG 3556 --- [main] com.bj.ContractManagementApplication     : Running with Spring Boot v2.0.6.RELEASE, Spring v5.0.10.RELEASE
+2020-06-24 09:45:10.451  INFO 3556 --- [main] com.bj.ContractManagementApplication     : No active profile set, falling back to default profiles: default
+2020-06-24 09:45:10.488  INFO 3556 --- [main] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@385e9564: startup date [Wed Jun 24 09:45:10 CST 2020]; root of context hierarchy
+2020-06-24 09:45:11.678  INFO 3556 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-06-24 09:45:11.716  INFO 3556 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-06-24 09:45:11.939  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'shiroConfig' of type [com.bj.config.ShiroConfig$$EnhancerBySpringCGLIB$$fcb07b34] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.015  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.context.properties.ConversionServiceDeducer$Factory' of type [org.springframework.boot.context.properties.ConversionServiceDeducer$Factory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.075  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'mybatis-plus-com.baomidou.mybatisplus.spring.boot.starter.MybatisPlusProperties' of type [com.baomidou.mybatisplus.spring.boot.starter.MybatisPlusProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.080  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'mybatisPlusConfig' of type [com.bj.config.MybatisPlusConfig$$EnhancerBySpringCGLIB$$31323810] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.089  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'paginationInterceptor' of type [com.baomidou.mybatisplus.plugins.PaginationInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.097  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.baomidou.mybatisplus.spring.boot.starter.MybatisPlusAutoConfiguration' of type [com.baomidou.mybatisplus.spring.boot.starter.MybatisPlusAutoConfiguration$$EnhancerBySpringCGLIB$$cc0cf3ac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.100  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure' of type [com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure$$EnhancerBySpringCGLIB$$98194ac1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.102  INFO 3556 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-06-24 09:45:12.138  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.144  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.alibaba.druid.spring.boot.autoconfigure.stat.DruidFilterConfiguration' of type [com.alibaba.druid.spring.boot.autoconfigure.stat.DruidFilterConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.170  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'statFilter' of type [com.alibaba.druid.filter.stat.StatFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.400  INFO 3556 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-06-24 09:45:12.400  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'dataSource' of type [com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceWrapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.833  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'sqlSessionFactory' of type [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.837  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'sqlSessionTemplate' of type [org.mybatis.spring.SqlSessionTemplate] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.837  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'sysUserDao' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.838  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'sysUserDao' of type [com.sun.proxy.$Proxy87] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.840  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'sysMenuDao' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.840  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'sysMenuDao' of type [com.sun.proxy.$Proxy88] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.840  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'userRealm' of type [com.bj.sys.shiro.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.848  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration' of type [org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration$$EnhancerBySpringCGLIB$$7404808b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.855  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.redis-org.springframework.boot.autoconfigure.data.redis.RedisProperties' of type [org.springframework.boot.autoconfigure.data.redis.RedisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.859  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.data.redis.JedisConnectionConfiguration' of type [org.springframework.boot.autoconfigure.data.redis.JedisConnectionConfiguration$$EnhancerBySpringCGLIB$$1fa906e4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.885  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'redisConnectionFactory' of type [org.springframework.data.redis.connection.jedis.JedisConnectionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.900  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'redisTemplate' of type [org.springframework.data.redis.core.RedisTemplate] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.900  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'redisShiroSessionDAO' of type [com.bj.sys.shiro.RedisShiroSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:12.911  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'sessionManager' of type [org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:13.086  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:13.116  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7e6d554f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:13.125  INFO 3556 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'authorizationAttributeSourceAdvisor' of type [org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-24 09:45:13.372  INFO 3556 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9101 (http)
+2020-06-24 09:45:13.385  INFO 3556 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-06-24 09:45:13.386  INFO 3556 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.34
+2020-06-24 09:45:13.388  INFO 3556 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\java\jdk1.8\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\python\Python38-32\Scripts\;D:\python\Python38-32\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;D:\java\jdk1.8\bin;D:\java\jdk1.8\jre\bin;D:\SQL\mysql\bin;E:\tesseract\Tesseract-OCR;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;D:\java\maven\apache-maven-3.5.3\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;D:\HashiCorp\Vagrant\bin;C:\Users\admin\AppData\Local\Microsoft\WindowsApps;;D:\java\ideaIU\IntelliJ IDEA 2018.3.6\bin;;D:\python\pycharm\PyCharm 2019.2.3\bin;;C:\Users\admin\AppData\Roaming\npm;C:\Users\admin\AppData\Local\Programs\Microsoft VS Code\bin;.]
+2020-06-24 09:45:13.465  INFO 3556 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-06-24 09:45:13.466  INFO 3556 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2978 ms
+2020-06-24 09:45:13.555  INFO 3556 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2020-06-24 09:45:13.556  INFO 3556 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2020-06-24 09:45:13.556  INFO 3556 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2020-06-24 09:45:13.556  INFO 3556 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2020-06-24 09:45:13.556  INFO 3556 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'delegatingFilterProxy' to urls: [/*]
+2020-06-24 09:45:13.556  INFO 3556 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'xssFilter' to urls: [/*]
+2020-06-24 09:45:13.556  INFO 3556 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webStatFilter' to urls: [/*]
+2020-06-24 09:45:13.556  INFO 3556 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'shiroFilter' to: [/*]
+2020-06-24 09:45:13.556  INFO 3556 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2020-06-24 09:45:13.557  INFO 3556 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet statViewServlet mapped to [/druid/*]
+2020-06-24 09:45:13.679 DEBUG 3556 --- [main] com.bj.sys.dao.SysDictDao.selectList     : ==>  Preparing: SELECT id AS id,`name`,`type`,code,`value`,order_num AS orderNum,remark,del_flag AS delFlag FROM sys_dict WHERE del_flag=0 AND (del_flag = ?) 
+2020-06-24 09:45:13.696 DEBUG 3556 --- [main] com.bj.sys.dao.SysDictDao.selectList     : ==> Parameters: 0(Integer)
+2020-06-24 09:45:13.722 DEBUG 3556 --- [main] com.bj.sys.dao.SysDictDao.selectList     : <==      Total: 131
+2020-06-24 09:45:13.723  INFO 3556 --- [main] com.bj.cache.DictCache                   : ===initRedisMap==获取redis的连接===1592963113723
+2020-06-24 09:45:13.834  INFO 3556 --- [main] com.bj.cache.DictCache                   : ===initRedisMap==执行关闭redis的操作===1592963113834
+2020-06-24 09:45:14.099  INFO 3556 --- [main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[192.168.1.108:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-06-24 09:45:14.099  INFO 3556 --- [main] org.mongodb.driver.cluster               : Adding discovered server 192.168.1.108:27017 to client view of cluster
+2020-06-24 09:45:14.186  INFO 3556 --- [cluster-ClusterId{value='5ef2b02a470b700de434bb41', description='null'}-192.168.1.108:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:2474}] to 192.168.1.108:27017
+2020-06-24 09:45:14.190  INFO 3556 --- [cluster-ClusterId{value='5ef2b02a470b700de434bb41', description='null'}-192.168.1.108:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=192.168.1.108:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 2, 5]}, minWireVersion=0, maxWireVersion=8, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3354100}
+2020-06-24 09:45:14.191  INFO 3556 --- [cluster-ClusterId{value='5ef2b02a470b700de434bb41', description='null'}-192.168.1.108:27017] org.mongodb.driver.cluster               : Discovered cluster type of STANDALONE
+2020-06-24 09:45:14.750  INFO 3556 --- [main] o.s.w.s.v.f.FreeMarkerConfigurer         : ClassTemplateLoader for Spring macros added to FreeMarker configuration
+2020-06-24 09:45:14.810  INFO 3556 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-06-24 09:45:14.999  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@385e9564: startup date [Wed Jun 24 09:45:10 CST 2020]; root of context hierarchy
+2020-06-24 09:45:15.042  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/change/add],methods=[POST]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractChangeController.addContractChange(com.bj.contract.entity.ContractChange)
+2020-06-24 09:45:15.044  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/list]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractController.list(java.util.Map<java.lang.String, java.lang.Object>) throws java.lang.Exception
+2020-06-24 09:45:15.045  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/info/{contractId}]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractController.info(java.lang.Long)
+2020-06-24 09:45:15.045  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/save],methods=[POST]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractController.saveContract(com.bj.contract.entity.Contract)
+2020-06-24 09:45:15.045  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/export/excel],methods=[GET]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractController.excelExport(java.lang.String,javax.servlet.http.HttpServletResponse) throws java.io.IOException,java.lang.IllegalAccessException
+2020-06-24 09:45:15.045  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/uploadImage]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractController.uploadImage(org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest) throws java.io.IOException
+2020-06-24 09:45:15.045  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/info/{id}],methods=[GET]}" onto public com.bj.contract.entity.Contract com.bj.contract.controller.ContractController.getContractInfoById(java.lang.Long)
+2020-06-24 09:45:15.046  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/examine/list]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractExamineController.list(java.util.Map<java.lang.String, java.lang.Object>) throws java.lang.Exception
+2020-06-24 09:45:15.047  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/examine/add],methods=[POST]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractExamineController.examineAdd(com.bj.contract.entity.ContractExamine)
+2020-06-24 09:45:15.048  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/risk/update],methods=[POST]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractRiskController.update(com.bj.contract.entity.ContractRisk)
+2020-06-24 09:45:15.049  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/risk/list]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractRiskController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2020-06-24 09:45:15.049  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/risk/info/{id}]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractRiskController.info(java.lang.Long)
+2020-06-24 09:45:15.049  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/risk/over],methods=[GET]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractRiskController.over(java.lang.Long)
+2020-06-24 09:45:15.049  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/settlement/list]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractSettlementController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2020-06-24 09:45:15.050  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/settlement/save],methods=[POST]}" onto public com.bj.common.util.R com.bj.contract.controller.ContractSettlementController.save(com.bj.contract.entity.ContractSettlement)
+2020-06-24 09:45:15.050  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/examine.html],methods=[GET]}" onto public java.lang.String com.bj.contract.controller.PageController.contractExamine()
+2020-06-24 09:45:15.051  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/query.html],methods=[GET]}" onto public java.lang.String com.bj.contract.controller.PageController.contract_query()
+2020-06-24 09:45:15.051  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/add.html],methods=[GET]}" onto public java.lang.String com.bj.contract.controller.PageController.contract_add()
+2020-06-24 09:45:15.051  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/{id}/detail.html],methods=[GET]}" onto public java.lang.String com.bj.contract.controller.PageController.contractChange(java.lang.Long,org.springframework.ui.ModelMap)
+2020-06-24 09:45:15.051  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/change.html],methods=[GET]}" onto public java.lang.String com.bj.contract.controller.PageController.contractChange()
+2020-06-24 09:45:15.051  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/examine/add.html],methods=[GET]}" onto public java.lang.String com.bj.contract.controller.PageController.examineAdd()
+2020-06-24 09:45:15.052  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/supplier/update],methods=[POST]}" onto public com.bj.common.util.R com.bj.contract.controller.SupplierController.update(com.bj.contract.entity.SupplierEntity)
+2020-06-24 09:45:15.052  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/supplier/delete],methods=[POST]}" onto public com.bj.common.util.R com.bj.contract.controller.SupplierController.delete(java.lang.Long[])
+2020-06-24 09:45:15.053  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/supplier/list]}" onto public com.bj.common.util.R com.bj.contract.controller.SupplierController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2020-06-24 09:45:15.053  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/supplier/save],methods=[POST]}" onto public com.bj.common.util.R com.bj.contract.controller.SupplierController.save(com.bj.contract.entity.SupplierEntity)
+2020-06-24 09:45:15.053  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/supplier/info/{supplierId}]}" onto public com.bj.common.util.R com.bj.contract.controller.SupplierController.info(java.lang.Long)
+2020-06-24 09:45:15.053  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/supplier/move],methods=[GET]}" onto public com.bj.common.util.R com.bj.contract.controller.SupplierController.move(java.lang.Long,java.lang.Integer,java.lang.String)
+2020-06-24 09:45:15.053  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/supplier/simpleInfo],methods=[GET]}" onto public com.bj.common.util.R com.bj.contract.controller.SupplierController.supplierSimpleInfo(java.lang.String) throws java.lang.Exception
+2020-06-24 09:45:15.053  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/supplier/name/{supplierId}],methods=[GET]}" onto public com.bj.common.util.R com.bj.contract.controller.SupplierController.supplierName(java.lang.Long) throws java.lang.Exception
+2020-06-24 09:45:15.054  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/userReviewRecord/list]}" onto public com.bj.common.util.R com.bj.contract.controller.UserReviewRecordController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2020-06-24 09:45:15.054  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/userReviewRecord/save],methods=[POST]}" onto public com.bj.common.util.R com.bj.contract.controller.UserReviewRecordController.save(com.bj.contract.entity.UserReviewRecord)
+2020-06-24 09:45:15.054  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/contract/userReviewRecord/reject],methods=[POST]}" onto public com.bj.common.util.R com.bj.contract.controller.UserReviewRecordController.reject(com.bj.contract.entity.UserReviewRecord)
+2020-06-24 09:45:15.055  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dept/update]}" onto public com.bj.common.util.R com.bj.sys.controller.SysDeptController.update(com.bj.sys.entity.SysDeptEntity)
+2020-06-24 09:45:15.055  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dept/delete]}" onto public com.bj.common.util.R com.bj.sys.controller.SysDeptController.delete(long)
+2020-06-24 09:45:15.056  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dept/list]}" onto public java.util.List<com.bj.sys.entity.SysDeptEntity> com.bj.sys.controller.SysDeptController.list()
+2020-06-24 09:45:15.056  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dept/save]}" onto public com.bj.common.util.R com.bj.sys.controller.SysDeptController.save(com.bj.sys.entity.SysDeptEntity)
+2020-06-24 09:45:15.056  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dept/select]}" onto public com.bj.common.util.R com.bj.sys.controller.SysDeptController.select()
+2020-06-24 09:45:15.056  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dept/info/{deptId}]}" onto public com.bj.common.util.R com.bj.sys.controller.SysDeptController.info(java.lang.Long)
+2020-06-24 09:45:15.056  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dept/info]}" onto public com.bj.common.util.R com.bj.sys.controller.SysDeptController.info()
+2020-06-24 09:45:15.056  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dept/refresh]}" onto public void com.bj.sys.controller.SysDeptController.refresh()
+2020-06-24 09:45:15.057  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dict/update]}" onto public com.bj.common.util.R com.bj.sys.controller.SysDictController.update(com.bj.sys.entity.SysDictEntity)
+2020-06-24 09:45:15.057  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dict/delete]}" onto public com.bj.common.util.R com.bj.sys.controller.SysDictController.delete(java.lang.Long[])
+2020-06-24 09:45:15.057  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dict/list]}" onto public com.bj.common.util.R com.bj.sys.controller.SysDictController.list(java.util.Map<java.lang.String, java.lang.Object>) throws java.lang.Exception
+2020-06-24 09:45:15.057  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dict/save]}" onto public com.bj.common.util.R com.bj.sys.controller.SysDictController.save(com.bj.sys.entity.SysDictEntity)
+2020-06-24 09:45:15.057  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/dict/info/{id}]}" onto public com.bj.common.util.R com.bj.sys.controller.SysDictController.info(java.lang.Long)
+2020-06-24 09:45:15.057  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/captcha.jpg]}" onto public void com.bj.sys.controller.SysLoginController.captcha(javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2020-06-24 09:45:15.057  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/login],methods=[POST]}" onto public com.bj.common.util.R com.bj.sys.controller.SysLoginController.login(java.lang.String,java.lang.String,java.lang.String)
+2020-06-24 09:45:15.058  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/logout],methods=[GET]}" onto public java.lang.String com.bj.sys.controller.SysLoginController.logout()
+2020-06-24 09:45:15.058  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/menu/update]}" onto public com.bj.common.util.R com.bj.sys.controller.SysMenuController.update(com.bj.sys.entity.SysMenuEntity) throws java.lang.Exception
+2020-06-24 09:45:15.058  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/menu/delete]}" onto public com.bj.common.util.R com.bj.sys.controller.SysMenuController.delete(long)
+2020-06-24 09:45:15.058  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/menu/list]}" onto public java.util.List<com.bj.sys.entity.SysMenuEntity> com.bj.sys.controller.SysMenuController.list()
+2020-06-24 09:45:15.059  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/menu/save]}" onto public com.bj.common.util.R com.bj.sys.controller.SysMenuController.save(com.bj.sys.entity.SysMenuEntity) throws java.lang.Exception
+2020-06-24 09:45:15.059  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/menu/select]}" onto public com.bj.common.util.R com.bj.sys.controller.SysMenuController.select()
+2020-06-24 09:45:15.059  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/menu/info/{menuId}]}" onto public com.bj.common.util.R com.bj.sys.controller.SysMenuController.info(java.lang.Long)
+2020-06-24 09:45:15.059  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/menu/nav]}" onto public com.bj.common.util.R com.bj.sys.controller.SysMenuController.nav()
+2020-06-24 09:45:15.059  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/ || /index.html]}" onto public java.lang.String com.bj.sys.controller.SysPageController.index()
+2020-06-24 09:45:15.059  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/main.html]}" onto public java.lang.String com.bj.sys.controller.SysPageController.main()
+2020-06-24 09:45:15.060  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index1.html]}" onto public java.lang.String com.bj.sys.controller.SysPageController.index1()
+2020-06-24 09:45:15.060  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{module}/{url}.html]}" onto public java.lang.String com.bj.sys.controller.SysPageController.module(java.lang.String,java.lang.String)
+2020-06-24 09:45:15.060  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/order/{url}.html]}" onto public java.lang.String com.bj.sys.controller.SysPageController.module(java.lang.String,javax.servlet.http.HttpServletRequest)
+2020-06-24 09:45:15.060  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/test.html]}" onto public java.lang.String com.bj.sys.controller.SysPageController.index2()
+2020-06-24 09:45:15.060  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/welcome.html]}" onto public java.lang.String com.bj.sys.controller.SysPageController.welcome()
+2020-06-24 09:45:15.060  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/404.html]}" onto public java.lang.String com.bj.sys.controller.SysPageController.notFound()
+2020-06-24 09:45:15.060  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/login.html]}" onto public java.lang.String com.bj.sys.controller.SysPageController.login()
+2020-06-24 09:45:15.061  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/role/update]}" onto public com.bj.common.util.R com.bj.sys.controller.SysRoleController.update(com.bj.sys.entity.SysRoleEntity)
+2020-06-24 09:45:15.061  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/role/delete]}" onto public com.bj.common.util.R com.bj.sys.controller.SysRoleController.delete(java.lang.Long[])
+2020-06-24 09:45:15.061  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/role/list]}" onto public com.bj.common.util.R com.bj.sys.controller.SysRoleController.list(java.util.Map<java.lang.String, java.lang.Object>) throws java.lang.Exception
+2020-06-24 09:45:15.061  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/role/save]}" onto public com.bj.common.util.R com.bj.sys.controller.SysRoleController.save(com.bj.sys.entity.SysRoleEntity)
+2020-06-24 09:45:15.061  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/role/select]}" onto public com.bj.common.util.R com.bj.sys.controller.SysRoleController.select()
+2020-06-24 09:45:15.062  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/role/info/{roleId}]}" onto public com.bj.common.util.R com.bj.sys.controller.SysRoleController.info(java.lang.Long)
+2020-06-24 09:45:15.062  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/update]}" onto public com.bj.common.util.R com.bj.sys.controller.SysUserController.update(com.bj.sys.entity.SysUserEntity)
+2020-06-24 09:45:15.063  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/delete]}" onto public com.bj.common.util.R com.bj.sys.controller.SysUserController.delete(java.lang.Long[])
+2020-06-24 09:45:15.063  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/list]}" onto public com.bj.common.util.R com.bj.sys.controller.SysUserController.list(java.util.Map<java.lang.String, java.lang.Object>) throws java.lang.Exception
+2020-06-24 09:45:15.063  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/save]}" onto public com.bj.common.util.R com.bj.sys.controller.SysUserController.save(com.bj.sys.entity.SysUserEntity)
+2020-06-24 09:45:15.063  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/info/{userId}]}" onto public com.bj.common.util.R com.bj.sys.controller.SysUserController.info(java.lang.Long)
+2020-06-24 09:45:15.063  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/info]}" onto public com.bj.common.util.R com.bj.sys.controller.SysUserController.info()
+2020-06-24 09:45:15.063  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/userDept]}" onto public com.bj.common.util.R com.bj.sys.controller.SysUserController.userDeptList(java.lang.String) throws java.lang.Exception
+2020-06-24 09:45:15.063  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/name/{id}]}" onto public com.bj.common.util.R com.bj.sys.controller.SysUserController.getUserNameById(java.lang.Long)
+2020-06-24 09:45:15.064  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/modifyUserPwd],methods=[POST]}" onto public com.bj.common.util.R com.bj.sys.controller.SysUserController.modifyUserPwd(java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception
+2020-06-24 09:45:15.064  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/user/password]}" onto public com.bj.common.util.R com.bj.sys.controller.SysUserController.password(java.lang.String,java.lang.String) throws java.lang.Exception
+2020-06-24 09:45:15.064  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/bjuseroperation/update]}" onto public com.bj.common.util.R com.bj.sys.controller.UserOperationController.update(com.bj.sys.entity.UserOperationEntity)
+2020-06-24 09:45:15.064  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/bjuseroperation/delete]}" onto public com.bj.common.util.R com.bj.sys.controller.UserOperationController.delete(java.lang.Long[])
+2020-06-24 09:45:15.064  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/bjuseroperation/save]}" onto public com.bj.common.util.R com.bj.sys.controller.UserOperationController.save(com.bj.sys.entity.UserOperationEntity)
+2020-06-24 09:45:15.065  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/bjuseroperation/info/{opId}]}" onto public com.bj.common.util.R com.bj.sys.controller.UserOperationController.info(java.lang.Long)
+2020-06-24 09:45:15.065  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/bjuseroperation/backList]}" onto public com.bj.common.util.R com.bj.sys.controller.UserOperationController.backList(java.util.Map<java.lang.String, java.lang.Object>)
+2020-06-24 09:45:15.065  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/bjuseroperation/frontList]}" onto public com.bj.common.util.R com.bj.sys.controller.UserOperationController.frontList(java.util.Map<java.lang.String, java.lang.Object>)
+2020-06-24 09:45:15.066  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2020-06-24 09:45:15.067  INFO 3556 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2020-06-24 09:45:15.091  INFO 3556 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-06-24 09:45:15.091  INFO 3556 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-06-24 09:45:15.092  INFO 3556 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/statics/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-06-24 09:45:15.092  INFO 3556 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/localImage/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-06-24 09:45:15.092  INFO 3556 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/upload/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-06-24 09:45:15.105  INFO 3556 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in RRExceptionHandler
+2020-06-24 09:45:15.145  INFO 3556 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-06-24 09:45:15.445  INFO 3556 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2020-06-24 09:45:15.447  INFO 3556 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'statFilter' has been autodetected for JMX exposure
+2020-06-24 09:45:15.447  INFO 3556 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2020-06-24 09:45:15.451  INFO 3556 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.spring.boot.autoconfigure:name=dataSource,type=DruidDataSourceWrapper]
+2020-06-24 09:45:15.451  INFO 3556 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'statFilter': registering with JMX server as MBean [com.alibaba.druid.filter.stat:name=statFilter,type=StatFilter]
+2020-06-24 09:45:15.459  INFO 3556 --- [main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2020-06-24 09:45:15.481  INFO 3556 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9101 (http) with context path ''
+2020-06-24 09:45:15.483  INFO 3556 --- [main] com.bj.ContractManagementApplication     : Started ContractManagementApplication in 5.316 seconds (JVM running for 5.923)
+2020-06-24 09:45:15.485  INFO 3556 --- [main] com.bj.ContractManagementApplication     : ===========开始初始化工作=========
+2020-06-24 09:45:24.350  INFO 3556 --- [http-nio-9101-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2020-06-24 09:45:24.350  INFO 3556 --- [http-nio-9101-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2020-06-24 09:45:24.364  INFO 3556 --- [http-nio-9101-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 14 ms
+2020-06-24 09:45:24.373  INFO 3556 --- [http-nio-9101-exec-1] a.s.s.m.AbstractValidatingSessionManager : Enabling session validation scheduler...
+2020-06-24 09:45:30.222 DEBUG 3556 --- [http-nio-9101-exec-8] com.bj.interceptor.TimeOutIntercepter    : -----> session持续时间: 3600
+2020-06-24 09:45:30.223 DEBUG 3556 --- [http-nio-9101-exec-8] com.bj.interceptor.TimeOutIntercepter    : -----> session创建时间: 2020-06-24 09:45:24
+2020-06-24 09:45:30.224 DEBUG 3556 --- [http-nio-9101-exec-8] com.bj.interceptor.TimeOutIntercepter    : -----> session最新链接时间: 2020-06-24 09:45:30
+2020-06-24 09:45:30.237 DEBUG 3556 --- [http-nio-9101-exec-8] com.bj.sys.dao.SysUserDao.selectOne      : ==>  Preparing: SELECT user_id AS userId,user_name AS userName,user_pwd AS userPwd,pwd_salt AS pwdSalt,user_email AS userEmail,user_mobile AS userMobile,user_status AS userStatus,dept_id AS deptId,create_time AS createTime,user_sex AS userSex,real_name AS realName FROM sys_user WHERE user_name=? 
+2020-06-24 09:45:30.237 DEBUG 3556 --- [http-nio-9101-exec-8] com.bj.sys.dao.SysUserDao.selectOne      : ==> Parameters: admin(String)
+2020-06-24 09:45:30.240 DEBUG 3556 --- [http-nio-9101-exec-8] com.bj.sys.dao.SysUserDao.selectOne      : <==      Total: 1
+2020-06-24 09:45:30.420 DEBUG 3556 --- [http-nio-9101-exec-6] com.bj.interceptor.TimeOutIntercepter    : -----> session持续时间: 3600
+2020-06-24 09:45:30.421 DEBUG 3556 --- [http-nio-9101-exec-6] com.bj.interceptor.TimeOutIntercepter    : -----> session创建时间: 2020-06-24 09:45:24
+2020-06-24 09:45:30.421 DEBUG 3556 --- [http-nio-9101-exec-6] com.bj.interceptor.TimeOutIntercepter    : -----> session最新链接时间: 2020-06-24 09:45:30
+2020-06-24 09:45:30.421 DEBUG 3556 --- [http-nio-9101-exec-3] com.bj.interceptor.TimeOutIntercepter    : -----> session持续时间: 3600
+2020-06-24 09:45:30.421 DEBUG 3556 --- [http-nio-9101-exec-6] com.bj.interceptor.TimeOutIntercepter    : -----> 从session获取上次链接时间: 2020-06-24 09:45:30
+2020-06-24 09:45:30.421 DEBUG 3556 --- [http-nio-9101-exec-3] com.bj.interceptor.TimeOutIntercepter    : -----> session创建时间: 2020-06-24 09:45:24
+2020-06-24 09:45:30.421 DEBUG 3556 --- [http-nio-9101-exec-6] com.bj.interceptor.TimeOutIntercepter    : -----> 操作间隔时间: 0
+2020-06-24 09:45:30.421 DEBUG 3556 --- [http-nio-9101-exec-3] com.bj.interceptor.TimeOutIntercepter    : -----> session最新链接时间: 2020-06-24 09:45:30
+2020-06-24 09:45:30.421 DEBUG 3556 --- [http-nio-9101-exec-3] com.bj.interceptor.TimeOutIntercepter    : -----> 从session获取上次链接时间: 2020-06-24 09:45:30
+2020-06-24 09:45:30.421 DEBUG 3556 --- [http-nio-9101-exec-3] com.bj.interceptor.TimeOutIntercepter    : -----> 操作间隔时间: 0
+2020-06-24 09:45:30.432  INFO 3556 --- [http-nio-9101-exec-6] c.b.sys.service.impl.SysMenuServiceImpl  : 获取 用户菜单列表
+2020-06-24 09:45:30.438 DEBUG 3556 --- [http-nio-9101-exec-6] c.bj.sys.dao.SysUserDao.queryAllMenuId   : ==>  Preparing: select distinct rm.menu_id from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id where ur.user_id = ? 
+2020-06-24 09:45:30.439 DEBUG 3556 --- [http-nio-9101-exec-6] c.bj.sys.dao.SysUserDao.queryAllMenuId   : ==> Parameters: 1(Long)
+2020-06-24 09:45:30.442 DEBUG 3556 --- [http-nio-9101-exec-6] c.bj.sys.dao.SysUserDao.queryAllMenuId   : <==      Total: 41
+2020-06-24 09:45:30.443 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : ==>  Preparing: select * from sys_menu where parent_id = ? order by sort_num asc 
+2020-06-24 09:45:30.444 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : ==> Parameters: 0(Long)
+2020-06-24 09:45:30.446 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : <==      Total: 7
+2020-06-24 09:45:30.447 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : ==>  Preparing: select * from sys_menu where parent_id = ? order by sort_num asc 
+2020-06-24 09:45:30.448 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : ==> Parameters: 110208(Long)
+2020-06-24 09:45:30.449 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : <==      Total: 2
+2020-06-24 09:45:30.450 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : ==>  Preparing: select * from sys_menu where parent_id = ? order by sort_num asc 
+2020-06-24 09:45:30.450 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : ==> Parameters: 110000(Long)
+2020-06-24 09:45:30.452 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : <==      Total: 3
+2020-06-24 09:45:30.452 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : ==>  Preparing: select * from sys_menu where parent_id = ? order by sort_num asc 
+2020-06-24 09:45:30.453 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : ==> Parameters: 110216(Long)
+2020-06-24 09:45:30.454 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : <==      Total: 2
+2020-06-24 09:45:30.455 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : ==>  Preparing: select * from sys_menu where parent_id = ? order by sort_num asc 
+2020-06-24 09:45:30.455 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : ==> Parameters: 100000(Long)
+2020-06-24 09:45:30.458 DEBUG 3556 --- [http-nio-9101-exec-6] c.b.s.dao.SysMenuDao.queryListParentId   : <==      Total: 4
+2020-06-24 09:45:33.097 DEBUG 3556 --- [http-nio-9101-exec-24] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:33.097 DEBUG 3556 --- [http-nio-9101-exec-24] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:33.100 DEBUG 3556 --- [http-nio-9101-exec-24] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:33.103  INFO 3556 --- [http-nio-9101-exec-24] c.b.c.controller.ContractController      : contract list
+2020-06-24 09:45:33.148 DEBUG 3556 --- [http-nio-9101-exec-24] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: SELECT COUNT(1) FROM contract AS c LEFT JOIN sys_user AS u ON c.contract_manager = u.user_id LEFT JOIN supplier AS s ON c.party_b_id = s.supplier_id LEFT JOIN sys_dept AS d ON c.demand_dept_id = d.dept_id JOIN review_order AS r ON c.contract_node = r.id WHERE (1 = ?) 
+2020-06-24 09:45:33.149 DEBUG 3556 --- [http-nio-9101-exec-24] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:45:33.152 DEBUG 3556 --- [http-nio-9101-exec-24] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,c.demand_dept_id,c.party_b_id,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date, d.dept_name as demand_dept_name, u.real_name as contract_manager_name, s.supplier_name as party_b_name,r.node_name, (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes, (select count(*) from contract_examine where contract_id=c.contract_id ) as examineNumbers from contract as c left join sys_user as u on c.contract_manager=u.user_id left join supplier as s on c.party_b_id=s.supplier_id left join sys_dept as d on c.demand_dept_id=d.dept_id join review_order as r on c.contract_node=r.id WHERE (1 = ?) ORDER BY create_date DESC LIMIT 0,20 
+2020-06-24 09:45:33.152 DEBUG 3556 --- [http-nio-9101-exec-24] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:45:33.157 DEBUG 3556 --- [http-nio-9101-exec-24] c.b.c.d.ContractMapper.queryAllContract  : <==      Total: 5
+2020-06-24 09:45:36.325 DEBUG 3556 --- [http-nio-9101-exec-26] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:36.325 DEBUG 3556 --- [http-nio-9101-exec-26] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:36.328 DEBUG 3556 --- [http-nio-9101-exec-26] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:36.329 DEBUG 3556 --- [http-nio-9101-exec-26] c.b.c.dao.ContractMapper.selectById      : ==>  Preparing: SELECT contract_id AS contractId,contract_code AS contractCode,contract_name AS contractName,contract_manager AS contractManager,purchase_content AS purchaseContent,contract_amount AS contractAmount,create_date AS createDate,start_date AS startDate,end_date AS endDate,purchasing_dept_id AS purchasingDeptId,demand_dept_id AS demandDeptId,contract_type AS contractType,party_a_id AS partyAId,party_b_id AS partyBId,contract_node AS contractNode,payment_type AS paymentType,contract_file AS contractFile,pay_status AS payStatus,un_pay_amount AS unPayAmount,del_tag AS delTag FROM contract WHERE contract_id=? AND del_tag=0 
+2020-06-24 09:45:36.330 DEBUG 3556 --- [http-nio-9101-exec-26] c.b.c.dao.ContractMapper.selectById      : ==> Parameters: 6(Long)
+2020-06-24 09:45:36.333 DEBUG 3556 --- [http-nio-9101-exec-26] c.b.c.dao.ContractMapper.selectById      : <==      Total: 1
+2020-06-24 09:45:42.838 ERROR 3556 --- [http-nio-9101-exec-27] c.b.common.exception.RRExceptionHandler  : Validation failed for argument at index 0 in method: public com.bj.common.util.R com.bj.contract.controller.UserReviewRecordController.save(com.bj.contract.entity.UserReviewRecord), with 4 error(s): [Field error in object 'userReviewRecord' on field 'contractType': rejected value [null]; codes [NotNull.userReviewRecord.contractType,NotNull.contractType,NotNull.java.lang.Integer,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userReviewRecord.contractType,contractType]; arguments []; default message [contractType]]; default message [必须选择合同类型]] [Field error in object 'userReviewRecord' on field 'contractName': rejected value [null]; codes [NotBlank.userReviewRecord.contractName,NotBlank.contractName,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userReviewRecord.contractName,contractName]; arguments []; default message [contractName]]; default message [合同名称不能为空]] [Field error in object 'userReviewRecord' on field 'startDate': rejected value [null]; codes [NotNull.userReviewRecord.startDate,NotNull.startDate,NotNull.java.util.Date,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userReviewRecord.startDate,startDate]; arguments []; default message [startDate]]; default message [合同开始时间不能为空]] [Field error in object 'userReviewRecord' on field 'endDate': rejected value [null]; codes [NotNull.userReviewRecord.endDate,NotNull.endDate,NotNull.java.util.Date,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userReviewRecord.endDate,endDate]; arguments []; default message [endDate]]; default message [合同结束时间不能为空]] 
+2020-06-24 09:45:42.839  WARN 3556 --- [http-nio-9101-exec-27] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument at index 0 in method: public com.bj.common.util.R com.bj.contract.controller.UserReviewRecordController.save(com.bj.contract.entity.UserReviewRecord), with 4 error(s): [Field error in object 'userReviewRecord' on field 'contractType': rejected value [null]; codes [NotNull.userReviewRecord.contractType,NotNull.contractType,NotNull.java.lang.Integer,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userReviewRecord.contractType,contractType]; arguments []; default message [contractType]]; default message [必须选择合同类型]] [Field error in object 'userReviewRecord' on field 'contractName': rejected value [null]; codes [NotBlank.userReviewRecord.contractName,NotBlank.contractName,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userReviewRecord.contractName,contractName]; arguments []; default message [contractName]]; default message [合同名称不能为空]] [Field error in object 'userReviewRecord' on field 'startDate': rejected value [null]; codes [NotNull.userReviewRecord.startDate,NotNull.startDate,NotNull.java.util.Date,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userReviewRecord.startDate,startDate]; arguments []; default message [startDate]]; default message [合同开始时间不能为空]] [Field error in object 'userReviewRecord' on field 'endDate': rejected value [null]; codes [NotNull.userReviewRecord.endDate,NotNull.endDate,NotNull.java.util.Date,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userReviewRecord.endDate,endDate]; arguments []; default message [endDate]]; default message [合同结束时间不能为空]] ]
+2020-06-24 09:45:47.725 DEBUG 3556 --- [http-nio-9101-exec-30] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:47.726 DEBUG 3556 --- [http-nio-9101-exec-30] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:47.728 DEBUG 3556 --- [http-nio-9101-exec-30] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:47.728  INFO 3556 --- [http-nio-9101-exec-30] c.b.c.controller.ContractController      : contract list
+2020-06-24 09:45:47.732 DEBUG 3556 --- [http-nio-9101-exec-30] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: SELECT COUNT(1) FROM contract AS c LEFT JOIN sys_user AS u ON c.contract_manager = u.user_id LEFT JOIN supplier AS s ON c.party_b_id = s.supplier_id LEFT JOIN sys_dept AS d ON c.demand_dept_id = d.dept_id JOIN review_order AS r ON c.contract_node = r.id WHERE (1 = ?) 
+2020-06-24 09:45:47.732 DEBUG 3556 --- [http-nio-9101-exec-30] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:45:47.734 DEBUG 3556 --- [http-nio-9101-exec-30] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,c.demand_dept_id,c.party_b_id,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date, d.dept_name as demand_dept_name, u.real_name as contract_manager_name, s.supplier_name as party_b_name,r.node_name, (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes, (select count(*) from contract_examine where contract_id=c.contract_id ) as examineNumbers from contract as c left join sys_user as u on c.contract_manager=u.user_id left join supplier as s on c.party_b_id=s.supplier_id left join sys_dept as d on c.demand_dept_id=d.dept_id join review_order as r on c.contract_node=r.id WHERE (1 = ?) ORDER BY create_date DESC LIMIT 0,20 
+2020-06-24 09:45:47.735 DEBUG 3556 --- [http-nio-9101-exec-30] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:45:47.740 DEBUG 3556 --- [http-nio-9101-exec-30] c.b.c.d.ContractMapper.queryAllContract  : <==      Total: 5
+2020-06-24 09:45:48.950 DEBUG 3556 --- [http-nio-9101-exec-23] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:48.950 DEBUG 3556 --- [http-nio-9101-exec-23] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:48.953 DEBUG 3556 --- [http-nio-9101-exec-23] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:48.962 DEBUG 3556 --- [http-nio-9101-exec-23] c.b.c.d.U.queryReview                    : ==>  Preparing: SELECT COUNT(1) FROM contract AS c JOIN user_review_record AS u ON c.contract_id = u.contract_id JOIN supplier AS s ON c.party_b_id = s.supplier_id JOIN review_order AS r ON c.contract_node = r.id 
+2020-06-24 09:45:48.962 DEBUG 3556 --- [http-nio-9101-exec-23] c.b.c.d.U.queryReview                    : ==> Parameters: 
+2020-06-24 09:45:48.964 DEBUG 3556 --- [http-nio-9101-exec-23] c.b.c.d.U.queryReview                    : ==>  Preparing: select c.contract_name,c.contract_amount,c.party_b_id,c.pay_status,c.payment_type,c.contract_code,c.pay_status,c.contract_node, c.start_date,c.end_date,c.create_date,c.contract_type, s.supplier_name, u.review_advise,u.review_result,u.reviewer,u.contract_id,u.id, r.node_name from contract as c join user_review_record as u on c.contract_id=u.contract_id join supplier as s on c.party_b_id = s.supplier_id join review_order as r on c.contract_node=r.id LIMIT 0,20 
+2020-06-24 09:45:48.965 DEBUG 3556 --- [http-nio-9101-exec-23] c.b.c.d.U.queryReview                    : ==> Parameters: 
+2020-06-24 09:45:48.968 DEBUG 3556 --- [http-nio-9101-exec-23] c.b.c.d.U.queryReview                    : <==      Total: 3
+2020-06-24 09:45:51.810 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.interceptor.TimeOutIntercepter    : -----> session持续时间: 3600
+2020-06-24 09:45:51.811 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.interceptor.TimeOutIntercepter    : -----> session创建时间: 2020-06-24 09:45:24
+2020-06-24 09:45:51.811 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.interceptor.TimeOutIntercepter    : -----> session最新链接时间: 2020-06-24 09:45:51
+2020-06-24 09:45:51.811 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.interceptor.TimeOutIntercepter    : -----> 从session获取上次链接时间: 2020-06-24 09:45:30
+2020-06-24 09:45:51.811 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.interceptor.TimeOutIntercepter    : -----> 操作间隔时间: 21
+2020-06-24 09:45:51.812 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:51.812 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:51.814 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:51.822 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectList     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept ORDER BY sortNum 
+2020-06-24 09:45:51.822 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectList     : ==> Parameters: 
+2020-06-24 09:45:51.824 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectList     : <==      Total: 4
+2020-06-24 09:45:51.825 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:51.825 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 0(Long)
+2020-06-24 09:45:51.826 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 0
+2020-06-24 09:45:51.827 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:51.827 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:51.828 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:51.829 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:51.829 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:51.830 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:51.830 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:51.831 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:51.832 DEBUG 3556 --- [http-nio-9101-exec-17] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:52.831 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.interceptor.TimeOutIntercepter    : -----> session持续时间: 3600
+2020-06-24 09:45:52.831 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.interceptor.TimeOutIntercepter    : -----> session创建时间: 2020-06-24 09:45:24
+2020-06-24 09:45:52.831 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.interceptor.TimeOutIntercepter    : -----> session最新链接时间: 2020-06-24 09:45:52
+2020-06-24 09:45:52.832 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.interceptor.TimeOutIntercepter    : -----> 从session获取上次链接时间: 2020-06-24 09:45:51
+2020-06-24 09:45:52.832 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.interceptor.TimeOutIntercepter    : -----> 操作间隔时间: 1
+2020-06-24 09:45:52.832 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:52.832 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:52.834 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:52.835 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectList     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept ORDER BY sortNum 
+2020-06-24 09:45:52.835 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectList     : ==> Parameters: 
+2020-06-24 09:45:52.837 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectList     : <==      Total: 4
+2020-06-24 09:45:52.838 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:52.838 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 0(Long)
+2020-06-24 09:45:52.840 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 0
+2020-06-24 09:45:52.840 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:52.840 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:52.842 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:52.843 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:52.843 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:52.844 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:52.845 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:52.845 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:52.852 DEBUG 3556 --- [http-nio-9101-exec-1] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:52.861 DEBUG 3556 --- [http-nio-9101-exec-2] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:52.861 DEBUG 3556 --- [http-nio-9101-exec-2] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:52.863 DEBUG 3556 --- [http-nio-9101-exec-2] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:52.863  INFO 3556 --- [http-nio-9101-exec-2] c.b.c.controller.ContractController      : contract list
+2020-06-24 09:45:52.865 DEBUG 3556 --- [http-nio-9101-exec-2] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: SELECT COUNT(1) FROM contract AS c LEFT JOIN sys_user AS u ON c.contract_manager = u.user_id LEFT JOIN supplier AS s ON c.party_b_id = s.supplier_id LEFT JOIN sys_dept AS d ON c.demand_dept_id = d.dept_id JOIN review_order AS r ON c.contract_node = r.id WHERE (1 = ?) 
+2020-06-24 09:45:52.866 DEBUG 3556 --- [http-nio-9101-exec-2] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:45:52.868 DEBUG 3556 --- [http-nio-9101-exec-2] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,c.demand_dept_id,c.party_b_id,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date, d.dept_name as demand_dept_name, u.real_name as contract_manager_name, s.supplier_name as party_b_name,r.node_name, (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes, (select count(*) from contract_examine where contract_id=c.contract_id ) as examineNumbers from contract as c left join sys_user as u on c.contract_manager=u.user_id left join supplier as s on c.party_b_id=s.supplier_id left join sys_dept as d on c.demand_dept_id=d.dept_id join review_order as r on c.contract_node=r.id WHERE (1 = ?) ORDER BY create_date DESC LIMIT 0,20 
+2020-06-24 09:45:52.868 DEBUG 3556 --- [http-nio-9101-exec-2] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:45:52.872 DEBUG 3556 --- [http-nio-9101-exec-2] c.b.c.d.ContractMapper.queryAllContract  : <==      Total: 5
+2020-06-24 09:45:53.999 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.interceptor.TimeOutIntercepter    : -----> session持续时间: 3600
+2020-06-24 09:45:53.999 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.interceptor.TimeOutIntercepter    : -----> session创建时间: 2020-06-24 09:45:24
+2020-06-24 09:45:53.999 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.interceptor.TimeOutIntercepter    : -----> session最新链接时间: 2020-06-24 09:45:53
+2020-06-24 09:45:53.999 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.interceptor.TimeOutIntercepter    : -----> 从session获取上次链接时间: 2020-06-24 09:45:52
+2020-06-24 09:45:53.999 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.interceptor.TimeOutIntercepter    : -----> 操作间隔时间: 1
+2020-06-24 09:45:54.000 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:54.000 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:54.002 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:54.003 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectList     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept ORDER BY sortNum 
+2020-06-24 09:45:54.003 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectList     : ==> Parameters: 
+2020-06-24 09:45:54.005 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectList     : <==      Total: 4
+2020-06-24 09:45:54.006 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:54.006 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 0(Long)
+2020-06-24 09:45:54.007 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 0
+2020-06-24 09:45:54.007 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:54.007 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:54.009 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:54.009 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:54.009 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:54.010 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:54.011 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:54.011 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:54.013 DEBUG 3556 --- [http-nio-9101-exec-9] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:54.023 DEBUG 3556 --- [http-nio-9101-exec-7] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:54.023 DEBUG 3556 --- [http-nio-9101-exec-7] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:54.025 DEBUG 3556 --- [http-nio-9101-exec-7] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:54.026  INFO 3556 --- [http-nio-9101-exec-7] c.b.c.controller.ContractController      : contract list
+2020-06-24 09:45:54.028 DEBUG 3556 --- [http-nio-9101-exec-7] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: SELECT COUNT(1) FROM contract AS c LEFT JOIN sys_user AS u ON c.contract_manager = u.user_id LEFT JOIN supplier AS s ON c.party_b_id = s.supplier_id LEFT JOIN sys_dept AS d ON c.demand_dept_id = d.dept_id JOIN review_order AS r ON c.contract_node = r.id WHERE (1 = ?) 
+2020-06-24 09:45:54.028 DEBUG 3556 --- [http-nio-9101-exec-7] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:45:54.030 DEBUG 3556 --- [http-nio-9101-exec-7] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,c.demand_dept_id,c.party_b_id,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date, d.dept_name as demand_dept_name, u.real_name as contract_manager_name, s.supplier_name as party_b_name,r.node_name, (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes, (select count(*) from contract_examine where contract_id=c.contract_id ) as examineNumbers from contract as c left join sys_user as u on c.contract_manager=u.user_id left join supplier as s on c.party_b_id=s.supplier_id left join sys_dept as d on c.demand_dept_id=d.dept_id join review_order as r on c.contract_node=r.id WHERE (1 = ?) ORDER BY create_date DESC LIMIT 0,20 
+2020-06-24 09:45:54.030 DEBUG 3556 --- [http-nio-9101-exec-7] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:45:54.035 DEBUG 3556 --- [http-nio-9101-exec-7] c.b.c.d.ContractMapper.queryAllContract  : <==      Total: 5
+2020-06-24 09:45:56.083 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.interceptor.TimeOutIntercepter    : -----> session持续时间: 3600
+2020-06-24 09:45:56.083 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.interceptor.TimeOutIntercepter    : -----> session创建时间: 2020-06-24 09:45:24
+2020-06-24 09:45:56.084 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.interceptor.TimeOutIntercepter    : -----> session最新链接时间: 2020-06-24 09:45:56
+2020-06-24 09:45:56.084 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.interceptor.TimeOutIntercepter    : -----> 从session获取上次链接时间: 2020-06-24 09:45:53
+2020-06-24 09:45:56.084 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.interceptor.TimeOutIntercepter    : -----> 操作间隔时间: 2
+2020-06-24 09:45:56.084 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:56.084 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:56.086 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:56.087 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectList     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept ORDER BY sortNum 
+2020-06-24 09:45:56.087 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectList     : ==> Parameters: 
+2020-06-24 09:45:56.089 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectList     : <==      Total: 4
+2020-06-24 09:45:56.089 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:56.089 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 0(Long)
+2020-06-24 09:45:56.090 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 0
+2020-06-24 09:45:56.091 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:56.091 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:56.092 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:56.092 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:56.093 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:56.094 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:56.094 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : ==>  Preparing: SELECT dept_id AS deptId,parent_id AS parentId,dept_name AS deptName,sort_num AS sortNum,del_flag AS delFlag FROM sys_dept WHERE dept_id=? 
+2020-06-24 09:45:56.094 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : ==> Parameters: 10000(Long)
+2020-06-24 09:45:56.095 DEBUG 3556 --- [http-nio-9101-exec-16] com.bj.sys.dao.SysDeptDao.selectById     : <==      Total: 1
+2020-06-24 09:45:56.108 DEBUG 3556 --- [http-nio-9101-exec-12] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:56.109 DEBUG 3556 --- [http-nio-9101-exec-12] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:56.111 DEBUG 3556 --- [http-nio-9101-exec-12] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:56.111  INFO 3556 --- [http-nio-9101-exec-12] c.b.c.controller.ContractController      : contract list
+2020-06-24 09:45:56.113 DEBUG 3556 --- [http-nio-9101-exec-12] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: SELECT COUNT(1) FROM contract AS c LEFT JOIN sys_user AS u ON c.contract_manager = u.user_id LEFT JOIN supplier AS s ON c.party_b_id = s.supplier_id LEFT JOIN sys_dept AS d ON c.demand_dept_id = d.dept_id JOIN review_order AS r ON c.contract_node = r.id WHERE (1 = ?) 
+2020-06-24 09:45:56.113 DEBUG 3556 --- [http-nio-9101-exec-12] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:45:56.115 DEBUG 3556 --- [http-nio-9101-exec-12] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,c.demand_dept_id,c.party_b_id,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date, d.dept_name as demand_dept_name, u.real_name as contract_manager_name, s.supplier_name as party_b_name,r.node_name, (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes, (select count(*) from contract_examine where contract_id=c.contract_id ) as examineNumbers from contract as c left join sys_user as u on c.contract_manager=u.user_id left join supplier as s on c.party_b_id=s.supplier_id left join sys_dept as d on c.demand_dept_id=d.dept_id join review_order as r on c.contract_node=r.id WHERE (1 = ?) ORDER BY create_date DESC LIMIT 0,20 
+2020-06-24 09:45:56.116 DEBUG 3556 --- [http-nio-9101-exec-12] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:45:56.119 DEBUG 3556 --- [http-nio-9101-exec-12] c.b.c.d.ContractMapper.queryAllContract  : <==      Total: 5
+2020-06-24 09:45:56.986 DEBUG 3556 --- [http-nio-9101-exec-26] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:56.986 DEBUG 3556 --- [http-nio-9101-exec-26] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:56.988 DEBUG 3556 --- [http-nio-9101-exec-26] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:56.996 DEBUG 3556 --- [http-nio-9101-exec-26] c.b.c.d.C.queryAllContractExamine        : ==>  Preparing: SELECT COUNT(1) FROM contract AS c JOIN contract_examine AS ce ON c.contract_id = ce.contract_id WHERE (1 = ?) 
+2020-06-24 09:45:56.997 DEBUG 3556 --- [http-nio-9101-exec-26] c.b.c.d.C.queryAllContractExamine        : ==> Parameters: 1(Integer)
+2020-06-24 09:45:56.998 DEBUG 3556 --- [http-nio-9101-exec-26] c.b.c.d.C.queryAllContractExamine        : ==>  Preparing: select c.contract_id,c.contract_name,c.contract_code, ce.risk_level,ce.problem,ce.create_time,ce.status,ce.handle_way, (select real_name from sys_user where sys_user.user_id=ce.handler) as handlerName, (select real_name from sys_user where sys_user.user_id=c.contract_manager) as contractManager from contract as c join contract_examine as ce on c.contract_id=ce.contract_id WHERE (1 = ?) ORDER BY create_date DESC LIMIT 0,20 
+2020-06-24 09:45:56.998 DEBUG 3556 --- [http-nio-9101-exec-26] c.b.c.d.C.queryAllContractExamine        : ==> Parameters: 1(Integer)
+2020-06-24 09:45:57.000 DEBUG 3556 --- [http-nio-9101-exec-26] c.b.c.d.C.queryAllContractExamine        : <==      Total: 1
+2020-06-24 09:45:58.904 DEBUG 3556 --- [http-nio-9101-exec-20] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:45:58.905 DEBUG 3556 --- [http-nio-9101-exec-20] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:45:58.907 DEBUG 3556 --- [http-nio-9101-exec-20] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:45:58.916 ERROR 3556 --- [http-nio-9101-exec-20] c.b.c.controller.ContractRiskController  : 分页查询信息出错，org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.bj.contract.dao.ContractRiskMapper.queryRisk
+	at org.apache.ibatis.binding.MapperMethod$SqlCommand.<init>(MapperMethod.java:225)
+	at org.apache.ibatis.binding.MapperMethod.<init>(MapperMethod.java:48)
+	at org.apache.ibatis.binding.MapperProxy.cachedMapperMethod(MapperProxy.java:65)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:58)
+	at com.sun.proxy.$Proxy130.queryRisk(Unknown Source)
+	at com.bj.contract.service.impl.ContractRiskServiceImpl.queryPage(ContractRiskServiceImpl.java:63)
+	at com.bj.contract.service.impl.ContractRiskServiceImpl$$FastClassBySpringCGLIB$$1780cc62.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:684)
+	at com.bj.contract.service.impl.ContractRiskServiceImpl$$EnhancerBySpringCGLIB$$acfa67ae.queryPage(<generated>)
+	at com.bj.contract.service.impl.ContractRiskServiceImpl$$FastClassBySpringCGLIB$$1780cc62.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:684)
+	at com.bj.contract.service.impl.ContractRiskServiceImpl$$EnhancerBySpringCGLIB$$62e62978.queryPage(<generated>)
+	at com.bj.contract.controller.ContractRiskController.list(ContractRiskController.java:42)
+	at com.bj.contract.controller.ContractRiskController$$FastClassBySpringCGLIB$$65f8ce0c.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:746)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.apache.shiro.spring.security.interceptor.AopAllianceAnnotationsAuthorizingMethodInterceptor$1.proceed(AopAllianceAnnotationsAuthorizingMethodInterceptor.java:82)
+	at org.apache.shiro.authz.aop.AuthorizingMethodInterceptor.invoke(AuthorizingMethodInterceptor.java:39)
+	at org.apache.shiro.spring.security.interceptor.AopAllianceAnnotationsAuthorizingMethodInterceptor.invoke(AopAllianceAnnotationsAuthorizingMethodInterceptor.java:115)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.bj.contract.controller.ContractRiskController$$EnhancerBySpringCGLIB$$67db767e.list(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:112)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.bj.common.xss.XssFilter.doFilter(XssFilter.java:20)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-06-24 09:46:06.818 DEBUG 3556 --- [http-nio-9101-exec-15] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:46:06.819 DEBUG 3556 --- [http-nio-9101-exec-15] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:46:06.821 DEBUG 3556 --- [http-nio-9101-exec-15] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:46:06.831 DEBUG 3556 --- [http-nio-9101-exec-15] c.b.c.d.C.queryContract                  : ==>  Preparing: SELECT COUNT(1) FROM contract AS c JOIN supplier AS s ON c.party_b_id = s.supplier_id JOIN sys_dept AS d ON c.purchasing_dept_id = d.dept_id JOIN sys_dept AS de ON c.demand_dept_id = de.dept_id WHERE (pay_status != 0) 
+2020-06-24 09:46:06.831 DEBUG 3556 --- [http-nio-9101-exec-15] c.b.c.d.C.queryContract                  : ==> Parameters: 
+2020-06-24 09:46:06.833 DEBUG 3556 --- [http-nio-9101-exec-15] c.b.c.d.C.queryContract                  : ==>  Preparing: select c.contract_id,c.contract_name,c.contract_manager,c.purchase_content,c.contract_amount, c.start_date,c.end_date,c.purchasing_dept_id,c.demand_dept_id,c.contract_type,c.party_a_id, c.party_b_id,c.payment_type,c.contract_file,c.pay_status,c.contract_code,c.create_date,c.un_pay_amount, s.supplier_name,d.dept_name as purchasing_dept_name,de.dept_name as demand_dept_name from contract as c join supplier as s on c.party_b_id=s.supplier_id join sys_dept as d on c.purchasing_dept_id=d.dept_id join sys_dept as de on c.demand_dept_id=de.dept_id WHERE (pay_status!=0) LIMIT 0,20 
+2020-06-24 09:46:06.833 DEBUG 3556 --- [http-nio-9101-exec-15] c.b.c.d.C.queryContract                  : ==> Parameters: 
+2020-06-24 09:46:06.836 DEBUG 3556 --- [http-nio-9101-exec-15] c.b.c.d.C.queryContract                  : <==      Total: 3
+2020-06-24 09:46:14.458 DEBUG 3556 --- [http-nio-9101-exec-25] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:46:14.458 DEBUG 3556 --- [http-nio-9101-exec-25] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:46:14.461 DEBUG 3556 --- [http-nio-9101-exec-25] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:46:14.462 DEBUG 3556 --- [http-nio-9101-exec-25] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:46:14.462 DEBUG 3556 --- [http-nio-9101-exec-25] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:46:14.464 DEBUG 3556 --- [http-nio-9101-exec-25] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:46:14.562 DEBUG 3556 --- [http-nio-9101-exec-28] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:46:14.562 DEBUG 3556 --- [http-nio-9101-exec-28] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:46:14.564 DEBUG 3556 --- [http-nio-9101-exec-28] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:46:14.572 DEBUG 3556 --- [http-nio-9101-exec-28] c.b.c.dao.SupplierMapper.selectPage      : ==>  Preparing: SELECT COUNT(1) FROM supplier WHERE `status` = 0 
+2020-06-24 09:46:14.572 DEBUG 3556 --- [http-nio-9101-exec-28] c.b.c.dao.SupplierMapper.selectPage      : ==> Parameters: 
+2020-06-24 09:46:14.574 DEBUG 3556 --- [http-nio-9101-exec-28] c.b.c.dao.SupplierMapper.selectPage      : ==>  Preparing: SELECT supplier_id AS supplierId,supplier_name AS supplierName,credit_code AS creditCode,lega_representative AS legaRepresentative,attribution,registered_capital AS registeredCapital,operating_status AS operatingStatus,supplier_type AS supplierType,business_scope AS businessScope,`status`,qualifications,remarks,black_list AS blackList FROM supplier WHERE `status`=0 ORDER BY supplier_name DESC LIMIT 0,20 
+2020-06-24 09:46:14.574 DEBUG 3556 --- [http-nio-9101-exec-28] c.b.c.dao.SupplierMapper.selectPage      : ==> Parameters: 
+2020-06-24 09:46:14.576 DEBUG 3556 --- [http-nio-9101-exec-28] c.b.c.dao.SupplierMapper.selectPage      : <==      Total: 3
+2020-06-24 09:47:54.434 DEBUG 3556 --- [http-nio-9101-exec-7] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:47:54.434 DEBUG 3556 --- [http-nio-9101-exec-7] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:47:54.437 DEBUG 3556 --- [http-nio-9101-exec-7] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:47:54.437  INFO 3556 --- [http-nio-9101-exec-7] c.b.c.controller.ContractController      : contract list
+2020-06-24 09:47:54.439 DEBUG 3556 --- [http-nio-9101-exec-7] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: SELECT COUNT(1) FROM contract AS c LEFT JOIN sys_user AS u ON c.contract_manager = u.user_id LEFT JOIN supplier AS s ON c.party_b_id = s.supplier_id LEFT JOIN sys_dept AS d ON c.demand_dept_id = d.dept_id JOIN review_order AS r ON c.contract_node = r.id WHERE (1 = ?) 
+2020-06-24 09:47:54.439 DEBUG 3556 --- [http-nio-9101-exec-7] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:47:54.441 DEBUG 3556 --- [http-nio-9101-exec-7] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,c.demand_dept_id,c.party_b_id,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date, d.dept_name as demand_dept_name, u.real_name as contract_manager_name, s.supplier_name as party_b_name,r.node_name, (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes, (select count(*) from contract_examine where contract_id=c.contract_id ) as examineNumbers from contract as c left join sys_user as u on c.contract_manager=u.user_id left join supplier as s on c.party_b_id=s.supplier_id left join sys_dept as d on c.demand_dept_id=d.dept_id join review_order as r on c.contract_node=r.id WHERE (1 = ?) ORDER BY create_date DESC LIMIT 0,20 
+2020-06-24 09:47:54.442 DEBUG 3556 --- [http-nio-9101-exec-7] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:47:54.446 DEBUG 3556 --- [http-nio-9101-exec-7] c.b.c.d.ContractMapper.queryAllContract  : <==      Total: 5
+2020-06-24 09:48:49.575 DEBUG 3556 --- [http-nio-9101-exec-3] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:48:49.575 DEBUG 3556 --- [http-nio-9101-exec-3] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:48:49.577 DEBUG 3556 --- [http-nio-9101-exec-3] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:48:49.578  INFO 3556 --- [http-nio-9101-exec-3] c.b.c.controller.ContractController      : contract list
+2020-06-24 09:48:49.579 DEBUG 3556 --- [http-nio-9101-exec-3] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: SELECT COUNT(1) FROM contract AS c LEFT JOIN sys_user AS u ON c.contract_manager = u.user_id LEFT JOIN supplier AS s ON c.party_b_id = s.supplier_id LEFT JOIN sys_dept AS d ON c.demand_dept_id = d.dept_id JOIN review_order AS r ON c.contract_node = r.id WHERE (1 = ?) 
+2020-06-24 09:48:49.580 DEBUG 3556 --- [http-nio-9101-exec-3] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:48:49.582 DEBUG 3556 --- [http-nio-9101-exec-3] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,c.demand_dept_id,c.party_b_id,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date, d.dept_name as demand_dept_name, u.real_name as contract_manager_name, s.supplier_name as party_b_name,r.node_name, (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes, (select count(*) from contract_examine where contract_id=c.contract_id ) as examineNumbers from contract as c left join sys_user as u on c.contract_manager=u.user_id left join supplier as s on c.party_b_id=s.supplier_id left join sys_dept as d on c.demand_dept_id=d.dept_id join review_order as r on c.contract_node=r.id WHERE (1 = ?) ORDER BY create_date DESC LIMIT 0,20 
+2020-06-24 09:48:49.582 DEBUG 3556 --- [http-nio-9101-exec-3] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:48:49.586 DEBUG 3556 --- [http-nio-9101-exec-3] c.b.c.d.ContractMapper.queryAllContract  : <==      Total: 5
+2020-06-24 09:49:05.242 DEBUG 3556 --- [http-nio-9101-exec-13] com.bj.interceptor.TimeOutIntercepter    : -----> session持续时间: 3600
+2020-06-24 09:49:05.242 DEBUG 3556 --- [http-nio-9101-exec-13] com.bj.interceptor.TimeOutIntercepter    : -----> session创建时间: 2020-06-24 09:45:24
+2020-06-24 09:49:05.242 DEBUG 3556 --- [http-nio-9101-exec-13] com.bj.interceptor.TimeOutIntercepter    : -----> session最新链接时间: 2020-06-24 09:49:05
+2020-06-24 09:49:05.242 DEBUG 3556 --- [http-nio-9101-exec-13] com.bj.interceptor.TimeOutIntercepter    : -----> 从session获取上次链接时间: 2020-06-24 09:45:56
+2020-06-24 09:49:05.242 DEBUG 3556 --- [http-nio-9101-exec-13] com.bj.interceptor.TimeOutIntercepter    : -----> 操作间隔时间: 189
+2020-06-24 09:49:05.242  INFO 3556 --- [http-nio-9101-exec-13] c.b.sys.service.impl.SysMenuServiceImpl  : 获取 用户菜单列表
+2020-06-24 09:49:05.243 DEBUG 3556 --- [http-nio-9101-exec-13] c.bj.sys.dao.SysUserDao.queryAllMenuId   : ==>  Preparing: select distinct rm.menu_id from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id where ur.user_id = ? 
+2020-06-24 09:49:05.243 DEBUG 3556 --- [http-nio-9101-exec-22] com.bj.interceptor.TimeOutIntercepter    : -----> session持续时间: 3600
+2020-06-24 09:49:05.243 DEBUG 3556 --- [http-nio-9101-exec-22] com.bj.interceptor.TimeOutIntercepter    : -----> session创建时间: 2020-06-24 09:45:24
+2020-06-24 09:49:05.243 DEBUG 3556 --- [http-nio-9101-exec-22] com.bj.interceptor.TimeOutIntercepter    : -----> session最新链接时间: 2020-06-24 09:49:05
+2020-06-24 09:49:05.243 DEBUG 3556 --- [http-nio-9101-exec-13] c.bj.sys.dao.SysUserDao.queryAllMenuId   : ==> Parameters: 1(Long)
+2020-06-24 09:49:05.243 DEBUG 3556 --- [http-nio-9101-exec-22] com.bj.interceptor.TimeOutIntercepter    : -----> 从session获取上次链接时间: 2020-06-24 09:49:05
+2020-06-24 09:49:05.244 DEBUG 3556 --- [http-nio-9101-exec-22] com.bj.interceptor.TimeOutIntercepter    : -----> 操作间隔时间: 0
+2020-06-24 09:49:05.246 DEBUG 3556 --- [http-nio-9101-exec-13] c.bj.sys.dao.SysUserDao.queryAllMenuId   : <==      Total: 41
+2020-06-24 09:49:05.246 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : ==>  Preparing: select * from sys_menu where parent_id = ? order by sort_num asc 
+2020-06-24 09:49:05.246 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : ==> Parameters: 0(Long)
+2020-06-24 09:49:05.248 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : <==      Total: 7
+2020-06-24 09:49:05.248 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : ==>  Preparing: select * from sys_menu where parent_id = ? order by sort_num asc 
+2020-06-24 09:49:05.248 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : ==> Parameters: 110208(Long)
+2020-06-24 09:49:05.250 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : <==      Total: 2
+2020-06-24 09:49:05.250 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : ==>  Preparing: select * from sys_menu where parent_id = ? order by sort_num asc 
+2020-06-24 09:49:05.251 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : ==> Parameters: 110000(Long)
+2020-06-24 09:49:05.252 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : <==      Total: 3
+2020-06-24 09:49:05.252 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : ==>  Preparing: select * from sys_menu where parent_id = ? order by sort_num asc 
+2020-06-24 09:49:05.252 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : ==> Parameters: 110216(Long)
+2020-06-24 09:49:05.254 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : <==      Total: 2
+2020-06-24 09:49:05.254 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : ==>  Preparing: select * from sys_menu where parent_id = ? order by sort_num asc 
+2020-06-24 09:49:05.254 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : ==> Parameters: 100000(Long)
+2020-06-24 09:49:05.256 DEBUG 3556 --- [http-nio-9101-exec-13] c.b.s.dao.SysMenuDao.queryListParentId   : <==      Total: 4
+2020-06-24 09:49:05.582 DEBUG 3556 --- [http-nio-9101-exec-10] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==>  Preparing: select m.menu_perms from sys_user_role ur LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id LEFT JOIN sys_menu m on rm.menu_id = m.menu_id where ur.user_id = ? 
+2020-06-24 09:49:05.582 DEBUG 3556 --- [http-nio-9101-exec-10] com.bj.sys.dao.SysUserDao.queryAllPerms  : ==> Parameters: 1(Long)
+2020-06-24 09:49:05.585 DEBUG 3556 --- [http-nio-9101-exec-10] com.bj.sys.dao.SysUserDao.queryAllPerms  : <==      Total: 41
+2020-06-24 09:49:05.585  INFO 3556 --- [http-nio-9101-exec-10] c.b.c.controller.ContractController      : contract list
+2020-06-24 09:49:05.587 DEBUG 3556 --- [http-nio-9101-exec-10] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: SELECT COUNT(1) FROM contract AS c LEFT JOIN sys_user AS u ON c.contract_manager = u.user_id LEFT JOIN supplier AS s ON c.party_b_id = s.supplier_id LEFT JOIN sys_dept AS d ON c.demand_dept_id = d.dept_id JOIN review_order AS r ON c.contract_node = r.id WHERE (1 = ?) 
+2020-06-24 09:49:05.587 DEBUG 3556 --- [http-nio-9101-exec-10] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:49:05.589 DEBUG 3556 --- [http-nio-9101-exec-10] c.b.c.d.ContractMapper.queryAllContract  : ==>  Preparing: select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,c.demand_dept_id,c.party_b_id,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date, d.dept_name as demand_dept_name, u.real_name as contract_manager_name, s.supplier_name as party_b_name,r.node_name, (select count(*) from contract_change where contract_id=c.contract_id ) as changeTimes, (select count(*) from contract_examine where contract_id=c.contract_id ) as examineNumbers from contract as c left join sys_user as u on c.contract_manager=u.user_id left join supplier as s on c.party_b_id=s.supplier_id left join sys_dept as d on c.demand_dept_id=d.dept_id join review_order as r on c.contract_node=r.id WHERE (1 = ?) ORDER BY create_date DESC LIMIT 0,20 
+2020-06-24 09:49:05.590 DEBUG 3556 --- [http-nio-9101-exec-10] c.b.c.d.ContractMapper.queryAllContract  : ==> Parameters: 1(Integer)
+2020-06-24 09:49:05.594 DEBUG 3556 --- [http-nio-9101-exec-10] c.b.c.d.ContractMapper.queryAllContract  : <==      Total: 5

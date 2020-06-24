@@ -61,11 +61,6 @@ public class Contract extends Model<Contract> {
     @NotNull(message = "必须选择经办人")
     private String contractManager;
 
-    /**
-     * 经办人
-     */
-    @TableField(exist = false)
-    private String contractManagerName;
 
     /**
      * 采购内容
@@ -133,11 +128,7 @@ public class Contract extends Model<Contract> {
     @NotNull(message = "必须选择需求部门")
     private Long demandDeptId;
 
-    /**
-     * 需求部门
-     */
-    @TableField(exist = false)
-    private String demandDeptName;
+
     /**
      * 需求部门名称
      */

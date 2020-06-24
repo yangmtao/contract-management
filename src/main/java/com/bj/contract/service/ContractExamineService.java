@@ -1,6 +1,7 @@
 package com.bj.contract.service;
 
 import com.bj.common.util.PageUtils;
+import com.bj.contract.entity.Contract;
 import com.bj.contract.entity.ContractExamine;
 import com.baomidou.mybatisplus.service.IService;
 
@@ -20,5 +21,4 @@ public interface ContractExamineService extends IService<ContractExamine> {
 
     PageUtils queryPage(Map<String, Object> params) throws Exception;
 
-    Contract getById(Long contractId);
 }

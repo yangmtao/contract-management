@@ -80,4 +80,6 @@ public class ContractExamineServiceImpl extends ServiceImpl<ContractExamineMappe
         page.setRecords(baseMapper.queryAllContractExamine(page,wrapper));
         return new PageUtils(page);
     }
+
+
 }
