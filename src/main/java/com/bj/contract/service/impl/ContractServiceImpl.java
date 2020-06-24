@@ -45,50 +45,64 @@ import java.util.Map;
 public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> implements ContractService {
 
     @Override
-    public PageUtils queryPage(Map<String, Object> params) throws Exception {
+    public PageUtils queryPage(Map<String, Object> params,Long deptId) throws Exception {
         Page page=new Query<Contract>(params).getPage();
         Wrapper wrapper= SqlHelper.fillWrapper(page,new EntityWrapper<Contract>());
-        Contract contract= JSON.parseObject((String)params.get("contract"),Contract.class);
+        String partyBId = null != params.get("partyBId")
+                && StringUtils.isNotBlank(params.get("partyBId") + "") ? params.get("partyBId") + "" : "";
+        String dept = null != params.get("deptId")
+                && StringUtils.isNotBlank(params.get("deptId") + "") ? params.get("deptId") + "" : "";
+        if (StringUtils.isNotBlank(partyBId)) {
+            System.out.println("查询相关合同==================================");
+            wrapper.eq("party_b_id",partyBId);
+        }else {
+            Contract contract= JSON.parseObject((String)params.get("contract"),Contract.class);
+            if(StringUtils.isNotBlank(dept)){
+                contract.setContractNode(Integer.parseInt(dept));
+            }
+            if (contract!=null){
+                Field[] contractFields = contract.getClass().getDeclaredFields();
 
-        if (contract!=null){
-            Field[] contractFields = contract.getClass().getDeclaredFields();
-
-            for(int i=0;i<contractFields.length;i++){
-                //获取属性名
-                String propertie=contractFields[i].getName();
-                //排除serialVersionUID
-                if(!propertie.equals("serialVersionUID")){
-                    //获取字段名
-                    String columName=contractFields[i].getAnnotation(TableField.class)!=null ? contractFields[i].getAnnotation(TableField.class).value() : "";
-                    //获取该属性在当前对象中的值
-                    contractFields[i].setAccessible(true);
-                    Object value=contractFields[i].get(contract);
-                    //构造SQL
-                    if(value!=null){
-                        if(propertie.equals("contractName")){
-                            wrapper.gt("instr(contract_name,'"+contract.getContractName()+"')",0);
-                        }else if(propertie.equals("paymentRange")){
-                            String[] paymnetRange=((String)value).split(",");
-                            //坑
-                            if(paymnetRange[0]==null || paymnetRange[0].equals("null")){
-                                System.out.println("合同金额范围为空："+paymnetRange[0]+","+paymnetRange[1]);
-                            }else {
-                                System.out.println("合同金额范围非空："+paymnetRange[0]+","+paymnetRange[1]);
-                                wrapper.between("contract_amount",paymnetRange[0],paymnetRange[1]);
-                            }
-                        } else{
-                            //未知字段名时先判空
-                            if(StringUtils.isNotBlank(columName)){
-                                wrapper.eq(columName,value);
+                for(int i=0;i<contractFields.length;i++){
+                    //获取属性名
+                    String propertie=contractFields[i].getName();
+                    //排除serialVersionUID
+                    if(!propertie.equals("serialVersionUID")){
+                        //获取字段名
+                        String columName=contractFields[i].getAnnotation(TableField.class)!=null ? contractFields[i].getAnnotation(TableField.class).value() : "";
+                        //获取该属性在当前对象中的值
+                        contractFields[i].setAccessible(true);
+                        Object value=contractFields[i].get(contract);
+                        //构造SQL
+                        if(value!=null){
+                            if(propertie.equals("contractName")){
+                                wrapper.gt("instr(contract_name,'"+contract.getContractName()+"')",0);
+                            }else if(propertie.equals("paymentRange")){
+                                String[] paymnetRange=((String)value).split(",");
+                                //坑
+                                if(paymnetRange[0]==null || paymnetRange[0].equals("null")){
+                                    System.out.println("合同金额范围为空："+paymnetRange[0]+","+paymnetRange[1]);
+                                }else {
+                                    System.out.println("合同金额范围非空："+paymnetRange[0]+","+paymnetRange[1]);
+                                    wrapper.between("contract_amount",paymnetRange[0],paymnetRange[1]);
+                                }
+                            } else{
+                                //未知字段名时先判空
+                                if(StringUtils.isNotBlank(columName)){
+                                    wrapper.eq(columName,value);
+                                }
                             }
                         }
                     }
+
                 }
 
             }
 
+            wrapper.eq("1",1);
         }
-        wrapper.eq("1",1);
+
+
 
         //sql格式化过滤
         wrapper.addFilterIfNeed(params.get(CommonEnum.SQL_FILTER)!=null,(String)params.get(CommonEnum.SQL_FILTER)).orderBy("create_date",false);

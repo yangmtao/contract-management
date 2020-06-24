@@ -104,7 +104,6 @@ public class ContractRisk extends Model<ContractRisk> {
      * 逻辑删除
      */
     @TableField("del")
-    @TableLogic
     private Integer del;
     @Override
     protected Serializable pkVal() {

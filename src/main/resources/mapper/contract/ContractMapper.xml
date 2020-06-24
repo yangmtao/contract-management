@@ -70,5 +70,9 @@
          where contract_id = #{contractId}
     </update>
 
+    <select id="queryAll" resultType="com.bj.contract.entity.Contract">
+        select * from contract
+    </select>
+
 
 </mapper>

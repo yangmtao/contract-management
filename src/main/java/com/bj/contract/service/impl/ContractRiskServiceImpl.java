@@ -56,9 +56,10 @@ public class ContractRiskServiceImpl extends ServiceImpl<ContractRiskMapper, Con
         if (StringUtils.isNotBlank(payStatus)) {
             riskWrapper.gt("instr(pay_status,'" + payStatus + "')", 0);
         }
-        riskWrapper.orderBy("contract_name", false);
 
-        riskWrapper.where("r.del=0");
+        riskWrapper.orderBy("del", false);
+
+        riskWrapper.where("1=1");
         Page<ContractRisk> page = new Query<ContractRisk>(params).getPage();
         page.setRecords(baseMapper.queryRisk(page,riskWrapper));
 

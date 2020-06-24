@@ -50,7 +50,6 @@ public class ContractController extends AbstractController {
         System.out.println(contractId);
         Contract contract = contractFileService.getById(contractId);
         System.out.println(contract);
-
         return R.ok().put("contract", contract);
     }
 
@@ -72,9 +71,15 @@ public class ContractController extends AbstractController {
     @ResponseBody
     @RequiresPermissions("contract:list")
     public R list(@RequestParam Map<String, Object> params) throws Exception {
-
+        Long deptId = getDeptId();
+        PageUtils page = null;
+        if(deptId==10000){
+            page  = contractFileService.queryPage(params,null);
+        }else {
+            page  = contractFileService.queryPage(params,deptId);
+        }
         log.info("contract list");
-        PageUtils page  = contractFileService.queryPage(params);
+
         return R.ok().put("page", page);
     }
 

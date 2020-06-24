@@ -22,4 +22,8 @@ public interface ContractRiskMapper extends BaseMapper<ContractRisk> {
     List<ContractRisk> queryRisk(Page<ContractRisk> page, @Param("ew") EntityWrapper<ContractRisk> riskWrapper);
 
     ContractRisk queryById(Long id);
+
+    Integer save(ContractRisk contractRisk);
+
+    ContractRisk select(Long contractId, String Risk);
 }
