@@ -6,10 +6,12 @@
         select c.contract_id,c.contract_name,c.contract_manager,c.purchase_content,c.contract_amount,
         c.start_date,c.end_date,c.purchasing_dept_id,c.demand_dept_id,c.contract_type,c.party_a_id,
         c.party_b_id,c.payment_type,c.contract_file,c.pay_status,c.contract_code,c.create_date,c.un_pay_amount,
+        u.real_name as contract_manager_name,
         s.supplier_name,d.dept_name as purchasing_dept_name,de.dept_name as demand_dept_name
          from contract as c join supplier as s on c.party_b_id=s.supplier_id
          join sys_dept as d on c.purchasing_dept_id=d.dept_id
         join sys_dept as de on c.demand_dept_id=de.dept_id
+        join sys_user as u on c.contract_manager=u.user_id
         <where> ${ew.sqlSegment}</where>
 
     </select>

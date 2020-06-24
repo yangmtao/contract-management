@@ -2,5 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bj.contract.dao.ContractRiskMapper">
 
+    <select id="queryRisk" resultType="com.bj.contract.entity.ContractRisk">
+        select c.contract_name,c.contract_amount,c.party_b_id,c.pay_status,c.payment_type,c.contract_code,c.pay_status,
+        c.contract_type,r.contract_id,r.risk_type,r.solution,r.id,r.risk_name,s.supplier_name
+        from contract as c join contract_risk as r on c.contract_id=r.contract_id join supplier as s on c.party_b_id = s.supplier_id
+        <where> ${ew.sqlSegment}</where>
+    </select>
+    <update id="setDel">
+        update contract_risk set del = -1 where id = #{id}
+    </update>
+
+    <select id="queryById" resultType="com.bj.contract.entity.ContractRisk">
+        select c.contract_name,c.contract_amount,c.party_b_id,c.pay_status,c.payment_type,c.contract_code,
+        c.contract_type,r.contract_id,r.risk_type,r.solution,r.id,r.risk_name,s.supplier_name
+         from contract as c join contract_risk as r on c.contract_id=r.contract_id join supplier as s on c.party_b_id = s.supplier_id
+         where id = #{id}
+    </select>
 
 </mapper>

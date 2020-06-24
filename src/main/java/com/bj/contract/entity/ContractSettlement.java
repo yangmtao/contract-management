@@ -76,6 +76,7 @@ public class ContractSettlement extends Model<ContractSettlement> {
     private Date receiveTime;
 
 
+
     @Override
     protected Serializable pkVal() {
         return this.id;

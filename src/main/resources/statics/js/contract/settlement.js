@@ -6,7 +6,8 @@ function jqGrid(){$("#jqGrid").jqGrid({
         {label: 'id', name: 'id', index: 'id', width: 10, key: true, hidden: true},
         {label: '合同id', name: 'contractId', index: 'contract_id', width: 140, align: 'center',hidden:true},
         {label: '合同编号', name: 'contractCode', index: 'contract_code', width: 140,align: 'center'},
-        {label: '合同名称', name: 'contractName', index: 'contract_name', width: 100},
+        {label: '合同名称', name: 'contractName', index: 'contract_name', width: 100,align: 'center'},
+        {label: '申请人', name: 'contractManagerName', index: 'contract_manager_name', width: 100,align: 'center'},
         {label: '采购部门', name: 'purchasingDeptName', index: 'dept1_name', width: 140, align: 'center'},
         {label: '需求部门', name: 'demandDeptName', index: 'demand_dept_name', width: 100},
         {label: '乙方单位', name: 'supplierName', index: 'supplier_name', width: 100},
@@ -38,7 +39,6 @@ function jqGrid(){$("#jqGrid").jqGrid({
                 }
             }},
 
-        {label: '备注', name: 'remarks', index: 'remarks', width: 100,align: 'center'},
         {label: '操作',  width: 100, sortable: false, align: 'center',
             formatter:function (cellValue, options, rowData) {
                 var contractId = rowData["contractId"];
@@ -135,7 +135,7 @@ var vm = new Vue({
             contractName:null,
             contractCode:null,
             supplierName:"",
-            contractManager:""
+            contractManagerName:""
 
 
         },
@@ -182,7 +182,7 @@ var vm = new Vue({
                 contractName:"",
                 contractCode:"",
                 supplierName:"",
-                contractManager:""
+                contractManagerName:""
             };
             this.reload();
         },
@@ -311,7 +311,7 @@ var vm = new Vue({
                 "contractName":this.contractSearch.contractName,
                 "contractCode":this.contractSearch.contractCode,
                 "supplierName":this.contractSearch.supplierName,
-                "contractManager":this.contractSearch.contractManager
+                "contractManagerName":this.contractSearch.contractManagerName
             };
             $("#jqGrid").jqGrid('setGridParam', {
                 page: 1, "postData": postData

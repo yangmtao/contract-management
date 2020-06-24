@@ -19,5 +19,5 @@ import java.util.List;
  */
 public interface ContractSettlementMapper extends BaseMapper<ContractSettlement> {
 
-    List<Contract> queryContract(Page<Contract> page,@Param("ew") EntityWrapper<ContractSettlement> settlementWrapper);
+    List<Contract> queryContract(Page<Contract> page,@Param("ew") EntityWrapper<Contract> settlementWrapper);
 }

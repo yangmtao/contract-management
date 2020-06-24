@@ -141,7 +141,7 @@ var vm = new Vue({
         //办理合同审核
         getReview:function(contractId,contractName,contractCode){
             this.showList = 2;
-            this.title = "结算";
+            this.title = "审核办理";
             this.contractName = contractName;
             this.contractCode = contractCode;
             this.contract = {
@@ -172,7 +172,7 @@ var vm = new Vue({
                             window.location.reload();
                         });
                     } else {
-                        alert(r.msg);
+                        alert("失败");
                     }
                 }
             });
@@ -218,7 +218,7 @@ var vm = new Vue({
         //得到所选id的信息
         getInfo: function (contractId) {
             var _this = this;
-            $.get(baseURL + "contract/info/" + contractId, function (r) {
+            $.get(baseURL + "contract/contractInfo/" + contractId, function (r) {
                 _this.contract=r.contract
             });
         },

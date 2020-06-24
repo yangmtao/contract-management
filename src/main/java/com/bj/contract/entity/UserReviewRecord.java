@@ -48,6 +48,7 @@ public class UserReviewRecord extends Model<UserReviewRecord> {
      */
     @TableField(exist = false)
     @NotBlank(message = "合同名称不能为空")
+
     @Size(min = 4,max = 100,message = "合同名称应在4~100字")
     private String contractName;
     /**

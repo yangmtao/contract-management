@@ -42,15 +42,15 @@ public class ContractSettlementServiceImpl extends ServiceImpl<ContractSettlemen
      */
     @Override
     public PageUtils queryPage(Map<String, Object> params) throws Exception {
-        EntityWrapper<ContractSettlement> settlementWrapper = new EntityWrapper<>();
+        EntityWrapper<Contract> settlementWrapper = new EntityWrapper<>();
         String contractName = null != params.get("contractName")
                 && StringUtils.isNotBlank(params.get("contractName") + "") ? params.get("contractName") + "" : "";
         String contractCode = null != params.get("contractCode")
                 && StringUtils.isNotBlank(params.get("contractCode") + "") ? params.get("contractCode") + "" : "";
         String supplierName = null != params.get("supplierName")
                 && StringUtils.isNotBlank(params.get("supplierName") + "") ? params.get("supplierName") + "" : "";
-        String contractManager = null != params.get("contractManager")
-                && StringUtils.isNotBlank(params.get("contractManager") + "") ? params.get("contractManager") + "" : "";
+        String contractManagerName = null != params.get("contractManagerName")
+                && StringUtils.isNotBlank(params.get("contractManagerName") + "") ? params.get("contractManagerName") + "" : "";
 
         if (StringUtils.isNotBlank(contractName)) {
             settlementWrapper.gt("instr(contract_name,'" + contractName + "')", 0);
@@ -61,10 +61,10 @@ public class ContractSettlementServiceImpl extends ServiceImpl<ContractSettlemen
         if (StringUtils.isNotBlank(supplierName)) {
             settlementWrapper.gt("instr(supplier_name,'" + supplierName + "')", 0);
         }
-        if (StringUtils.isNotBlank(contractManager)) {
-            settlementWrapper.gt("instr(contract_manager,'" + contractManager + "')", 0);
+        if (StringUtils.isNotBlank(contractManagerName)) {
+            settlementWrapper.gt("instr(real_name,'" + contractManagerName + "')", 0);
         }
-       // settlementWrapper.orderBy("c.contract_name", false);
+       settlementWrapper.where("un_pay_amount!=0");
        settlementWrapper.where("pay_status!=0");
         Page<Contract> page = new Query<Contract>(params).getPage();
         page.setRecords(baseMapper.queryContract(page,settlementWrapper));
@@ -80,13 +80,13 @@ public class ContractSettlementServiceImpl extends ServiceImpl<ContractSettlemen
         Contract contract = contractMapper.selectContractById(contractSettlement.getContractId());
         Long contractId = contract.getContractId();
         if (contract.getUnPayAmount().equals(BigDecimal.ZERO)){
-            contractMapper.updateAmount(contractId,0,null);
+            contractMapper.updateAmount(contractId,0,BigDecimal.ZERO);
         }else {
             BigDecimal amount = contract.getUnPayAmount();
             BigDecimal receiveAmount = contractSettlement.getReceiveAmount();
             BigDecimal unAmount = amount.subtract(receiveAmount);
             if (unAmount.equals(BigDecimal.ZERO)){
-                contractMapper.updateAmount(contractId,0,null);
+                contractMapper.updateAmount(contractId,0,BigDecimal.ZERO);
             }
             else {
                 contractMapper.updateAmount(contractId,"",unAmount);

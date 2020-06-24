@@ -54,7 +54,7 @@ public class UserReviewRecordController extends AbstractController {
      */
     @PostMapping("/save")
     //@RequiresPermissions("contract:userReviewRecord:save")
-    public R save(@Validated @RequestBody UserReviewRecord userReviewRecord){
+    public R save(@RequestBody UserReviewRecord userReviewRecord){
         try {
             userReviewRecord.setReviewer(getUser().getUserName());
             System.out.println(userReviewRecord);
