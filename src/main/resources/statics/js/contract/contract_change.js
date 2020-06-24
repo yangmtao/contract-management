@@ -143,6 +143,10 @@ var vmContract = new Vue({
             partyAId:null,
             partyBId:null,
             paymentType:null,
+            payStatus:null,
+            startNumber:null,
+            endNumber:null,
+            paymentRange:null,
             contractCode:null
         },
         contractChange:{
@@ -305,6 +309,17 @@ var vmContract = new Vue({
         },
         queryContract: function(){
             console.log("正在查找");
+            var _this=this;
+            if(_this.contract.startNumber > _this.contract.endNumber){
+                alert("合同金额错误，范围起始值必须小于等于终止值");
+                return;
+            }
+            _this.contract.paymentRange=_this.contract.startNumber+","+_this.contract.endNumber;
+            var page = $("#jqGrid").jqGrid('getGridParam', 'page');
+            $("#jqGrid").jqGrid('setGridParam', {
+                postData: {'contract':JSON.stringify(_this.contract)},
+                page: page
+            }).trigger("reloadGrid");
         },
         reload: function () {
             window.location.reload();

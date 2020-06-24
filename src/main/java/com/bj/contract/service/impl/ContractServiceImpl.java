@@ -14,6 +14,7 @@ import com.bj.contract.dao.ContractMapper;
 import com.bj.contract.entity.Contract;
 import com.bj.contract.service.ContractService;
 
+import freemarker.template.utility.StringUtil;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.*;
@@ -68,7 +69,13 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
                             wrapper.gt("instr(contract_name,'"+contract.getContractName()+"')",0);
                         }else if(propertie.equals("paymentRange")){
                             String[] paymnetRange=((String)value).split(",");
-                            wrapper.between("contract_amount",paymnetRange[0],paymnetRange[1]);
+                            //坑
+                            if(paymnetRange[0]==null || paymnetRange[0].equals("null")){
+                                System.out.println("合同金额范围为空："+paymnetRange[0]+","+paymnetRange[1]);
+                            }else {
+                                System.out.println("合同金额范围非空："+paymnetRange[0]+","+paymnetRange[1]);
+                                wrapper.between("contract_amount",paymnetRange[0],paymnetRange[1]);
+                            }
                         } else{
                             //未知字段名时先判空
                             if(StringUtils.isNotBlank(columName)){
