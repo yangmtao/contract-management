@@ -13,15 +13,13 @@ function jqGrid(){$("#jqGrid").jqGrid({
         {label: '收款时间', name: 'receiveTime', index: 'receive_time', width: 100},
 
         {label: '结束时间', name: 'endDate', index: 'end_date', width: 180, align: 'center'},
-        {label: '当前节点', name: 'currentNode', index: 'current_node', width: 140, align: 'center'},
+        {label: '当前节点', name: 'contractNode', index: 'contratc_node', width: 140, align: 'center'},
         {label: '备注', name: 'remarks', index: 'remarks', width: 100,align: 'center'},
         {label: '操作',  width: 100, sortable: false, align: 'center',
             formatter:function (cellValue, options, rowData) {
-                var i  = rowData["contractApplyRecordId"];
-                var node = rowData["currentNode"];
-                console.log(node)
-                return "<a class='btn btn-primary' onclick='pass(\""+i+"\",\""+node+"\")' '>通过</a>"
+                var contractId = rowData["contractId"];
 
+                return "<a class='btn btn-primary' onclick='settlement(\""+contractId+"\")' '>结算</a>"
 
             }
         },
@@ -52,43 +50,14 @@ function jqGrid(){$("#jqGrid").jqGrid({
         // $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
     }
 });}
+
 $(function () {
     jqGrid();
 });
 
-function pass(i,node){
+function settlement(contractId){
 
-    layer.confirm('确定仔细核查了吗？', {
-        btn: ['确定','再看一下'] //按钮
-    }, function(){
-        $.ajax({
-            type:"get",
-            url:baseURL + "contract/myMission/pass?contractApplyRecordId="+i+"&currentNode="+node,
-            success:function(re){
-                if(re.code==1){
-                    layer.alert("操作成功",{
-                        icon:1
-                    },function(index){
-                        layer.close(index)
-                        window.location.reload();
-                    })
-                }else {
-                    layer.alert(re.message,{
-                        icon:2
-                    },function (index){
-                        layer.close(index)
-                    })
-                }
-            }
-
-
-        })
-
-    }, function(){
-        layer.close();
-    });
-
-
+   vm.addSupplier();
 
 }
 
@@ -106,7 +75,7 @@ var setting = {
         }
     }
 };
-var vmFinUser = new Vue({
+var vm = new Vue({
     el: '#rrapp',
     data: {
         showList: 1,
@@ -150,6 +119,9 @@ var vmFinUser = new Vue({
         newPassword: "",
         newPasswordSure: "",
         chooseUserId: ""
+    },
+    mounted: function(){
+        window.testFun = this.addSupplier; // 方法赋值给window
     },
     methods: {
 

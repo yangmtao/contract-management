@@ -44,11 +44,17 @@ public class Contract extends Model<Contract> {
     @Size(min = 4,max = 100,message = "合同名称应在4~100字")
     private String contractName;
     /**
-     * 经办人
+     * 经办人id
      */
     @TableField("contract_manager")
     @NotNull(message = "必须选择经办人")
     private String contractManager;
+
+    /**
+     * 经办人
+     */
+    @TableField(exist = false)
+    private String contractManagerName;
 
     /**
      * 采购内容
@@ -96,6 +102,12 @@ public class Contract extends Model<Contract> {
     @TableField("demand_dept_id")
     @NotNull(message = "必须选择需求部门")
     private Long demandDeptId;
+
+    /**
+     * 需求部门
+     */
+    @TableField(exist = false)
+    private String demandDeptName;
     /**
      * 合同类型
      */
@@ -112,6 +124,20 @@ public class Contract extends Model<Contract> {
      */
     @TableField("party_b_id")
     private Long partyBId;
+
+    /**
+     * 合同节点id
+     */
+    @TableField("contract_node")
+    private Integer contractNode;
+
+    /**
+     * 节点名称
+     */
+    @TableField(exist = false)
+    private String nodeName;
+
+
     /**
      * 支付方式
      */
@@ -137,6 +163,25 @@ public class Contract extends Model<Contract> {
      */
     @TableField("pay_status")
     private Integer payStatus;
+
+    /**
+     * 乙方名称
+     */
+    @TableField(exist = false)
+    private String supplierName;
+    /**
+     * 部门名称
+     */
+    @TableField(exist = false)
+    private String purchasingDeptName;
+
+    /**
+     * 未付金额
+     */
+    @TableField("un_pay_amount")
+    @DecimalMax(value = "1000000000",message = "合同金额不能大于10亿")
+    @DecimalMin(value = "0",message = "未付金额不能小于0")
+    private BigDecimal unPayAmount;
     /**
      *
      * 逻辑删除

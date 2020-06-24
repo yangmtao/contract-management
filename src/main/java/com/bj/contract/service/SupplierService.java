@@ -18,8 +18,7 @@ import java.util.Map;
 public interface SupplierService extends IService<SupplierEntity> {
 
     PageUtils queryPage(Map<String, Object> params) throws Exception;
-    boolean save(SupplierEntity supplierEntity);
-    //boolean deleteBatchIds(Long[] supplierIds);
+
 
    SupplierEntity getById(Long supplierId);
 

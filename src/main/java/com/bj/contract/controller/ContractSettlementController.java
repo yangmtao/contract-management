@@ -9,10 +9,9 @@ import com.bj.contract.entity.ContractSettlement;
 import com.bj.contract.service.ContractSettlementService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import com.bj.sys.controller.AbstractController;
 
 import java.util.Map;
@@ -35,7 +34,7 @@ public class ContractSettlementController extends AbstractController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("contract:supplier:list")
+    @RequiresPermissions("contract:settlement:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = null;
         try {
@@ -45,8 +44,23 @@ public class ContractSettlementController extends AbstractController {
             logger.error("分页查询供应商信息出错，{}", msg);
             return R.error(CommonEnum.ReturnCode.ERROR.getValue(), "分页查询供应商信息出错");
         }
-
         return R.ok().put("page", page);
+    }
+
+    /**
+     * 保存
+     */
+    @PostMapping("/save")
+    @RequiresPermissions("contract:supplier:save")
+    public R save(@Validated @RequestBody ContractSettlement contractSettlement){
+        try {
+            return contractSettlementService.saveSettlement(contractSettlement);
+        } catch (Exception e) {
+            String msg = ExceptionUtil.getExceptionAllInformation(e);
+            logger.error("修改信息出错，{}", msg);
+            return R.error(CommonEnum.ReturnCode.ERROR.getValue(), "修改信息出错");
+        }
+
     }
 }
 

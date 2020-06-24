@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>金融机构-我的待办任务</title>
+    <title>我的待办任务</title>
     <#include "/header.html">
 </head>
 <body>
@@ -9,29 +9,26 @@
     <div v-show="showList==1">
         <div class="grid-btn">
             <div style="float:left;height:40px;width:100%;margin-top:10px;">
+                <label style="font-weight: normal;margin-left: 10px;">合同名称：</label>
+                <el-input
+                        placeholder="请输入合同名称"
+                        v-model="contractSearch.contractName"
+                        style="width:250px;"
+                        size="small"
+                        clearable>
+                </el-input>
                 <label style="font-weight: normal;margin-left: 10px;">申请人：</label>
                 <el-input
-                        placeholder="请输入公司名称"
-                        v-model="supplierSearch.supplierName"
+                        placeholder="请输入申请人姓名"
+                        v-model="contractSearch.contractManagerName"
                         style="width:250px;"
                         size="small"
                         clearable>
                 </el-input>
-                <label style="font-weight: normal;margin-left: 10px;">申请时间：</label>
-                <el-input
-                        placeholder="请输入信用代码"
-                        v-model="supplierSearch.creditCode"
-                        style="width:250px;"
-                        size="small"
-                        clearable>
-                </el-input>
-                <a class="btn btn-default" @click="querySupplier">查询</a>
-                <a class="btn btn-default" @click="clearSupplier">重置</a>
+                <a class="btn btn-default" @click="queryContract">查询</a>
+                <a class="btn btn-default" @click="clearContract">重置</a>
             </div>
             <div style="float:left;height:40px;width:100%;margin-top:10px;">
-            <#if shiro.hasPermission("business:finuser:update")>
-            <a class='btn btn-primary' @click='supplierDetails'><i class="fa-info-circle"></i>&nbsp;详情</a>
-        </#if>
     </div>
     <div style="height: 0px;clear:both;"></div>
 </div>
@@ -39,62 +36,125 @@
 <div id="jqGridPager"></div>
 </div>
 
-<div v-show="showList==2" class="panel panel-default">
+<div v-show="showList==2" class="panel panel-default" style="height: 50%">
     <div class="panel-heading">{{title}}</div>
-    <form class="form-horizontal">
-        <div class="form-group">
-            <div class="col-sm-2 control-label">申请人</div>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" v-model="supplier.supplierName" placeholder="公司名称"/>
-            </div>
-        </div>
-        <div class="form-group" v-show='opName=="add"'>
-            <div class="col-sm-2 control-label">申请部门</div>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" v-model="supplier.creditCode" placeholder="统一社会信用代码"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-2 control-label">申请时间</div>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" v-model="supplier.legaRepresentative" placeholder="法定代表人"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-2 control-label">开始时间</div>
-            <div class="col-sm-10">
-                <input type="text" style="cursor: pointer;"  class="form-control" v-model="supplier.qualifications" placeholder="资质"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-2 control-label">结束时间</div>
-            <div class="col-sm-10">
-                <input type="text" style="cursor: pointer;"  class="form-control" v-model="supplier.attribution" placeholder="所属地"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-2 control-label">当前节点</div>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" v-model="supplier.registeredCapital" placeholder="注册资本"/>
-            </div>
-        </div>
+    <div style="text-align: center;">
+    <div style="float:left;height:10px;width:100%;margin-top:10px;"></div>
+    <span  style="font-size: 20px;font-weight: bold">{{contractName}}</span><br/>
+    <div style="float:left;height:10px;width:100%;margin-top:10px;"></div>
+    合同编号：<span  style="font-size: 14px;color: red">{{contractCode}}</span>
+    <div class="form-group">
+    <div style="height:30px;width:100%;margin-top:10px;">
+        <label style="font-weight: normal;margin-left: 10px;">当前节点：</label>
+        <el-input :disabled="true"
+                v-model="contract.nodeName"
+                style="width:250px;"
+                size="small"
+                >
+        </el-input>
+        <label style="font-weight: normal;margin-left: 10px;">需求部门：</label>
+        <el-input
+                :disabled="true"
+                v-model="contract.demandDeptName"
+                style="width:250px;"
+                size="small"
+                >
+        </el-input>
+        <label style="font-weight: normal;margin-left: 10px;">经办人员：</label>
+        <el-input :disabled="true"
+                v-model="contract.contractManagerName"
+                style="width:250px;"
+                size="small"
+                >
+        </el-input>
+    </div>
+    <div style="height:30px;width:100%;margin-top:10px;">
+        <label style="font-weight: normal;margin-left: 10px;">乙方单位：</label>
+        <el-input :disabled="true"
+                v-model="contract.supplierName"
+                style="width:250px;"
+                size="small"
+                >
+        </el-input>
+        <label style="font-weight: normal;margin-left: 10px;">合同金额：</label>
+        <el-input :disabled="true"
+                placeholder="请输入金额"
+                v-model="contract.contractAmount"
+                style="width:250px;"
+                size="small">
+        </el-input>
+        <label style="font-weight: normal;margin-left: 10px;">开始时间：</label>
+        <el-date-picker
+                :disabled="true" v-model="contract.startDate"
+                        type="datetime"
+                        :time-arrow-control="true"
+                        placeholder="选择时间" id="finOrgInfoDate001" size="small"
+                        value-format="yyyy-MM-dd HH:mm:ss ">
+        </el-date-picker>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+    <div style="height:30px;width:100%;margin-top:10px;">
+        <label style="font-weight: normal;margin-left: 10px;">合同类型：</label>
+        <el-input
+                :disabled="true"
+                v-model="contract.contractType"
+                style="width:250px;"
+                size="small"
+                >
+        </el-input>
+        <label style="font-weight: normal;margin-left: 10px;">采购内容：</label>
+        <el-input
+                :disabled="true"
+                v-model="contract.purchaseContent"
+                style="width:250px;"
+                size="small"
+                >
+        </el-input>
+        <label style="font-weight: normal;margin-left: 10px;">结束时间：</label>
+        <el-date-picker
+                :disabled="true" v-model="contract.endDate"
+                        type="datetime"
+                        :time-arrow-control="true"
+                        placeholder="选择时间" id="finOrgInfoDate001" size="small"
+                        value-format="yyyy-MM-dd HH:mm:ss ">
+        </el-date-picker>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
 
-        <div class="form-group">
-            <div class="col-sm-2 control-label">合同名称</div>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" v-model="supplier.businessScope" placeholder="营业范围"/>
-            </div>
+    </div>
+    </div>
+    <el-form label-width="80px" style="margin-left:11%">
+        <div style="left:40%;height:30px;width:100%;margin-top:10px;">
+            <el-form-item>
+                <label style="font-weight: normal;margin-left: 10px;">&nbsp;支付情况：</label>
+                <el-radio-group :disabled="true" v-model="contract.payStatus">
+                    <el-radio :label="0" name="type" value="0">已支付</el-radio>
+                    <el-radio :label="1" name="type" value="1">正在支付</el-radio>
+                    <el-radio :label="2" name="type" value="2">未支付</el-radio>
+                </el-radio-group>
+            </el-form-item>
         </div>
-
-
-        <div class="form-group">
-            <div class="col-sm-2 control-label"></div>
-            <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
-            &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
-        </div>
-    </form>
+    </el-form>
+    <div style="float:left;height:40px;width:100%;margin-top:10px;"></div>
 </div>
+<div v-show="showList==2" class="panel panel-default" >
 
+    <el-form  style="margin:0px auto;"  label-width="100px" class="demo-ruleForm">
+
+        <el-form-item label="合同附件："  style="margin-left: 18%">
+            <el-button style="margin-left: 0px" v-model="contract.contractFile">查看文件</el-button>
+        </el-form-item>
+
+        <el-form-item label="审核意见："  style="margin-left: 18%;margin-right: 18%;">
+            <el-input  type="textarea" label-width="300px" :rows="4" v-model="userReviewRecord.reviewAdvise"></el-input>
+        </el-form-item>
+        <el-form-item style="margin-left: 18%;">
+            <el-button type="primary" @click="passOrReject(1)" >同意</el-button>
+            <el-button type="warning" @click="passOrReject(2)" >驳回</el-button>
+            <el-button @click="reload">返回</el-button>
+        </el-form-item>
+    </el-form>
+
+
+</div>
 </div>
 <!-- 选择窗口 -->
 <div id="finUserOrgInfoTreeLayer" style="display: none;padding:10px;">

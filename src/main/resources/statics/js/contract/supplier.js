@@ -25,8 +25,6 @@ function jqGrid(){$("#jqGrid").jqGrid({
                     val = "营业";
                 } else if (operatingStatus == "2") {
                     val = "停业";
-                } else if (operatingStatus == "3") {
-                    val = "跑路";
                 }
                 return val;
             }
@@ -237,7 +235,7 @@ var vmFinUser = new Vue({
             this.title = "详情";
             this.opName = "details";
             this.getInfo(supplierId);
-            //this.getContract(supplierId);
+            this.getContract(supplierId);
         },
 
         //跳转黑名单页面
@@ -257,67 +255,6 @@ var vmFinUser = new Vue({
             this.getInfo(supplierId);
         },
 
-        // 修改密码
-        updateFinUserPwd: function (event) {
-            var userId = getSelectedRow();
-            if (userId == null) {
-                return;
-            }
-            this.chooseUserId = userId;
-            this.getInfo(userId);
-            var _this = this;
-            var finUserPwdIndex = layer.open({
-                type: 1,
-                offset: '50px',
-                skin: 'layui-layer-molv',
-                title: "修改密码",
-                area: ['540px', '500px'],
-                shade: 0,
-                shadeClose: false,
-                content: jQuery("#finUserPwdLayer"),
-                btn: ['确定', '取消'],
-                btnAlign: 'c',
-                btn1: function (index) {
-                    if (!_this.newPassword) {
-                        alert("请输入新密码");
-                        return;
-                    }
-                    if (_this.newPassword != _this.newPasswordSure) {
-                        alert("两次输入的密码不一致");
-                        return;
-                    }
-                    var data = "userId=" + _this.chooseUserId + "&oldPassword=" + _this.oldPassword + "&newPassword=" + _this.newPassword;
-                    $.ajax({
-                        type: "POST",
-                        url: baseURL + "business/finuser/updateFinUserPwd",
-                        data: data,
-                        dataType: "json",
-                        success: function (result) {
-                            if (result.code == 1) {
-                                layer.alert('修改成功', function (index) {
-                                    _this.reload();
-                                    layer.close(finUserPwdIndex);
-                                    layer.close(index);
-                                });
-
-                            } else {
-                                alert(result.msg);
-                            }
-                        }
-                    });
-                },
-                btn2: function (index, layero) {
-                    //按钮【按钮二】的回调
-                    layer.close(index);
-                    //return false 开启该代码可禁止点击该按钮关闭
-                },
-                cancel: function () {
-                    //右上角关闭回调
-                    layer.close(finUserPwdIndex);
-                    //return false 开启该代码可禁止点击该按钮关闭
-                }
-            });
-        },
         //新增或修改
         saveOrUpdate: function (event) {
             var url = this.supplier.supplierId == null ? "contract/supplier/save" : "contract/supplier/update";
@@ -366,77 +303,42 @@ var vmFinUser = new Vue({
 
         //获取相关合同
         getContract:function(supplierId){
-            $("#jqGrid").jqGrid({
-                url: baseURL + 'contract/contract/list'+supplierId,
+            $("#jqGridContract").jqGrid({
+                url: baseURL + 'contract/list?partyBId='+supplierId,
                 datatype: "json",
                 colModel: [
 
-                    {label: 'supplierId', name: 'supplierId', index: 'supplier_id', width: 10, key: true, hidden: true},
-                    {label: '公司名称', name: 'supplierName', index: 'supplier_name', width: 140, align: 'center'},
-                    {label: '统一社会信用代码', name: 'creditCode', index: 'credit_code', width: 140, align: 'center'},
-                    {label: '法定代表人', name: 'legaRepresentative', index: 'lega_representative', width: 100, align:'center'},
-                    {label: '所属地', name: 'attribution', index: 'attribution', width: 100},
-                    {label: '注册资本', name: 'registeredCapital', index: 'registered_capital', width: 140, align: 'center'},
-                    {label: '经营状态,1:营业,2:停业,3:跑路', name: 'operatingStatus', index: 'operating_status', width: 10, hidden: true},
-                    {
-                        label: '经营状态',
-                        name: 'operatingStatus',
-                        index: 'operating_status',
-                        width: 80,
-                        sortable: false,
-                        align: 'center',
-                        formatter: function (cellValue, options, rowData) {
+                    {label: '合同id', name: 'contractId', index: 'contract_id', width: 140, align: 'center',hidden:true},
+                    {label: '合同编号', name: 'contractCode', index: 'contract_code', width: 140,align: 'center'},
+                    {label: '合同名称', name: 'contractName', index: 'contract_name', width: 100},
+                    {label: '采购部门', name: 'purchasingDeptName', index: 'dept1_name', width: 140, align: 'center'},
+                    {label: '需求部门', name: 'demandDeptName', index: 'demand_dept_name', width: 100},
+                    {label: '乙方单位', name: 'supplierName', index: 'supplier_name', width: 100},
+                    {label: '合同类型', name: 'contractType', index: 'contract_type', width: 100},
+                    {label: '付款情况', name: 'payStatus', index: 'pay_status', width: 100,
+                        formatter:function (cellValue, options, rowData) {
                             var val = "";
-                            var operatingStatus = rowData["operatingStatus"];
-                            if (operatingStatus == "1") {
-                                val = "营业";
-                            } else if (operatingStatus == "2") {
-                                val = "停业";
-                            } else if (operatingStatus == "3") {
-                                val = "跑路";
+                            var payStatus = rowData["payStatus"];
+                            if (payStatus == "0") {
+                                val = "已支付";
+                            } else if (payStatus == "1") {
+                                val = "正在支付";
+                            }else if(payStatus="2") {
+                                val = "未支付"
                             }
                             return val;
                         }
-                    },
-                    {
-                        label: '公司类型,1:主账号,2:子账号', name: 'supplierType', index: 'supplier_type', width: 80, hidden: true
-                    },
-                    {
-                        label: '公司类型', name: 'supplierType', index: 'supplier_type', width: 80, sortable: false, align: 'center',
-                        formatter: function (cellValue, options, rowData) {
-                            var val = "";
-                            var type = rowData["supplierType"];
-                            if (type == "2") {
-                                val = "教育";
-                            } else if (type == "1") {
-                                val = "科技";
-                            }
-                            return val;
+                    },{label: '操作',  width: 100, sortable: false, align: 'center',
+                        formatter:function (cellValue, options, rowData) {
+                            var contractId = rowData["contractId"];
+                            var contractName = rowData["contractName"];
+                            var contractCode = rowData["contractCode"];
+                            return "<a class='btn btn-primary' onclick='settlement(\""+contractId+"\",\""+contractName+"\",\""+contractCode+"\")' '>详情</a>"
                         }
                     },
-                    {label: '经营范围', name: 'businessScope', index: 'business_scope', width: 180, align: 'center'},
-                    {label: '黑名单，1：2：', name: 'status', index: 'status', width: 10, hidden: true},
-                    {
-                        label: '黑名单', name: 'status', index: 'status', width: 100, sortable: false, align: 'center',
-                        formatter: function (cellValue, options, rowData) {
-                            var val = "";
-                            var status = rowData["status"];
-                            if (status == "1") {
-                                val = "移入黑名单";
-                            } else if (status == "0") {
-                                val = "移出黑名单";
-                            }
-                            return val;
-                        }
-                    },
-                    // {label: '操作',  width: 100, sortable: false, align: 'center',
-                    //     formatter:function (cellValue, options, rowData) {
-                    //     return "<button class='btn btn-primary' @click='supplierDetails'>详情</button>"
-                    //     }
-                    // },
                 ],
                 viewrecords: true,
-                height: 385,
+                height: 150,
                 rowNum: 20,
                 rowList: [20, 30, 40, 50],
                 rownumbers: true,
@@ -444,7 +346,7 @@ var vmFinUser = new Vue({
                 autowidth: true,
                 shrinkToFit: false,
                 multiselect: true,
-                pager: "#jqGridPager",
+                pager: "#contractPager",
                 jsonReader: {
                     root: "page.list",
                     page: "page.currPage",
@@ -460,42 +362,6 @@ var vmFinUser = new Vue({
                     //隐藏grid底部滚动条
                     // $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
                 }
-            });
-        },
-        handleFinUser: function (num) {
-            var userIds = getSelectedRows();
-            if (userIds == null) {
-                return;
-            }
-            var ids = [];
-            for (var i = 0; i < userIds.length; i++) {
-                ids.push(userIds[i] + "--" + num);
-            }
-            var msg = "";
-            if (num == 1) {
-                msg = "确定启用所选客户的账户信息";
-            } else if (num == 2) {
-                msg = "确定停用所选客户的账户信息";
-            } else if (num == 3) {
-                msg = "确定注销所选客户的账户信息";
-            }
-            var _this = this;
-            confirm(msg, function () {
-                $.ajax({
-                    type: "POST",
-                    url: baseURL + "business/finuser/handleFinUser",
-                    contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 1) {
-                            alert(r.msg, function (index) {
-                                _this.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
             });
         },
 

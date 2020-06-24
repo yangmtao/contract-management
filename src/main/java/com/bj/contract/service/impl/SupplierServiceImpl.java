@@ -8,7 +8,7 @@ import com.bj.common.enums.CommonEnum;
 import com.bj.common.util.PageUtils;
 import com.bj.common.util.Query;
 import com.bj.common.util.R;
-import com.bj.contract.dao.SupplierDao;
+import com.bj.contract.dao.SupplierMapper;
 import com.bj.contract.entity.SupplierEntity;
 import com.bj.contract.service.SupplierService;
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +19,7 @@ import java.util.Map;
 
 
 @Service("supplierService")
-public class SupplierServiceImpl extends ServiceImpl<SupplierDao, SupplierEntity> implements SupplierService {
+public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, SupplierEntity> implements SupplierService {
 
 
 
@@ -52,35 +52,7 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierDao, SupplierEntity
         return new PageUtils(page);
     }
 
-    @Override
-    public boolean save(SupplierEntity supplierEntity) {
-        int i = baseMapper.insert(supplierEntity);
-        boolean a = false;
-        if (i > 0) {
-            a = true;
-        }
-        return a;
-    }
-
-    @Override
-    public boolean updateById(SupplierEntity supplierEntity) {
-        int i = baseMapper.updateById(supplierEntity);
-        boolean a = false;
-        if (i > 0) {
-            a = true;
-        }
-        return a;
-    }
-//    @Override
-//    public boolean deleteBatchIds(Long[] supplierIds){
-//        int i = baseMapper.deleteBatchIds(Arrays.asList(supplierIds));
-//        boolean a = false;
-//        if (i > 0) {
-//            a = true;
-//        }
-//        return a;
-//    }
-
+   //根据id获取实体
     @Override
     public SupplierEntity getById(Long supplierId) {
         SupplierEntity supplier = baseMapper.selectById(supplierId);
@@ -170,6 +142,8 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierDao, SupplierEntity
 
     }
 
+
+    //关键字获取值
     @Override
     public List<Map<String, String>> selectSupplierSimple(String keyword) {
         return baseMapper.selectSupplierSimple(keyword);

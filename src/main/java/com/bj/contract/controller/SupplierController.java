@@ -50,6 +50,7 @@ public class SupplierController {
         return R.ok().put("page", page);
     }
 
+    //获取公司名称
     @GetMapping("/supplier/simpleInfo")
     @ResponseBody
     public R supplierSimpleInfo(@RequestParam("keyword") String keyword) throws Exception {
@@ -79,7 +80,7 @@ public class SupplierController {
             return supplierService.saveSupplier(supplier);
         } catch (Exception e) {
             String msg = ExceptionUtil.getExceptionAllInformation(e);
-            logger.error("修改信息出错，{}", msg);
+            logger.error("新增信息出错，{}", msg);
             return R.error(CommonEnum.ReturnCode.ERROR.getValue(), "修改信息出错");
         }
 
@@ -114,6 +115,7 @@ public class SupplierController {
 
     }
 
+    //黑名单
     @GetMapping("/move")
     public R move(Long supplierId, Integer blackList, String remarks){
         supplierService.update(supplierId,blackList,remarks);

@@ -3,23 +3,28 @@ function jqGrid(){$("#jqGrid").jqGrid({
     datatype: "json",
     colModel: [
 
-        {label: 'contractApplyRecordId', name: 'contractApplyRecordId', index: 'contract_apply_record_id', width: 10, key: true, hidden: true},
+        {label: 'contractId', name: 'contractId', index: 'contract_id', width: 10, key: true, hidden: true},
         {label: '合同名称', name: 'contractName', index: 'contract_name', width: 140, align: 'center'},
-        {label: '申请人', name: 'contractManager', index: 'contract_manager', width: 100},
-        {label: '申请部门', name: 'demandDeptId', index: 'demand_dept_id', width: 140, align: 'center'},
-        {label: '申请时间', name: 'createDate', index: 'create_date', width: 100},
+        {label: '合同编号', name: 'contractCode', index: 'contract_code', width: 140,align: 'center',hidden: true},
+        {label: '申请人', name: 'contractManagerName', index: 'contract_manager_name', width: 100,align: 'center'},
+        {label: '申请部门', name: 'demandDeptName', index: 'demand_dept_name', width: 140, align: 'center'},
+        {label: '申请时间', name: 'createDate', index: 'create_date', width: 160, align: 'center'},
         {
-            label: '开始时间', name: 'startDate', index: 'start_date', width: 80, hidden: true
+            label: '开始时间', name: 'startDate', index: 'start_date', width: 100, align: 'center'
         },
-        {label: '结束时间', name: 'endDate', index: 'end_date', width: 180, align: 'center'},
-        {label: '当前节点', name: 'currentNode', index: 'current_node', width: 140, align: 'center'},
-        {label: '备注', name: 'remarks', index: 'remarks', width: 100,align: 'center'},
+        {label: '结束时间', name: 'endDate', index: 'end_date', width: 100, align: 'center'},
+        {label: '当前节点', name: 'nodeName', index: 'node_name', width: 140, align: 'center',
+            formatter:function (cellValue, options, rowData) {
+            var nodeName = rowData["nodeName"]
+                return nodeName+"待审核"
+            }
+        },
         {label: '操作',  width: 100, sortable: false, align: 'center',
             formatter:function (cellValue, options, rowData) {
-                var i  = rowData["contractApplyRecordId"];
-                var node = rowData["currentNode"];
-                console.log(node)
-            return "<a class='btn btn-primary' onclick='pass(\""+i+"\",\""+node+"\")' '>通过</a>"
+                var contractId = rowData["contractId"];
+                var contractName = rowData["contractName"];
+                var contractCode = rowData["contractCode"];
+                return "<a class='btn btn-primary' onclick='review(\""+contractId+"\",\""+contractName+"\",\""+contractCode+"\")' '>办理</a>"
 
 
             }
@@ -55,39 +60,9 @@ $(function () {
     jqGrid();
 });
 
-function pass(i,node){
+function review(contractId,contractName,contractCode){
 
-        layer.confirm('确定仔细核查了吗？', {
-            btn: ['确定','再看一下'] //按钮
-        }, function(){
-            $.ajax({
-                type:"get",
-                url:baseURL + "contract/myMission/pass?contractApplyRecordId="+i+"&currentNode="+node,
-                success:function(re){
-                    if(re.code==1){
-                        layer.alert("操作成功",{
-                            icon:1
-                        },function(index){
-                            layer.close(index)
-                            window.location.reload();
-                        })
-                    }else {
-                        layer.alert(re.message,{
-                            icon:2
-                        },function (index){
-                            layer.close(index)
-                        })
-                    }
-                }
-
-
-            })
-
-        }, function(){
-            layer.close();
-        });
-
-
+    vm.getReview(contractId,contractName,contractCode)
 
 }
 
@@ -105,12 +80,14 @@ var setting = {
         }
     }
 };
-var vmFinUser = new Vue({
+var vm = new Vue({
     el: '#rrapp',
     data: {
         showList: 1,
         title: null,
         opName: "",
+        contractCode:"",
+        contractName:"",
         supplier:{
             blackList:1
         },
@@ -119,18 +96,15 @@ var vmFinUser = new Vue({
             orgName: "",
             userFlag: 1
         },
-        finUserSearch: {
-            userName: "",
-            realName: "",
-            userStatus: "",
-            orgId: "",
-            orgName: "",
-            createDateStart: "",
-            createDateEnd: ""
+        userReviewRecord:{
+
         },
-        supplierSearch:{
-            supplierName:"",
-            creditCode:""
+        contract:{
+
+        },
+        contractSearch:{
+            contractName:"",
+            contractManagerName:""
         },
         userStatusList: [
             {code: 1, value: "启用"},
@@ -153,71 +127,49 @@ var vmFinUser = new Vue({
     methods: {
 
         //搜索
-        querySupplier: function () {
+        queryContract: function () {
             this.reload();
         },
         //重置
-        clearSupplier: function () {
-            this.supplierSearch = {
-                supplierName:"",
-                creditCode:""
+        clearContract: function () {
+            this.contractSearch = {
+                contractName:"",
+                contractManagerName:""
             };
             this.reload();
         },
-        //新增
-        addSupplier: function () {
+        //办理合同审核
+        getReview:function(contractId,contractName,contractCode){
             this.showList = 2;
-            this.title = "新增";
-            this.opName = "add";
-            this.supplier = {
-                blackList:1
+            this.title = "结算";
+            this.contractName = contractName;
+            this.contractCode = contractCode;
+            this.contract = {
+                contractId:contractId,
             };
-        },
-
-        //跳转详情页面
-        supplierDetails:function(){
-            var supplierId = getSelectedRow();
-            if (supplierId == null) {
-                return;
+            this.userReviewRecord = {
+                contractId:contractId,
             }
-            this.showList = 3;
-            this.title = "详情";
-            this.opName = "details";
-            this.getInfo(supplierId);
-            this.getContract(supplierId);
+            this.getInfo(contractId);
+
+
         },
 
-        //跳转黑名单页面
-        getBlackList:function(){
-            this.$router.push({ path:'/blackList.html'  })
-        },
 
-        //跳转修改页面
-        updateFinUser: function (event) {
-            var supplierId = getSelectedRow();
-            if (supplierId == null) {
-                return;
-            }
-            this.showList = 2;
-            this.title = "修改";
-            this.opName = "update";
-            this.getInfo(supplierId);
-        },
         //新增或修改
-        saveOrUpdate: function (event) {
-            var url = this.supplier.supplierId == null ? "contract/supplier/save" : "contract/supplier/update";
+        passOrReject: function (a) {
+            var url = a == 1 ? "contract/userReviewRecord/save" : "contract/userReviewRecord/reject";
             var _this = this;
 
-            console.log("============")
             $.ajax({
                 type: "POST",
                 url: baseURL + url,
                 contentType: "application/json",
-                data: JSON.stringify(this.supplier),
+                data: JSON.stringify(this.userReviewRecord),
                 success: function (r) {
                     if (r.code === 1) {
                         alert('操作成功', function (index) {
-                            _this.reload();
+                            window.location.reload();
                         });
                     } else {
                         alert(r.msg);
@@ -225,129 +177,7 @@ var vmFinUser = new Vue({
                 }
             });
         },
-        //删除
-        del: function (event) {
-            var supplierIds = getSelectedRows();
-            if (supplierIds == null) {
-                return;
-            }
-            confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
-                    url: baseURL + "contract/supplier/delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(supplierIds),
-                    success: function (r) {
-                        if (r.code == 1) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
-            });
-        },
 
-        //获取相关合同
-        getContract:function(supplierId){
-            $("#jqGrid").jqGrid({
-                url: baseURL + 'contract/contract/list'+supplierId,
-                datatype: "json",
-                colModel: [
-
-                    {label: 'supplierId', name: 'supplierId', index: 'supplier_id', width: 10, key: true, hidden: true},
-                    {label: '公司名称', name: 'supplierName', index: 'supplier_name', width: 140, align: 'center'},
-                    {label: '统一社会信用代码', name: 'creditCode', index: 'credit_code', width: 140, align: 'center'},
-                    {label: '法定代表人', name: 'legaRepresentative', index: 'lega_representative', width: 100, align:'center'},
-                    {label: '所属地', name: 'attribution', index: 'attribution', width: 100},
-                    {label: '注册资本', name: 'registeredCapital', index: 'registered_capital', width: 140, align: 'center'},
-                    {label: '经营状态,1:营业,2:停业,3:跑路', name: 'operatingStatus', index: 'operating_status', width: 10, hidden: true},
-                    {
-                        label: '经营状态',
-                        name: 'operatingStatus',
-                        index: 'operating_status',
-                        width: 80,
-                        sortable: false,
-                        align: 'center',
-                        formatter: function (cellValue, options, rowData) {
-                            var val = "";
-                            var operatingStatus = rowData["operatingStatus"];
-                            if (operatingStatus == "1") {
-                                val = "营业";
-                            } else if (operatingStatus == "2") {
-                                val = "停业";
-                            } else if (operatingStatus == "3") {
-                                val = "跑路";
-                            }
-                            return val;
-                        }
-                    },
-                    {
-                        label: '公司类型,1:主账号,2:子账号', name: 'supplierType', index: 'supplier_type', width: 80, hidden: true
-                    },
-                    {
-                        label: '公司类型', name: 'supplierType', index: 'supplier_type', width: 80, sortable: false, align: 'center',
-                        formatter: function (cellValue, options, rowData) {
-                            var val = "";
-                            var type = rowData["supplierType"];
-                            if (type == "2") {
-                                val = "教育";
-                            } else if (type == "1") {
-                                val = "科技";
-                            }
-                            return val;
-                        }
-                    },
-                    {label: '经营范围', name: 'businessScope', index: 'business_scope', width: 180, align: 'center'},
-                    {label: '黑名单，1：2：', name: 'status', index: 'status', width: 10, hidden: true},
-                    {
-                        label: '黑名单', name: 'status', index: 'status', width: 100, sortable: false, align: 'center',
-                        formatter: function (cellValue, options, rowData) {
-                            var val = "";
-                            var status = rowData["status"];
-                            if (status == "1") {
-                                val = "移入黑名单";
-                            } else if (status == "0") {
-                                val = "移出黑名单";
-                            }
-                            return val;
-                        }
-                    },
-                    // {label: '操作',  width: 100, sortable: false, align: 'center',
-                    //     formatter:function (cellValue, options, rowData) {
-                    //     return "<button class='btn btn-primary' @click='supplierDetails'>详情</button>"
-                    //     }
-                    // },
-                ],
-                viewrecords: true,
-                height: 385,
-                rowNum: 20,
-                rowList: [20, 30, 40, 50],
-                rownumbers: true,
-                rownumWidth: 25,
-                autowidth: true,
-                shrinkToFit: false,
-                multiselect: true,
-                pager: "#jqGridPager",
-                jsonReader: {
-                    root: "page.list",
-                    page: "page.currPage",
-                    total: "page.totalPage",
-                    records: "page.totalCount"
-                },
-                prmNames: {
-                    page: "page",
-                    rows: "limit",
-                    order: "order"
-                },
-                gridComplete: function () {
-                    //隐藏grid底部滚动条
-                    // $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-                }
-            });
-        },
         handleFinUser: function (num) {
             var userIds = getSelectedRows();
             if (userIds == null) {
@@ -386,11 +216,10 @@ var vmFinUser = new Vue({
         },
 
         //得到所选id的信息
-        getInfo: function (supplierId) {
+        getInfo: function (contractId) {
             var _this = this;
-            $.get(baseURL + "contract/supplier/info/" + supplierId, function (r) {
-                _this.supplier = r.supplier;
-                console.log(_this.supplier+"===================")
+            $.get(baseURL + "contract/info/" + contractId, function (r) {
+                _this.contract=r.contract
             });
         },
 
@@ -399,10 +228,10 @@ var vmFinUser = new Vue({
             this.showList = 1;
             // var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             var postData = {
-                "supplierName":this.supplierSearch.supplierName,
-                "creditCode":this.supplierSearch.creditCode,
+                "contractName":this.contractSearch.contractName,
+                "contractManagerName":this.contractSearch.contractManagerName,
             };
-            console.log(postData.supplierName)
+            console.log(postData.contractName)
             $("#jqGrid").jqGrid('setGridParam', {
                 page: 1, "postData": postData
             }).trigger("reloadGrid");

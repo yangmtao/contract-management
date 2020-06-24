@@ -10,11 +10,9 @@ import com.bj.contract.service.UserReviewRecordService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import com.bj.sys.controller.AbstractController;
 
 import java.util.Map;
@@ -51,6 +49,42 @@ public class UserReviewRecordController extends AbstractController {
         return R.ok().put("page", page);
     }
 
+    /**
+     * 保存
+     */
+    @PostMapping("/save")
+    //@RequiresPermissions("contract:userReviewRecord:save")
+    public R save(@Validated @RequestBody UserReviewRecord userReviewRecord){
+        try {
+            userReviewRecord.setReviewer(getUser().getUserName());
+            System.out.println(userReviewRecord);
+            userReviewRecord.setReviewResult("通过");
+            return userReviewRecordService.saveUserReviewRecord(userReviewRecord);
+        } catch (Exception e) {
+            String msg = ExceptionUtil.getExceptionAllInformation(e);
+            logger.error("新增信息出错，{}", msg);
+            return R.error(CommonEnum.ReturnCode.ERROR.getValue(), "修改信息出错");
+        }
+
+    }
+/**
+ * 驳回
+ */
+    @PostMapping("/reject")
+    //@RequiresPermissions("contract:userReviewRecord:save")
+    public R reject(@Validated @RequestBody UserReviewRecord userReviewRecord){
+        try {
+            userReviewRecord.setReviewer(getUser().getUserName());
+            System.out.println(userReviewRecord);
+            userReviewRecord.setReviewResult("驳回");
+            return userReviewRecordService.saveUserReviewRecord(userReviewRecord);
+        } catch (Exception e) {
+            String msg = ExceptionUtil.getExceptionAllInformation(e);
+            logger.error("新增信息出错，{}", msg);
+            return R.error(CommonEnum.ReturnCode.ERROR.getValue(), "修改信息出错");
+        }
+
+    }
 
 }
 

@@ -1,5 +1,5 @@
 function jqGrid(){$("#jqGrid").jqGrid({
-    url: baseURL + 'contract/supplier/list?blackList=1' ,
+    url: baseURL + 'contract/supplier/list?blackList=1',
     datatype: "json",
     colModel: [
 

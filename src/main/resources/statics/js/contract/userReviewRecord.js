@@ -3,8 +3,9 @@ function jqGrid(){$("#jqGrid").jqGrid({
     datatype: "json",
     colModel: [
 
-        {label: 'contractApplyRecordId', name: 'contractApplyRecordId', index: 'contract_apply_record_id', width: 10, key: true, hidden: true},
-        {label: '合同名称', name: 'contarctId', index: 'contarct_id', width: 140, align: 'center'},
+        {label: 'Id', name: 'Id', index: 'id', width: 10, key: true, hidden: true},
+        {label: '合同id', name: 'contractId', index: 'contract_id', width: 140, align: 'center', hidden: true},
+        {label: '合同名称', name: 'contractName', index: 'contract_name', width: 140, align: 'center'},
         {label: '审核建议', name: 'reviewAdvise', index: 'review_advise', width: 100},
         {label: '审核结果', name: 'reviewResult', index: 'review_result', width: 140, align: 'center'},
         {label: '审核人', name: 'reviewer', index: 'reviewer', width: 100},
@@ -12,14 +13,11 @@ function jqGrid(){$("#jqGrid").jqGrid({
             label: '开始时间', name: 'startDate', index: 'start_date', width: 80, hidden: true
         },
         {label: '结束时间', name: 'endDate', index: 'end_date', width: 180, align: 'center'},
-        {label: '当前节点', name: 'currentNode', index: 'current_node', width: 140, align: 'center'},
-        {label: '备注', name: 'remarks', index: 'remarks', width: 100,align: 'center'},
+        {label: '当前节点', name: 'nodeName', index: 'node_name', width: 140, align: 'center'},
         {label: '操作',  width: 100, sortable: false, align: 'center',
             formatter:function (cellValue, options, rowData) {
-                var i  = rowData["contractApplyRecordId"];
-                var node = rowData["currentNode"];
-                console.log(node)
-                return "<a class='btn btn-primary' onclick='pass(\""+i+"\",\""+node+"\")' '>通过</a>"
+                var contractId  = rowData["contractId"];
+                return "<a class='btn btn-primary' onclick='contractDetails(\""+contractId+"\")' '>合同详情</a>"
 
 
             }
@@ -55,38 +53,7 @@ $(function () {
     jqGrid();
 });
 
-function pass(i,node){
-
-    layer.confirm('确定仔细核查了吗？', {
-        btn: ['确定','再看一下'] //按钮
-    }, function(){
-        $.ajax({
-            type:"get",
-            url:baseURL + "contract/myMission/pass?contractApplyRecordId="+i+"&currentNode="+node,
-            success:function(re){
-                if(re.code==1){
-                    layer.alert("操作成功",{
-                        icon:1
-                    },function(index){
-                        layer.close(index)
-                        window.location.reload();
-                    })
-                }else {
-                    layer.alert(re.message,{
-                        icon:2
-                    },function (index){
-                        layer.close(index)
-                    })
-                }
-            }
-
-
-        })
-
-    }, function(){
-        layer.close();
-    });
-
+function contractDetails(i,node){
 
 
 }
@@ -113,6 +80,10 @@ var vmFinUser = new Vue({
         opName: "",
         supplier:{
             blackList:1
+        },
+        reviewSearch:{
+            contractName:"",
+            reviewer:""
         },
         finUser: {
             orgId: "",
@@ -153,15 +124,15 @@ var vmFinUser = new Vue({
     methods: {
 
         //搜索
-        querySupplier: function () {
+        queryReview: function () {
             this.reload();
         },
         //重置
-        clearSupplier: function () {
-            this.supplierSearch = {
-                supplierName:"",
-                creditCode:""
-            };
+        clearReview: function () {
+            this.reviewSearch ={
+                contractName:"",
+                    reviewer:""
+            }
             this.reload();
         },
         //新增
@@ -301,10 +272,10 @@ var vmFinUser = new Vue({
             this.showList = 1;
             // var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             var postData = {
-                "supplierName":this.supplierSearch.supplierName,
-                "creditCode":this.supplierSearch.creditCode,
+                "contractName":this.reviewSearch.contractName,
+                "reviewer":this.reviewSearch.reviewer,
             };
-            console.log(postData.supplierName)
+            console.log(postData.contractName)
             $("#jqGrid").jqGrid('setGridParam', {
                 page: 1, "postData": postData
             }).trigger("reloadGrid");

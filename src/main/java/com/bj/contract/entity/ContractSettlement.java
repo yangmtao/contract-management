@@ -1,5 +1,6 @@
 package com.bj.contract.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotations.Version;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -65,11 +67,12 @@ public class ContractSettlement extends Model<ContractSettlement> {
      * 收款金额
      */
     @TableField("receive_amount")
-    private Integer receiveAmount;
+    private BigDecimal receiveAmount;
     /**
      * 收款时间
      */
     @TableField("receive_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date receiveTime;
 
 

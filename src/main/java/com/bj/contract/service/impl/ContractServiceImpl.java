@@ -35,6 +35,11 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
 
         //合同名称
         String contractName = params.get("contractName")!=null && StringUtils.isNoneBlank(params.get("contractName")+"") ? (String)params.get("contractName") : "";
+        String contractManagerName = params.get("contractManagerName")!=null
+                && StringUtils.isNoneBlank(params.get("contractManagerName")+"") ? (String)params.get("contractManagerName") : "";
+
+        String partyBId = null != params.get("partyBId")
+                && StringUtils.isNotBlank(params.get("partyBId") + "") ? params.get("partyBId") + "" : "";
 
       /*  //状态
         String status=params.get("status")!=null &&StringUtils.isNotBlank(params.get("status")+"") ? (String)params.get("status") : "-1";
@@ -51,6 +56,15 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         }else{
             wrapper.eq("1",1);
         }
+        if(StringUtils.isNotBlank(contractManagerName)){
+            wrapper.gt("instr(real_name,'"+contractManagerName+"')",0);
+        }else{
+            wrapper.eq("1",1);
+        }
+
+        if (StringUtils.isNotBlank(partyBId)) {
+            wrapper.eq("party_b_id",Integer.parseInt(partyBId));
+        }
        /* if(userId!=null){
             wrapper.and().eq("user_id",userId);
         }
@@ -65,5 +79,12 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         //执行查询并将查询结果添加到page
         page.setRecords(baseMapper.queryAllContract(page,wrapper));
         return new PageUtils(page);
+    }
+
+    //获取当前合同信息
+    @Override
+    public Contract getById(Long contractId) {
+        Contract contract = baseMapper.contractById(contractId);
+        return contract;
     }
 }

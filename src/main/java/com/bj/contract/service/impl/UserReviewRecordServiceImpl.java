@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.bj.common.util.PageUtils;
 import com.bj.common.util.Query;
+import com.bj.common.util.R;
+import com.bj.contract.entity.Contract;
+import com.bj.contract.entity.ContractSettlement;
 import com.bj.contract.entity.UserReviewRecord;
 import com.bj.contract.dao.UserReviewRecordMapper;
 import com.bj.contract.service.UserReviewRecordService;
@@ -26,30 +29,37 @@ public class UserReviewRecordServiceImpl extends ServiceImpl<UserReviewRecordMap
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) throws Exception{
-        EntityWrapper<UserReviewRecord> userReviewRecordWrapper = new EntityWrapper<>();
-//        String supplierName =
-//                null != params.get("supplierName") && StringUtils.isNotBlank(params.get("supplierName") + "") ? params.get("supplierName") + "" : "";
-//        String creditCode = null != params.get("creditCode")
-//                && StringUtils.isNotBlank(params.get("creditCode") + "") ? params.get("creditCode") + "" : "";
-//        String blackList = null != params.get("blackList")
-//                && StringUtils.isNotBlank(params.get("blackList") + "") ? params.get("blackList") + "" : "";
-//        System.out.println("++++++++++++++++"+blackList);
-//        if (StringUtils.isNotBlank(supplierName)) {
-//            supplierWrapper.gt("instr(supplier_name,'" + supplierName + "')", 0);
-//        }
-//        if (StringUtils.isNotBlank(creditCode)) {
-//            supplierWrapper.gt("instr(credit_code,'" + creditCode + "')", 0);
-//        }
-//        if (StringUtils.isNotBlank(blackList)) {
-//            supplierWrapper.eq("black_list",Integer.parseInt(blackList));
-//        }
-        //supplierWrapper.orderBy("supplier_name", false);
-        Page<UserReviewRecord> page = this.selectPage(
-                new Query<UserReviewRecord>(params).getPage(),
-                userReviewRecordWrapper
-        );
-       // page.setRecords(UserReviewRecordMapper.queryAllUser(page,wrapper));
+
+        EntityWrapper<ContractSettlement> reviewWrapper = new EntityWrapper<>();
+        String contractName = null != params.get("contractName")
+                && StringUtils.isNotBlank(params.get("contractName") + "") ? params.get("contractName") + "" : "";
+        String reviewer = null != params.get("reviewer")
+                && StringUtils.isNotBlank(params.get("reviewer") + "") ? params.get("reviewer") + "" : "";
+
+        if (StringUtils.isNotBlank(contractName)) {
+            reviewWrapper.gt("instr(contract_name,'" + contractName + "')", 0);
+        }
+        if (StringUtils.isNotBlank(reviewer)) {
+            reviewWrapper.gt("instr(reviewer,'" + reviewer + "')", 0);
+        }
+        Page<Contract> page = new Query<Contract>(params).getPage();
+        page.setRecords(baseMapper.queryReview(page,reviewWrapper));
+
 
         return new PageUtils(page);
+    }
+
+
+    //审核记录表
+    @Override
+    public R saveUserReviewRecord(UserReviewRecord userReviewRecord) {
+
+        if(userReviewRecord.getReviewResult().equals("通过")){
+            baseMapper.updateNode(userReviewRecord.getContractId(),1);
+        }else {
+            baseMapper.updateNode(userReviewRecord.getContractId(),-1);
+        }
+        baseMapper.insert(userReviewRecord);
+        return R.ok();
     }
 }
