@@ -38,4 +38,6 @@ public interface SysUserService extends IService<SysUserEntity> {
 	boolean updatePassword(Long userId, String password, String newPassword);
 
     List<Map<String, String>> selectUserDept(String keyword);
+
+    String getUserNameById(Long id);
 }

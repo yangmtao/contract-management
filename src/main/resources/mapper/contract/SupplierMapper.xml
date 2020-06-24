@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bj.contract.dao.SupplierMapper">
+    <select id="selectSupplierSimple" resultType="java.util.HashMap">
+        select supplier_id,supplier_name from supplier
+        where
+        <bind name="supplierName" value="'%'+keyword+'%'"/>
+        supplier_name like #{supplierName}
+    </select>
+
+    <select id="selectSupplierNameById" resultType="string">
+        select supplier_name from supplier where supplier_id=#{id}
+    </select>
 
 <select id="selectSupplierSimple" resultType="java.util.Map">
     select supplier_id,supplier_name from supplier where status = 0

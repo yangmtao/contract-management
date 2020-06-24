@@ -6,13 +6,16 @@ $(function () {
             {label: '合同ID', name: 'contractId', index: "id", width: 20, key: true, hidden: true},
             {label: '合同编号', name: 'contractCode', width: 120, align: 'center',sortable:false},
             {label: '合同名称', name: 'contractName', width: 200, align: 'center',sortable:false},
-           {label: '严重等级', name: 'purchaseContent', width: 100, align: 'center',sortable:false},
-            {label: '审查问题', name: 'demandDeptId',width: 180, align: 'center',sortable:false},
-            {label: '修正状态', name: 'partyBId', index:"publish_date", width: 100, align: 'center'},
-            {label: '解决方案', name: 'payStatus', index: "create_date", width: 180, align: 'center',sorttype:'date'},
-            {label: '提出人', name: 'contractAmount', width: 120, align: 'center',sortable:false,},
-            {label: '提出时间', name: 'startDate', index: "create_date", width: 120, align: 'center',sorttype:'date'},
-            {label: '处理人', name: 'demandDeptId',width: 120, align: 'center',sortable:false},
+           {label: '严重等级', name: 'riskLevel', width: 100, align: 'center',sortable:false},
+            {label: '审查问题', name: 'problem',width: 180, align: 'center',sortable:false},
+            {label: '修正状态', name: 'status',  width: 100, align: 'center',
+                formatter: function (value) {
+                    return DICT.STATUS[value] || '';
+                }},
+            {label: '解决方案', name: 'handleWay',  width: 180, align: 'center',sorttype:'date'},
+            {label: '提出人', name: 'handlerName', width: 120, align: 'center',sortable:false,},
+            {label: '提出时间', name: 'createTime', index: "create_time", width: 120, align: 'center',sorttype:'date'},
+            {label: '经办人', name: 'handlerName',width: 120, align: 'center',sortable:false},
             {label: '操作',  width: 110, align: 'center',sortable:false,
                 formatter: function (value) {
                     return '<a class="btn btn-primary" href="/cmsContent/view/'+value+'" target="_blank">查看详情</a>';
@@ -61,7 +64,11 @@ var setting = {
 var ztree;
 
 
-
+DICT = {
+    STATUS: {0: '待处理', 1: '处理中', 2: '已解决'},
+    RISK_LEVEL: {0: '低', 1: '中', 2: '高'},
+}
+Vue.prototype.DICT = DICT;
 
 
 var area_ztree;

@@ -50,12 +50,20 @@ public class SupplierController {
         return R.ok().put("page", page);
     }
 
-    //获取公司名称
-    @GetMapping("/supplier/simpleInfo")
+    //根据供应商名称关键词查询供应商id和完整名称
+    @GetMapping("/simpleInfo")
     @ResponseBody
     public R supplierSimpleInfo(@RequestParam("keyword") String keyword) throws Exception {
         List<Map<String, String>> maps = supplierService.selectSupplierSimple(keyword);
         return R.ok().put("partyBs", maps);
+    }
+
+    //根据供应商id获取供应商名称
+    @GetMapping("/name/{supplierId}")
+    @ResponseBody
+    public R supplierName(@PathVariable("supplierId") Long id) throws Exception {
+        String supplierName=supplierService.getSupplierNameById(id);
+        return R.ok().put("supplierName", supplierName);
     }
     /**
      * 信息

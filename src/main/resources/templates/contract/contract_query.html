@@ -34,11 +34,11 @@
             <div class="form-group">
                 <div class="col-sm-2 control-label  ">合同名称</div>
                 <div class="col-sm-2">
-                    <input type="text" auto-complete="off" class="form-control"  v-model="dept.purchasingDeptName" placeholder="请输入合同名称"/>
+                    <input type="text" auto-complete="off" class="form-control"  v-model="contract.contractName" placeholder="请输入合同名称"/>
                 </div>
                 <div class="col-sm-2   control-label  ">合同编号</div>
                 <div class="col-sm-2">
-                    <input type="text" auto-complete="off" class="form-control" v-model="dept.demandDeptName" placeholder="请输入合同编号"/>
+                    <input type="text" auto-complete="off" class="form-control" v-model="contract.contractCode" placeholder="请输入合同编号"/>
                 </div>
                 <div class="col-sm-2   control-label  ">采购部门</div>
                 <div class="col-sm-2">
@@ -53,8 +53,8 @@
                 </div>
                 <div class="col-sm-2   control-label  ">付款情况</div>
                 <div class="col-sm-2">
-                    <el-select v-model="contract.partyAId" size="small">
-                        <el-option v-for="(v,k) in DICT.CONTRACT_TYPE" :key="k" :value="k" :label="v"></el-option>
+                    <el-select v-model="contract.payStatus" size="small">
+                        <el-option v-for="(v,k) in DICT.PAYMENT_STATUS" :key="k" :value="k" :label="v"></el-option>
                     </el-select>
                 </div>
                 <div class="col-sm-2 control-label  ">开始时间</div>
@@ -104,8 +104,8 @@
                 </div>
                 <div class="col-sm-2   control-label  ">合同金额</div>
                 <div class="col-sm-2">
-                    <input type="text" auto-complete="off" class="amountRange" v-model="contract.partyBId" /> &nbsp;--&nbsp;
-                    <input type="text" auto-complete="off" class="amountRange" v-model="contract.partyBId" />
+                    <input type="text" auto-complete="off" class="amountRange" v-model="contract.startNumber" /> &nbsp;--&nbsp;
+                    <input type="text" auto-complete="off" class="amountRange" v-model="contract.endNumber" />
                 </div>
 
             </div>
@@ -134,7 +134,7 @@
                 <div class="col-sm-3 ">
                 <input type="button" class="btn btn-primary" @click="queryContract" value="查 询"/>
                 <input type="reset" class="btn btn-warning"  value="重 置"/>
-                <input type="button" class="btn btn-success" value="导出Excel"/>
+                <input type="button" class="btn btn-success" @click="excelExport" value="导出Excel"/>
                 </div>
             </div>
 

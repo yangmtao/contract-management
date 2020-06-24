@@ -36,4 +36,7 @@
 		u.real_name like #{userName}
 	</select>
 
+	<select id="selectUserNameById" resultType="string">
+		select real_name from sys_user where user_id=#{id}
+	</select>
 </mapper>

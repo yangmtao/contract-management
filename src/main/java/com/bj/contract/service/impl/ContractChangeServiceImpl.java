@@ -6,6 +6,8 @@ import com.bj.contract.service.ContractChangeService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContractChangeServiceImpl extends ServiceImpl<ContractChangeMapper, ContractChange> implements ContractChangeService {
 
+    @Override
+    public int save(ContractChange change) {
+        change.setCreateDate(new Date());
+        return baseMapper.insert(change);
+    }
 }

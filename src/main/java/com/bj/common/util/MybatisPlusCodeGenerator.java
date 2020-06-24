@@ -22,17 +22,18 @@ public class MybatisPlusCodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/study?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false");
+        dsc.setUrl("jdbc:mysql://192.168.1.104:3306/dev_contract_db?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("work123321");
+        dsc.setPassword("admin2019");
         autoGenerator.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName("contract");
-        pc.setParent("com.bj.practice");
-        pc.setMapper("Dao");
+        pc.setParent("com.bj");
+        pc.setMapper("dao");
+        pc.setController("controller");
         autoGenerator.setPackageInfo(pc);
 
 
@@ -44,11 +45,11 @@ public class MybatisPlusCodeGenerator {
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         // 公共父类
-        strategy.setSuperControllerClass("com.bj.practice.controller.AbstractController");
+        strategy.setSuperControllerClass("com.bj.sys.controller.AbstractController");
         // 写于父类中的公共字段
         strategy.setSuperEntityColumns("id");
         //表
-        strategy.setInclude("contract_file","review_record");
+        strategy.setInclude("contract_examine");
         strategy.setControllerMappingHyphenStyle(true);
 
         //strategy.setTablePrefix(pc.getModuleName() + "_");

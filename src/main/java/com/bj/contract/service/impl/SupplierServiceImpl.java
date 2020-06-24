@@ -149,4 +149,10 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, SupplierEnt
         return baseMapper.selectSupplierSimple(keyword);
     }
 
+    @Override
+    public String getSupplierNameById(Long id) {
+        baseMapper.selectSupplierNameById(id);
+        return null;
+    }
+
 }

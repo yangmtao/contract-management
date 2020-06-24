@@ -33,12 +33,12 @@ $.ajaxSetup({
         var sessionStatus = XMLHttpRequest.getResponseHeader("sessionStatus");
         // console.log("sessionStatus====",sessionStatus,"success"!=textStatus);
         // return;
-        if (textStatus != "success") {
-            //top.location.href = baseURL + "login.html";
-        }
+        /*if (textStatus != "success") {
+            top.location.href = baseURL + "index.html";
+        }*/
         if (sessionStatus == "timeout") {
             //如果超时就处理 ，指定要跳转的页面(比如登陆页)
-            //top.location.href = baseURL + "login.html";
+            top.location.href = baseURL + "index.html";
         }
     }
 });
@@ -113,9 +113,8 @@ function isBlank(value) {
 
 DICT = {
     SEX: {0: '未知', 1: '男', 2: '女'},
-    QUOTATIONTYPE: {0: '招投标报价', 1: '普通报价'},
-    QUOTATIONSTATUS: {0: '待报价', 1: '已报价', 2: '已取消'},
-    PURCHASETYPE: {0: '招投标', 1: '普通'}
+    PAYMENT_TYPE:{0:'现金',1:'银行转账',2:'支票',3:'支付宝',4:'微信'},
+    CONTRACT_TYPE: {0: '买卖合同', 1: '赠与合同', 2: '租赁合同'}
 }
 Vue.prototype.DICT = DICT;
 

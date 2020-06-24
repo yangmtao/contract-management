@@ -135,7 +135,7 @@
                 <div class="col-sm-3 ">
                 <input type="button" class="btn btn-primary" @click="queryContract" value="查 询"/>
                 <input type="reset" class="btn btn-warning"  value="重 置"/>
-                <input type="button" class="btn btn-primary"  @click="showAddChange" value="添加变更"/>
+                <input type="button" class="btn btn-primary"  @click="showAddChange" value="添加审查记录"/>
                 </div>
             </div>
 
@@ -147,36 +147,31 @@
 
     </div>
     <!--添加合同变更-->
-    <el-dialog title="添加合同变更" :visible.sync="dialogFormVisible" width="600px" >
-        <el-form :model="contractChange">
-            <el-form-item label="变更名称" :label-width="formLabelWidth">
-                <el-input v-model="contractChange.changeName" auto-complete="off" v-validate="'required|length:4,50'" name="changeName" placeholder="请输入变更名称,4~50个字"></el-input>
+    <el-dialog title="添加合同审查记录" :visible.sync="dialogFormVisible" width="600px" >
+        <el-form :model="contractExamine">
+            <el-form-item label="审查问题" :label-width="formLabelWidth">
+                <el-input v-model="contractExamine.problem" auto-complete="off" v-validate="'required|length:4,50'" name="problem" placeholder="请输入变更名称,4~50个字"></el-input>
                 <el-alert
-                        :title="'变更名称'+errors.first('changeName')"
+                        :title="'审查问题'+errors.first('problem')"
                         :closable="false"
                         type="warning"
                         show-icon
-                        v-show="errors.has('changeName')">
+                        v-show="errors.has('problem')">
                 </el-alert>
             </el-form-item>
-            <el-form-item label="变更原因" :label-width="formLabelWidth">
-                <el-input type="textarea" v-model="contractChange.changeReason" v-validate="'required|max:200'" name="changeReason" placeholder="请输入变更原因，200字以内"></el-input>
-                <el-alert
-                        :title="'变更原因'+errors.first('changeReason')"
-                        :closable="false"
-                        type="warning"
-                        show-icon
-                        v-show="errors.has('changeReason')">
-                </el-alert>
+            <el-form-item label="严重等级" :label-width="formLabelWidth">
+                <el-select v-model="contractExamine.riskLevel" size="small" name="riskLevel"  v-validate="'required'">
+                    <el-option v-for="(v,k) in DICT.RISK_LEVEL" :key="k" :value="k" :label="v"></el-option>
+                </el-select>
             </el-form-item>
-            <el-form-item label="经办人" :label-width="formLabelWidth">
+            <el-form-item label="提出人" :label-width="formLabelWidth">
                 <el-select
-                        v-model="contractChange.contractManager"
+                        v-model="contractExamine.handler"
                         filterable
                         remote
-                        v-validate="'required'" name="contractManager"
+                        v-validate="'required'" name="handler"
                         reserve-keyword
-                        placeholder="请输入经办人"
+                        placeholder="请输入提出人"
                         :remote-method="remoteManager"
                         :loading="remoteManagerLoading">
                     <el-option
@@ -187,45 +182,30 @@
                     </el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="合同金额" :label-width="formLabelWidth">
-                <el-input type="number" v-model="contractChange.contractAmount"  name="contractAmount" auto-complete="off" v-validate="'required|min_value:0|decimal:2'" placeholder="请输入合同金额"></el-input>
-                <el-alert
-                        v-show="errors.has('contractAmount')"
-                        :title="'合同金额'+errors.first('contractAmount')"
-                        :closable="false"
-                        type="warning"
-                        show-icon>
-                </el-alert>
-
+            <el-form-item label="解决方案" :label-width="formLabelWidth">
+                <el-input  v-model="contractExamine.handleWay"  auto-complete="off" placeholder="请输入解决方案"></el-input>
             </el-form-item>
-            <el-form-item label="付款时间" :label-width="formLabelWidth">
+            <el-form-item label="修正状态" :label-width="formLabelWidth">
+                <el-select v-model="contractExamine.status" size="small" name="status"  v-validate="'required'">
+                    <el-option v-for="(v,k) in DICT.STATUS" :key="k" :value="k" :label="v"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="提出时间" :label-width="formLabelWidth">
 
-                <el-date-picker v-model="contractChange.paymentDate"
+                <el-date-picker v-model="contractExamine.createTime"
                                 type="date"
                                 :time-arrow-control="true"
                                 placeholder="选择结束时间" id="finOrgInfoDate001" size="small"
                                 value-format="yyyy-MM-dd"
-                                name="paymentDate"  v-validate="'required'"
+                                name="createTime"  v-validate="'required'"
                 >
                 </el-date-picker>
             </el-form-item>
-            <el-form-item label="协议正文" :label-width="formLabelWidth">
-                <el-upload
-                        class="upload-demo"
-                        action="/contract/uploadImage/"
-                        accept="image/jpeg,image/png,.doc,.docx,.pdf"
-                        :before-remove="cancleContractFile"
-                        :limit="1"
-                        :on-success="contractFileSuccess"
-                        :file-list="files">
-                    <el-button size="small" icon="el-icon-upload">点击上传</el-button>
-                    <div slot="tip" class="el-upload__tip">上传合同原件的扫描件，只能上传jpg&nbsp;/&nbsp;png&nbsp;/&nbsp;word&nbsp;/&nbsp;pdf文件，且不超过5M</div>
-                </el-upload>
-            </el-form-item>
+
         </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="addContractChange">添 加</el-button>
+            <el-button type="primary" @click="addcontractExamine">添 加</el-button>
         </div>
     </el-dialog>
 
@@ -237,7 +217,7 @@
     <ul id="deptTree" class="ztree"></ul>
 </div>
 
-<script src="${request.contextPath}/statics/js/contract/contract_change.js?_${.now?long}"></script>
+<script src="${request.contextPath}/statics/js/contract/contract_examine_add.js?_${.now?long}"></script>
 
 </body>
 </html>

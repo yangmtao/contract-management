@@ -77,6 +77,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
 		return baseMapper.selectUserDept(keyword);
 	}
+
+	@Override
+	public String getUserNameById(Long id) {
+		return baseMapper.selectUserNameById(id);
+	}
+
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void update(SysUserEntity user) {

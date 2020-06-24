@@ -20,7 +20,8 @@ import java.util.Map;
 @Mapper
 public interface SupplierMapper extends BaseMapper<SupplierEntity> {
 
-    List<Map<String, String>> selectSupplierSimple(String keyword);
+    List<Map<String, String>> selectSupplierSimple(@Param("keyword") String keyword);
 
-	
+
+    String selectSupplierNameById(@Param("id") Long id);
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>合同详情</title>
+    <#include "/header.html">
+</head>
+<style>
+    .contractTitle{
+        text-align: center;
+        background-color: transparent;
+    }
+    .panel{
+        width: 996px;
+        border:1px solid #999999;
+        margin: 0 auto;
+    }
+</style>
+<body>
+<div id="rrapp" v-cloak>
+    <div class="panel panel-default">
+        <div class="contractTitle">
+        <h2>${contract.contractName}</h2>
+        </div>
+        <h4>一、合同基本信息</h4>
+        <hr/>
+        <h4>二、合同经办人信息</h4>
+        <h4>三、合同审查记录</h4>
+        <el-divider></el-divider>
+        <h4>四、合同审核记录</h4>
+        <el-divider></el-divider>
+        <h4>五、合同变更记录</h4>
+        <el-divider></el-divider>
+        <h4>六、合同风险信息</h4>
+        <el-divider></el-divider>
+        <h4>七、合同结算信息</h4>
+        <el-divider></el-divider>
+
+    </div>
+
+
+</div>
+</body>
+<script src="${request.contextPath}/statics/js/contract/contract_query.js?_${.now?long}"></script>
+</html>

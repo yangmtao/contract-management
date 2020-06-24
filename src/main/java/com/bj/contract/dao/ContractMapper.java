@@ -26,6 +26,8 @@ public interface ContractMapper extends BaseMapper<Contract> {
 
     List<Contract> queryAllContract(Page page, @Param("ew") Wrapper wrapper);
 
+    List<Contract> selectContractByIds(List<String> ids);
+
 
     void updateAmount(@Param("contractId")Long contractId,@Param("o") Object o, @Param("unAmount") BigDecimal unAmount);
 

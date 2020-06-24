@@ -1,3 +1,5 @@
+
+
 $(function () {
     $("#jqGrid").jqGrid({
         url: baseURL + 'contract/list',
@@ -6,23 +8,26 @@ $(function () {
             {label: '合同ID', name: 'contractId', index: "id", width: 40, key: true, hidden: true},
             {label: '合同编号', name: 'contractCode', width: 120, align: 'center',sortable:false},
             {label: '合同名称', name: 'contractName', width: 200, align: 'center',sortable:false},
-           {label: '采购内容', name: 'purchaseContent', width: 200, align: 'center',sortable:false},
-            {label: '需求部门', name: 'demandDeptId',width: 120, align: 'center',sortable:false},
-            {label: '乙方单位', name: 'partyBId', index:"publish_date", width: 160, align: 'center'},
+            {label: '采购内容', name: 'purchaseContent', width: 200, align: 'center',sortable:false},
+            {label: '需求部门', name: 'demandDeptName',width: 120, align: 'center',sortable:false},
+            {label: '乙方单位', name: 'partyBName', index:"publish_date", width: 160, align: 'center'},
             {
                 label: '合同类型', name: 'contractType', width: 120, align: 'center',sortable:false,
                 formatter: function (value) {
-                    return DICT.STATUS[value] || '';
+                    return DICT.CONTRACT_TYPE[value] || '';
                 }
             },
-            {label: '付款状态', name: 'payStatus', index: "create_date", width: 100, align: 'center',sorttype:'date'},
+            {label: '付款状态', name: 'payStatus', index: "create_date", width: 100, align: 'center',
+                formatter: function (value) {
+                    return DICT.PAYMENT_STATUS[value] || '';
+                }},
             {label: '合同金额', name: 'contractAmount', width: 120, align: 'center',sortable:false,},
             {label: '开始时间', name: 'startDate', index: "create_date", width: 120, align: 'center',sorttype:'date'},
             {label: '结束时间', name: 'endDate', index: "create_date", width: 120, align: 'center',sorttype:'date'},
-            {label: '经办人', name: 'contractManager', index: "create_date", width: 100, align: 'center',sorttype:'date'},
-            {label: '操作',  width: 110, align: 'center',sortable:false,
+            {label: '经办人', name: 'contractManagerName', index: "create_date", width: 100, align: 'center'},
+            {label: '操作',  name: 'contractId', width: 110, align: 'center',sortable:false,
                 formatter: function (value) {
-                    return '<a class="btn btn-primary" href="/cmsContent/view/'+value+'" target="_blank">查看详情</a>';
+                    return '<a class="btn btn-primary" href="/contract/'+value+'/detail.html" >查看详情</a>';
                 }}
         ],
         viewrecords: true,
@@ -52,6 +57,7 @@ $(function () {
         }
     });
 });
+var userName;
 var setting = {
     data: {
         simpleData: {
@@ -137,6 +143,10 @@ var vmContract = new Vue({
             partyAId:null,
             partyBId:null,
             paymentType:null,
+            payStatus:null,
+            startNumber:null,
+            endNumber:null,
+            paymentRange:null,
             contractCode:null
         },
         remoteManagers:[],
@@ -160,11 +170,12 @@ var vmContract = new Vue({
                 ztree = $.fn.zTree.init($("#deptTree"), setting, r.deptList);
             })
         },
-        getRemotePartyB:function(){
+        //根据关键字查询相关乙方单位
+        getRemotePartyB:function(keyword){
             var _this=this;
             if(keyword!=''){
                 _this.remotePartyBLoading=true;
-
+                console.log("正在查找相关单位")
                 setTimeout(function(){
                     _this.remotePartyBLoading=false;
                     $.ajax({
@@ -172,10 +183,10 @@ var vmContract = new Vue({
                         data:{
                             keyword:keyword
                         },
-                        url:baseURL+"sys/user/userDept",
+                        url:baseURL+"contract/supplier/simpleInfo",
                         success:function(r){
                             if(r.code===1){
-                                _this.remotePartyBs=r.managers;
+                                _this.remotePartyBs=r.partyBs;
                             }
                         }
                     });
@@ -212,6 +223,7 @@ var vmContract = new Vue({
                 }
             });
         },
+        //根据关键字查询经办人（用户）
         remoteManager:function(keyword){
             var _this=this;
             if(keyword!=''){
@@ -239,9 +251,44 @@ var vmContract = new Vue({
             }
 
         },
+        //合同查询
         queryContract: function(){
             console.log("正在查找");
+            var _this=this;
+            if(_this.contract.startNumber > _this.contract.endNumber){
+                alert("合同金额错误，范围起始值必须小于等于终止值");
+                return;
+            }
+            _this.contract.paymentRange=_this.contract.startNumber+","+_this.contract.endNumber;
+            var page = $("#jqGrid").jqGrid('getGridParam', 'page');
+            $("#jqGrid").jqGrid('setGridParam', {
+                postData: {'contract':JSON.stringify(_this.contract)},
+                page: page
+            }).trigger("reloadGrid");
         },
+        //导出为excel
+        excelExport:function(){
+            console.log("正在导出为excel");
+            var ids = [];
+            ids=getSelectedRows();
+            var idStr='';
+            if (ids == null) {
+                return;
+            }else{
+                for(var i=0;i<ids.length;i++){
+                    if((i+1)!=ids.length){
+                        idStr+=(ids[i]+',');
+                    }else{
+                        idStr+=ids[i];
+                    }
+
+                }
+
+            }
+
+            window.location.href="/contract/export/excel?ids="+idStr;
+        },
+
         reload: function () {
             window.location.reload();
         }
@@ -251,7 +298,8 @@ var vmContract = new Vue({
 });
 
 DICT = {
-    STATUS: {0: '草稿', 1: '待审核', 2: '审核不通过', 3: '已发布'}
+    PAYMENT_STATUS: {0: '未付', 1: '在付', 2: '已付'},
+    CONTRACT_TYPE: {0: '买卖合同', 1: '赠与合同', 2: '租赁合同'}
 }
 Vue.prototype.DICT = DICT;
 
@@ -278,7 +326,7 @@ function getSelectedRows() {
     var grid = $("#jqGrid");
     var rowKey = grid.getGridParam("selrow");
     if (!rowKey) {
-        alert("请选择一条记录");
+        alert("请选择一条或多条记录");
         return;
     }
 
@@ -314,3 +362,4 @@ window.onload = window.onresize = function () {
         target.style.height = (document.documentElement.clientHeight - document.querySelector('.ui-jqgrid').offsetTop - 82) + 'px';
     }
 };
+
