@@ -24,6 +24,8 @@ public interface ContractMapper extends BaseMapper<Contract> {
 
     Contract selectContractById(Long contractId);
 
+    Contract selectContractDetail (@Param("contractId") Long contractId);
+
     List<Contract> queryAllContract(Page page, @Param("ew") Wrapper wrapper);
 
     List<Contract> selectContractByIds(List<String> ids);

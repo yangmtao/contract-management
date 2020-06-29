@@ -64,6 +64,19 @@ public class ContractController extends AbstractController {
         return contract;
     }
 
+    @GetMapping("/detail")
+    @ResponseBody
+    @RequiresPermissions("contract:select")
+    public R getContractDetailById(@RequestParam("contractId") Long id) {
+        Contract contract=contractFileService.getContractDetailById(id);
+        Map<String,Object> queryMap=new HashMap<>();
+        //selectByMap中的键是数据库字段，而不是实体属性
+        queryMap.put("contract_id",id);
+        List<ContractPaymentStage> paymentStages=paymentStageService.selectByMap(queryMap);
+
+        return R.ok().put("contract",contract).put("paymentStages",paymentStages);
+    }
+
 
     /**
      * 分页获取所有合同

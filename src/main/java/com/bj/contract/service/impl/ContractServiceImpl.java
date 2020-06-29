@@ -176,7 +176,12 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
 
     }
 
-    //获取当前合同信息
+    @Override
+    public Contract getContractDetailById(Long id) {
+        return baseMapper.selectContractDetail(id);
+    }
+
+    //获取当前合同详细信息
     @Override
     public Contract getById(Long contractId) {
         Contract contract = baseMapper.contractById(contractId);

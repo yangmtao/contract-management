@@ -55,6 +55,23 @@
         where c.contract_id = #{contractId}
     </select>
 
+    <select id="selectContractDetail" resultType="com.bj.contract.entity.Contract">
+        select c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,
+        c.create_date,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date,
+        case c.contract_type when 1 then '赠予合同' when 2 then '租赁合同' else '买卖合同' end as contract_type_name,
+        case c.pay_status when 1 then '在付' when 2 then '已付' else '未付' end as pay_status_name,
+        case c.payment_type when 1 then '银行转账' when 2 then '支票' when 3 then '支付宝' when 4 then '微信' else '现金' end as payment_type_name,
+        d.dept_name as demand_dept_name,
+        u.real_name as contract_manager_name,u.user_mobile as phone,
+        s.supplier_name as party_b_name,
+        (select dept_name from sys_dept where dept_id=c.purchasing_dept_id) as purchasing_dept_name
+        from contract as c
+        left join sys_user as u on c.contract_manager=u.user_id
+        left join supplier as s on c.party_b_id=s.supplier_id
+        left join sys_dept as d on c.demand_dept_id=d.dept_id
+        where c.contract_id= #{contractId}
+    </select>
+
     <select id="selectContractById" resultType="com.bj.contract.entity.Contract">
         select * from contract where contract_id=#{contractId}
            </select>
