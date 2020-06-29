@@ -48,12 +48,32 @@ public class ContractExamineController extends AbstractController {
         return R.error();
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/update")
+    @RequiresPermissions("contract:examine:update")
+    public R examineUpdate(@RequestBody  ContractExamine examine){
+
+        if(examineService.updateById(examine)){
+            return R.ok();
+        }
+        return R.error();
+    }
+
+    @PostMapping("/delete")
     @RequiresPermissions("contract:examine:delete")
-    public R deleteExamine(@PathVariable("id") String id){
-        boolean b = examineService.deleteById(Long.parseLong(id));
+    public R deleteExamine(@RequestBody Long[] ids){
+        boolean b = examineService.deleteById(ids);
         if(b){
             return R.ok();
+        }
+        return R.error();
+    }
+
+    @GetMapping("/info/{id}")
+    @RequiresPermissions("contract:examine:info")
+    public R contractExamineInfo(@PathVariable("id") Integer id){
+        ContractExamine contractExamine = examineService.selectInfoById(id);
+        if(contractExamine!=null){
+            return R.ok().put("contractExamine",contractExamine);
         }
         return R.error();
     }

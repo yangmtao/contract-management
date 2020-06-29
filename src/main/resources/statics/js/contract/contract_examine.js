@@ -8,17 +8,14 @@ $(function () {
             {label: '合同名称', name: 'contractName', width: 200, align: 'center',sortable:false},
            {label: '严重等级', name: 'riskLevel', width: 100, align: 'center',sortable:false},
             {label: '审查问题', name: 'problem',width: 180, align: 'center',sortable:false},
-            {label: '修正状态', name: 'status',  width: 100, align: 'center',
-                formatter: function (value) {
-                    return DICT.STATUS[value] || '';
-                }},
+            {label: '修正状态', name: 'status',  width: 100, align: 'center'},
             {label: '解决方案', name: 'handleWay',  width: 180, align: 'center',sorttype:'date'},
             {label: '提出人', name: 'handlerName', width: 120, align: 'center',sortable:false,},
             {label: '提出时间', name: 'createTime', index: "create_time", width: 120, align: 'center',sorttype:'date'},
             {label: '经办人', name: 'handlerName',width: 120, align: 'center',sortable:false},
             {label: '操作',  name: 'id',width: 110, align: 'center',sortable:false,
                 formatter: function (value) {
-                    return '<button class="btn btn-danger" onclick="deleteExamine('+value+')" >删 除</button>';
+                    return '<button class="btn btn-success" onclick="showUpdate('+value+')" >修 正</button>';
                 }}
         ],
         viewrecords: true,
@@ -63,6 +60,9 @@ var setting = {
 };
 var ztree;
 
+function updateExamine(id){
+
+}
 
 DICT = {
     STATUS: {0: '待处理', 1: '处理中', 2: '已解决'},
@@ -92,6 +92,7 @@ var area_setting = {
 };
 var setting1 = {
     data: {
+
         simpleData: {
             enable: true,
             idKey: "id",
@@ -118,24 +119,85 @@ var setting1 = {
 var vmContractExamine = new Vue({
     el: '#rrapp',
     data: {
-
+        formLabelWidth: '120px',
+        dialogFormVisible:false,
         queryOption:{
             contractName:null,
             startDate:null,
             endDate:null,
             riskLevel:null,
             contractCode:null
-        }
+        },
+        contractExamine:{}
     },
     methods: {
-
-
-        modifyExamine:function(){
-
+        //根据id获取合同审查记录信息
+        getContractExamine:function(id){
+            var _this = this;
+            $.get(baseURL + "contract/examine/info/" + id, function (r) {
+                _this.contractExamine = r.contractExamine;
+            });
         },
+
+        updateContractExamine:function(){
+            var _this=this;
+            $.ajax({
+                type: "POST",
+                url: baseURL + "contract/examine/update",
+                contentType: "application/json",
+                data: JSON.stringify(this.contractExamine),
+                success: function (r) {
+                    if (r.code == 1) {
+                        alert('操作成功', function () {
+                            _this.dialogFormVisible=false;
+                            _this.reload();
+                        });
+                    } else {
+                        alert(r.msg);
+                    }
+                }
+            });
+        },
+        //删除审查记录
+        deleteExamine:function(){
+            var ids = getSelectedRows();
+            if (ids == null) {
+                return;
+            }
+            var _this = this;
+            confirm('确定要删除选中的记录？', function () {
+                $.ajax({
+                    type: "POST",
+                    url: baseURL + "contract/examine/delete",
+                    contentType: "application/json",
+                    data: JSON.stringify(ids),
+                    success: function (r) {
+                        if (r.code == 1) {
+                            alert('操作成功', function () {
+                               _this.reload();
+                            });
+                        } else {
+                            alert(r.msg);
+                        }
+                    }
+                });
+            });
+        },
+        //查询审查记录
         queryExamine: function(){
             console.log("正在查找");
+            var _this=this;
+            $("#jqGrid").jqGrid('setGridParam', {
+                postData: {'risk_level': _this.queryOption.riskLevel,
+                           'contract_code':_this.queryOption.contractCode,
+                           'contract_name':_this.queryOption.contractName,
+                           'end_date':_this.queryOption.endDate,
+                           'start_date':_this.queryOption.startDate
+                },
+                page: 1
+            }).trigger("reloadGrid");
         },
+
         reload: function () {
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
@@ -146,23 +208,15 @@ var vmContractExamine = new Vue({
 
     }
 });
+//显示合同修改模态框
+function  showUpdate(id) {
 
-//删除审查记录
-function deleteExamine(id){
-    confirm("确定删除该条记录？",function(){
-        $.ajax({
-            type:"GET",
-            url:baseURL+"contract/examine/delete/"+id,
-            success:function(r){
-                if(r.code===1){
-                    alert("删除成功");
-                    $("#jqGrid").jqGrid('setGridParam', {
-                        page: 1
-                    }).trigger("reloadGrid");
-                }
-            }
-        });
-    })
+    if (id == null) {
+        return;
+    }
+    this.vmContractExamine.dialogFormVisible = true;
+
+    this.vmContractExamine.getContractExamine(id);
 
 }
 

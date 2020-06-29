@@ -19,4 +19,6 @@ import java.util.List;
 public interface ContractExamineMapper extends BaseMapper<ContractExamine> {
 
     List<ContractExamine> queryAllContractExamine(Page page, @Param("ew") Wrapper wrapper);
+
+    ContractExamine selectInfoById(@Param("id") Integer id);
 }

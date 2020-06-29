@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd60090f-90ee-457b-96b9-44f98b2830f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/logs/contract-manage.log.2020-06-24.0.gz" afterDir="false" />
+    <list default="true" id="bd60090f-90ee-457b-96b9-44f98b2830f9" name="Default Changelist" comment="2020/6/29 11:20">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/contract-manage.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/contract-manage.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/controller/ContractExamineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/controller/ContractExamineController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/dao/ContractExamineMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/dao/ContractExamineMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/entity/ContractExamine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/entity/ContractExamine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/ContractExamineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/ContractExamineService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/impl/ContractExamineServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bj/contract/service/impl/ContractExamineServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/contract/ContractExamineMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/contract/ContractExamineMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/contract/ContractMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/contract/ContractMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_examine.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_examine.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_query.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/statics/js/contract/contract_query.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_examine.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_examine.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_examine_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_examine_add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_query.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/contract/contract_query.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +36,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="dca90e29-f309-45dc-b344-928b6b2fc6ce" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -60,7 +75,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="Push.Settings">
     <option name="SHOW_DETAILS_PANEL" value="false" />
@@ -161,7 +176,8 @@
       <workItem from="1592788520549" duration="26868000" />
       <workItem from="1592873354848" duration="2303000" />
       <workItem from="1592877321779" duration="23107000" />
-      <workItem from="1593391923105" duration="6123000" />
+      <workItem from="1593391923105" duration="6346000" />
+      <workItem from="1593401189724" duration="17337000" />
     </task>
     <task id="LOCAL-00001" summary="contract_add modify">
       <created>1592537822162</created>
@@ -233,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593400727731</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="2020/6/29 11:20">
+      <created>1593400938260</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1593400938260</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,10 +291,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="802" y="156" width="1092" height="773" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592541857452" />
-    <state x="1153" y="210" key="#com.intellij.ide.util.MemberChooser" timestamp="1593399125400">
+    <state x="1153" y="210" key="#com.intellij.ide.util.MemberChooser" timestamp="1593417299853">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1153" y="210" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1593399125400" />
+    <state x="1153" y="210" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1593417299853" />
     <state x="1005" y="427" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1592542829073">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -280,42 +303,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1107" y="260" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592968665257" />
-    <state x="837" y="96" key="CommitChangelistDialog2" timestamp="1593400726066">
+    <state x="837" y="96" key="CommitChangelistDialog2" timestamp="1593401241899">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="837" y="96" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593400726066" />
-    <state width="1083" height="351" key="GridCell.Tab.0.bottom" timestamp="1593400626070">
+    <state x="837" y="96" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593401241899" />
+    <state width="1083" height="351" key="GridCell.Tab.0.bottom" timestamp="1593423098084">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="351" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593400626070" />
-    <state width="1083" height="351" key="GridCell.Tab.0.center" timestamp="1593400626069">
+    <state width="1083" height="351" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593423098084" />
+    <state width="1083" height="351" key="GridCell.Tab.0.center" timestamp="1593423098084">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="351" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593400626069" />
-    <state width="1083" height="351" key="GridCell.Tab.0.left" timestamp="1593400626069">
+    <state width="1083" height="351" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593423098084" />
+    <state width="1083" height="351" key="GridCell.Tab.0.left" timestamp="1593423098084">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="351" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593400626069" />
-    <state width="1083" height="351" key="GridCell.Tab.0.right" timestamp="1593400626070">
+    <state width="1083" height="351" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593423098084" />
+    <state width="1083" height="351" key="GridCell.Tab.0.right" timestamp="1593423098084">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="351" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593400626070" />
-    <state width="1083" height="351" key="GridCell.Tab.1.bottom" timestamp="1593400626070">
+    <state width="1083" height="351" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593423098084" />
+    <state width="1083" height="351" key="GridCell.Tab.1.bottom" timestamp="1593423098084">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="351" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593400626070" />
-    <state width="1083" height="351" key="GridCell.Tab.1.center" timestamp="1593400626070">
+    <state width="1083" height="351" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593423098084" />
+    <state width="1083" height="351" key="GridCell.Tab.1.center" timestamp="1593423098084">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="351" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593400626070" />
-    <state width="1083" height="351" key="GridCell.Tab.1.left" timestamp="1593400626070">
+    <state width="1083" height="351" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593423098084" />
+    <state width="1083" height="351" key="GridCell.Tab.1.left" timestamp="1593423098084">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="351" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593400626070" />
-    <state width="1083" height="351" key="GridCell.Tab.1.right" timestamp="1593400626070">
+    <state width="1083" height="351" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593423098084" />
+    <state width="1083" height="351" key="GridCell.Tab.1.right" timestamp="1593423098084">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1083" height="351" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593400626070" />
+    <state width="1083" height="351" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593423098084" />
     <state x="368" y="98" key="MergeDialog" timestamp="1592873853167">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -324,18 +347,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="972" y="248" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593400867155" />
-    <state x="704" y="74" key="SettingsEditor" timestamp="1592541575528">
+    <state x="704" y="74" key="SettingsEditor" timestamp="1593401124673">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="704" y="74" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1592541575528" />
-    <state x="816" y="233" key="Vcs.Push.Dialog.v2" timestamp="1593400884038">
+    <state x="704" y="74" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593401124673" />
+    <state x="816" y="233" key="Vcs.Push.Dialog.v2" timestamp="1593401261151">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="816" y="233" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593400884038" />
-    <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1593391930555">
+    <state x="816" y="233" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593401261151" />
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1593401195630">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593391930555" />
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593401195630" />
     <state x="1069" y="449" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593400849011">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

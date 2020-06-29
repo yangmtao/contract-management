@@ -11,4 +11,10 @@
         <where> ${ew.sqlSegment}</where>
     </select>
 
+    <select id="selectInfoById" resultType="com.bj.contract.entity.ContractExamine">
+        select c.contract_id,c.contract_name,c.contract_code,
+        ce.id,ce.risk_level,ce.problem,ce.create_time,ce.status,ce.handle_way
+        from contract as c join contract_examine as ce on  c.contract_id=ce.contract_id
+        where id=#{id}
+    </select>
 </mapper>

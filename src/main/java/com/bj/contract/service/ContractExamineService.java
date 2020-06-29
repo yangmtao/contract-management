@@ -21,4 +21,5 @@ public interface ContractExamineService extends IService<ContractExamine> {
 
     PageUtils queryPage(Map<String, Object> params) throws Exception;
 
+    ContractExamine selectInfoById(Integer id);
 }

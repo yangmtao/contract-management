@@ -148,7 +148,8 @@ var vmContract = new Vue({
             startNumber:null,
             endNumber:null,
             paymentRange:null,
-            contractCode:null
+            contractCode:null,
+            contractFile:null
         },
         paymentStages:[],
         remoteManagers:[],

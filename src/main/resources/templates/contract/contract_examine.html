@@ -9,6 +9,7 @@
     .form-control{
         width: 220px;
     }
+
 </style>
 <body>
 <div id="rrapp" v-cloak>
@@ -63,6 +64,10 @@
                     <a class="btn btn-primary" @click="queryExamine"><i class="fa fa-search"></i>查 询</a>
                     </#if>
                     <input type="reset" class="btn btn-warning"  value="重 置"/>
+                    <#if shiro.hasPermission("contract:examine:delete")>
+                    <a class="btn btn-danger" @click="deleteExamine"><i class="fa fa-close"></i>删 除</a>
+                    </#if>
+
                 </div>
             </div>
 
@@ -72,6 +77,39 @@
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
     </div>
+
+<!--审查记录修正-->
+<el-dialog title="审查问题修正" :visible.sync="dialogFormVisible" width="550px" >
+    <el-form :model="contractExamine">
+        <el-form-item label="合同编号" :label-width="formLabelWidth">
+            <el-input v-model="contractExamine.contractCode" auto-complete="off" readonly="true" ></el-input>
+        </el-form-item>
+        <el-form-item label="合同名称" :label-width="formLabelWidth">
+            <el-input type="text" v-model="contractExamine.contractName" readonly="true" ></el-input>
+        </el-form-item>
+        <el-form-item label="审查问题" :label-width="formLabelWidth">
+            <el-input v-model="contractExamine.problem" auto-complete="off" readonly="true"></el-input>
+        </el-form-item>
+        <el-form-item label="严重等级" :label-width="formLabelWidth">
+            <el-select  v-model="contractExamine.riskLevel" size="small" name="status" >
+                <el-option v-for="(v,k) in DICT.RISK_LEVEL" :key="k" :value="v" :label="v"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="解决方案"  :label-width="formLabelWidth">
+            <el-input  v-model="contractExamine.handleWay"  auto-complete="off" suffix-icon="el-icon-edit el-input__icon"></el-input>
+        </el-form-item>
+        <el-form-item label="修正状态" :label-width="formLabelWidth">
+            <el-select  v-model="contractExamine.status" size="small" name="status" >
+                <el-option v-for="(v,k) in DICT.STATUS" :key="k" :value="v" :label="v"></el-option>
+            </el-select>
+        </el-form-item>
+
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="updateContractExamine">确 定</el-button>
+    </div>
+</el-dialog>
 
 
 
