@@ -42,9 +42,16 @@
         border:1px solid #b4bccc;
         margin: 0 auto;
     }
-    .el-input{
+    .panel .el-input {
+        width: 220px;
+    }
+    .contractInfo .el-input {
         width: 320px;
         border: none;
+    }
+    #contractImage{
+        width: 780px;
+        height: 900px;
     }
 </style>
 <body>
@@ -231,13 +238,18 @@
                     <el-input type="textarea" :row="3" style="width: 780px;" v-model="contract.purchaseContent" readonly="true"></el-input>
                 </el-form-item>
             </el-form>
+
+
+            <hr/>
+
+            <h4>二、合同付款阶段</h4>
             <el-form ref="form" :model="paymentStages"  label-width="120px">
                 <el-form-item label="付款阶段">
                     <el-table  style="width: 780px;"
-                            :data="tableData"
-                            style="width: 100%"
-                            empty-text="暂未添加付款阶段"
-                            border>
+                               :data="paymentStages"
+                               style="width: 100%"
+                               empty-text="暂未添加付款阶段"
+                               border>
                         <el-table-column
                                 label="付款阶段"
                                 prop="stageName"
@@ -273,58 +285,12 @@
             </el-form>
 
             <hr/>
-            <h4>二、合同审核记录</h4>
+
+            <h4>三、合同原件扫描件</h4>
             <el-form ref="form" :model="contract"  label-width="120px">
-                <el-form-item label="审核记录表">
-                    <el-table  style="width: 780px;"
-                               :data="tableData"
-                               style="width: 100%"
-                               empty-text="待审核"
-                               border>
-                        <el-table-column
-                                label="审核节点"
-                                prop="stageName"
-                                width="178">
-                        </el-table-column>
-                        <el-table-column
-                                prop="uses"
-                                label="审核人"
-                                width="150">
-                        </el-table-column>
-                        <el-table-column
-                                prop="paymentAmount"
-                                label="审核意见"
-                                width="150">
-                        </el-table-column>
-                        <el-table-column
-                                prop="paymentRate"
-                                label="审核结果"
-                                width="150"
-                                :formatter="rateFormatter"
-                        >
-                        </el-table-column>
-                        <el-table-column
-                                label="审核时间"
-                                width="150">
-                            <template slot-scope="scope">
-                                <!-- <i class="el-icon-time"></i>-->
-                                <span style="margin-left: 10px">{{ scope.row.paymentDate }}</span>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                </el-form-item>
-            </el-form>
-            <el-form ref="form" :model="contract"  label-width="100px">
-                <el-form-item label="审核进度">
-                    <el-steps :active="2" align-center>
-                        <el-step title="步骤1" description="这是一段很长很长很长的描述性文字"></el-step>
-                        <el-step title="步骤2" description="这是一段很长很长很长的描述性文字"></el-step>
-                        <el-step title="步骤3" description="这是一段很长很长很长的描述性文字"></el-step>
-                        <el-step title="步骤4" description="这是一段很长很长很长的描述性文字"></el-step>
-                        <el-step title="步骤2" description="这是一段很长很长很长的描述性文字"></el-step>
-                        <el-step title="步骤3" description="这是一段很长很长很长的描述性文字"></el-step>
-                        <el-step title="步骤4" description="这是一段很长很长很长的描述性文字"></el-step>
-                    </el-steps>
+                <el-form-item label="扫描件图片">
+                    <img id="contractImage" :src="contract.contractFile">
+
                 </el-form-item>
             </el-form>
 

@@ -60,9 +60,9 @@ public class ContractExamine extends Model<ContractExamine> {
      */
     private String problem;
     /**
-     * 审查问题修正状态；0，待处理；1，处理中；2，已解决
+     * 审查问题修正状态；待处理；处理中；已解决
      */
-    private Integer status;
+    private String status;
     /**
      * 解决方案
      */

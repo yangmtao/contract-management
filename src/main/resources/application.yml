@@ -125,7 +125,7 @@ bj:
     redis: false # true表示shiro session存到redis里，需要开启redis，才会生效【分布式场景】
 
 system:
-  name: 医院采购合同管理系统
+  name: 合同管理系统
   localAddress: http://localhost:9001/admin/upload/
   serverAddress: http://localhost:9003/api-web/upload/
   fileAddress: E:/admin/
