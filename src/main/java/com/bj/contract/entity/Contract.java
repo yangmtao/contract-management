@@ -75,6 +75,12 @@ public class Contract extends Model<Contract> {
     @ApiModelProperty("合同经办人")
     @TableField(exist = false)
     private String contractManagerName;
+
+    /**
+     * 经办人联系方式
+     */
+    @TableField(exist = false)
+    private String phone;
     /**
      * 合同金额
      */
@@ -121,6 +127,12 @@ public class Contract extends Model<Contract> {
     @TableField("purchasing_dept_id")
     @NotNull(message = "必须选择采购部门")
     private Long purchasingDeptId;
+    /**
+     * 需求部门名称
+     */
+    @TableField(exist = false)
+    @ApiModelProperty("需求部门")
+    private String purchasingDeptName;
     /**
      * 需求部门id
      */
@@ -211,11 +223,6 @@ public class Contract extends Model<Contract> {
      */
     @TableField(exist = false)
     private String supplierName;
-    /**
-     * 部门名称
-     */
-    @TableField(exist = false)
-    private String purchasingDeptName;
 
     /**
      * 未付金额

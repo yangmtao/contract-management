@@ -127,6 +127,7 @@ var vmContract = new Vue({
         remotePartyBLoading:false,
         contractManager:null,
         remotePartyB:null,
+        readonly:true,
         title: null,
         files:[],
         contract:{
@@ -149,6 +150,7 @@ var vmContract = new Vue({
             paymentRange:null,
             contractCode:null
         },
+        paymentStages:[],
         remoteManagers:[],
         remotePartyBs:[],
         tableData: [],
@@ -307,7 +309,23 @@ DICT = {
 Vue.prototype.DICT = DICT;
 
 function showContractInfo(id) {
-    vmContract.showList=false;
+    $.ajax({
+        type:"GET",
+        data:{
+            contractId:id
+        },
+        url:baseURL+"contract/detail",
+        success:function(r){
+            if(r.code===1){
+                vmContract.contract=r.contract;
+                vmContract.paymentStages=r.paymentStages;
+                vmContract.showList=false;
+            }else{
+                alert("服务器异常，请联系系统管理员！");
+            }
+        }
+    });
+
 }
 
 //选择一条记录
