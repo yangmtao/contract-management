@@ -234,8 +234,12 @@ var vmFinUser = new Vue({
             this.showList = 3;
             this.title = "详情";
             this.opName = "details";
+           // jQuery("#jqGridContract").jqGrid("clearGridData")
+            $("#jqGridContract").jqGrid('setGridParam',{  // 重新加载数据
+                postData: {'partyBId':supplierId},   //  newdata 是符合格式要求的需要重新加载的数据
+                page:1
+            }).trigger("reloadGrid");
             this.getInfo(supplierId);
-            this.getContract(supplierId);
         },
 
         //跳转黑名单页面
@@ -300,11 +304,21 @@ var vmFinUser = new Vue({
                 });
             });
         },
+//得到所选id的信息
+        getInfo: function (supplierId) {
+            var _this = this;
+            $.get(baseURL + "contract/supplier/info/" + supplierId, function (r) {
+                _this.supplier = r.supplier;
+                console.log(_this.supplier+"===================")
+                _this.getContract(supplierId);
+            });
+            //this.getContract(supplierId);
+        },
 
         //获取相关合同
         getContract:function(supplierId){
             $("#jqGridContract").jqGrid({
-                url: baseURL + 'contract/list?partyBId='+supplierId,
+                url: baseURL + 'contract/list',
                 datatype: "json",
                 colModel: [
 
@@ -365,14 +379,7 @@ var vmFinUser = new Vue({
             });
         },
 
-        //得到所选id的信息
-        getInfo: function (supplierId) {
-            var _this = this;
-            $.get(baseURL + "contract/supplier/info/" + supplierId, function (r) {
-                _this.supplier = r.supplier;
-                console.log(_this.supplier+"===================")
-            });
-        },
+
 
         //搜索函数
         reload: function (event) {

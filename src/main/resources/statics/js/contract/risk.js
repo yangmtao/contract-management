@@ -6,11 +6,11 @@ function jqGrid(){$("#jqGrid").jqGrid({
         {label: 'id', name: 'id', index: 'id', width: 10, key: true, hidden: true},
         {label: '合同id', name: 'contractId', index: 'contract_id', width: 140, align: 'center',hidden: true},
         {label: '合同编号', name: 'contractCode', index: 'contract_code', width: 140,align: 'center'},
-        {label: '合同名称', name: 'contractName', index: 'contract_name', width: 100},
-        {label: '风险类型', name: 'riskType', index: 'risk_type', width: 140, align: 'center'},
-        {label: '风险名称', name: 'riskName', index: 'risk_name', width: 100},
-        {label: '解决方案', name: 'solution', index: 'solution', width: 100},
-        {label: '合同类型', name: 'contractType', index: 'contract_type', width: 100},
+        {label: '合同名称', name: 'contractName', index: 'contract_name', width: 140},
+        {label: '风险类型', name: 'riskType', index: 'risk_type', width: 100, align: 'center'},
+        {label: '风险名称', name: 'riskName', index: 'risk_name', width: 140, align: 'center'},
+        {label: '解决方案', name: 'solution', index: 'solution', width: 140, align: 'center'},
+        {label: '合同类型', name: 'contractType', index: 'contract_type', width: 100, align: 'center'},
         {label: '付款情况', name: 'payStatus', index: 'pay_status', width: 100,
             formatter: function (cellValue, options, rowData) {
                 var val = "";
@@ -32,8 +32,14 @@ function jqGrid(){$("#jqGrid").jqGrid({
         {label: '操作',  width: 100, sortable: false, align: 'center',
             formatter:function (cellValue, options, rowData) {
                 var id  = rowData["id"];
+                var del = rowData["del"]
+                if (del==0){
+                    return "<a class='btn btn-primary' onclick='over(\""+id+"\")' '>已解决</a>"
+                } else{
+                    return "<label>已解决</label>"
+                }
 
-                return "<a class='btn btn-primary' onclick='over(\""+id+"\")' '>已解决</a>"
+
 
 
             }

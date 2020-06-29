@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>信息</title>
+    <#include "/header.html">
+</head>
+<body>
+<div v-show="showList==3" class="panel panel-default">
+    <div class="panel-heading">{{title}}</div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-2 control-label">公司名称</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" :disabled="true" v-model="supplier.supplierName" placeholder="公司名称"/>
+            </div>
+        </div>
+        <div class="form-group" v-show='opName=="add"'>
+            <div class="col-sm-2 control-label">统一社会信用代码</div>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" :disabled="true" v-model="supplier.creditCode" placeholder="统一社会信用代码"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">法定代表人</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" :disabled="true" v-model="supplier.legaRepresentative" placeholder="法定代表人"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">资质</div>
+            <div class="col-sm-10">
+                <input type="text" style="cursor: pointer;"  class="form-control" v-model="supplier.qualifications" placeholder="资质"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">所属地</div>
+            <div class="col-sm-10">
+                <input type="text" style="cursor: pointer;"  class="form-control" :disabled="true" v-model="supplier.attribution" placeholder="所属地"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">注册资本</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" :disabled="true" v-model="supplier.registeredCapital" placeholder="注册资本"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">经营状况</div>
+            <div class="col-sm-10">
+                <el-select v-model="supplier.operatingStatus" :disabled="true" clearable placeholder="请选择">
+                    <el-option
+                            v-for="item in operatingStatusList"
+                            :key="item.code"
+                            size="small"
+                            :label="item.value"
+                            :value="item.code">
+                    </el-option>
+                </el-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">公司类型</div>
+            <div class="col-sm-10">
+                <el-select v-model="supplier.supplierType" :disabled="true" clearable placeholder="请选择">
+                    <el-option
+                            v-for="item in typeList"
+                            :key="item.code"
+                            size="small"
+                            :label="item.value"
+                            :value="item.code">
+                    </el-option>
+                </el-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">营业范围</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" :disabled="true" v-model="supplier.businessScope" placeholder="营业范围"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">备注</div>
+            <div class="col-sm-10">
+                <input type="textarea" style="cursor: pointer;"  class="form-control" v-model="supplier.remarks" placeholder="备注"/>
+            </div>
+
+        </div>
+        <div style="margin-left: 15%">
+            <table id="jqGridContract"></table>
+            <div id="contractPager"></div>
+        </div>
+        <br/>
+
+        <div class="form-group" style="margin-left: 30%">
+            <div class="col-sm-2 control-label"></div>
+            &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+        </div>
+    </form>
+</div>
+</body>
+<script src="${request.contextPath}/statics/js/contract/supplier.js?_${.now?long}"></script>
+</html>

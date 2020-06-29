@@ -4,8 +4,10 @@
 
     <select id="queryRisk" resultType="com.bj.contract.entity.ContractRisk">
         select c.contract_name,c.contract_amount,c.party_b_id,c.pay_status,c.payment_type,c.contract_code,c.pay_status,
-        c.contract_type,r.contract_id,r.risk_type,r.solution,r.id,r.risk_name,s.supplier_name
-        from contract as c join contract_risk as r on c.contract_id=r.contract_id join supplier as s on c.party_b_id = s.supplier_id
+        c.contract_type,r.contract_id,r.risk_type,r.solution,r.id,r.risk_name,s.supplier_name,r.del
+        from contract as c
+        join contract_risk as r on c.contract_id=r.contract_id
+        join supplier as s on c.party_b_id = s.supplier_id
         <where> ${ew.sqlSegment}</where>
     </select>
     <update id="setDel">
@@ -17,6 +19,16 @@
         c.contract_type,r.contract_id,r.risk_type,r.solution,r.id,r.risk_name,s.supplier_name
          from contract as c join contract_risk as r on c.contract_id=r.contract_id join supplier as s on c.party_b_id = s.supplier_id
          where id = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.bj.contract.entity.ContractRisk">
+
+        insert into contract_risk (id, contract_id,risk_name,risk_type,solution)
+    values (#{id}, #{contractId}, #{riskName}, #{riskType}, #{solution})
+    </insert>
+    
+    <select id="select" resultType="com.bj.contract.entity.ContractRisk">
+        select id from contract_risk where contract_id = #{contractId} and risk_type = #{Risk}
     </select>
 
 </mapper>

@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public interface ContractService extends IService<Contract> {
 
-    PageUtils queryPage(Map<String, Object> params) throws Exception;
+    PageUtils queryPage(Map<String, Object> params,Long deptId) throws Exception;
 
     Contract getContractInfoById(Long id);
     Contract getById(Long contractId);

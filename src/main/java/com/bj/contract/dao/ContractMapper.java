@@ -34,4 +34,7 @@ public interface ContractMapper extends BaseMapper<Contract> {
     void updateAmount(@Param("contractId")Long contractId,@Param("o") Object o, @Param("unAmount") BigDecimal unAmount);
 
     Contract contractById(Long contractId);
+
+    List<Contract> queryAll();
+
 }

@@ -72,7 +72,7 @@ public class UserReviewRecordController extends AbstractController {
  */
     @PostMapping("/reject")
     //@RequiresPermissions("contract:userReviewRecord:save")
-    public R reject(@Validated @RequestBody UserReviewRecord userReviewRecord){
+    public R reject(@RequestBody UserReviewRecord userReviewRecord){
         try {
             userReviewRecord.setReviewer(getUser().getUserName());
             System.out.println(userReviewRecord);
