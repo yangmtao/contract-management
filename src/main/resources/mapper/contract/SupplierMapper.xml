@@ -5,11 +5,12 @@
         select supplier_id,supplier_name from supplier
         where
         <bind name="supplierName" value="'%'+keyword+'%'"/>
-        supplier_name like #{supplierName} and status = 0
+        supplier_name like #{supplierName}
     </select>
 
     <select id="selectSupplierNameById" resultType="string">
         select supplier_name from supplier where supplier_id=#{id}
     </select>
+
 
 </mapper>

@@ -15,7 +15,6 @@ import com.bj.contract.entity.Contract;
 import com.bj.contract.entity.ReviewOrder;
 import com.bj.contract.service.ContractService;
 
-import freemarker.template.utility.StringUtil;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.*;
@@ -269,6 +268,31 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
     @Override
     public Contract getContractDetailById(Long id) {
         return baseMapper.selectContractDetail(id);
+    }
+
+    @Override
+    public String[] getAllYear() {
+        return baseMapper.selectAllYear();
+    }
+
+    @Override
+    public List<Map<String,String>>  getTypeCount(String year) {
+        return baseMapper.selectTypeCount(year);
+    }
+
+    @Override
+    public List<Map<String, String>> getTypeCountMonth(String year, Integer type) {
+        return baseMapper.selectTypeCountMonth(year,type);
+    }
+
+    @Override
+    public List<Map<String, String>> getMonthNumberByYear(String year) {
+        return baseMapper.selectMonthNumberByYear(year);
+    }
+
+    @Override
+    public List<Map<String, String>> getAllYearAndCount() {
+        return baseMapper.selectAllYearAndCount();
     }
 
     //获取当前合同详细信息

@@ -1,62 +1,4 @@
-/*$(function () {
-    var dataList=[
-        {   paymentStageId:'1',
-            paymentStage:'阶段一',
-            uses:'<select class="jqgridSelect" ><option></option></select>',
-            paymentAmount:'<input class="jqgridInput">',
-            paymentRate:'',
-            paymentDate:'<input class="jqgridInput">'
-        }];
-    $("#jqGrid").jqGrid({
-        datatype: "local",
-        colModel: [
-            {label: '付款阶段Id', name: 'paymentStageId',width: 80, key: true, hidden: true},
-            {label: '付款阶段', name: 'paymentStage', width: 150,align: 'center'},
-            {label: '用途', name: 'uses', width: 150, align: 'center'},
-            {label: '付款金额', name: 'paymentAmount', width: 150, align: 'center'},
-            {
-                label: '付款比例', name: 'paymentRate', width: 115, align: 'center'
-            },
-            {
-                label: '付款日期', name: 'paymentDate', sortable: false, width: 150, align: 'center'
-            }
-        ],
-        viewrecords: true,
-        height: 150,
-        rowNum: 20,
-        rowList: [50, 100, 500],
-        autowidth: true,
-        shrinkToFit: false,
-        multiselect: false,
-        pager: "#jqGridPager",
-        styleUI: 'Bootstrap',
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        }
-    });
 
-    var localData = {page: 1, total: 0, records: dataList.length, rows: dataList};
-
-    localData.total = (dataList.length % 5 == 0) ? (dataList.length / 5) : (Math.floor(dataList.length / 5) + 1);
-    var reader = {
-        root: function (obj) {
-            return localData.rows;
-        },
-        page: function (obj) {
-            return localData.page;
-        },
-        total: function (obj) {
-            return localData.total;
-        },
-        records: function (obj) {
-            return localData.records;
-        }, repeatitems: false
-    };
-    $("#jqGrid").setGridParam({data: localData.rows, reader: reader}).trigger('reloadGrid');
-
-});*/
 
 var setting = {
     data: {
@@ -143,6 +85,7 @@ var vmContract = new Vue({
             paymentRate:null,
             paymentDate: null
         },
+        updateStageIndex:-1,
         tableData: [],
         dept: {
             purchasingDeptName: null,
@@ -175,16 +118,25 @@ var vmContract = new Vue({
            return row.paymentRate+'%';
         },
         addPaymentStage:function(){
+            var index=this.updateStageIndex;
             var tempStage={};
             $.extend(tempStage,this.paymentStage);
             tempStage.paymentRate=((tempStage.paymentAmount/this.contract.contractAmount)*100).toFixed(2);
-            this.tableData.push(tempStage);
-          this.dialogFormVisible=false;
+            if(index>=0){
+                this.tableData[index]=tempStage;
+            }else{
+                this.tableData.push(tempStage);
+            }
+            this.updateStageIndex=-1;
+            this.dialogFormVisible=false;
         },
         handleEdit:function(index, row) {
-            console.log(index, row);
+            this.paymentStage=this.tableData[index];
+            this.updateStageIndex=index;
+            this.dialogFormVisible=true;
         },
         handleDelete:function(index, row) {
+            this.tableData.splice(index,1);
             console.log(index, row);
         },
         contractFileSuccess: function(r){
@@ -231,8 +183,10 @@ var vmContract = new Vue({
                 data: dataStr,
                 success: function (r) {
                     if (r.code === 1) {
-                        alert('操作成功');
-                        _this.reload();
+
+                        alert('操作成功',function () {
+                            _this.reload();
+                        });
                     } else {
                         alert(r.msg);
                     }

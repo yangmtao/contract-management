@@ -21,7 +21,7 @@
 
     <select id="selectContractByIds" resultType="com.bj.contract.entity.Contract">
         select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,c.demand_dept_id,c.party_b_id,
-        case c.contract_type when 1 then '赠予合同' when 2 then '租赁合同' else '买卖合同' end as contract_type_name,
+        case c.contract_type when 1 then '通用物资' when 2 then '医用物资' when 2 then '工程' when 2 then '服务' else '其他' end as contract_type_name,
         case c.pay_status when 1 then '在付' when 2 then '已付' else '未付' end as pay_status_name,
         case c.payment_type when 1 then '银行转账' when 2 then '支票' when 3 then '支付宝' when 4 then '微信' else '现金' end as payment_type_name,
         c.contract_amount,c.create_date,c.start_date,c.end_date,
@@ -58,11 +58,11 @@
     <select id="selectContractDetail" resultType="com.bj.contract.entity.Contract">
         select c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,
         c.create_date,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date,c.contract_file,
-        case c.contract_type when 1 then '赠予合同' when 2 then '租赁合同' else '买卖合同' end as contract_type_name,
+        case c.contract_type when 1 then '通用物资' when 2 then '医用物资' when 3 then '工程' when 4 then '服务' else '其他' end as contract_type_name,
         case c.pay_status when 1 then '在付' when 2 then '已付' else '未付' end as pay_status_name,
         case c.payment_type when 1 then '银行转账' when 2 then '支票' when 3 then '支付宝' when 4 then '微信' else '现金' end as payment_type_name,
         d.dept_name as demand_dept_name,
-        u.real_name as contract_manager_name,u.user_mobile as phone,
+        u.real_name as contract_manager_name,u.user_mobile as contract_manager_phone,
         s.supplier_name as party_b_name,
         (select dept_name from sys_dept where dept_id=c.purchasing_dept_id) as purchasing_dept_name
         from contract as c
@@ -89,6 +89,46 @@
 
     <select id="queryAll" resultType="com.bj.contract.entity.Contract">
         select * from contract
+    </select>
+
+    <select id="selectAllYear" resultType="string">
+        select DISTINCT substring(start_date,1,4) as year from contract ;
+    </select>
+
+    <select id="selectAllYearAndCount" resultType="java.util.HashMap">
+        select substring(start_date,1,4) as year , count(start_date) as count
+        from contract
+        GROUP BY year
+        ORDER BY year asc
+    </select>
+
+    <select id="selectTypeCount" resultType="java.util.HashMap">
+        select case contract_type when 1 then '通用物资' when 2 then '医用物资' when 3 then '工程' when 4 then '服务' else '其他' end as contract_type_name,
+        count(contract_type) as number from contract
+        where
+        <bind name="year" value="'%'+year+'%'"/>
+        start_date like #{year}
+        GROUP BY contract_type
+    </select>
+
+    <select id="selectTypeCountMonth" resultType="java.util.HashMap">
+        select substring(start_date,6,2) as month ,contract_type,count(start_date) as count
+        from contract
+        where
+        <bind name="year" value="'%'+year+'%'"/>
+        start_date like #{year}
+        GROUP BY month,contract_type
+        ORDER BY month asc
+    </select>
+
+    <select id="selectMonthNumberByYear" resultType="java.util.HashMap">
+        select substring(start_date,6,2) as month , count(start_date) as number
+        from contract
+        where
+         <bind name="year" value="'%'+year+'%'"/>
+        start_date like #{year}
+         GROUP BY month
+         ORDER BY month asc
     </select>
 
     <select id="getRole" resultType="long">

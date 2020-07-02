@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -37,5 +38,14 @@ public interface ContractMapper extends BaseMapper<Contract> {
 
     List<Contract> queryAll();
 
+    String[] selectAllYear();
+
+    List<Map<String,String>>  selectTypeCount(@Param("year") String year);
+
+    List<Map<String, String>> selectTypeCountMonth(@Param("year") String year, @Param("type") Integer type);
+
+    List<Map<String, String>> selectMonthNumberByYear(@Param("year") String year);
+
+    List<Map<String, String>> selectAllYearAndCount();
     Long getRole(Long userId);
 }
