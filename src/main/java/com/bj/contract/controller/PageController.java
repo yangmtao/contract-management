@@ -45,6 +45,10 @@ public class PageController {
         return "contract/contract_detail";
     }
 
+    @GetMapping("/contract/statistic.html")
+    public String statistic(){
+        return "contract/statistic";
+    }
 
 
 }

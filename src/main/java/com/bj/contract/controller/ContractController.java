@@ -115,7 +115,7 @@ public class ContractController extends AbstractController {
             targetFile.createNewFile();
         }
         file.transferTo(targetFile);
-        String fileUrl = "http://localhost:9001/localImage/"+imageName;
+        String fileUrl = "http://localhost:9101/localImage/"+imageName;
 
         return R.ok().put("url",fileUrl).put("imageName",file.getOriginalFilename());
     }
@@ -151,6 +151,41 @@ public class ContractController extends AbstractController {
         List<String> idList= Arrays.asList(idStr);
         contractFileService.excelExport(response,idList);
         return R.ok().put("msg","导出成功");
+    }
+
+    //获取当前合同的所有年份
+    @GetMapping("/years")
+    public R contractAllYear(){
+        String[] years=contractFileService.getAllYear();
+        return R.ok().put("years",years);
+    }
+
+    //获取当前合同的所有年份以及对应的合同数量
+    @GetMapping("/year/count")
+    public R contractAllYearAndCount(){
+        List<Map<String,String>> years=contractFileService.getAllYearAndCount();
+        return R.ok().put("yearAndCount",years);
+    }
+
+    //根据年份获取各个合同类别的合同数量
+    @GetMapping("/type/numbers")
+    public R getTypeNumbersByType(@RequestParam("year") String year){
+        List<Map<String,String>> typeCount=  contractFileService.getTypeCount(year);
+        return R.ok().put("typeCount",typeCount);
+    }
+
+    //根据年份获取各个合同类别每个月的合同数量
+    @GetMapping("type/month/count")
+    public R getTypeCountAndMonthByYear(@RequestParam("year") String year ,Integer type){
+        List<Map<String,String>> typeCountMonth=contractFileService.getTypeCountMonth(year,type);
+        return R.ok().put("typeCountMonth",typeCountMonth);
+    }
+
+    //
+    @GetMapping("/month/number")
+    public R getMonthNumberByYear(@RequestParam("year") String year){
+        List<Map<String,String>> monthNumber=contractFileService.getMonthNumberByYear(year);
+        return R.ok().put("monthNumber",monthNumber);
     }
 }
 

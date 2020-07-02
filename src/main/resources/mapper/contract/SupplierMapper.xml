@@ -12,8 +12,5 @@
         select supplier_name from supplier where supplier_id=#{id}
     </select>
 
-<select id="selectSupplierSimple" resultType="java.util.Map">
-    select supplier_id,supplier_name from supplier where status = 0
-</select>
 
 </mapper>

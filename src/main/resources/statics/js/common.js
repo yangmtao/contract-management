@@ -114,7 +114,7 @@ function isBlank(value) {
 DICT = {
     SEX: {0: '未知', 1: '男', 2: '女'},
     PAYMENT_TYPE:{0:'现金',1:'银行转账',2:'支票',3:'支付宝',4:'微信'},
-    CONTRACT_TYPE: {0: '买卖合同', 1: '赠与合同', 2: '租赁合同'}
+    CONTRACT_TYPE: {1: '通用物资', 2: '医用物资', 3: '工程',4:'服务',5:'其他'}
 }
 Vue.prototype.DICT = DICT;
 

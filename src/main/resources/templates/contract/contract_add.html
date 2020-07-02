@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>文章列表</title>
+    <title>合同录入</title>
     <#include "/header.html">
     <!-- vee-validate-->
     <script src="${request.contextPath}/statics/libs/vee-validate.js"></script>
@@ -273,6 +273,7 @@
             </div>
         </form>
     </div>
+
     <!--付款阶段添加-->
     <el-dialog title="添加付款阶段" :visible.sync="dialogFormVisible" width="480px" >
         <el-form :model="paymentStage">
@@ -281,8 +282,11 @@
             </el-form-item>
             <el-form-item label="用途" :label-width="formLabelWidth">
                 <el-select v-model="paymentStage.uses" placeholder="请选择款项用途">
-                    <el-option label="用途一" value="0"></el-option>
-                    <el-option label="用途二" value="1"></el-option>
+                    <el-option  value="定金"></el-option>
+                    <el-option  value="预付款"></el-option>
+                    <el-option  value="阶段付款"></el-option>
+                    <el-option  value="全款"></el-option>
+                    <el-option  value="尾款"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="付款金额" :label-width="formLabelWidth">

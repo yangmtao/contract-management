@@ -305,7 +305,7 @@ var vmContract = new Vue({
 
 DICT = {
     PAYMENT_STATUS: {0: '未付', 1: '在付', 2: '已付'},
-    CONTRACT_TYPE: {0: '买卖合同', 1: '赠与合同', 2: '租赁合同'}
+    CONTRACT_TYPE: {1: '通用物资', 2: '医用物资', 3: '工程',4:'服务',5:'其他'}
 }
 Vue.prototype.DICT = DICT;
 

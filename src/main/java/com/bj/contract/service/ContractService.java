@@ -29,4 +29,14 @@ public interface ContractService extends IService<Contract> {
     void excelExport(HttpServletResponse response, List<String> ids) throws FileNotFoundException, IOException, IllegalAccessException;
 
     Contract getContractDetailById(Long id);
+
+    String[] getAllYear();
+
+    List<Map<String,String>>  getTypeCount(String year);
+
+    List<Map<String, String>> getTypeCountMonth(String year, Integer type);
+
+    List<Map<String, String>> getMonthNumberByYear(String year);
+
+    List<Map<String,String>> getAllYearAndCount();
 }

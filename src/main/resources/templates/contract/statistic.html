@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计与分析</title>
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/elementUI.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/main.css">
+
+    <script src="${request.contextPath}/statics/libs/echarts.min.js"></script>
+    <script src="${request.contextPath}/statics/libs/vue.min.js"></script>
+    <script src="${request.contextPath}/statics/js/elementUI.js"></script>
+    <script src="${request.contextPath}/statics/libs/jquery.min.js"></script>
+    <style>
+        #statistic{
+            width: 90%;
+            margin: 0 auto;
+            border:1px solid #999999;
+            padding: 20px;
+        }
+        #chart,#lineChart{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .chart{
+            width:400px;
+            height: 250px;
+        }
+        #pieChart,#lineChartOfYear,#lineChartOfMonth{
+            width: 600px;
+            height: 400px;
+            margin-top:50px ;
+        }
+        #pieChart{
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div  id="statistic" >
+    <h1>五类合同（通用物资、医用物资、工程、服务、其他）分别的年度月份合同数</h1>
+    <el-select v-model="barYear" size="small" placeholder="请选择年份" @change="loadBarData">
+        <el-option v-for="item in years" :key="item" :value="item" ></el-option>
+    </el-select>
+    <p></p>
+    <div id="chart">
+        <div id="mainOne" class="chart"></div>
+        <div id="mainTwo" class="chart"></div>
+        <div id="mainThree" class="chart"></div>
+        <div id="mainFour" class="chart"></div>
+        <div id="mainFive" class="chart"></div>
+    </div>
+    <p></p>
+    <hr>
+    <h1>五类合同数量占比</h1>
+    <el-select v-model="pieYear" size="small" placeholder="请选择年份" @change="loadPieData">
+        <el-option v-for="item in years" :key="item" :value="item" ></el-option>
+        <el-option key="20" label="全部" value="全部"></el-option>
+    </el-select>
+    <div id="pieChart"></div>
+    <hr>
+    <p> </p>
+    <h1>年度、月度合同增长曲线</h1>
+    <el-select v-model="lineYear" size="small" placeholder="请选择年份" @change="loadMonthLineData">
+        <el-option v-for="item in years" :key="item" :value="item" ></el-option>
+    </el-select>
+    <div id="lineChart">
+    <div id="lineChartOfYear"></div>
+     <div id="lineChartOfMonth"></div>
+    </div>
+</div>
+
+</body>
+<script>
+    CONTRACT_TYPE=['通用物资', '医用物资', '工程','服务','其他'];
+    var pieSource=[['type','number']];
+    var barSource=[['month','count1','count2','count3','count4','count5']];
+    var yearLineSource=[['year','count']];
+    var monthLineSource=[['month','number']];
+    $(function () {
+
+        //初始化合同年度增长折线图
+         $.get("/contract//year/count",function (r) {
+             var data=[];
+             data=r.yearAndCount;
+             for(var i=0;i<data.length;i++){
+                 var tempArray=[data[i].year,data[i].count];
+                 yearLineSource.push(tempArray);
+             }
+             lineChartOfYear.setOption({
+                 title: {text:'年度合同增长曲线'},
+                 dataset:{
+                     source: yearLineSource
+                 },
+                 series:[{
+                     encode:{
+                         x:'year',
+                         y:'count'
+
+                     }
+                 }]
+             });
+
+         })
+
+        //初始化月度增长折线图
+        statisticVue.loadMonthLineData();
+        //初始化饼图
+       statisticVue.loadPieData();
+        //初始化柱状图
+        statisticVue.loadBarData();
+
+    })
+    //Vue对象
+    var statisticVue=new Vue({
+        el:'#statistic',
+        data:{
+            years: [],
+            pieYear:'全部',
+            barYear:'2019',
+            lineYear:'2019'
+        },
+        mounted(){
+            var _this=this;
+            //加载所有年份
+            $.get("/contract/years",function(r){
+                _this.years=r.years;
+            })
+        },
+        methods:{
+            //根据所选年份加载饼图数据（五类合同占比）
+            loadPieData:function () {
+                var year=this.pieYear;
+                year=year=='全部'? '20':year;
+                pieSource=[['type','number']];
+             if(year!=''){
+                 $.get("/contract/type/numbers",{'year':year},function (r) {
+                     var data=[];
+                     data=r.typeCount;
+                     for(var i=0;i<data.length;i++){
+                         var tempArray=[data[i].contract_type_name,data[i].number];
+                         pieSource.push(tempArray);
+                     }
+                     pieChart.setOption({
+                         dataset:{
+                             source: pieSource
+                         },
+                     });
+                 })
+             }
+            },
+            //根据所选年份加载柱状图数据（五类合同分别的年度月份增长数）
+            loadBarData:function(){
+                var year=this.barYear;
+                barSource=[['month','count1','count2','count3','count4','count5']];
+                $.get("/contract/type/month/count",{'year':year},function (r) {
+                    var data=[];
+                    data=r.typeCountMonth;
+                    for(var i=1;i<=12;i++){
+                        i=i<10? '0'+i:i+'';
+                        var tempArray=[i,0,0,0,0,0];
+                        for(var j=0;j<data.length;j++){
+                            if(data[j].month==i){
+                                switch (data[j].contract_type) {
+                                    case 1:tempArray[1]=data[j].count;
+                                        break;
+                                    case 2:tempArray[2]=data[j].count;
+                                        break;
+                                    case 3:tempArray[3]=data[j].count;
+                                        break;
+                                    case 4:tempArray[4]=data[j].count;
+                                        break;
+                                    case 5:tempArray[5]=data[j].count;
+                                        break;
+                                }
+                            }
+                        }
+                        barSource.push(tempArray);
+                    }
+                    for(var i=0;i<5;i++){
+                        barCharts[i].setOption({
+                            title:{
+                                text:CONTRACT_TYPE[i]
+                            },
+                            dataset:{
+                                source: barSource
+                            },
+                            series:[{
+                                encode: {
+                                    x: 'month',
+                                    y: 'count'+(i+1)
+                                }
+                            },
+                                {
+                                    encode: {
+                                        x: 'month',
+                                        y: 'count'+(i+1)
+                                    }
+                                }]
+                        });
+                    }
+                })
+            },
+            //根据所选年份加载合同月度增长折线图
+            loadMonthLineData:function () {
+                 var year=this.lineYear;
+                monthLineSource=[['month','number']];
+                 $.get("/contract/month/number",{'year':year},function (r) {
+                     var data=[];
+                     data=r.monthNumber;
+                     for(var i=1;i<=12;i++){
+                         i=i<10? '0'+i:i+'';
+                         var tempArray=[i,0];
+                         for(var j=0;j<data.length;j++){
+                             if(data[j].month==i){
+                                 tempArray[1]=data[j].number;
+                             }
+                         }
+                         monthLineSource.push(tempArray);
+                     }
+                     lineChartOfMonth.setOption({
+                         title: {text:'月度合同增长曲线'},
+                         dataset:{
+                             source: monthLineSource
+                         },
+                         series:[{
+                             encode:{
+                                 x:'month',
+                                 y:'number'
+
+                             }
+                         }]
+                     })
+                 })
+            }
+        }
+    })
+    //基于准备好的dom，初始化echarts实例
+    var myChartOne=echarts.init(document.getElementById('mainOne'));
+    var myChartTwo=echarts.init(document.getElementById('mainTwo'));
+    var myChartThree=echarts.init(document.getElementById('mainThree'));
+    var myChartFour=echarts.init(document.getElementById('mainFour'));
+    var myChartFive=echarts.init(document.getElementById('mainFive'));
+    var barCharts=[myChartOne,myChartTwo,myChartThree,myChartFour,myChartFive]
+    //指定图表的配置项和数据
+    var option={
+        tooltip:{},
+        //x轴
+        xAxis:{
+            type:'category'
+        },
+        //y轴
+        yAxis:{
+
+        },
+        series:[{
+            type:'bar',
+        },
+            {
+                type:'line',
+                smooth:false,
+            }]
+    };
+    //使用刚才指定的配置项和数据显示图表
+    myChartOne.setOption(option);
+    myChartTwo.setOption(option);
+    myChartThree.setOption(option);
+    myChartFour.setOption(option);
+    myChartFive.setOption(option);
+
+    //饼图
+    var percentOption={
+        tooltip:{
+            trigger: 'item',
+            formatter: '{b} : {c} ({d}%)'
+        },
+        legend:{
+        },
+        series:{
+            type:'pie',
+            encode:{
+                itemName:'type',
+                value:'number'
+            }
+        }
+    }
+    var pieChart=echarts.init(document.getElementById('pieChart'));
+    pieChart.setOption(percentOption);
+
+    //曲折线图
+    var lineChartOption={
+        tooltip:{},
+        xAxis: {type:'category'},
+        yAxis: {},
+        series:[{
+            type:'line',
+            smooth:false
+        }]
+    }
+    var lineChartOfYear=echarts.init(document.getElementById('lineChartOfYear'));
+    var lineChartOfMonth=echarts.init(document.getElementById('lineChartOfMonth'));
+    lineChartOfYear.setOption(lineChartOption);
+    lineChartOfMonth.setOption(lineChartOption);
+</script>
+</html>

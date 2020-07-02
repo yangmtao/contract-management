@@ -10,9 +10,11 @@ import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotations.Version;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -42,7 +44,7 @@ public class ContractPaymentStage extends Model<ContractPaymentStage> {
     /**
      * 付款用途
      */
-    private Integer uses;
+    private String uses;
     /**
      * 付款金额
      */
@@ -51,6 +53,8 @@ public class ContractPaymentStage extends Model<ContractPaymentStage> {
     /**
      * 付款时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @TableField("payment_date")
     private Date paymentDate;
     /**

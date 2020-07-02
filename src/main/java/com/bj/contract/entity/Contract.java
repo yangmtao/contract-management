@@ -80,7 +80,7 @@ public class Contract extends Model<Contract> {
      * 经办人联系方式
      */
     @TableField(exist = false)
-    private String phone;
+    private String contractManagerPhone;
     /**
      * 合同金额
      */
