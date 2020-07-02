@@ -37,4 +37,5 @@ public interface ContractMapper extends BaseMapper<Contract> {
 
     List<Contract> queryAll();
 
+    Long getRole(Long userId);
 }

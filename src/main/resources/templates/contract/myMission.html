@@ -46,7 +46,7 @@
             <div class="form-group">
                 <div style="height:30px;width:100%;margin-top:10px;">
                     <label style="font-weight: normal;margin-left: 10px;">当前节点：</label>
-                    <el-input :disabled="true"
+                    <el-input :readonly="true"
                               v-model="contract.nodeName"
                               style="width:250px;"
                               size="small"
@@ -54,14 +54,14 @@
                     </el-input>
                     <label style="font-weight: normal;margin-left: 10px;">需求部门：</label>
                     <el-input
-                            :disabled="true"
+                            :readonly="true"
                             v-model="contract.demandDeptName"
                             style="width:250px;"
                             size="small"
                     >
                     </el-input>
                     <label style="font-weight: normal;margin-left: 10px;">经办人员：</label>
-                    <el-input :disabled="true"
+                    <el-input :readonly="true"
                               v-model="contract.contractManagerName"
                               style="width:250px;"
                               size="small"
@@ -70,14 +70,14 @@
                 </div>
                 <div style="height:30px;width:100%;margin-top:10px;">
                     <label style="font-weight: normal;margin-left: 10px;">乙方单位：</label>
-                    <el-input :disabled="true"
+                    <el-input :readonly="true"
                               v-model="contract.supplierName"
                               style="width:250px;"
                               size="small"
                     >
                     </el-input>
                     <label style="font-weight: normal;margin-left: 10px;">合同金额：</label>
-                    <el-input :disabled="true"
+                    <el-input :readonly="true"
                               placeholder="请输入金额"
                               v-model="contract.contractAmount"
                               style="width:250px;"
@@ -85,7 +85,7 @@
                     </el-input>
                     <label style="font-weight: normal;margin-left: 10px;">开始时间：</label>
                     <el-date-picker
-                            :disabled="true" v-model="contract.startDate"
+                            :readonly="true" v-model="contract.startDate"
                             type="datetime"
                             :time-arrow-control="true"
                             placeholder="选择时间" id="finOrgInfoDate001" size="small"
@@ -95,7 +95,7 @@
                 <div style="height:30px;width:100%;margin-top:10px;">
                     <label style="font-weight: normal;margin-left: 10px;">合同类型：</label>
                     <el-input
-                            :disabled="true"
+                            :readonly="true"
                             v-model="contract.contractType"
                             style="width:250px;"
                             size="small"
@@ -103,7 +103,7 @@
                     </el-input>
                     <label style="font-weight: normal;margin-left: 10px;">采购内容：</label>
                     <el-input
-                            :disabled="true"
+                            :readonly="true"
                             v-model="contract.purchaseContent"
                             style="width:250px;"
                             size="small"
@@ -111,7 +111,7 @@
                     </el-input>
                     <label style="font-weight: normal;margin-left: 10px;">结束时间：</label>
                     <el-date-picker
-                            :disabled="true" v-model="contract.endDate"
+                            :readonly="true" v-model="contract.endDate"
                             type="datetime"
                             :time-arrow-control="true"
                             placeholder="选择时间" id="finOrgInfoDate001" size="small"
@@ -121,11 +121,11 @@
 
             </div>
         </div>
-        <el-form label-width="80px" style="margin-left:7.7%">
+        <el-form label-width="80px" style="margin-left:11%">
             <div style="height:30px;width:100%;margin-top:10px;">
                 <el-form-item>
                     <label style="font-weight: normal;margin-left: 10px;">&nbsp;支付情况：</label>
-                    <el-radio-group :disabled="true" v-model="contract.payStatus">
+                    <el-radio-group :readonly="true" v-model="contract.payStatus">
                         <el-radio :label="0" name="type" value="0">已支付</el-radio>
                         <el-radio :label="1" name="type" value="1">正在支付</el-radio>
                         <el-radio :label="2" name="type" value="2">未支付</el-radio>
@@ -140,7 +140,7 @@
         <el-form  style="margin:0px auto;"  label-width="100px" >
 
             <el-form-item label="合同附件："  style="margin-left: 18%">
-                <el-button style="margin-left: 0px" v-model="contract.contractFile">查看文件</el-button>
+                <el-button style="margin-left: 0px"><a href="contract.contractFile"  target="_blank" >查看文件</a></el-button>
             </el-form-item>
 
             <el-form-item label="审核意见："  style="margin-left: 18%;margin-right: 18%;">

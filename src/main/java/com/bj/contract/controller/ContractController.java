@@ -4,6 +4,7 @@ package com.bj.contract.controller;
 import com.alibaba.fastjson.JSON;
 import com.bj.common.util.PageUtils;
 import com.bj.common.util.R;
+import com.bj.contract.dao.ContractMapper;
 import com.bj.contract.entity.Contract;
 import com.bj.contract.entity.ContractPaymentStage;
 import com.bj.contract.service.ContractPaymentStageService;
@@ -37,6 +38,9 @@ import java.util.*;
 public class ContractController extends AbstractController {
     @Autowired
     private ContractService contractFileService;
+
+    @Autowired
+    private ContractMapper contractMapper;
 
     @Autowired
     private ContractPaymentStageService paymentStageService;
@@ -96,6 +100,26 @@ public class ContractController extends AbstractController {
         return R.ok().put("page", page);
     }
 
+    /**
+     * 分页获取该部门需要审核的合同
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/review/list")
+    @ResponseBody
+    @RequiresPermissions("contract:list")
+    public R reviewList(@RequestParam Map<String, Object> params) throws Exception {
+        Long deptId = getDeptId();
+        System.out.println(deptId+"--");
+        Long userId = getUser().getUserId();
+        Long roleId = contractMapper.getRole(userId);
+        System.out.println(roleId);
+
+
+        PageUtils page  = contractFileService.queryReview(params,deptId,roleId);
+        log.info("contract list");
+        return R.ok().put("page", page);
+    }
 
 
     //图片上传

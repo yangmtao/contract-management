@@ -10,9 +10,12 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +86,15 @@ public class SupplierController {
      */
     @PostMapping("/save")
     @RequiresPermissions("contract:supplier:save")
-    public R save(@Validated @RequestBody SupplierEntity supplier){
+    public R save(@Validated @RequestBody SupplierEntity supplier, BindingResult result){
+        List<String> errors = new ArrayList<>();
+        if (result.hasErrors()){
+            List<ObjectError> allErrors = result.getAllErrors();
+            for (ObjectError error : allErrors){
+                errors.add(error.getDefaultMessage());
+            }
+        }
+
         try {
             return supplierService.saveSupplier(supplier);
         } catch (Exception e) {

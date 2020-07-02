@@ -44,7 +44,8 @@ function jqGrid(){$("#jqGrid").jqGrid({
                 var contractId = rowData["contractId"];
                 var contractName = rowData["contractName"];
                 var contractCode = rowData["contractCode"];
-                return "<a class='btn btn-primary' onclick='settlement(\""+contractId+"\",\""+contractName+"\",\""+contractCode+"\")' '>结算</a>"
+                var unPayAmount = rowData["unPayAmount"]
+                return "<a class='btn btn-primary' onclick='settlement(\""+contractId+"\",\""+contractName+"\",\""+contractCode+"\",\""+unPayAmount+"\")' '>结算</a>"
 
 
             }
@@ -80,29 +81,32 @@ $(function () {
     jqGrid();
 });
 
-function settlement(contractId,contractName,contractCode){
+function settlement(contractId,contractName,contractCode,unPayAmount){
 
-vm.passSettlement(contractId,contractName,contractCode)
+vm.passSettlement(contractId,contractName,contractCode,unPayAmount)
 
 }
 
-var ztree;
-var setting = {
-    data: {
-        simpleData: {
-            enable: true,
-            idKey: "orgId",
-            pIdKey: "parentId",
-            rootPId: -1
-        },
-        key: {
-            url: "nourl"
-        }
-    }
-};
+Vue.use(VeeValidate);
+VeeValidate.Validator.localize('zh_CN');
+
+VeeValidate.Validator.extend('normalText',{
+    getMessage:function(n){return n+"只能包含中文、字母、数字"},
+    validate: function(value){return !!/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(value) }
+});
+VeeValidate.Validator.extend('myDecimal',{
+    getMessage:function(n){return "只能是19位数字"},
+    validate: function(value){return /^\d{19}$/.test(value) }
+});
+VeeValidate.Validator.extend('AmDecimal',{
+    getMessage:function(n){return "不能为负"},
+    validate: function(value){
+        return /^[1-9]\d*$/.test(value)}
+});
 var vm = new Vue({
     el: '#rrapp',
     data: {
+        //back:"default",
         showList: 1,
         title: null,
         opName: "",
@@ -113,6 +117,7 @@ var vm = new Vue({
             orgName: "",
             userFlag: 1
         },
+        unPayAmount:"",
         contract:{
             contractName:null,
             startDate:null,
@@ -139,24 +144,10 @@ var vm = new Vue({
 
 
         },
-        finUserSearch: {
-            userName: "",
-            realName: "",
-            userStatus: "",
-            orgId: "",
-            orgName: "",
-            createDateStart: "",
-            createDateEnd: ""
-        },
         supplierSearch:{
             supplierName:"",
             creditCode:""
         },
-        userStatusList: [
-            {code: 1, value: "启用"},
-            {code: 2, value: "停用"},
-            {code: 3, value: "注销"}
-        ],
         operatingStatusList: [
             {code: 1, value: "营业"},
             {code: 2, value: "停业"}
@@ -165,10 +156,6 @@ var vm = new Vue({
             {code: 1, value: "科技"},
             {code: 2, value: "教育"}
         ],
-        oldPassword: "",
-        newPassword: "",
-        newPasswordSure: "",
-        chooseUserId: ""
     },
     methods: {
 
@@ -187,11 +174,13 @@ var vm = new Vue({
             this.reload();
         },
         //结算
-        passSettlement: function (contractId,contractName,contractCode) {
+        passSettlement: function (contractId,contractName,contractCode,unPayAmount) {
+            this.errors.clear()
             this.showList = 2;
             this.title = "结算";
             this.contractName = contractName;
             this.contractCode = contractCode;
+            this.unPayAmount = unPayAmount
             this.opName = "settlement";
             this.settlement = {
                 contractId:contractId,
@@ -211,79 +200,35 @@ var vm = new Vue({
             this.getContract(supplierId);
         },
 
-
         //新增或修改
         saveOrUpdate: function (event) {
             var url = "contract/settlement/save" ;
             var _this = this;
-            $.ajax({
-                type: "POST",
-                url: baseURL + url,
-                contentType: "application/json",
-                data: JSON.stringify(this.settlement),
-                success: function (r) {
-                    if (r.code === 1) {
-                        alert('操作成功', function (index) {
-                            _this.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
-                }
-            });
-        },
-        //删除
-        del: function (event) {
-            var supplierIds = getSelectedRows();
-            if (supplierIds == null) {
+            var settlement = _this.settlement
+            console.log(Object.getOwnPropertyNames(settlement).length)
+            if (Object.getOwnPropertyNames(settlement).length<6){
+                layer.msg("请输入完整信息")
                 return;
             }
-            confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
-                    url: baseURL + "contract/supplier/delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(supplierIds),
-                    success: function (r) {
-                        if (r.code == 1) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
-            });
-        },
+            for (item in settlement){
+                if(_this.errors.has(item)||settlement[item]==null){
 
-        handleFinUser: function (num) {
-            var userIds = getSelectedRows();
-            if (userIds == null) {
-                return;
+                    alert("请输入正确的信息！");
+                    return;
+                }
             }
-            var ids = [];
-            for (var i = 0; i < userIds.length; i++) {
-                ids.push(userIds[i] + "--" + num);
+            if(this.settlement.receiveAmount>this.unPayAmount){
+                layer.msg("付款金额不能大于未付款金额")
             }
-            var msg = "";
-            if (num == 1) {
-                msg = "确定启用所选客户的账户信息";
-            } else if (num == 2) {
-                msg = "确定停用所选客户的账户信息";
-            } else if (num == 3) {
-                msg = "确定注销所选客户的账户信息";
-            }
-            var _this = this;
-            confirm(msg, function () {
+            else{
                 $.ajax({
                     type: "POST",
-                    url: baseURL + "business/finuser/handleFinUser",
+                    url: baseURL + url,
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
+                    data: JSON.stringify(this.settlement),
                     success: function (r) {
-                        if (r.code == 1) {
-                            alert(r.msg, function (index) {
+                        if (r.code === 1) {
+                            alert('操作成功', function (index) {
                                 _this.reload();
                             });
                         } else {
@@ -291,20 +236,24 @@ var vm = new Vue({
                         }
                     }
                 });
-            });
+            }
+
+
         },
+
 
         //得到所选id的信息
         getInfo: function (supplierId) {
             var _this = this;
             $.get(baseURL + "contract/supplier/info/" + supplierId, function (r) {
                 _this.supplier = r.supplier;
-                console.log(_this.supplier+"===================")
+
             });
         },
 
         //搜索函数
         reload: function (event) {
+            this.errors.clear()
             this.showList = 1;
             // var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             var postData = {
@@ -317,89 +266,19 @@ var vm = new Vue({
                 page: 1, "postData": postData
             }).trigger("reloadGrid");
         },
-        finUserOrgTree: function (num) {
-            var _this = this;
-            this.getFinOrgInfoTreeData();
-            layer.open({
-                type: 1,
-                offset: '50px',
-                skin: 'layui-layer-molv',
-                title: "选择所属机构",
-                area: ['300px', '450px'],
-                shade: 0,
-                shadeClose: false,
-                content: jQuery("#finUserOrgInfoTreeLayer"),
-                btn: ['确定', '取消'],
-                btn1: function (index) {
-                    var node = ztree.getSelectedNodes();
-                    // console.log("node====", node, "==num==", num);
-                    if (null != node) {
-                        if (num == 1 || num == "1") {
-                            _this.finUserSearch.orgId = node[0]["orgId"];
-                            _this.finUserSearch.orgName = node[0]["orgName"];
-                        } else if (num == 2 || num == "2") {
-                            //选择上级菜单
-                            _this.finUser.orgId = node[0]["orgId"];
-                            _this.finUser.orgName = node[0]["orgName"];
-                        }
-                    }
-                    layer.close(index);
-                }
-            });
-        },
-        checkStartDate: function () {
-            if (this.finUserSearch.createDateStart) {
-                if (this.finUserSearch.createDateEnd) {
-                    var start = new Date((this.finUserSearch.createDateStart).replace(/-/g, '/'));
-                    var end = new Date((this.finUserSearch.createDateEnd).replace(/-/g, '/'));
-                    if (start.getTime() > end.getTime()) {
-                        alert("起始时间不能大于截止时间！");
-                        this.finUserSearch.createDateStart = '';
-                        return;
-                    }
-                }
 
-            }
-        },
-        checkEndDate: function () {
-            if (this.finUserSearch.createDateEnd) {
-                if (this.finUserSearch.createDateStart) {
-                    var start = new Date((this.finUserSearch.createDateStart).replace(/-/g, '/'));
-                    var end = new Date((this.finUserSearch.createDateEnd).replace(/-/g, '/'));
-                    if (end.getTime() < start.getTime()) {
-                        alert("截止时间不能小于起始时间！");
-                        this.finUserSearch.createDateEnd = '';
-                        return;
-                    }
-                }
-
-            }
-        },
-        getFinOrgInfoTreeData: function () {
-            var _this = this;
-            //加载菜单树
-            $.get(baseURL + "business/finorginfo/finOrgTreeList", function (r) {
-                var arr = [];
-                if (null != r["data"] && r["data"].length > 0) {
-                    var total = r["data"].length;
-                    for (var i = 0; i < total; i++) {
-                        var obj = r["data"][i];
-                        obj["name"] = r["data"][i]["orgName"];
-                        arr.push(obj);
-                    }
-                }
-                ztree = $.fn.zTree.init($("#finUserOrgInfoTree"), setting, arr);
-                if (_this.finOrgInfo != null) {
-                    var node = ztree.getNodeByParam("orgId", _this.finOrgInfo.parentId);
-                    if (null != node) {
-                        ztree.selectNode(node);
-                        _this.finOrgInfo.parentName = node.orgName;
-                    }
-                }
-            })
-        }
     }
 });
+
+//重写alert
+window.alert = function (msg, callback) {
+    parent.layer.alert(msg, function (index) {
+        parent.layer.close(index);
+        if (typeof(callback) === "function") {
+            callback("ok");
+        }
+    });
+}
 
 //加载页面
 function read(){

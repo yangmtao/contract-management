@@ -12,6 +12,7 @@ import com.bj.common.util.PageUtils;
 import com.bj.common.util.Query;
 import com.bj.contract.dao.ContractMapper;
 import com.bj.contract.entity.Contract;
+import com.bj.contract.entity.ReviewOrder;
 import com.bj.contract.service.ContractService;
 
 import freemarker.template.utility.StringUtil;
@@ -22,6 +23,7 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletOutputStream;
@@ -44,6 +46,8 @@ import java.util.Map;
 @Service
 public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> implements ContractService {
 
+    @Autowired
+    private ReviewOrder reviewOrder;
     @Override
     public PageUtils queryPage(Map<String, Object> params,Long deptId) throws Exception {
         Page page=new Query<Contract>(params).getPage();
@@ -109,6 +113,78 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         //执行查询并将查询结果添加到page
         page.setRecords(baseMapper.queryAllContract(page,wrapper));
         return new PageUtils(page);
+    }
+
+    /**
+     * 分页获取该部门需要审核的合同
+     * @param params
+     * @param deptId
+     * @return
+     */
+    @Override
+    public PageUtils queryReview(Map<String, Object> params, Long deptId, Long roleId) {
+        Integer order=0;
+        Integer order1=0;
+        if (deptId!=null){
+
+            if (deptId==10003){
+                order = 1;
+            }else if(deptId==10004){
+                order = 3;
+            }else if (deptId==10005){
+                order = 4;
+            }
+            else if (deptId==10006){
+                order = 5;
+            }
+            else if (deptId==10007){
+                order = 6;
+            }
+
+        }
+        if (roleId!=null){
+            System.out.println(roleId);
+            if (roleId==3){
+                order1=7;
+            }else if(roleId==4){
+                order1=8;
+            }
+        }
+
+        EntityWrapper<Contract> wrapper = new EntityWrapper<>();
+        if (deptId==10000){
+            if(order1!=0){
+                wrapper.eq("contract_node",order1).or().eq("demand_dept_id",deptId);
+            }else {
+                System.out.println("+++++++");
+            }
+        }else {
+            if (order!=0)
+                wrapper.eq("contract_node",order).or().eq("demand_dept_id",deptId);
+
+        }
+        String contractName = null != params.get("contractName")
+                && StringUtils.isNotBlank(params.get("contractName") + "") ? params.get("contractName") + "" : "";
+        String contractManagerName = null != params.get("contractManagerName")
+                && StringUtils.isNotBlank(params.get("contractManagerName") + "") ? params.get("contractManagerName") + "" : "";
+
+        if (StringUtils.isNotBlank(contractName)) {
+            wrapper.gt("instr(contract_name,'" + contractName + "')", 0);
+        }
+        if (StringUtils.isNotBlank(contractManagerName)) {
+            wrapper.gt("instr(real_name,'" + contractManagerName + "')", 0);
+        }
+
+        wrapper.eq("1",1);
+        Page<Contract> page = null;
+        try {
+            page = new Query<Contract>(params).getPage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        page.setRecords(baseMapper.queryAllContract(page,wrapper));
+
+        return new PageUtils(page);//new PageUtils(page);
     }
 
     @Override

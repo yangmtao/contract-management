@@ -3,6 +3,8 @@
 <head>
     <title>金融机构-我的待办任务</title>
     <#include "/header.html">
+    <script src="${request.contextPath}/statics/libs/vee-validate.js"></script>
+    <script src="${request.contextPath}/statics/libs/zh_CN.js"></script>
 </head>
 <body>
 <div id="rrapp" v-cloak>
@@ -42,7 +44,7 @@
         <div id="jqGridPager"></div>
     </div>
 
-    <div v-show="showList==2" class="panel panel-default" style="text-align: center">
+    <div v-show="showList==2" class="panel panel-default" style="text-align: center;height: 500px">
         <div class="panel-heading">{{title}}</div>
         <div style="float:left;height:20px;width:100%;margin-top:10px;"></div>
         <span  style="font-size: 20px;font-weight: bold">{{contractName}}</span><br/>
@@ -51,64 +53,93 @@
 
         <div style="float:left;height:20px;width:100%;margin-top:10px;"></div>
         <div style="float:left;height:60px;width:100%;margin-top:10px;">
-            <label style="font-weight: normal;margin-left: 10px;">收款银行：</label>
-            <el-input
-                    placeholder="请输入银行名称"
-                    v-model="settlement.receiveBank"
-                    style="width:250px;"
-                    size="small"
-                    clearable>
-            </el-input>
-            <label style="font-weight: normal;margin-left: 10px;">收款账户：</label>
-            <el-input
-                    placeholder="请输入账户"
-                    v-model="settlement.receiveAccount"
-                    style="width:250px;"
-                    size="small"
-                    clearable>
-            </el-input>
-            <label style="font-weight: normal;margin-left: 10px;">收款单位：</label>
-            <el-input
-                    placeholder="请输入单位"
-                    v-model="settlement.receiveCompany"
-                    style="width:250px;"
-                    size="small"
-                    clearable>
-            </el-input>
-        </div>
-        <div style="float:left;height:20px;width:100%;margin-top:10px;"></div>
-        <div style="float:left;height:30px;width:100%;margin-top:10px;">
-            <label style="font-weight: normal;margin-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;用途：</label>
-            <el-input
-                    placeholder="请输入用途"
-                    v-model="settlement.receiveStage"
-                    style="width:250px;"
-                    size="small"
-                    clearable>
-            </el-input>
-            <label style="font-weight: normal;margin-left: 10px;">收款金额：</label>
-            <el-input
-                    placeholder="请输入金额"
-                    v-model="settlement.receiveAmount"
-                    style="width:250px;"
-                    size="small"
-                    clearable>
-            </el-input>
-            <label style="font-weight: normal;margin-left: 10px;">收款时间：</label>
-            <el-date-picker v-model="settlement.receiveTime"
-                            type="datetime"
-                            :time-arrow-control="true"
-                            placeholder="选择时间" id="finOrgInfoDate001" size="small"
-                            value-format="yyyy-MM-dd HH:mm:ss ">
-            </el-date-picker>&nbsp;&nbsp;&nbsp;&nbsp;
-        </div>
-        <div style="float:left;height:30px;width:100%;margin-top:10px;">
+
+            <el-form ref="form" :model="settlement" :inline="true" label-width="120px">
+                <el-form-item label="收款银行：">
+                    <el-input v-model="settlement.receiveBank" clearable v-validate="'required'" name="receiveBank" placeholder="请输入银行名称"></el-input>
+                    <el-alert
+                            :title="'收款银行'+errors.first('receiveBank')"
+                            :closable="false"
+                            type="warning"
+                            show-icon
+                            v-show="errors.has('receiveBank')">
+                    </el-alert>
+                </el-form-item>
+                <el-form-item label="收款账户：">
+                    <el-input v-model="settlement.receiveAccount" clearable v-validate="'required|myDecimal'" name="receiveAccount" placeholder="请输入账户"></el-input>
+                    <el-alert
+                            :title="'收款账户'+errors.first('receiveAccount')"
+                            :closable="false"
+                            type="warning"
+                            show-icon
+                            v-show="errors.has('receiveAccount')">
+                    </el-alert>
+                </el-form-item>
+            </el-form>
+
+            <el-form ref="form" :model="settlement" :inline="true" label-width="120px">
+                <el-form-item label="收款单位：">
+                    <el-input v-model="settlement.receiveCompany" clearable  v-validate="'required|required'" name="receiveCompany" placeholder="请输入收款单位"></el-input>
+                    <el-alert
+                            :title="'收款单位'+errors.first('receiveCompany')"
+                            :closable="false"
+                            type="warning"
+                            show-icon
+                            v-show="errors.has('receiveCompany')">
+                    </el-alert>
+                </el-form-item>
+                <el-form-item label="用途：">
+                    <el-input v-model="settlement.receiveStage" clearable v-validate="'required|required'" name="receiveStage" placeholder="请输入用途"></el-input>
+                    <el-alert
+                            :title="'用途'+errors.first('receiveCompany')"
+                            :closable="false"
+                            type="warning"
+                            show-icon
+                            v-show="errors.has('receiveStage')">
+                    </el-alert>
+                </el-form-item>
+            </el-form>
+
+            <el-form ref="form" :model="settlement" :inline="true" label-width="120px">
+                <el-form-item label="收款金额：">
+                    <el-input v-model="settlement.receiveAmount" clearable placeholder="请输入金额"  v-validate="'required|AmDecimal'" name="receiveAmount">
+                        <span slot="suffix">元</span></el-input>
+                    <el-alert
+                            :title="'收款金额'+errors.first('receiveAmount')"
+                            :closable="false"
+                            type="warning"
+                            show-icon
+                            v-show="errors.has('receiveAmount')">
+                    </el-alert>
+                </el-form-item>
+
+                <el-form-item label="收款时间：">
+                    <el-date-picker type="datetime" v-model="settlement.receiveTime" v-validate="'required|required'" name="receiveTime" placeholder="请选择时间"
+                                    value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
+                    <el-alert
+                            :title="'收款时间'+errors.first('receiveTime')"
+                            :closable="false"
+                            type="warning"
+                            show-icon
+                            v-show="errors.has('receiveTime')">
+                    </el-alert>
+                </el-form-item>
+            </el-form>
+
+
+            <el-form ref="form" :model="settlement" :inline="true" label-width="120px">
+                <el-form-item >
+                    <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                </el-form-item>
+                <el-form-item >
+                    <input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+                </el-form-item>
+            </el-form>
+
+
         </div>
 
-        <div class="form-group">
-            <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
-                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
-        </div>
+
 
     </div>
 
