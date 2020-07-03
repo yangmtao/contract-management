@@ -60,61 +60,11 @@ var setting = {
 };
 var ztree;
 
-function updateExamine(id){
-
-}
-
 DICT = {
     STATUS: {0: '待处理', 1: '处理中', 2: '已解决'},
     RISK_LEVEL: {0: '低', 1: '中', 2: '高'},
 }
 Vue.prototype.DICT = DICT;
-
-
-var area_ztree;
-var area_setting = {
-    data: {
-        simpleData: {
-            enable: true,
-            idKey: "id",
-            pIdKey: "pid",
-            rootPId: 0
-        },
-        key: {
-            url: "nourl"
-        }
-    },
-    check: {
-        enable: true,
-        nocheckInherit: true
-    }
-
-};
-var setting1 = {
-    data: {
-
-        simpleData: {
-            enable: true,
-            idKey: "id",
-            pIdKey: "pid",
-            rootPId: 0
-        },
-        showList: true,
-        key: {
-            url: "nourl"
-        },
-        examine:{
-
-        }
-    },
-    callback: {
-        onDblClick: function (event, treeId, node) {
-            vmFinSysUser.user.areaId = node.id;
-            vmFinSysUser.user.areaName = node.joinname;
-            layer.closeAll();
-        }
-    }
-};
 
 var vmContractExamine = new Vue({
     el: '#rrapp',
@@ -219,34 +169,3 @@ function  showUpdate(id) {
     this.vmContractExamine.getContractExamine(id);
 
 }
-
-//重写alert
-window.alert = function (msg, callback) {
-    parent.layer.alert(msg, function (index) {
-        parent.layer.close(index);
-        if (typeof(callback) === "function") {
-            callback("ok");
-        }
-    });
-}
-//重写confirm式样框
-window.confirm = function (msg, callback, btn2) {
-    parent.layer.confirm(msg, {btn: ['确定', '取消']},
-        function (index) {//确定事件
-            if (typeof(callback) === "function") {
-                parent.layer.close(index);
-                callback("ok");
-
-            }
-        }, function () {
-            btn2 && btn2();
-
-        });
-}
-
-window.onload = window.onresize = function () {
-    var target = document.querySelector(".ui-jqgrid-bdiv");
-    if (target) {
-        target.style.height = (document.documentElement.clientHeight - document.querySelector('.ui-jqgrid').offsetTop - 82) + 'px';
-    }
-};

@@ -105,14 +105,24 @@ function getSelectedRows() {
 
     return grid.getGridParam("selarrrow");
 }
-
+//适应性设置jqgrid高度
+window.onload = window.onresize = function () {
+    var target = document.querySelector(".ui-jqgrid-bdiv");
+    if (target) {
+        target.style.height = (document.documentElement.clientHeight - document.querySelector('.ui-jqgrid').offsetTop - 82) + 'px';
+    }
+};
 //判断是否为空
 function isBlank(value) {
     return !value || !/\S/.test(value)
 }
 
+//系统字段
 DICT = {
     SEX: {0: '未知', 1: '男', 2: '女'},
+    STATUS: {0: '待处理', 1: '处理中', 2: '已解决'},
+    RISK_LEVEL: {0: '低', 1: '中', 2: '高'},
+    PAYMENT_STATUS: {0: '未付', 1: '在付', 2: '已付'},
     PAYMENT_TYPE:{0:'现金',1:'银行转账',2:'支票',3:'支付宝',4:'微信'},
     CONTRACT_TYPE: {1: '通用物资', 2: '医用物资', 3: '工程',4:'服务',5:'其他'}
 }
@@ -122,97 +132,6 @@ Vue.prototype.DICT = DICT;
 function isInt(str) {
     var reg = /^(-|\+)?\d+$/;
     return reg.test(str);
-}
-
-/**
- * 使用平台
- * @returns {*[]}
- */
-function getUsePlatform() {
-    return [
-        {code: 1, value: "房企平台"},
-        {code: 2, value: "医疗平台"},
-        {code: 3, value: "食品平台"},
-        {code: 4, value: "部队及高校平台"},
-        {code: 5, value: "金融平台"}
-    ]
-}
-
-
-/**
- * 三方接口数据来源
- * @returns {*[]}
- */
-function getApiSource() {
-    return [
-        {code: 0, value: "本地缓存"},
-        {code: 1, value: "有数接口"},
-        {code: 2, value: "汇法网"},
-        {code: 3, value: "大陆云盾"},
-        {code: 4, value: "国信"},
-        {code: 5, value: "启信宝"},
-        {code: 6, value: "中数"},
-        {code: 999, value: "其它"}
-    ]
-}
-
-/**
- *  报告订单状态
- * @returns {*[]}
- */
-function getFinReportOrderStatus() {
-    return [
-        {code: 1, value: "待采集数据"},
-        {code: 2, value: "订单已取消"},
-        {code: 3, value: "报告生成中"},
-        {code: 4, value: "报告生成失败"},
-        {code: 5, value: "订单已完成"},
-        {code: 6, value: "数据采集失败"}
-    ]
-}
-
-/**
- * 信用报告申请类别
- */
-function getReportType() {
-    return [
-        {code: 10000, value: "信用决策报告"},
-        {code: 10001, value: "招投标信用报告(标准版)"},
-        {code: 10002, value: "汇法网报告"},
-        {code: 10003, value: "招投标信用报告(增值版)"},
-        {code: 10004, value: "企业信用报告(金融版)"}
-    ]
-}
-
-/**
- * 信用报告的报告类别
- */
-function getUserBiddingType() {
-    return [
-        {code: 1, value: "招投标信用报告(标准版)"},
-        {code: 2, value: "招投标信用报告(增值版)"},
-        {code: 3, value: "企业信用报告(金融版)"}
-    ]
-}
-
-/**
- * 用户所在企业的类型
- * @returns {*[]}
- */
-function getUserEntType() {
-    return [
-        {code: 1, value: "房地产类"},
-        {code: 2, value: "工程施工类"},
-        {code: 3, value: "材料设备类"},
-        {code: 4, value: "咨询服务类"},
-        {code: 5, value: "设计类"},
-        {code: 6, value: "勘察类"},
-        {code: 7, value: "医疗类"},
-        {code: 8, value: "高校类"},
-        {code: 9, value: "食品类"},
-        {code: 91, value: "军工类"},
-        {code: 999, value: "其它"}
-    ]
 }
 
 function showImg(url) {

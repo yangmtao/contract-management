@@ -8,7 +8,7 @@ import com.bj.sys.controller.AbstractController;
 
 /**
  * <p>
- *  前端控制器
+ *  合同付款阶段 前端控制器
  * </p>
  *
  * @author yangmingtao
