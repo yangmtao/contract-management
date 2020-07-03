@@ -41,8 +41,8 @@ public class ContractRiskServiceImpl extends ServiceImpl<ContractRiskMapper, Con
                 && StringUtils.isNotBlank(params.get("contractCode") + "") ? params.get("contractCode") + "" : "";
         String supplierName = null != params.get("supplierName")
                 && StringUtils.isNotBlank(params.get("supplierName") + "") ? params.get("supplierName") + "" : "";
-        String payStatus = null != params.get("payStatus")
-                && StringUtils.isNotBlank(params.get("payStatus") + "") ? params.get("payStatus") + "" : "";
+        String del = null != params.get("del")
+                && StringUtils.isNotBlank(params.get("del") + "") ? params.get("del") + "" : "";
 
         if (StringUtils.isNotBlank(contractName)) {
             riskWrapper.gt("instr(contract_name,'" + contractName + "')", 0);
@@ -53,8 +53,8 @@ public class ContractRiskServiceImpl extends ServiceImpl<ContractRiskMapper, Con
         if (StringUtils.isNotBlank(supplierName)) {
             riskWrapper.gt("instr(supplier_name,'" + supplierName + "')", 0);
         }
-        if (StringUtils.isNotBlank(payStatus)) {
-            riskWrapper.gt("instr(pay_status,'" + payStatus + "')", 0);
+        if (StringUtils.isNotBlank(del)) {
+            riskWrapper.gt("instr(del,'" + del + "')", 0);
         }
 
         riskWrapper.orderBy("del", false);

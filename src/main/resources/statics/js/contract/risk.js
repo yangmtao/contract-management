@@ -38,10 +38,6 @@ function jqGrid(){$("#jqGrid").jqGrid({
                 } else{
                     return "<label>已解决</label>"
                 }
-
-
-
-
             }
         },
     ],
@@ -110,20 +106,7 @@ function over(id){
 
 }
 
-var ztree;
-var setting = {
-    data: {
-        simpleData: {
-            enable: true,
-            idKey: "orgId",
-            pIdKey: "parentId",
-            rootPId: -1
-        },
-        key: {
-            url: "nourl"
-        }
-    }
-};
+
 var vmFinUser = new Vue({
     el: '#rrapp',
     data: {
@@ -151,10 +134,6 @@ var vmFinUser = new Vue({
             {code: 1, value: "科技"},
             {code: 2, value: "教育"}
         ],
-        oldPassword: "",
-        newPassword: "",
-        newPasswordSure: "",
-        chooseUserId: ""
     },
     methods: {
 
@@ -234,94 +213,13 @@ var vmFinUser = new Vue({
                 "contractName":this.riskSearch.contractName,
                 "contractCode":this.riskSearch.contractCode,
                 "supplierName":this.riskSearch.supplierName,
-                "payStatus":this.riskSearch.payStatus
+                "del":this.riskSearch.del
             };
             console.log(postData.payStatus)
             $("#jqGrid").jqGrid('setGridParam', {
                 page: 1, "postData": postData
             }).trigger("reloadGrid");
         },
-        finUserOrgTree: function (num) {
-            var _this = this;
-            this.getFinOrgInfoTreeData();
-            layer.open({
-                type: 1,
-                offset: '50px',
-                skin: 'layui-layer-molv',
-                title: "选择所属机构",
-                area: ['300px', '450px'],
-                shade: 0,
-                shadeClose: false,
-                content: jQuery("#finUserOrgInfoTreeLayer"),
-                btn: ['确定', '取消'],
-                btn1: function (index) {
-                    var node = ztree.getSelectedNodes();
-                    // console.log("node====", node, "==num==", num);
-                    if (null != node) {
-                        if (num == 1 || num == "1") {
-                            _this.finUserSearch.orgId = node[0]["orgId"];
-                            _this.finUserSearch.orgName = node[0]["orgName"];
-                        } else if (num == 2 || num == "2") {
-                            //选择上级菜单
-                            _this.finUser.orgId = node[0]["orgId"];
-                            _this.finUser.orgName = node[0]["orgName"];
-                        }
-                    }
-                    layer.close(index);
-                }
-            });
-        },
-        checkStartDate: function () {
-            if (this.finUserSearch.createDateStart) {
-                if (this.finUserSearch.createDateEnd) {
-                    var start = new Date((this.finUserSearch.createDateStart).replace(/-/g, '/'));
-                    var end = new Date((this.finUserSearch.createDateEnd).replace(/-/g, '/'));
-                    if (start.getTime() > end.getTime()) {
-                        alert("起始时间不能大于截止时间！");
-                        this.finUserSearch.createDateStart = '';
-                        return;
-                    }
-                }
-
-            }
-        },
-        checkEndDate: function () {
-            if (this.finUserSearch.createDateEnd) {
-                if (this.finUserSearch.createDateStart) {
-                    var start = new Date((this.finUserSearch.createDateStart).replace(/-/g, '/'));
-                    var end = new Date((this.finUserSearch.createDateEnd).replace(/-/g, '/'));
-                    if (end.getTime() < start.getTime()) {
-                        alert("截止时间不能小于起始时间！");
-                        this.finUserSearch.createDateEnd = '';
-                        return;
-                    }
-                }
-
-            }
-        },
-        getFinOrgInfoTreeData: function () {
-            var _this = this;
-            //加载菜单树
-            $.get(baseURL + "business/finorginfo/finOrgTreeList", function (r) {
-                var arr = [];
-                if (null != r["data"] && r["data"].length > 0) {
-                    var total = r["data"].length;
-                    for (var i = 0; i < total; i++) {
-                        var obj = r["data"][i];
-                        obj["name"] = r["data"][i]["orgName"];
-                        arr.push(obj);
-                    }
-                }
-                ztree = $.fn.zTree.init($("#finUserOrgInfoTree"), setting, arr);
-                if (_this.finOrgInfo != null) {
-                    var node = ztree.getNodeByParam("orgId", _this.finOrgInfo.parentId);
-                    if (null != node) {
-                        ztree.selectNode(node);
-                        _this.finOrgInfo.parentName = node.orgName;
-                    }
-                }
-            })
-        }
     }
 });
 

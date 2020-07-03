@@ -14,6 +14,7 @@ import com.bj.contract.service.SupplierService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -106,6 +107,8 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, SupplierEnt
 //        finUserEntity.setCreateTime(new Date());
 //        finUserEntity.setCreatePersonId(ShiroUtils.getUserId());
 //        finUserEntity.setCreatePersonName(ShiroUtils.getUserEntity().getRealName());
+        Date date = new Date();
+        supplier.setCreateTime(date);
 
         baseMapper.insert(supplier);
 

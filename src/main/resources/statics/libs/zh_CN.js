@@ -102,7 +102,7 @@
                 return n + "格式无效"
             },
             required: function(n) {
-                return  "是必须的"
+                return  "不能为空"
             },
             size: function(n, e) {
                 return n + "必须小于" + function(n) {

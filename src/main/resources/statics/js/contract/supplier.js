@@ -65,11 +65,6 @@ function jqGrid(){$("#jqGrid").jqGrid({
 
             }
         },
-        // {label: '操作',  width: 100, sortable: false, align: 'center',
-        //     formatter:function (cellValue, options, rowData) {
-        //     return "<button class='btn btn-primary' @click='supplierDetails'>详情</button>"
-        //     }
-        // },
     ],
     viewrecords: true,
     height: 385,
@@ -138,21 +133,11 @@ function move(id,bid) {
     });
     read()
 }
-var ztree;
-var setting = {
-    data: {
-        simpleData: {
-            enable: true,
-            idKey: "orgId",
-            pIdKey: "parentId",
-            rootPId: -1
-        },
-        key: {
-            url: "nourl"
-        }
-    }
-};
-var vmFinUser = new Vue({
+
+Vue.use(VeeValidate);
+VeeValidate.Validator.localize('zh_CN');
+
+var vm = new Vue({
     el: '#rrapp',
     data: {
         showList: 1,
@@ -161,29 +146,17 @@ var vmFinUser = new Vue({
         supplier:{
             orgId: "",
         },
-        finUser: {
-            orgId: "",
-            orgName: "",
-            userFlag: 1
+        paymentStages:[]
+        ,
+        contract:{
+
         },
-        finUserSearch: {
-            userName: "",
-            realName: "",
-            userStatus: "",
-            orgId: "",
-            orgName: "",
-            createDateStart: "",
-            createDateEnd: ""
-        },
+
         supplierSearch:{
             supplierName:"",
             creditCode:""
         },
-        userStatusList: [
-            {code: 1, value: "启用"},
-            {code: 2, value: "停用"},
-            {code: 3, value: "注销"}
-        ],
+
         operatingStatusList: [
             {code: 1, value: "营业"},
             {code: 2, value: "停业"}
@@ -192,17 +165,23 @@ var vmFinUser = new Vue({
             {code: 1, value: "科技"},
             {code: 2, value: "教育"}
         ],
-        oldPassword: "",
-        newPassword: "",
-        newPasswordSure: "",
-        chooseUserId: ""
+
     },
     methods: {
-        toFinUserDetail: function (id, name) {
-            this.showList = 3;
-            this.title = name + "--详情";
-            this.getInfo(id);
+        rateFormatter:function(row,column){
+            return row.paymentRate+'%';
         },
+        show:function(){
+            var supplierId = getSelectedRow();
+            if (supplierId == null) {
+                return;
+            }
+            this.showList = 3;
+            this.title = "详情";
+            this.opName = "details";
+            this.getInfo(supplierId);
+        },
+
         //搜索
         querySupplier: function () {
             this.reload();
@@ -323,6 +302,7 @@ var vmFinUser = new Vue({
                 colModel: [
 
                     {label: '合同id', name: 'contractId', index: 'contract_id', width: 140, align: 'center',hidden:true},
+                    {label: '供应商id', name: 'partyBId', index: 'party_b_id', width: 140, align: 'center',hidden:true},
                     {label: '合同编号', name: 'contractCode', index: 'contract_code', width: 140,align: 'center'},
                     {label: '合同名称', name: 'contractName', index: 'contract_name', width: 100},
                     {label: '采购部门', name: 'purchasingDeptName', index: 'dept1_name', width: 140, align: 'center'},
@@ -345,9 +325,7 @@ var vmFinUser = new Vue({
                     },{label: '操作',  width: 100, sortable: false, align: 'center',
                         formatter:function (cellValue, options, rowData) {
                             var contractId = rowData["contractId"];
-                            var contractName = rowData["contractName"];
-                            var contractCode = rowData["contractCode"];
-                            return "<a class='btn btn-primary' onclick='settlement(\""+contractId+"\",\""+contractName+"\",\""+contractCode+"\")' '>详情</a>"
+                            return "<a class='btn btn-primary' onclick='contractDetails(\""+contractId+"\")' '>详情</a>"
                         }
                     },
                 ],
@@ -379,10 +357,9 @@ var vmFinUser = new Vue({
             });
         },
 
-
-
         //搜索函数
         reload: function (event) {
+            this.errors.clear()
             this.showList = 1;
             // var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             var postData = {
@@ -394,89 +371,28 @@ var vmFinUser = new Vue({
                 page: 1, "postData": postData
             }).trigger("reloadGrid");
         },
-        finUserOrgTree: function (num) {
-            var _this = this;
-            this.getFinOrgInfoTreeData();
-            layer.open({
-                type: 1,
-                offset: '50px',
-                skin: 'layui-layer-molv',
-                title: "选择所属机构",
-                area: ['300px', '450px'],
-                shade: 0,
-                shadeClose: false,
-                content: jQuery("#finUserOrgInfoTreeLayer"),
-                btn: ['确定', '取消'],
-                btn1: function (index) {
-                    var node = ztree.getSelectedNodes();
-                    // console.log("node====", node, "==num==", num);
-                    if (null != node) {
-                        if (num == 1 || num == "1") {
-                            _this.finUserSearch.orgId = node[0]["orgId"];
-                            _this.finUserSearch.orgName = node[0]["orgName"];
-                        } else if (num == 2 || num == "2") {
-                            //选择上级菜单
-                            _this.finUser.orgId = node[0]["orgId"];
-                            _this.finUser.orgName = node[0]["orgName"];
-                        }
-                    }
-                    layer.close(index);
-                }
-            });
-        },
-        checkStartDate: function () {
-            if (this.finUserSearch.createDateStart) {
-                if (this.finUserSearch.createDateEnd) {
-                    var start = new Date((this.finUserSearch.createDateStart).replace(/-/g, '/'));
-                    var end = new Date((this.finUserSearch.createDateEnd).replace(/-/g, '/'));
-                    if (start.getTime() > end.getTime()) {
-                        alert("起始时间不能大于截止时间！");
-                        this.finUserSearch.createDateStart = '';
-                        return;
-                    }
-                }
-
-            }
-        },
-        checkEndDate: function () {
-            if (this.finUserSearch.createDateEnd) {
-                if (this.finUserSearch.createDateStart) {
-                    var start = new Date((this.finUserSearch.createDateStart).replace(/-/g, '/'));
-                    var end = new Date((this.finUserSearch.createDateEnd).replace(/-/g, '/'));
-                    if (end.getTime() < start.getTime()) {
-                        alert("截止时间不能小于起始时间！");
-                        this.finUserSearch.createDateEnd = '';
-                        return;
-                    }
-                }
-
-            }
-        },
-        getFinOrgInfoTreeData: function () {
-            var _this = this;
-            //加载菜单树
-            $.get(baseURL + "business/finorginfo/finOrgTreeList", function (r) {
-                var arr = [];
-                if (null != r["data"] && r["data"].length > 0) {
-                    var total = r["data"].length;
-                    for (var i = 0; i < total; i++) {
-                        var obj = r["data"][i];
-                        obj["name"] = r["data"][i]["orgName"];
-                        arr.push(obj);
-                    }
-                }
-                ztree = $.fn.zTree.init($("#finUserOrgInfoTree"), setting, arr);
-                if (_this.finOrgInfo != null) {
-                    var node = ztree.getNodeByParam("orgId", _this.finOrgInfo.parentId);
-                    if (null != node) {
-                        ztree.selectNode(node);
-                        _this.finOrgInfo.parentName = node.orgName;
-                    }
-                }
-            })
-        }
     }
 });
+
+function contractDetails(id){
+    $.ajax({
+        type:"GET",
+        data:{
+            contractId:id
+        },
+        url:baseURL+"contract/detail",
+        success:function(r){
+            if(r.code===1){
+                vm.contract=r.contract;
+                vm.paymentStages=r.paymentStages;
+                vm.showList=4;
+            }else{
+                alert("服务器异常，请联系系统管理员！");
+            }
+        }
+    });
+
+}
 
 //加载页面
 function read(){

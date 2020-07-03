@@ -47,4 +47,5 @@ public interface ContractMapper extends BaseMapper<Contract> {
     List<Map<String, String>> selectMonthNumberByYear(@Param("year") String year);
 
     List<Map<String, String>> selectAllYearAndCount();
+    Long getRole(Long userId);
 }

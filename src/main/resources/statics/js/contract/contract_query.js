@@ -272,8 +272,8 @@ function showContractInfo(id) {
         url:baseURL+"contract/detail",
         success:function(r){
             if(r.code===1){
-                vmContract.contract=r.contract;
-                vmContract.paymentStages=r.paymentStages;
+                vm.contract=r.contract;
+                vm.paymentStages=r.paymentStages;
                 vmContract.showList=false;
             }else{
                 alert("服务器异常，请联系系统管理员！");

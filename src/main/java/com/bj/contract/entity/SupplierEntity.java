@@ -8,7 +8,10 @@ import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.annotations.TableName;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 供应商表
@@ -31,15 +34,19 @@ public class SupplierEntity implements Serializable {
 	/**
 	 * 供应商名称
 	 */
+	@Size(min = 2,max = 30,message = "{supplier.supplierName.size}")
 	@TableField("supplier_name")
 	private String supplierName;
 	/**
 	 * 统一社会信用代码
 	 */
+	@NotNull(message = "{supplier.creditCode.notnull}")
 	private String creditCode;
 	/**
 	 * 法定代表人
 	 */
+	@Size(min = 2,max = 6,message = "{supplier.legaRepresentative.size}")
+	@NotNull(message = "{supplier.legaRepresentative.notnull}")
 	private String legaRepresentative;
 	/**
 	 * 所属地
@@ -79,4 +86,9 @@ public class SupplierEntity implements Serializable {
 	 * 黑名单
 	 */
 	private Integer blackList;
+
+	/**
+	 * 创建时间
+	 */
+	private Date createTime;
 }

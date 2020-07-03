@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>合同风险</title>
+    <title>风险</title>
     <#include "/header.html">
 </head>
 <style>
@@ -32,12 +32,12 @@
             </div>
 
             <div class="form-group">
-                <div class="col-sm-2   control-label  ">付款情况</div>
+                <div class="col-sm-2   control-label  ">风险情况</div>
                 <div class="col-sm-2">
-                    <el-select v-model="riskSearch.payStatus" size="small">
-                        <el-option label="已支付" :value="0"></el-option>
-                        <el-option label="正在支付" :value="1"></el-option>
-                        <el-option label="未支付" :value="2"></el-option>
+                    <el-select v-model="riskSearch.del" size="small">
+                        <el-option label="已解决" :value="-1"></el-option>
+                        <el-option label="为解决" :value="0"></el-option>
+
                     </el-select>
                 </div>
                 <div class="col-sm-2 control-label  ">乙方单位</div>
