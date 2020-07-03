@@ -43,22 +43,28 @@ import java.util.Map;
 @Service
 public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> implements ContractService {
 
+    //根据查询条件查询所有的相关合同信息
     @Override
     public PageUtils queryPage(Map<String, Object> params,Long deptId) throws Exception {
+        //创建分页
         Page page=new Query<Contract>(params).getPage();
+        //创建查询条件构造器
         Wrapper wrapper= SqlHelper.fillWrapper(page,new EntityWrapper<Contract>());
+
         String partyBId = null != params.get("partyBId")
                 && StringUtils.isNotBlank(params.get("partyBId") + "") ? params.get("partyBId") + "" : "";
-        String dept = null != params.get("deptId")
-                && StringUtils.isNotBlank(params.get("deptId") + "") ? params.get("deptId") + "" : "";
+        //供应商id不为空则表示只需根据供应商id查询相关合同信息
         if (StringUtils.isNotBlank(partyBId)) {
-            System.out.println("查询相关合同==================================");
             wrapper.eq("party_b_id",partyBId);
         }else {
             Contract contract= JSON.parseObject((String)params.get("contract"),Contract.class);
+            //查询条件，合同当前部门节点
+            String dept = null != params.get("deptId")
+                    && StringUtils.isNotBlank(params.get("deptId") + "") ? params.get("deptId") + "" : "";
             if(StringUtils.isNotBlank(dept)){
                 contract.setContractNode(Integer.parseInt(dept));
             }
+            //如果合同对象不为空，根据注解加反射创建查询条件SQL
             if (contract!=null){
                 Field[] contractFields = contract.getClass().getDeclaredFields();
 
@@ -109,12 +115,13 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         page.setRecords(baseMapper.queryAllContract(page,wrapper));
         return new PageUtils(page);
     }
-
+    //根据合同id获取合同信息，仅包含合同表中的数据
     @Override
     public Contract getContractInfoById(Long id) {
         return baseMapper.selectById(id);
     }
 
+    //合同信息导出为excel
     @Override
     public void excelExport(HttpServletResponse response, List<String> ids) throws FileNotFoundException, IOException, IllegalAccessException {
 
@@ -154,7 +161,6 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
             }
         }
 
-        //--------------------------------------------
         //写入内容：
         for(int i=0;i<contractList.size();i++){
             //创建行
@@ -189,31 +195,38 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
 
     }
 
+    /*根据合同id获取合同详细信息，包括会将合同表中的外键信息进行转换为具体数据
+     *也包括付款阶段等相关信息
+     */
     @Override
     public Contract getContractDetailById(Long id) {
         return baseMapper.selectContractDetail(id);
     }
 
+    //获取当前合同的所有年份
     @Override
     public String[] getAllYear() {
         return baseMapper.selectAllYear();
     }
 
+    //根据年份获取各个合同类别的合同数量
     @Override
     public List<Map<String,String>>  getTypeCount(String year) {
         return baseMapper.selectTypeCount(year);
     }
 
+    //根据年份获取各个合同类别每个月的合同数量
     @Override
     public List<Map<String, String>> getTypeCountMonth(String year, Integer type) {
         return baseMapper.selectTypeCountMonth(year,type);
     }
-
+    //根据年份获取每个月对应的合同数量
     @Override
     public List<Map<String, String>> getMonthNumberByYear(String year) {
         return baseMapper.selectMonthNumberByYear(year);
     }
 
+    //获取当前合同的所有年份以及对应的合同数量
     @Override
     public List<Map<String, String>> getAllYearAndCount() {
         return baseMapper.selectAllYearAndCount();

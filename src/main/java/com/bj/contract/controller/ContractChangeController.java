@@ -14,7 +14,7 @@ import com.bj.sys.controller.AbstractController;
 
 /**
  * <p>
- *  前端控制器
+ *  合同变更表 前端控制器
  * </p>
  *
  * @author yangmingtao
@@ -25,6 +25,8 @@ import com.bj.sys.controller.AbstractController;
 public class ContractChangeController extends AbstractController {
     @Autowired
     private ContractChangeService contractChangeService;
+
+    //添加合同变更
     @PostMapping("/add")
     public R addContractChange(@RequestBody ContractChange change){
         int i=contractChangeService.save(change);

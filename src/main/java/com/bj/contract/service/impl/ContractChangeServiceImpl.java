@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * <p>
- *  服务实现类
+ *  合同更改 服务实现类
  * </p>
  *
  * @author yangmingtao
@@ -19,6 +19,7 @@ import java.util.Date;
 @Service
 public class ContractChangeServiceImpl extends ServiceImpl<ContractChangeMapper, ContractChange> implements ContractChangeService {
 
+    //保存合同更改记录
     @Override
     public int save(ContractChange change) {
         change.setCreateDate(new Date());

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ *  合同付款阶段 服务实现类
  * </p>
  *
  * @author yangmingtao

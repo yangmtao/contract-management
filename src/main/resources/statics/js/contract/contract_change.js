@@ -12,7 +12,7 @@ $(function () {
             {
                 label: '合同类型', name: 'contractType', width: 120, align: 'center',sortable:false,
                 formatter: function (value) {
-                    return DICT.STATUS[value] || '';
+                    return DICT.CONTRACT_TYPE[value] || '';
                 }
             },
             {label: '付款状态', name: 'payStatus', index: "create_date", width: 100, align: 'center',
@@ -24,12 +24,12 @@ $(function () {
             {label: '变更次数', name: 'changeTimes', index: "change_times", width: 100, align: 'center'},
             {label: '操作',  width: 110, align: 'center',sortable:false,
                 formatter: function (value) {
-                    return '<a class="btn btn-primary" href="/cmsContent/view/'+value+'" target="_blank">查看详情</a>';
+                    return '<a class="btn btn-primary" href="/cmsContent/view/'+value+'" target="_blank">查看变更</a>';
                 }}
         ],
         viewrecords: true,
         width: 1200,
-        height: 385,
+        height: 520,
         rowNum: 20,
         rowList: [50, 100, 500],
         rownumbers: true,
@@ -68,50 +68,6 @@ var setting = {
     }
 };
 var ztree;
-
-
-
-
-
-var area_ztree;
-var area_setting = {
-    data: {
-        simpleData: {
-            enable: true,
-            idKey: "id",
-            pIdKey: "pid",
-            rootPId: 0
-        },
-        key: {
-            url: "nourl"
-        }
-    },
-    check: {
-        enable: true,
-        nocheckInherit: true
-    }
-
-};
-var setting1 = {
-    data: {
-        simpleData: {
-            enable: true,
-            idKey: "id",
-            pIdKey: "pid",
-            rootPId: 0
-        },
-        key: {
-            url: "nourl"
-        }
-    },
-    callback: {
-        onDblClick: function (event, treeId, node) {
-            vmFinSysUser.user.areaId = node.id;
-            vmFinSysUser.user.areaName = node.joinname;
-            layer.closeAll();
-        }
-    }
-};
 
 Vue.use(VeeValidate);
 VeeValidate.Validator.localize('zh_CN');
@@ -328,71 +284,3 @@ var vmContract = new Vue({
 
     }
 });
-
-
-DICT = {
-    STATUS: {0: '草稿', 1: '待审核', 2: '审核不通过', 3: '已发布'},
-    PAYMENT_STATUS: {0: '未付', 1: '在付', 2: '已付'},
-    CONTRACT_TYPE: {0: '买卖合同', 1: '供用电、水、气、热力合同', 2: '赠与合同', 3: '租赁合同',4:'承揽合同',5:'建设工程合同',6:'技术合同',7:'仓储合同',8:'委托合同',9:'房间合同'}
-}
-Vue.prototype.DICT = DICT;
-
-//选择一条记录
-function getSelectedRow() {
-    var grid = $("#jqGrid");
-    var rowKey = grid.getGridParam("selrow");
-    if (!rowKey) {
-        alert("请选择一条记录");
-        return;
-    }
-
-    var selectedIDs = grid.getGridParam("selarrrow");
-    if (selectedIDs.length > 1) {
-        alert("只能选择一条记录");
-        return;
-    }
-
-    return selectedIDs[0];
-}
-
-//选择多条记录
-function getSelectedRows() {
-    var grid = $("#jqGrid");
-    var rowKey = grid.getGridParam("selrow");
-    if (!rowKey) {
-        alert("请选择一条记录");
-        return;
-    }
-
-    return grid.getGridParam("selarrrow");
-}
-//重写alert
-window.alert = function (msg, callback) {
-    parent.layer.alert(msg, function (index) {
-        parent.layer.close(index);
-        if (typeof(callback) === "function") {
-            callback("ok");
-        }
-    });
-}
-//重写confirm式样框
-window.confirm = function (msg, callback, btn2) {
-    parent.layer.confirm(msg, {btn: ['确定', '取消']},
-        function (index) {//确定事件
-            if (typeof(callback) === "function") {
-                parent.layer.close(index);
-                callback("ok");
-
-            }
-        }, function () {
-            btn2 && btn2();
-
-        });
-}
-
-window.onload = window.onresize = function () {
-    var target = document.querySelector(".ui-jqgrid-bdiv");
-    if (target) {
-        target.style.height = (document.documentElement.clientHeight - document.querySelector('.ui-jqgrid').offsetTop - 82) + 'px';
-    }
-};

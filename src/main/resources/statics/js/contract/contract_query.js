@@ -1,5 +1,4 @@
-
-
+//初始化加载合同信息列表
 $(function () {
     $("#jqGrid").jqGrid({
         url: baseURL + 'contract/list',
@@ -32,7 +31,7 @@ $(function () {
         ],
         viewrecords: true,
         width: 1200,
-        height: 385,
+        height: 520,
         rowNum: 20,
         rowList: [50, 100, 500],
         rownumbers: true,
@@ -57,6 +56,8 @@ $(function () {
         }
     });
 });
+
+//部门树设置
 var userName;
 var setting = {
     data: {
@@ -73,49 +74,6 @@ var setting = {
 };
 var ztree;
 
-
-
-
-
-var area_ztree;
-var area_setting = {
-    data: {
-        simpleData: {
-            enable: true,
-            idKey: "id",
-            pIdKey: "pid",
-            rootPId: 0
-        },
-        key: {
-            url: "nourl"
-        }
-    },
-    check: {
-        enable: true,
-        nocheckInherit: true
-    }
-
-};
-var setting1 = {
-    data: {
-        simpleData: {
-            enable: true,
-            idKey: "id",
-            pIdKey: "pid",
-            rootPId: 0
-        },
-        key: {
-            url: "nourl"
-        }
-    },
-    callback: {
-        onDblClick: function (event, treeId, node) {
-            vmFinSysUser.user.areaId = node.id;
-            vmFinSysUser.user.areaName = node.joinname;
-            layer.closeAll();
-        }
-    }
-};
 
 var vmContract = new Vue({
     el: '#rrapp',
@@ -203,6 +161,7 @@ var vmContract = new Vue({
         rateFormatter:function(row,column){
             return row.paymentRate+'%';
         },
+        //显示部门树
         deptTree: function (type) {
             var _this = this;
             layer.open({
@@ -303,12 +262,7 @@ var vmContract = new Vue({
     }
 });
 
-DICT = {
-    PAYMENT_STATUS: {0: '未付', 1: '在付', 2: '已付'},
-    CONTRACT_TYPE: {1: '通用物资', 2: '医用物资', 3: '工程',4:'服务',5:'其他'}
-}
-Vue.prototype.DICT = DICT;
-
+//在当前页面显示合同详情
 function showContractInfo(id) {
     $.ajax({
         type:"GET",
@@ -329,63 +283,4 @@ function showContractInfo(id) {
 
 }
 
-//选择一条记录
-function getSelectedRow() {
-    var grid = $("#jqGrid");
-    var rowKey = grid.getGridParam("selrow");
-    if (!rowKey) {
-        alert("请选择一条记录");
-        return;
-    }
-
-    var selectedIDs = grid.getGridParam("selarrrow");
-    if (selectedIDs.length > 1) {
-        alert("只能选择一条记录");
-        return;
-    }
-
-    return selectedIDs[0];
-}
-
-//选择多条记录
-function getSelectedRows() {
-    var grid = $("#jqGrid");
-    var rowKey = grid.getGridParam("selrow");
-    if (!rowKey) {
-        alert("请选择一条或多条记录");
-        return;
-    }
-
-    return grid.getGridParam("selarrrow");
-}
-//重写alert
-window.alert = function (msg, callback) {
-    parent.layer.alert(msg, function (index) {
-        parent.layer.close(index);
-        if (typeof(callback) === "function") {
-            callback("ok");
-        }
-    });
-}
-//重写confirm式样框
-window.confirm = function (msg, callback, btn2) {
-    parent.layer.confirm(msg, {btn: ['确定', '取消']},
-        function (index) {//确定事件
-            if (typeof(callback) === "function") {
-                parent.layer.close(index);
-                callback("ok");
-
-            }
-        }, function () {
-            btn2 && btn2();
-
-        });
-}
-
-window.onload = window.onresize = function () {
-    var target = document.querySelector(".ui-jqgrid-bdiv");
-    if (target) {
-        target.style.height = (document.documentElement.clientHeight - document.querySelector('.ui-jqgrid').offsetTop - 82) + 'px';
-    }
-};
 

@@ -23,7 +23,7 @@ import java.util.Set;
 
 /**
  * <p>
- *  服务实现类
+ *  合同审查 服务实现类
  * </p>
  *
  * @author yangmingtao
@@ -32,11 +32,13 @@ import java.util.Set;
 @Service
 public class ContractExamineServiceImpl extends ServiceImpl<ContractExamineMapper, ContractExamine> implements ContractExamineService {
 
+    //保存合同审查信息
     @Override
     public int save(ContractExamine examine) {
         return baseMapper.insert(examine);
     }
 
+    //根据查询条件分页查询所有的相关合同审查信息
     @Override
     public PageUtils queryPage(Map<String, Object> params) throws Exception {
         Page page=new Query<ContractExamine>(params).getPage();
@@ -73,6 +75,7 @@ public class ContractExamineServiceImpl extends ServiceImpl<ContractExamineMappe
         return new PageUtils(page);
     }
 
+    //根据审查记录id获取对应的合同审查信息
     @Override
     public ContractExamine selectInfoById(Integer id) {
         return baseMapper.selectInfoById(id);

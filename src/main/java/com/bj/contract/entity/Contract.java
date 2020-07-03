@@ -131,7 +131,7 @@ public class Contract extends Model<Contract> {
      * 需求部门名称
      */
     @TableField(exist = false)
-    @ApiModelProperty("需求部门")
+    @ApiModelProperty("采购部门")
     private String purchasingDeptName;
     /**
      * 需求部门id

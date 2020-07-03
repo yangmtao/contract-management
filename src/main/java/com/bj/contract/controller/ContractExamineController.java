@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  前端控制器
+ *  合同审查表 前端控制器
  * </p>
  *
  * @author yangmingtao
@@ -38,6 +38,7 @@ public class ContractExamineController extends AbstractController {
         return R.ok().put("page", page);
     }
 
+    //添加合同审查信息
     @PostMapping("/add")
     @RequiresPermissions("contract:examine:add")
     public R examineAdd(@RequestBody  ContractExamine examine){
@@ -48,6 +49,7 @@ public class ContractExamineController extends AbstractController {
         return R.error();
     }
 
+    //修改合同审查信息
     @PostMapping("/update")
     @RequiresPermissions("contract:examine:update")
     public R examineUpdate(@RequestBody  ContractExamine examine){
@@ -58,6 +60,7 @@ public class ContractExamineController extends AbstractController {
         return R.error();
     }
 
+    //根据合同审查记录id删除一个或多个合同审查信息
     @PostMapping("/delete")
     @RequiresPermissions("contract:examine:delete")
     public R deleteExamine(@RequestBody Long[] ids){
@@ -68,6 +71,7 @@ public class ContractExamineController extends AbstractController {
         return R.error();
     }
 
+    //根据合同审查记录id获取合同审查信息
     @GetMapping("/info/{id}")
     @RequiresPermissions("contract:examine:info")
     public R contractExamineInfo(@PathVariable("id") Integer id){

@@ -42,7 +42,7 @@ public class ContractController extends AbstractController {
     private ContractPaymentStageService paymentStageService;
 
     /**
-     * 信息
+     * 根据合同id获取合同信息，会将合同表中的外键信息进行转换为具体数据
      */
     @RequestMapping("/contractInfo/{contractId}")
     @RequiresPermissions("contract:contractInfo")
@@ -54,7 +54,7 @@ public class ContractController extends AbstractController {
     }
 
 
-
+    //根据合同id获取合同信息，仅包含合同表中的数据
     @GetMapping("/info/{id}")
     @ResponseBody
     @RequiresPermissions("contract:select")
@@ -63,13 +63,16 @@ public class ContractController extends AbstractController {
         return contract;
     }
 
+    /*根据合同id获取合同详细信息，包括会将合同表中的外键信息进行转换为具体数据
+    *也包括付款阶段等相关信息
+     */
     @GetMapping("/detail")
     @ResponseBody
     @RequiresPermissions("contract:select")
     public R getContractDetailById(@RequestParam("contractId") Long id) {
         Contract contract=contractFileService.getContractDetailById(id);
         Map<String,Object> queryMap=new HashMap<>();
-        //selectByMap中的键是数据库字段，而不是实体属性
+        //selectByMap中的参数map的键是数据库字段，而不是实体属性
         queryMap.put("contract_id",id);
         List<ContractPaymentStage> paymentStages=paymentStageService.selectByMap(queryMap);
 
@@ -78,7 +81,7 @@ public class ContractController extends AbstractController {
 
 
     /**
-     * 分页获取所有合同
+     * 分页获取所有合同信息
      */
     @RequestMapping("/list")
     @ResponseBody
@@ -86,9 +89,11 @@ public class ContractController extends AbstractController {
     public R list(@RequestParam Map<String, Object> params) throws Exception {
         Long deptId = getDeptId();
         PageUtils page = null;
+        //如果为系统管理员，可查看所有合同信息
         if(deptId==10000){
             page  = contractFileService.queryPage(params,null);
         }else {
+            //仅可查看本部门合同信息
             page  = contractFileService.queryPage(params,deptId);
         }
         log.info("contract list");
@@ -128,6 +133,7 @@ public class ContractController extends AbstractController {
         System.out.println(JSON.toJSONString(contractFile));
         contractFile.setPayStatus(0);
         contractFile.setCreateDate(new Date());
+        //保存合同信息到合同表
         boolean insert = contractFileService.insert(contractFile);
 
         if(insert){
@@ -144,10 +150,10 @@ public class ContractController extends AbstractController {
         }
     }
 
+    //合同信息导出为excel
     @GetMapping("/export/excel")
     public R excelExport(@RequestParam("ids") String ids,HttpServletResponse response) throws IOException, IllegalAccessException {
         String[] idStr=ids.split(",");
-
         List<String> idList= Arrays.asList(idStr);
         contractFileService.excelExport(response,idList);
         return R.ok().put("msg","导出成功");
@@ -181,7 +187,7 @@ public class ContractController extends AbstractController {
         return R.ok().put("typeCountMonth",typeCountMonth);
     }
 
-    //
+    //根据年份获取每个月对应的合同数量
     @GetMapping("/month/number")
     public R getMonthNumberByYear(@RequestParam("year") String year){
         List<Map<String,String>> monthNumber=contractFileService.getMonthNumberByYear(year);
