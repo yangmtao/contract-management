@@ -11,17 +11,34 @@ function jqGrid(){$("#jqGrid").jqGrid({
         {label: '采购部门', name: 'purchasingDeptName', index: 'dept1_name', width: 140, align: 'center'},
         {label: '需求部门', name: 'demandDeptName', index: 'demand_dept_name', width: 100},
         {label: '乙方单位', name: 'supplierName', index: 'supplier_name', width: 100},
-        {label: '合同类型', name: 'contractType', index: 'contract_type', width: 100},
+        {label: '合同类型', name: 'contractType', index: 'contract_type', width: 100,
+            formatter:function (cellValue, options, rowData) {
+                var val = "";
+                var contractType = rowData["contractType"];
+                if (contractType == "1") {
+                    val = "通用物资";
+                } else if (contractType == "2") {
+                    val = "医用物资";
+                }else if(contractType == "3") {
+                    val = "工程"
+                }else if(contractType=="4"){
+                    val = "服务"
+                }else if(contractType=="5"){
+                    val = "其他"
+                }
+                return val;
+            }
+        },
         {label: '付款情况', name: 'payStatus', index: 'pay_status', width: 100,
         formatter:function (cellValue, options, rowData) {
             var val = "";
             var payStatus = rowData["payStatus"];
             if (payStatus == "0") {
-                val = "已支付";
+                val = "未支付";
             } else if (payStatus == "1") {
                 val = "正在支付";
             }else if(payStatus="2") {
-                val = "未支付"
+                val = "已支付"
             }
             return val;
         }

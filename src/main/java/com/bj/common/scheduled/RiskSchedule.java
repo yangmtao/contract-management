@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.bj.contract.dao.ContractRiskMapper;
 import com.bj.contract.entity.Contract;
 import com.bj.contract.entity.ContractRisk;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,11 +16,16 @@ import java.util.Date;
 import java.util.List;
 
 @Component
+@Slf4j
 public class RiskSchedule {
     @Autowired
     private ContractMapper contractMapper;
     @Autowired
     private ContractRiskMapper contractRiskMapper;
+
+    /**
+     * 检测是否逾期
+     */
     @Scheduled(cron = "0 * * * * ?")
     public void cron() {
         Date now= new Date();
@@ -56,15 +62,13 @@ public class RiskSchedule {
                 }
 
                 if (save == 1){
-                    System.out.println("添加风险成功");
+                    log.info("添加风险成功");
                 }else{
-                    System.out.println("已存在");
+                    log.info("已存在");
                 }
 
             }
 
         }
-
-        System.out.println("cron:"+new Date());
     }
 }

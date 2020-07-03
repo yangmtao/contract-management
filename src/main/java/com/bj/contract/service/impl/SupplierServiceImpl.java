@@ -18,7 +18,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * @author wgq
+ */
 @Service("supplierService")
 public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, SupplierEntity> implements SupplierService {
 
@@ -34,7 +36,6 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, SupplierEnt
                 && StringUtils.isNotBlank(params.get("creditCode") + "") ? params.get("creditCode") + "" : "";
         String blackList = null != params.get("blackList")
                 && StringUtils.isNotBlank(params.get("blackList") + "") ? params.get("blackList") + "" : "";
-        System.out.println("++++++++++++++++"+blackList);
         if (StringUtils.isNotBlank(supplierName)) {
             supplierWrapper.gt("instr(supplier_name,'" + supplierName + "')", 0);
         }
@@ -98,15 +99,6 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, SupplierEnt
      */
     @Override
     public R saveSupplier(SupplierEntity supplier) {
-//        finUserEntity.setUserId(SnowflakeIdWorker.getInstance().nextId());
-//        finUserEntity.setUserPwd(ShiroUtils.sha256(finUserEntity.getUserPwd(), Constant.pwdSalt));
-//        finUserEntity.setUserStatus(CommonEnum.DataStatus.ENABLE.getValue());
-//        if (finUserEntity.getUserFlag() == null) {
-//            finUserEntity.setUserFlag(CommonEnum.UserFlag.MASTER.getValue());
-//        }
-//        finUserEntity.setCreateTime(new Date());
-//        finUserEntity.setCreatePersonId(ShiroUtils.getUserId());
-//        finUserEntity.setCreatePersonName(ShiroUtils.getUserEntity().getRealName());
         Date date = new Date();
         supplier.setCreateTime(date);
 

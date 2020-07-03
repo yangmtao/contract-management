@@ -20,7 +20,7 @@
     <div v-show="showList==1">
         <form class="form-horizontal">
 
-            <div class="form-group">
+            <div class="form-group" >
                 <div class="col-sm-2 control-label  ">合同名称</div>
                 <div class="col-sm-2">
                     <input type="text" auto-complete="off" class="form-control"  v-model="riskSearch.contractName" placeholder="请输入合同名称"/>
@@ -64,7 +64,7 @@
         <div class="panel-heading">{{title}}</div>
 
         <el-form label-width="80px" style="margin: auto">
-            <el-form-item label="合同名称">
+            <el-form-item label="合同名称" style="margin-top: 15px">
                 <el-input :disabled="true" v-model="contractRisk.contractName"></el-input>
             </el-form-item>
             <el-form-item label="支付状态">
@@ -103,7 +103,7 @@
         <div class="panel-heading">{{title}}</div>
 
         <el-form label-width="80px" style="margin: auto">
-            <el-form-item label="合同名称">
+            <el-form-item label="合同名称" style="margin-top: 15px">
                 <el-input :disabled="true" v-model="contractRisk.contractName"></el-input>
             </el-form-item>
             <el-form-item label="支付状态">

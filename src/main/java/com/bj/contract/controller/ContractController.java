@@ -9,12 +9,10 @@ import com.bj.contract.entity.Contract;
 import com.bj.contract.entity.ContractPaymentStage;
 import com.bj.contract.service.ContractPaymentStageService;
 import com.bj.contract.service.ContractService;
-
 import com.bj.sys.controller.AbstractController;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -110,11 +108,8 @@ public class ContractController extends AbstractController {
     @RequiresPermissions("contract:list")
     public R reviewList(@RequestParam Map<String, Object> params) throws Exception {
         Long deptId = getDeptId();
-        System.out.println(deptId+"--");
         Long userId = getUser().getUserId();
         Long roleId = contractMapper.getRole(userId);
-        System.out.println(roleId);
-
 
         PageUtils page  = contractFileService.queryReview(params,deptId,roleId);
         log.info("contract list");

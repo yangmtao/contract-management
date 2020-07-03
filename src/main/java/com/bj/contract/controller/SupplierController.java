@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * 供应商表
  *
- * @author contract
+ * @author wgq
  * @email 1079626899@qq.com
  * @date 2020-06-08 10:41:06
  */

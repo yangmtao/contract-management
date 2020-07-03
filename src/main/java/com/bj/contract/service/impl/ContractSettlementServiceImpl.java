@@ -25,7 +25,7 @@ import java.util.Map;
  *  服务实现类
  * </p>
  *
- * @author yangmingtao
+ * @author wgq
  * @since 2020-06-17
  */
 @Service
@@ -64,8 +64,7 @@ public class ContractSettlementServiceImpl extends ServiceImpl<ContractSettlemen
         if (StringUtils.isNotBlank(contractManagerName)) {
             settlementWrapper.gt("instr(real_name,'" + contractManagerName + "')", 0);
         }
-       settlementWrapper.where("un_pay_amount!=0");
-       settlementWrapper.where("pay_status!=0");
+       settlementWrapper.where("un_pay_amount!=0").or().where("pay_status!=2");
         Page<Contract> page = new Query<Contract>(params).getPage();
         page.setRecords(baseMapper.queryContract(page,settlementWrapper));
 
@@ -74,7 +73,6 @@ public class ContractSettlementServiceImpl extends ServiceImpl<ContractSettlemen
 
 
     //新增结算
-
     @Override
     public R saveSettlement(ContractSettlement contractSettlement) {
         Contract contract = contractMapper.selectContractById(contractSettlement.getContractId());

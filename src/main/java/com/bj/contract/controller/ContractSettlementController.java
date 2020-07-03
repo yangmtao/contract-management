@@ -21,7 +21,7 @@ import java.util.Map;
  *  前端控制器
  * </p>
  *
- * @author yangmingtao
+ * @author wgq
  * @since 2020-06-17
  */
 @RestController
@@ -31,7 +31,7 @@ public class ContractSettlementController extends AbstractController {
     @Autowired
     private ContractSettlementService contractSettlementService;
     /**
-     * 列表
+     * 分页列表
      */
     @RequestMapping("/list")
     @RequiresPermissions("contract:settlement:list")
@@ -48,7 +48,7 @@ public class ContractSettlementController extends AbstractController {
     }
 
     /**
-     * 保存
+     * 新增保存
      */
     @PostMapping("/save")
     @RequiresPermissions("contract:supplier:save")

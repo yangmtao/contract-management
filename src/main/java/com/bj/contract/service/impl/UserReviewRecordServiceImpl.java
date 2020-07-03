@@ -21,12 +21,19 @@ import java.util.Map;
  *  服务实现类
  * </p>
  *
- * @author yangmingtao
+ * @author wgq
  * @since 2020-06-17
  */
 @Service
 public class UserReviewRecordServiceImpl extends ServiceImpl<UserReviewRecordMapper, UserReviewRecord> implements UserReviewRecordService {
 
+
+    /**
+     * 用户审查记录查询
+     * @param params
+     * @return
+     * @throws Exception
+     */
     @Override
     public PageUtils queryPage(Map<String, Object> params) throws Exception{
 

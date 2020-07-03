@@ -21,8 +21,7 @@ import java.util.Map;
  * <p>
  *  前端控制器
  * </p>
- *
- * @author yangmingtao
+ * @author wgq
  * @since 2020-06-18
  */
 @RestController
@@ -32,7 +31,7 @@ public class ContractRiskController extends AbstractController {
     private ContractRiskService contractRiskService;
 
     /**
-     * 列表
+     * 分页列表
      */
     @RequestMapping("/list")
     @RequiresPermissions("contract:risk:list")
@@ -79,7 +78,7 @@ public class ContractRiskController extends AbstractController {
     }
 
     /**
-     * 已解决
+     * 解决该风险
      */
     @GetMapping("/over")
     public R over(Long id){

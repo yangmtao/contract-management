@@ -23,7 +23,7 @@ import java.util.Map;
  *  服务实现类
  * </p>
  *
- * @author yangmingtao
+ * @author wgq
  * @since 2020-06-18
  */
 @Service
@@ -31,6 +31,12 @@ public class ContractRiskServiceImpl extends ServiceImpl<ContractRiskMapper, Con
 //    @Autowired
 //    private ContractRiskMapper contractRiskMapper;
 
+    /**
+     * 分页查询实现
+     * @param params
+     * @return
+     * @throws Exception
+     */
     @Override
     public PageUtils queryPage(Map<String, Object> params) throws Exception {
         EntityWrapper<ContractRisk> riskWrapper = new EntityWrapper<>();
