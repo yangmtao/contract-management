@@ -109,7 +109,7 @@ var vmContract = new Vue({
             contractCode:null,
             contractFile:null
         },
-        paymentStages:[],
+        paymentStages:null,
         remoteManagers:[],
         remotePartyBs:[],
         tableData: [],
@@ -272,8 +272,8 @@ function showContractInfo(id) {
         url:baseURL+"contract/detail",
         success:function(r){
             if(r.code===1){
-                vm.contract=r.contract;
-                vm.paymentStages=r.paymentStages;
+                vmContract.contract=r.contract;
+                vmContract.paymentStages=r.paymentStages;
                 vmContract.showList=false;
             }else{
                 alert("服务器异常，请联系系统管理员！");

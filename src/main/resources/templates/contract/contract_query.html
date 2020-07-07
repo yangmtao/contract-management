@@ -178,64 +178,64 @@
             <h4>一、合同基本信息</h4>
             <el-form ref="form" :model="contract" :inline="true" label-width="120px">
                 <el-form-item label="合同名称">
-                    <el-input v-model="contract.contractName" readonly="true"></el-input>
+                    <el-input v-model="contract.contractName" :readonly="true"></el-input>
                 </el-form-item>
                 <el-form-item label="合同编号">
-                    <el-input v-model="contract.contractCode" readonly="true"></el-input>
+                    <el-input v-model="contract.contractCode" :readonly="true"></el-input>
                 </el-form-item>
             </el-form>
 
             <el-form ref="form" :model="contract" :inline="true" label-width="120px">
                 <el-form-item label="合同经办人">
-                    <el-input v-model="contract.contractManagerName" readonly="true"></el-input>
+                    <el-input v-model="contract.contractManagerName" :readonly="true"></el-input>
                 </el-form-item>
                 <el-form-item label="经办人联系方式">
-                    <el-input v-model="contract.contractManagerPhone" readonly="true"></el-input>
+                    <el-input v-model="contract.contractManagerPhone" :readonly="true"></el-input>
                 </el-form-item>
             </el-form>
             <el-form ref="form" :model="contract" :inline="true" label-width="120px">
                 <el-form-item label="甲方单位">
-                    <el-input v-model="contract.partyAName" readonly="true"></el-input>
+                    <el-input v-model="contract.partyAName" :readonly="true"></el-input>
                 </el-form-item>
                 <el-form-item label="乙方单位">
-                    <el-input v-model="contract.partyBName" readonly="true"></el-input>
+                    <el-input v-model="contract.partyBName" :readonly="true"></el-input>
                 </el-form-item>
             </el-form>
             <el-form ref="form" :model="contract" :inline="true" label-width="120px">
                 <el-form-item label="合同类型">
-                    <el-input v-model="contract.contractTypeName" readonly="true"></el-input>
+                    <el-input v-model="contract.contractTypeName" :readonly="true"></el-input>
                 </el-form-item>
                 <el-form-item label="付款状态">
-                    <el-input v-model="contract.payStatusName" readonly="true"></el-input>
+                    <el-input v-model="contract.payStatusName" :readonly="true"></el-input>
                 </el-form-item>
             </el-form>
             <el-form ref="form" :model="contract" :inline="true" label-width="120px">
                 <el-form-item label="采购部门">
-                    <el-input v-model="contract.purchasingDeptName" readonly="true"></el-input>
+                    <el-input v-model="contract.purchasingDeptName" :readonly="true"></el-input>
                 </el-form-item>
                 <el-form-item label="需求部门">
-                    <el-input v-model="contract.demandDeptName" readonly="true"></el-input>
+                    <el-input v-model="contract.demandDeptName" :readonly="true"></el-input>
                 </el-form-item>
             </el-form>
             <el-form ref="form" :model="contract" :inline="true" label-width="120px">
                 <el-form-item label="合同金额">
-                    <el-input v-model="contract.contractAmount" readonly="true"></el-input>
+                    <el-input v-model="contract.contractAmount" :readonly="true"></el-input>
                 </el-form-item>
                 <el-form-item label="支付方式">
-                    <el-input v-model="contract.paymentTypeName" readonly="true"></el-input>
+                    <el-input v-model="contract.paymentTypeName" :readonly="true"></el-input>
                 </el-form-item>
             </el-form>
             <el-form ref="form" :model="contract" :inline="true" label-width="120px">
                 <el-form-item label="开始时间">
-                    <el-input v-model="contract.startDate" readonly="true"></el-input>
+                    <el-input v-model="contract.startDate" :readonly="true"></el-input>
                 </el-form-item>
                 <el-form-item label="结束时间">
-                    <el-input v-model="contract.endDate" readonly="true"></el-input>
+                    <el-input v-model="contract.endDate" :readonly="true"></el-input>
                 </el-form-item>
             </el-form>
             <el-form ref="form" :model="contract"  label-width="120px">
                 <el-form-item label="采购内容">
-                    <el-input type="textarea" :row="3" style="width: 780px;" v-model="contract.purchaseContent" readonly="true"></el-input>
+                    <el-input type="textarea" :row="3" style="width: 780px;" v-model="contract.purchaseContent" :readonly="true"></el-input>
                 </el-form-item>
             </el-form>
 
