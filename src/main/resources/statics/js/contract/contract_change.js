@@ -22,9 +22,9 @@ $(function () {
             },
             {label: '经办人', name: 'contractManagerName', index: "create_date", width: 100, align: 'center',sorttype:'date'},
             {label: '变更次数', name: 'changeTimes', index: "change_times", width: 100, align: 'center'},
-            {label: '操作',  width: 110, align: 'center',sortable:false,
+            {label: '操作', name: 'contractId', width: 110, align: 'center',sortable:false,
                 formatter: function (value) {
-                    return '<a class="btn btn-primary" href="/cmsContent/view/'+value+'" target="_blank">查看变更</a>';
+                    return '<button class="btn btn-primary" onclick="showChangeInfo('+value+')" >查看变更</button>';
                 }}
         ],
         viewrecords: true,
@@ -69,6 +69,11 @@ var setting = {
 };
 var ztree;
 
+function showChangeInfo(val){
+    vmContract.showChangeInfo=true
+    // alert('val:'+val)
+}
+
 Vue.use(VeeValidate);
 VeeValidate.Validator.localize('zh_CN');
 
@@ -76,6 +81,7 @@ var vmContract = new Vue({
     el: '#rrapp',
     data: {
 
+        showChangeInfo: false,
         formLabelWidth: '120px',
         closeOnClickModal:false,
         remoteManagerLoading:false,
@@ -113,6 +119,7 @@ var vmContract = new Vue({
             paymentDate:null,
             contractId:null,
         },
+        changeInfos:[],
         remoteManagers:[],
         remotePartyBs:[],
         tableData: [],

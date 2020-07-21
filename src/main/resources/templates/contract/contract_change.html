@@ -231,6 +231,17 @@
         </div>
     </el-dialog>
 
+    <el-dialog title="合同变更记录详情" :visible.sync="showChangeInfo" width="920px">
+        <el-table :data="changeInfos">
+            <el-table-column property="changeName" label="变更名称" width="150"></el-table-column>
+            <el-table-column property="changeReason" label="变更原因" width="200"></el-table-column>
+            <el-table-column property="contractManager" label="经办人"></el-table-column>
+            <el-table-column property="contractAmount" label="变更后合同金额" width="150"></el-table-column>
+            <el-table-column property="paymentDate" label="变更后付款时间" width="200"></el-table-column>
+            <el-table-column property="contractFile" label="操作" width="100"></el-table-column>
+        </el-table>
+    </el-dialog>
+
 </div>
 
 
