@@ -12,7 +12,7 @@
         select c.contract_name,c.contract_amount,c.party_b_id,c.pay_status,c.payment_type,c.contract_code,c.pay_status,c.contract_node,
         c.start_date,c.end_date,c.create_date,c.contract_type,
         s.supplier_name,
-        u.review_advise,u.review_result,u.reviewer,u.contract_id,u.id,
+        u.review_advise,u.review_result,u.reviewer,u.contract_id,u.id,u.create_time,
         r.node_name
         from contract as c
         join user_review_record as u on c.contract_id=u.contract_id

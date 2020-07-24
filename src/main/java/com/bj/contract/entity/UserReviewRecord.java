@@ -141,6 +141,11 @@ public class UserReviewRecord extends Model<UserReviewRecord> {
     @TableField("review_advise")
     private String reviewAdvise;
     /**
+     * 创建时间
+     */
+    @TableField("create_time")
+    private Date createTime;
+    /**
      * 审核结果
      */
     @TableField("review_result")

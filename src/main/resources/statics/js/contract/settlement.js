@@ -48,7 +48,7 @@ function jqGrid(){$("#jqGrid").jqGrid({
             formatter:function (cellValue, options, rowData) {
                 var val = "";
                 var unPayAmount = rowData["unPayAmount"];
-                if (unPayAmount == null) {
+                if (unPayAmount == null || unPayAmount == 0) {
                     val = "已支付完成";
                     return val;
                 }else {

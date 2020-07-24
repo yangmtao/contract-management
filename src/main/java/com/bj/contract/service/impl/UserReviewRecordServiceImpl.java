@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -35,7 +36,7 @@ public class UserReviewRecordServiceImpl extends ServiceImpl<UserReviewRecordMap
      * @throws Exception
      */
     @Override
-    public PageUtils queryPage(Map<String, Object> params) throws Exception{
+    public PageUtils queryPage(Map<String, Object> params,String userName) throws Exception{
 
         EntityWrapper<ContractSettlement> reviewWrapper = new EntityWrapper<>();
         String contractName = null != params.get("contractName")
@@ -43,12 +44,20 @@ public class UserReviewRecordServiceImpl extends ServiceImpl<UserReviewRecordMap
         String reviewer = null != params.get("reviewer")
                 && StringUtils.isNotBlank(params.get("reviewer") + "") ? params.get("reviewer") + "" : "";
 
+        System.out.println(reviewer);
+        System.out.println(contractName);
+
         if (StringUtils.isNotBlank(contractName)) {
             reviewWrapper.gt("instr(contract_name,'" + contractName + "')", 0);
         }
         if (StringUtils.isNotBlank(reviewer)) {
             reviewWrapper.gt("instr(reviewer,'" + reviewer + "')", 0);
         }
+        if (!userName.equals("admin")){
+            reviewWrapper.eq("reviewer",userName);
+        }
+        reviewWrapper.eq("1",1);
+        reviewWrapper.orderBy("create_time",false);
         Page<Contract> page = new Query<Contract>(params).getPage();
         page.setRecords(baseMapper.queryReview(page,reviewWrapper));
 
@@ -66,6 +75,7 @@ public class UserReviewRecordServiceImpl extends ServiceImpl<UserReviewRecordMap
         }else {
             baseMapper.updateNode(userReviewRecord.getContractId(),-1);
         }
+        userReviewRecord.setCreateTime(new Date());
         baseMapper.insert(userReviewRecord);
         return R.ok();
     }

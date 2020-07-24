@@ -94,13 +94,16 @@
                 </div>
                 <div style="height:30px;width:100%;margin-top:10px;">
                     <label style="font-weight: normal;margin-left: 10px;">合同类型：</label>
-                    <el-input
-                            :readonly="true"
-                            v-model="contract.contractType"
-                            style="width:250px;"
-                            size="small"
-                    >
-                    </el-input>
+                        <el-select disabled="true"
+                                   v-model="contract.contractType"
+                                   style="width:250px;" size="small">
+                            <el-option label="通用物资" :value="1"></el-option>
+                            <el-option label="医用物资" :value="2"></el-option>
+                            <el-option label="工程" :value="3"></el-option>
+                            <el-option label="服务" :value="4"></el-option>
+                            <el-option label="其他" :value="5"></el-option>
+
+                        </el-select>
                     <label style="font-weight: normal;margin-left: 10px;">采购内容：</label>
                     <el-input
                             :readonly="true"
@@ -140,7 +143,7 @@
         <el-form  style="margin:0px auto;"  label-width="100px" >
 
             <el-form-item label="合同附件："  style="margin-left: 18%">
-                <el-button style="margin-left: 0px"><a href="contract.contractFile"  target="_blank" >查看文件</a></el-button>
+                <el-button style="margin-left: 0px"><a :href="contract.contractFile"  target="_blank" >查看文件</a></el-button>
             </el-form-item>
 
             <el-form-item label="审核意见："  style="margin-left: 18%;margin-right: 18%;">

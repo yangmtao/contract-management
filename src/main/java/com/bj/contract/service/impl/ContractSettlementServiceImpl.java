@@ -1,5 +1,6 @@
 package com.bj.contract.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.bj.common.util.PageUtils;
@@ -45,12 +46,16 @@ public class ContractSettlementServiceImpl extends ServiceImpl<ContractSettlemen
         EntityWrapper<Contract> settlementWrapper = new EntityWrapper<>();
         String contractName = null != params.get("contractName")
                 && StringUtils.isNotBlank(params.get("contractName") + "") ? params.get("contractName") + "" : "";
+        System.out.println(contractName);
         String contractCode = null != params.get("contractCode")
                 && StringUtils.isNotBlank(params.get("contractCode") + "") ? params.get("contractCode") + "" : "";
+        System.out.println(contractCode);
         String supplierName = null != params.get("supplierName")
                 && StringUtils.isNotBlank(params.get("supplierName") + "") ? params.get("supplierName") + "" : "";
+        System.out.println(supplierName);
         String contractManagerName = null != params.get("contractManagerName")
                 && StringUtils.isNotBlank(params.get("contractManagerName") + "") ? params.get("contractManagerName") + "" : "";
+        System.out.println(contractManagerName);
 
         if (StringUtils.isNotBlank(contractName)) {
             settlementWrapper.gt("instr(contract_name,'" + contractName + "')", 0);
@@ -64,9 +69,12 @@ public class ContractSettlementServiceImpl extends ServiceImpl<ContractSettlemen
         if (StringUtils.isNotBlank(contractManagerName)) {
             settlementWrapper.gt("instr(real_name,'" + contractManagerName + "')", 0);
         }
-       settlementWrapper.where("un_pay_amount!=0").or().where("pay_status!=2");
+        settlementWrapper.where("1=1").andNew().where("un_pay_amount!=0").or().where("pay_status!=2");
+
+
         Page<Contract> page = new Query<Contract>(params).getPage();
         page.setRecords(baseMapper.queryContract(page,settlementWrapper));
+        System.out.println(JSON.toJSONString(page));
 
         return new PageUtils(page);
     }
@@ -92,8 +100,10 @@ public class ContractSettlementServiceImpl extends ServiceImpl<ContractSettlemen
 
         }
 
-
-        baseMapper.insert(contractSettlement);
+        Integer insert = baseMapper.insert(contractSettlement);
+        if (insert == 1){
+            Integer integer = contractMapper.updatePay(contractId);
+        }
         return R.ok();
     }
 }

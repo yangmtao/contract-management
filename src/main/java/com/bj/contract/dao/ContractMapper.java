@@ -48,4 +48,6 @@ public interface ContractMapper extends BaseMapper<Contract> {
 
     List<Map<String, String>> selectAllYearAndCount();
     Long getRole(Long userId);
+
+    Integer updatePay(@Param("contractId") Long contractId);
 }

@@ -43,7 +43,7 @@
 
     <select id="contractById" resultType="com.bj.contract.entity.Contract">
         select c.contract_id,c.contract_code,c.contract_name,insert(c.purchase_content,11,500,'...') as purchase_content,
-        c.demand_dept_id,c.party_b_id,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date,c.create_date,
+        c.demand_dept_id,c.party_b_id,c.contract_type,c.pay_status,c.contract_amount,c.start_date,c.end_date,c.create_date,c.contract_file,
         d.dept_name as demand_dept_name,
         u.real_name as contract_manager_name,
         s.supplier_name,
@@ -136,5 +136,8 @@
         select role_id from sys_user_role where user_id = #{userId}
     </select>
 
+    <update id="updatePay" >
+        update contract set pay_status = 2 where contract_id = #{contractId}
+    </update>
 
 </mapper>

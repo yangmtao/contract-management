@@ -130,8 +130,7 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
     public PageUtils queryReview(Map<String, Object> params, Long deptId, Long roleId) {
         Integer order=0;
         Integer order1=0;
-        if (deptId!=null){
-
+        if (deptId!=10000 && deptId!=null){
             if (deptId==10003){
                 order = 1;
             }else if(deptId==10004){
@@ -144,28 +143,33 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
             }
             else if (deptId==10007){
                 order = 6;
+            }else {
+                order = 2;
             }
 
         }
         if (roleId!=null){
-            System.out.println(roleId);
             if (roleId==3){
                 order1=7;
             }else if(roleId==4){
                 order1=8;
             }
         }
-
+        System.out.println(deptId +"-" + roleId);
         EntityWrapper<Contract> wrapper = new EntityWrapper<>();
         if (deptId==10000){
             if(order1!=0){
-                wrapper.eq("contract_node",order1).or().eq("demand_dept_id",deptId);
+                wrapper.eq("contract_node",order1);
             }else {
                 System.out.println("+++++++");
             }
         }else {
-            if (order!=0)
-                wrapper.eq("contract_node",order).or().eq("demand_dept_id",deptId);
+            if (order!=2){
+                wrapper.eq("contract_node",order);
+            }else {
+                wrapper.eq("contract_node",order).and().eq("demand_dept_id",deptId);
+            }
+
 
         }
         String contractName = null != params.get("contractName")

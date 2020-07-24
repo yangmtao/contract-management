@@ -120,7 +120,7 @@ var vmFinUser = new Vue({
            contractName:"",
            contractCode:"",
            supplierName:"",
-           payStatus:""
+           del:""
 
        },
         supplier:{
@@ -147,7 +147,7 @@ var vmFinUser = new Vue({
                 contractName:"",
                 contractCode:"",
                 supplierName:"",
-                payStatus:""
+                del:""
             };
             this.reload();
         },

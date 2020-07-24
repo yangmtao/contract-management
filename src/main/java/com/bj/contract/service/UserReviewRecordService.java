@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public interface UserReviewRecordService extends IService<UserReviewRecord> {
 
-    PageUtils queryPage(Map<String, Object> params) throws Exception;
+    PageUtils queryPage(Map<String, Object> params,String userName) throws Exception;
 
     R saveUserReviewRecord(UserReviewRecord userReviewRecord);
 }

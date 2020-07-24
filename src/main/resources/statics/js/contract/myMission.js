@@ -16,7 +16,7 @@ function jqGrid(){$("#jqGrid").jqGrid({
         {label: '当前节点', name: 'nodeName', index: 'node_name', width: 140, align: 'center',
             formatter:function (cellValue, options, rowData) {
             var nodeName = rowData["nodeName"]
-                return nodeName+"待审核"
+                return nodeName=="合同归档" ? nodeName : nodeName+"待审核"
             }
         },
         {label: '操作',  width: 100, sortable: false, align: 'center',
@@ -24,7 +24,8 @@ function jqGrid(){$("#jqGrid").jqGrid({
                 var contractId = rowData["contractId"];
                 var contractName = rowData["contractName"];
                 var contractCode = rowData["contractCode"];
-                return "<a class='btn btn-primary' onclick='review(\""+contractId+"\",\""+contractName+"\",\""+contractCode+"\")' '>办理</a>"
+                var nodeName = rowData["nodeName"]
+                return nodeName=="合同归档" ? "<label>办理</label>" : "<a class='btn btn-primary' onclick='review(\""+contractId+"\",\""+contractName+"\",\""+contractCode+"\")' '>办理</a>"
 
 
             }

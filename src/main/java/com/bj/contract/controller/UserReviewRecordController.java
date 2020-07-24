@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.bj.sys.controller.AbstractController;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Map;
 
 /**
@@ -39,7 +40,8 @@ public class UserReviewRecordController extends AbstractController {
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = null;
         try {
-            page = userReviewRecordService.queryPage(params);
+            String userName = getUser().getUserName();
+            page = userReviewRecordService.queryPage(params,userName);
         } catch (Exception e) {
             String msg = ExceptionUtil.getExceptionAllInformation(e);
             logger.error("分页查询供应商信息出错，{}", msg);
